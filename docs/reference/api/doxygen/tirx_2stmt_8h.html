@@ -220,6 +220,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1ExecScopeStmt.html">tvm::tirx::ExecScopeStmt</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Managed reference to <a class="el" href="classtvm_1_1tirx_1_1ExecScopeStmtNode.html" title="A statement that annotates the execution scope for its body.">ExecScopeStmtNode</a>.  <a href="classtvm_1_1tirx_1_1ExecScopeStmt.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1ScopeIdDefStmtNode.html">tvm::tirx::ScopeIdDefStmtNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standalone statement that declares a scope-id binding (e.g. cta_id, warp_id, lane_id). Carries a <code><a class="el" href="classtvm_1_1tirx_1_1ScopeIdDef.html">ScopeIdDef</a></code> value.  <a href="classtvm_1_1tirx_1_1ScopeIdDefStmtNode.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1ScopeIdDefStmt.html">tvm::tirx::ScopeIdDefStmt</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Managed reference to <a class="el" href="classtvm_1_1tirx_1_1ScopeIdDefStmtNode.html" title="Standalone statement that declares a scope-id binding (e.g. cta_id, warp_id, lane_id)....">ScopeIdDefStmtNode</a>.  <a href="classtvm_1_1tirx_1_1ScopeIdDefStmt.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -472,6 +478,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a6f887b62ab35d12dac91803200160f01"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx_1_1attr.html#a6f887b62ab35d12dac91803200160f01">tvm::tirx::attr::kPersistentKernel</a> = &quot;tirx.persistent_kernel&quot;</td></tr>
 <tr class="memdesc:a6f887b62ab35d12dac91803200160f01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mark the kernel as persistent.  <a href="namespacetvm_1_1tirx_1_1attr.html#a6f887b62ab35d12dac91803200160f01">More...</a><br /></td></tr>
 <tr class="separator:a6f887b62ab35d12dac91803200160f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0843b1522844dbfd80b9cca44d95ae8"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx_1_1attr.html#ad0843b1522844dbfd80b9cca44d95ae8">tvm::tirx::attr::kDeviceEntry</a> = &quot;tirx.device_entry&quot;</td></tr>
+<tr class="memdesc:ad0843b1522844dbfd80b9cca44d95ae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mark the device-region entry within a <a class="el" href="classtvm_1_1tirx_1_1PrimFunc.html" title="Managed reference to PrimFuncNode.">PrimFunc</a> body. The <code><a class="el" href="classtvm_1_1tirx_1_1AttrStmt.html" title="Managed reference to AttrStmtNode.">AttrStmt</a></code> so-keyed has a body that is the device-side region; anything before the marker (within the <a class="el" href="classtvm_1_1tirx_1_1PrimFunc.html" title="Managed reference to PrimFuncNode.">PrimFunc</a> body) is host code. Value is <code><a class="el" href="classtvm_1_1IntImm.html" title="Managed reference class to IntImmNode.">IntImm</a>("bool", 1)</code> &ndash; a boolean marker, similar to <code>kPersistentKernel</code>.  <a href="namespacetvm_1_1tirx_1_1attr.html#ad0843b1522844dbfd80b9cca44d95ae8">More...</a><br /></td></tr>
+<tr class="separator:ad0843b1522844dbfd80b9cca44d95ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>TIR statements. </p>

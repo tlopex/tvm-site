@@ -801,10 +801,10 @@
 </li>
       <li><a href="reference/api/python/relax/transform.html#tvm.relax.transform.BindSymbolicVars">BindSymbolicVars() (in module tvm.relax.transform)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/tirx/transform.html#tvm.tirx.transform.BindTarget">BindTarget() (in module tvm.tirx.transform)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/topi.html#tvm.topi.nn.bitpack">bitpack() (in module tvm.topi.nn)</a>
 </li>
       <li><a href="reference/api/python/topi.html#tvm.topi.nn.bitserial_conv2d_nchw">bitserial_conv2d_nchw() (in module tvm.topi.nn)</a>
@@ -850,7 +850,11 @@
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.Broadcast">Broadcast (class in tvm.tirx)</a>
 </li>
       <li><a href="reference/api/python/runtime/disco.html#tvm.runtime.disco.Session.broadcast">broadcast() (tvm.runtime.disco.Session method)</a>
+
+      <ul>
+        <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.Layout.broadcast">(tvm.tirx.Layout method)</a>
 </li>
+      </ul></li>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.ccl.broadcast_from_worker0">broadcast_from_worker0() (in module tvm.relax.op.ccl)</a>
 
       <ul>
@@ -3912,10 +3916,10 @@
 </li>
       <li><a href="reference/api/python/topi.html#tvm.topi.nn.pool_grad">pool_grad() (in module tvm.topi.nn)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/topi.html#tvm.topi.testing.pool_grad_nchw">pool_grad_nchw() (in module tvm.topi.testing)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.op_attrs.Pool1DAttrs.pool_size">pool_size (tvm.relax.op.op_attrs.Pool1DAttrs property)</a>
 
       <ul>
@@ -4029,6 +4033,8 @@
       <li><a href="reference/api/python/meta_schedule.html#tvm.s_tir.meta_schedule.Profiler">Profiler (class in tvm.s_tir.meta_schedule)</a>
 </li>
       <li><a href="reference/api/python/arith.html#tvm.arith.ProofStrength">ProofStrength (class in tvm.arith)</a>
+</li>
+      <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.ptr_byte_offset">ptr_byte_offset() (in module tvm.tirx)</a>
 </li>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.Buffer.ptr_to">ptr_to() (tvm.tirx.Buffer method)</a>
 </li>
@@ -4513,6 +4519,8 @@
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.Buffer.scope">scope() (tvm.tirx.Buffer method)</a>
 </li>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.ScopeIdDef">ScopeIdDef (class in tvm.tirx)</a>
+</li>
+      <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.ScopeIdDefStmt">ScopeIdDefStmt (class in tvm.tirx)</a>
 </li>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.op_attrs.GetValidCountsAttrs.score_index">score_index (tvm.relax.op.op_attrs.GetValidCountsAttrs property)</a>
 
@@ -6360,14 +6368,14 @@
         <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.PyStmtExprVisitor.visit_float_imm_">(tvm.tirx.PyStmtExprVisitor method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.PyStmtExprMutator.visit_floor_div_">visit_floor_div_() (tvm.tirx.PyStmtExprMutator method)</a>
 
       <ul>
         <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.PyStmtExprVisitor.visit_floor_div_">(tvm.tirx.PyStmtExprVisitor method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.PyStmtExprMutator.visit_floor_mod_">visit_floor_mod_() (tvm.tirx.PyStmtExprMutator method)</a>
 
       <ul>
@@ -6602,6 +6610,14 @@
 
       <ul>
         <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.PyStmtExprVisitor.visit_sblock_realize_">(tvm.tirx.PyStmtExprVisitor method)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/api/python/tirx/stmt_functor.html#tvm.tirx.stmt_functor.StmtFunctor.visit_scope_id_def_stmt_">visit_scope_id_def_stmt_() (tvm.tirx.stmt_functor.StmtFunctor method)</a>
+
+      <ul>
+        <li><a href="reference/api/python/tirx/stmt_functor.html#tvm.tirx.stmt_functor.StmtMutator.visit_scope_id_def_stmt_">(tvm.tirx.stmt_functor.StmtMutator method)</a>
+</li>
+        <li><a href="reference/api/python/tirx/stmt_functor.html#tvm.tirx.stmt_functor.StmtVisitor.visit_scope_id_def_stmt_">(tvm.tirx.stmt_functor.StmtVisitor method)</a>
 </li>
       </ul></li>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.ExprFunctor.visit_select_">visit_select_() (tvm.tirx.ExprFunctor method)</a>

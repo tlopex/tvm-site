@@ -121,14 +121,12 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a5557ec0aa484324e44adaa012ff081c4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4">tvm::tirx::ScopeKind</a> : int { <br />
-&#160;&#160;<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a5346a7e9e23cbcc5a9ddf739ee74bc4d">tvm::tirx::kWorld</a> = 0
-, <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4ad72b09eb57a49c6384c9b49474ea4653">tvm::tirx::kKernel</a> = 1
-, <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a1424418f3f2ab4252d26e85d02523b23">tvm::tirx::kCluster</a> = 2
+&#160;&#160;<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a1424418f3f2ab4252d26e85d02523b23">tvm::tirx::kCluster</a> = 2
 , <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4af6601c0894c3d8810ec3d00ea7d97380">tvm::tirx::kCta</a> = 3
-, <br />
-&#160;&#160;<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a40a150ae5ad7a7654a262cfdde63a0f6">tvm::tirx::kWarpgroup</a> = 4
+, <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a40a150ae5ad7a7654a262cfdde63a0f6">tvm::tirx::kWarpgroup</a> = 4
 , <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a7150a1272fb5e8267858ab706061e68d">tvm::tirx::kWarp</a> = 5
-, <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4aba6384690d22712050b53a0074ebcc3c">tvm::tirx::kThread</a> = 6
+, <br />
+&#160;&#160;<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4aba6384690d22712050b53a0074ebcc3c">tvm::tirx::kThread</a> = 6
 <br />
  }</td></tr>
 <tr class="memdesc:a5557ec0aa484324e44adaa012ff081c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The target execution scope kind of an ExecScopeStmt.  <a href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4">More...</a><br /></td></tr>
@@ -154,7 +152,7 @@ Enumerations</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aed6529f1f431626eb5b8c4b64b4e6254"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#aed6529f1f431626eb5b8c4b64b4e6254">tvm::tirx::ScopeKindToString</a> (ScopeKind kind)</td></tr>
-<tr class="memdesc:aed6529f1f431626eb5b8c4b64b4e6254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a ScopeKind to its string name (e.g. kKernel -&gt; "kernel").  <a href="namespacetvm_1_1tirx.html#aed6529f1f431626eb5b8c4b64b4e6254">More...</a><br /></td></tr>
+<tr class="memdesc:aed6529f1f431626eb5b8c4b64b4e6254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a ScopeKind to its string name (e.g. kThread -&gt; "thread").  <a href="namespacetvm_1_1tirx.html#aed6529f1f431626eb5b8c4b64b4e6254">More...</a><br /></td></tr>
 <tr class="separator:aed6529f1f431626eb5b8c4b64b4e6254"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cb0b5d3543d48e3be6565b16a7953ea"><td class="memItemLeft" align="right" valign="top">ScopeKind&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a3cb0b5d3543d48e3be6565b16a7953ea">tvm::tirx::StringToScopeKind</a> (const ffi::String &amp;name)</td></tr>
 <tr class="memdesc:a3cb0b5d3543d48e3be6565b16a7953ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse a string name to a ScopeKind. FATAL if unknown.  <a href="namespacetvm_1_1tirx.html#a3cb0b5d3543d48e3be6565b16a7953ea">More...</a><br /></td></tr>

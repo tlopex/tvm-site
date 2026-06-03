@@ -544,6 +544,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1ExecScopeStmt.html">ExecScopeStmt</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Managed reference to <a class="el" href="classtvm_1_1tirx_1_1ExecScopeStmtNode.html" title="A statement that annotates the execution scope for its body.">ExecScopeStmtNode</a>.  <a href="classtvm_1_1tirx_1_1ExecScopeStmt.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1ScopeIdDefStmtNode.html">ScopeIdDefStmtNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standalone statement that declares a scope-id binding (e.g. cta_id, warp_id, lane_id). Carries a <code><a class="el" href="classtvm_1_1tirx_1_1ScopeIdDef.html">ScopeIdDef</a></code> value.  <a href="classtvm_1_1tirx_1_1ScopeIdDefStmtNode.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1ScopeIdDefStmt.html">ScopeIdDefStmt</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Managed reference to <a class="el" href="classtvm_1_1tirx_1_1ScopeIdDefStmtNode.html" title="Standalone statement that declares a scope-id binding (e.g. cta_id, warp_id, lane_id)....">ScopeIdDefStmtNode</a>.  <a href="classtvm_1_1tirx_1_1ScopeIdDefStmt.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1StmtFunctor.html">StmtFunctor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classtvm_1_1tirx_1_1ExprFunctor.html" title="A dynamical functor that dispatches on in the first Expr argument. You can use this as a more powerfu...">ExprFunctor</a> except it is applied on statements.  <a href="classtvm_1_1tirx_1_1StmtFunctor.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -560,12 +566,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1StmtExprMutator.html">StmtExprMutator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutator that recursively mutates stmts and exprs on them.  <a href="classtvm_1_1tirx_1_1StmtExprMutator.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1ScheduleContextNode.html">ScheduleContextNode</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The context information of the kernel required by op schedule.  <a href="classtvm_1_1tirx_1_1ScheduleContextNode.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1ScheduleContext.html">ScheduleContext</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Managed reference to <a class="el" href="classtvm_1_1tirx_1_1ScheduleContextNode.html" title="The context information of the kernel required by op schedule.">ScheduleContextNode</a>.  <a href="classtvm_1_1tirx_1_1ScheduleContext.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1DispatchContextNode.html">DispatchContextNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The context information of the kernel required by op dispatch.  <a href="classtvm_1_1tirx_1_1DispatchContextNode.html#details">More...</a><br /></td></tr>
@@ -637,9 +637,6 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ac75690401fe7bb271429bef404803be8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#ac75690401fe7bb271429bef404803be8">FArgSanitizer</a> = ffi::TypedFunction&lt; void(<a class="el" href="classtvm_1_1Op.html">tvm::Op</a>, ffi::Array&lt; ffi::ObjectRef &gt;)&gt;</td></tr>
 <tr class="memdesc:ac75690401fe7bb271429bef404803be8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the function that sanitizes the arguments of a TIRX operator.  <a href="namespacetvm_1_1tirx.html#ac75690401fe7bb271429bef404803be8">More...</a><br /></td></tr>
 <tr class="separator:ac75690401fe7bb271429bef404803be8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b91b9094101a031d1275ac9c36ab82b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a6b91b9094101a031d1275ac9c36ab82b">FOpScheduler</a> = ffi::TypedFunction&lt; <a class="el" href="classtvm_1_1tirx_1_1Stmt.html">Stmt</a>(<a class="el" href="classtvm_1_1Op.html">tvm::Op</a>, ffi::Array&lt; ffi::ObjectRef &gt;, <a class="el" href="classtvm_1_1tirx_1_1ScheduleContext.html">ScheduleContext</a>)&gt;</td></tr>
-<tr class="memdesc:a6b91b9094101a031d1275ac9c36ab82b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the function that schedules a TIRX operator.  <a href="namespacetvm_1_1tirx.html#a6b91b9094101a031d1275ac9c36ab82b">More...</a><br /></td></tr>
-<tr class="separator:a6b91b9094101a031d1275ac9c36ab82b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4b2c09cd79673b502959a7d4e997675"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#ad4b2c09cd79673b502959a7d4e997675">Region</a> = ffi::Array&lt; <a class="el" href="classtvm_1_1Range.html">Range</a> &gt;</td></tr>
 <tr class="separator:ad4b2c09cd79673b502959a7d4e997675"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -658,14 +655,12 @@ Enumerations</h2></td></tr>
 <tr class="memdesc:aa8895d5d8f59beb94751c7b90a1c8d6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">buffer type  <a href="namespacetvm_1_1tirx.html#aa8895d5d8f59beb94751c7b90a1c8d6e">More...</a><br /></td></tr>
 <tr class="separator:aa8895d5d8f59beb94751c7b90a1c8d6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5557ec0aa484324e44adaa012ff081c4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4">ScopeKind</a> : int { <br />
-&#160;&#160;<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a5346a7e9e23cbcc5a9ddf739ee74bc4d">kWorld</a> = 0
-, <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4ad72b09eb57a49c6384c9b49474ea4653">kKernel</a> = 1
-, <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a1424418f3f2ab4252d26e85d02523b23">kCluster</a> = 2
+&#160;&#160;<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a1424418f3f2ab4252d26e85d02523b23">kCluster</a> = 2
 , <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4af6601c0894c3d8810ec3d00ea7d97380">kCta</a> = 3
-, <br />
-&#160;&#160;<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a40a150ae5ad7a7654a262cfdde63a0f6">kWarpgroup</a> = 4
+, <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a40a150ae5ad7a7654a262cfdde63a0f6">kWarpgroup</a> = 4
 , <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4a7150a1272fb5e8267858ab706061e68d">kWarp</a> = 5
-, <a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4aba6384690d22712050b53a0074ebcc3c">kThread</a> = 6
+, <br />
+&#160;&#160;<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4aba6384690d22712050b53a0074ebcc3c">kThread</a> = 6
 <br />
  }</td></tr>
 <tr class="memdesc:a5557ec0aa484324e44adaa012ff081c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The target execution scope kind of an ExecScopeStmt.  <a href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4">More...</a><br /></td></tr>
@@ -819,7 +814,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a03075c85ba635d34d4910f47399495ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates TIR <a class="el" href="classtvm_1_1tirx_1_1Buffer.html" title="Buffer is a symbolic n-darray structure. It is a composition of primitive symbolic types,...">Buffer</a> for provided parameters.  <a href="namespacetvm_1_1tirx.html#a03075c85ba635d34d4910f47399495ee">More...</a><br /></td></tr>
 <tr class="separator:a03075c85ba635d34d4910f47399495ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a322e4685865a5e0e1c03ade1c5932f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtvm_1_1tirx_1_1ActiveSet.html">ActiveSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a9a322e4685865a5e0e1c03ade1c5932f">InitialActiveSet</a> (int64_t lane_ext, int64_t warp_ext, int64_t cta_ext)</td></tr>
-<tr class="memdesc:a9a322e4685865a5e0e1c03ade1c5932f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial A at T.kernel() entry: all threads active, offsets zero.  <a href="namespacetvm_1_1tirx.html#a9a322e4685865a5e0e1c03ade1c5932f">More...</a><br /></td></tr>
+<tr class="memdesc:a9a322e4685865a5e0e1c03ade1c5932f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial A at <a class="el" href="classtvm_1_1tirx_1_1PrimFunc.html" title="Managed reference to PrimFuncNode.">PrimFunc</a> device entry: all threads active, offsets zero.  <a href="namespacetvm_1_1tirx.html#a9a322e4685865a5e0e1c03ade1c5932f">More...</a><br /></td></tr>
 <tr class="separator:a9a322e4685865a5e0e1c03ade1c5932f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaff50cc6f9b632f3d4d4e507b50fb1f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtvm_1_1tirx_1_1ActiveSet.html">ActiveSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#aaff50cc6f9b632f3d4d4e507b50fb1f1">InitialActiveSet</a> (int64_t lane_ext, int64_t warp_ext, int64_t cta_ext, const std::vector&lt; std::pair&lt; std::string, int64_t &gt;&gt; &amp;cta_axes)</td></tr>
 <tr class="separator:aaff50cc6f9b632f3d4d4e507b50fb1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -833,7 +828,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a473bc439e6346dee4b9c67b9dcbf2e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode one side of an <a class="el" href="structtvm_1_1tirx_1_1ExecSplit.html" title="One scope_switch split. Fields are sparse dicts keyed by active-set axis name, e.g....">ExecSplit</a> (inter or intra) as the FFI map used by <code><a class="el" href="classtvm_1_1tirx_1_1DispatchContextNode.html" title="The context information of the kernel required by op dispatch.">DispatchContextNode</a>::{inter, intra}</code>: axis name -&gt; [extent, offset] for unit-stride axes, or [extent, offset, stride] for strided axes.  <a href="namespacetvm_1_1tirx.html#a473bc439e6346dee4b9c67b9dcbf2e0f">More...</a><br /></td></tr>
 <tr class="separator:a473bc439e6346dee4b9c67b9dcbf2e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed6529f1f431626eb5b8c4b64b4e6254"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#aed6529f1f431626eb5b8c4b64b4e6254">ScopeKindToString</a> (<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4">ScopeKind</a> kind)</td></tr>
-<tr class="memdesc:aed6529f1f431626eb5b8c4b64b4e6254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a ScopeKind to its string name (e.g. kKernel -&gt; "kernel").  <a href="namespacetvm_1_1tirx.html#aed6529f1f431626eb5b8c4b64b4e6254">More...</a><br /></td></tr>
+<tr class="memdesc:aed6529f1f431626eb5b8c4b64b4e6254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a ScopeKind to its string name (e.g. kThread -&gt; "thread").  <a href="namespacetvm_1_1tirx.html#aed6529f1f431626eb5b8c4b64b4e6254">More...</a><br /></td></tr>
 <tr class="separator:aed6529f1f431626eb5b8c4b64b4e6254"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cb0b5d3543d48e3be6565b16a7953ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4">ScopeKind</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a3cb0b5d3543d48e3be6565b16a7953ea">StringToScopeKind</a> (const ffi::String &amp;name)</td></tr>
 <tr class="memdesc:a3cb0b5d3543d48e3be6565b16a7953ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse a string name to a ScopeKind. FATAL if unknown.  <a href="namespacetvm_1_1tirx.html#a3cb0b5d3543d48e3be6565b16a7953ea">More...</a><br /></td></tr>
@@ -977,9 +972,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a37d50e69df978b98eea3ab9aa86271f3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classtvm_1_1Op.html">Op</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a37d50e69df978b98eea3ab9aa86271f3">cast</a> ()</td></tr>
 <tr class="memdesc:a37d50e69df978b98eea3ab9aa86271f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">See pesudo code below:  <a href="namespacetvm_1_1tirx.html#a37d50e69df978b98eea3ab9aa86271f3">More...</a><br /></td></tr>
 <tr class="separator:a37d50e69df978b98eea3ab9aa86271f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20ddde74a0934271aa7bed0e819d7348"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classtvm_1_1Op.html">Op</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a20ddde74a0934271aa7bed0e819d7348">permute_dims</a> ()</td></tr>
-<tr class="memdesc:a20ddde74a0934271aa7bed0e819d7348"><td class="mdescLeft">&#160;</td><td class="mdescRight">See pesudo code below:  <a href="namespacetvm_1_1tirx.html#a20ddde74a0934271aa7bed0e819d7348">More...</a><br /></td></tr>
-<tr class="separator:a20ddde74a0934271aa7bed0e819d7348"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a925ae08f30f2aa6d6e312a6982aa5456"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classtvm_1_1Op.html">Op</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a925ae08f30f2aa6d6e312a6982aa5456">copy</a> ()</td></tr>
 <tr class="memdesc:a925ae08f30f2aa6d6e312a6982aa5456"><td class="mdescLeft">&#160;</td><td class="mdescRight">See pesudo code below:  <a href="namespacetvm_1_1tirx.html#a925ae08f30f2aa6d6e312a6982aa5456">More...</a><br /></td></tr>
 <tr class="separator:a925ae08f30f2aa6d6e312a6982aa5456"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1172,30 +1164,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The intrinsic lowering function for given op. </p>
-
-</div>
-</div>
-<a id="a6b91b9094101a031d1275ac9c36ab82b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b91b9094101a031d1275ac9c36ab82b">&#9670;&nbsp;</a></span>FOpScheduler</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespacetvm_1_1tirx.html#a6b91b9094101a031d1275ac9c36ab82b">tvm::tirx::FOpScheduler</a> = typedef ffi::TypedFunction&lt;<a class="el" href="classtvm_1_1tirx_1_1Stmt.html">Stmt</a>(<a class="el" href="classtvm_1_1Op.html">tvm::Op</a>, ffi::Array&lt;ffi::ObjectRef&gt;, <a class="el" href="classtvm_1_1tirx_1_1ScheduleContext.html">ScheduleContext</a>)&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The type of the function that schedules a TIRX operator. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">op</td><td>The operator. </td></tr>
-    <tr><td class="paramname">args</td><td>The arguments. </td></tr>
-    <tr><td class="paramname">context</td><td>The schedule context. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -1521,7 +1489,7 @@ Variables</h2></td></tr>
 
 <p>The binding between a parent scope and a child scope as used by a <code><a class="el" href="classtvm_1_1tirx_1_1ScopeIdDef.html">ScopeIdDef</a></code>. The closed enum of valid (parent -&gt; cur) pairs. </p>
 <p>Single-axis bindings (target one <a class="el" href="structtvm_1_1tirx_1_1ActiveSet.html" title="Active thread set A. The source of truth is layout: shard = active axes with extents offset = per-axi...">ActiveSet</a> box axis &ndash; <code>laneid</code> / <code>warpid</code> / <code>cta_id</code>, possibly via a warpid factor lane): kKernelCta, kClusterCta -&gt; cta_id (flat) kCtaWarp -&gt; warpid (flat) kCtaWarpgroup -&gt; warpid (outer factor; warpgroup index) kWarpgroupWarp -&gt; warpid (inner factor; warp-within-wg index) kWarpThread -&gt; laneid (flat) kKernelCluster -&gt; not a filter target (cluster_id by design) kClusterCtaPair -&gt; hardware CTA pair id (cluster CTA rank % 2)</p>
-<p>Multi-axis (flat-thread) bindings &ndash; linearize across two <a class="el" href="structtvm_1_1tirx_1_1ActiveSet.html" title="Active thread set A. The source of truth is layout: shard = active axes with extents offset = per-axi...">ActiveSet</a> axes; <code>T.filter(var, lo, hi)</code> cannot narrow them as a contiguous box range, so they fall back to plain predicate semantics: kCtaThread -&gt; threadIdx.x within a CTA (laneid * warpid) kWarpgroupThread -&gt; threadIdx.x within a warpgroup (laneid * wid_in_wg) </p>
+<p>Multi-axis (flat-thread) bindings &ndash; linearize across two <a class="el" href="structtvm_1_1tirx_1_1ActiveSet.html" title="Active thread set A. The source of truth is layout: shard = active axes with extents offset = per-axi...">ActiveSet</a> axes; a flat <code>lo &lt;= var and var &lt; hi</code> predicate cannot narrow them as a contiguous box range, so they fall back to plain predicate semantics: kCtaThread -&gt; threadIdx.x within a CTA (laneid * warpid) kWarpgroupThread -&gt; threadIdx.x within a warpgroup (laneid * wid_in_wg) </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab2fb207581a0c58e7667287500aa1068ad0627a8efd493427edcc6bef463897af"></a>kKernelCluster&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ab2fb207581a0c58e7667287500aa1068a37f85aabf98d21e6a556f3d28eaefea3"></a>kKernelCta&#160;</td><td class="fielddoc"></td></tr>
@@ -1558,11 +1526,9 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The target execution scope kind of an <a class="el" href="classtvm_1_1tirx_1_1ExecScopeStmt.html" title="Managed reference to ExecScopeStmtNode.">ExecScopeStmt</a>. </p>
-<p>Replaces the string-keyed name of <a class="el" href="classtvm_1_1tirx_1_1ExecScope.html">ExecScope</a>. One value per user-facing <code>with T.&lt;kind&gt;():</code> construct, plus <code>kWorld</code> for the cross-kernel root scope used by axe-layout's <code>pid</code> axis. Ordered from coarsest to finest; smaller integer = wider scope, so <code>ScopeKindHigher</code> is a plain <code>&lt;</code>. </p>
+<p>Replaces the string-keyed name of <a class="el" href="classtvm_1_1tirx_1_1ExecScope.html">ExecScope</a>. One value per user-facing <code>with T.&lt;kind&gt;():</code> construct. Ordered from coarsest to finest; smaller integer = wider scope, so <code>ScopeKindHigher</code> is a plain <code>&lt;</code>. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5557ec0aa484324e44adaa012ff081c4a5346a7e9e23cbcc5a9ddf739ee74bc4d"></a>kWorld&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5557ec0aa484324e44adaa012ff081c4ad72b09eb57a49c6384c9b49474ea4653"></a>kKernel&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5557ec0aa484324e44adaa012ff081c4a1424418f3f2ab4252d26e85d02523b23"></a>kCluster&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5557ec0aa484324e44adaa012ff081c4a1424418f3f2ab4252d26e85d02523b23"></a>kCluster&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a5557ec0aa484324e44adaa012ff081c4af6601c0894c3d8810ec3d00ea7d97380"></a>kCta&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a5557ec0aa484324e44adaa012ff081c4a40a150ae5ad7a7654a262cfdde63a0f6"></a>kWarpgroup&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a5557ec0aa484324e44adaa012ff081c4a7150a1272fb5e8267858ab706061e68d"></a>kWarp&#160;</td><td class="fielddoc"></td></tr>
@@ -2680,7 +2646,7 @@ template&lt;typename FReduce &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Initial A at T.kernel() entry: all threads active, offsets zero. </p>
+<p>Initial A at <a class="el" href="classtvm_1_1tirx_1_1PrimFunc.html" title="Managed reference to PrimFuncNode.">PrimFunc</a> device entry: all threads active, offsets zero. </p>
 
 </div>
 </div>
@@ -3516,26 +3482,6 @@ template&lt;typename ValueType &gt; </div>
 
 </div>
 </div>
-<a id="a20ddde74a0934271aa7bed0e819d7348"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20ddde74a0934271aa7bed0e819d7348">&#9670;&nbsp;</a></span>permute_dims()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classtvm_1_1Op.html">Op</a>&amp; tvm::tirx::permute_dims </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>See pesudo code below: </p>
-<p>Tx.permute_dims(BufferRegion buffer, List order) </p>
-
-</div>
-</div>
 <a id="a2208adcd452091b90707ab345b2f7914"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2208adcd452091b90707ab345b2f7914">&#9670;&nbsp;</a></span>PostOrderVisit()</h2>
 
@@ -3718,7 +3664,7 @@ template&lt;typename ValueType &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Convert a ScopeKind to its string name (e.g. kKernel -&gt; "kernel"). </p>
+<p>Convert a ScopeKind to its string name (e.g. kThread -&gt; "thread"). </p>
 
 </div>
 </div>

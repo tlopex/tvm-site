@@ -310,6 +310,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.ExecScopeStmt"><code class="docutils literal notranslate"><span class="pre">ExecScopeStmt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.ScopeIdDefStmt"><code class="docutils literal notranslate"><span class="pre">ScopeIdDefStmt</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.PrimFunc"><code class="docutils literal notranslate"><span class="pre">PrimFunc</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.PrimFunc.with_body"><code class="docutils literal notranslate"><span class="pre">PrimFunc.with_body()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.PrimFunc.specialize"><code class="docutils literal notranslate"><span class="pre">PrimFunc.specialize()</span></code></a></li>
@@ -363,6 +364,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.tvm_thread_allreduce"><code class="docutils literal notranslate"><span class="pre">tvm_thread_allreduce()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.type_annotation"><code class="docutils literal notranslate"><span class="pre">type_annotation()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.tvm_access_ptr"><code class="docutils literal notranslate"><span class="pre">tvm_access_ptr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.ptr_byte_offset"><code class="docutils literal notranslate"><span class="pre">ptr_byte_offset()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.tvm_throw_last_error"><code class="docutils literal notranslate"><span class="pre">tvm_throw_last_error()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.tvm_load_matrix_sync"><code class="docutils literal notranslate"><span class="pre">tvm_load_matrix_sync()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.tvm_store_matrix_sync"><code class="docutils literal notranslate"><span class="pre">tvm_store_matrix_sync()</span></code></a></li>
@@ -505,6 +507,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.Layout.is_trivial"><code class="docutils literal notranslate"><span class="pre">Layout.is_trivial()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.Layout.is_trainium"><code class="docutils literal notranslate"><span class="pre">Layout.is_trainium()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.Layout.unpack"><code class="docutils literal notranslate"><span class="pre">Layout.unpack()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.Layout.broadcast"><code class="docutils literal notranslate"><span class="pre">Layout.broadcast()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.Layout.pack"><code class="docutils literal notranslate"><span class="pre">Layout.pack()</span></code></a></li>
 </ul>
 </li>
@@ -2004,6 +2007,28 @@ for its body. This decouples the execution scope concept from SBlock.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="tvm.tirx.ScopeIdDefStmt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.tirx.</span></span><span class="sig-name descname"><span class="pre">ScopeIdDefStmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">def_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#tvm.tirx.ScopeIdDef" title="tvm.tirx.exec_scope.ScopeIdDef"><span class="pre">ScopeIdDef</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../ir.html#tvm.ir.Span" title="tvm.ir.base.Span"><span class="pre">Span</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.ScopeIdDefStmt" title="Link to this definition"></a></dt>
+<dd><p>ScopeIdDefStmt node.</p>
+<p>Leaf statement that introduces scope-identifier vars
+(<code class="docutils literal notranslate"><span class="pre">wg_id</span> <span class="pre">=</span> <span class="pre">Tx.warpgroup_id([N])</span></code>, <code class="docutils literal notranslate"><span class="pre">warp_id</span> <span class="pre">=</span> <span class="pre">Tx.warp_id_in_wg([4])</span></code>,
+<code class="docutils literal notranslate"><span class="pre">lane_id</span> <span class="pre">=</span> <span class="pre">Tx.lane_id([32])</span></code>, …) at the kernel-body top level. The
+underlying <code class="docutils literal notranslate"><span class="pre">ScopeIdDef</span></code> carries the def vars, their extents, and
+the parent/child scope binding.</p>
+<p>Note: the C++ field is named <code class="docutils literal notranslate"><span class="pre">def</span></code> (a Python keyword). Access it
+via <code class="docutils literal notranslate"><span class="pre">getattr(stmt,</span> <span class="pre">&quot;def&quot;)</span></code> or <code class="docutils literal notranslate"><span class="pre">stmt.__getattribute__(&quot;def&quot;)</span></code> —
+the type-annotation alias here is purely for documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>def</strong> (<a class="reference internal" href="#tvm.tirx.ScopeIdDef" title="tvm.tirx.ScopeIdDef"><em>ScopeIdDef</em></a>) – The scope-id definition (def vars, extents, scope binding).</p></li>
+<li><p><strong>span</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../ir.html#tvm.ir.Span" title="tvm.ir.Span"><em>Span</em></a><em>]</em>) – The location of this statement in the source code.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="tvm.tirx.PrimFunc">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.tirx.</span></span><span class="sig-name descname"><span class="pre">PrimFunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ret_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.PrimFunc" title="Link to this definition"></a></dt>
 <dd><p>A function declaration expression.</p>
@@ -3041,6 +3066,14 @@ instead of <code class="docutils literal notranslate"><span class="pre">void</sp
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="tvm.tirx.ptr_byte_offset">
+<span class="sig-prename descclassname"><span class="pre">tvm.tirx.</span></span><span class="sig-name descname"><span class="pre">ptr_byte_offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">byte_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.ptr_byte_offset" title="Link to this definition"></a></dt>
+<dd><p>Cast <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">+</span> <span class="pre">byte_offset</span></code> to <code class="docutils literal notranslate"><span class="pre">dtype*</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">byte_offset</span></code> is always in bytes.  Use this when the source CUDA shape
+needs an explicitly typed local pointer derived from a byte-addressed base.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="tvm.tirx.tvm_throw_last_error">
 <span class="sig-prename descclassname"><span class="pre">tvm.tirx.</span></span><span class="sig-name descname"><span class="pre">tvm_throw_last_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.tvm_throw_last_error" title="Link to this definition"></a></dt>
 <dd><p>Throw TVMGetLastError()</p>
@@ -3184,9 +3217,19 @@ instead of <code class="docutils literal notranslate"><span class="pre">void</sp
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.tirx.ptx_mma">
-<span class="sig-prename descclassname"><span class="pre">tvm.tirx.</span></span><span class="sig-name descname"><span class="pre">ptx_mma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_layout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_layout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_ptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_ptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_ptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ptr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saturate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bit_op</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.ptx_mma" title="Link to this definition"></a></dt>
-<dd><p>TVM intrinsic for ptx tensor core mma instructions
+<span class="sig-prename descclassname"><span class="pre">tvm.tirx.</span></span><span class="sig-name descname"><span class="pre">ptx_mma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_layout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_layout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_ptrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_ptrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_ptrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ptrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saturate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bit_op</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.ptx_mma" title="Link to this definition"></a></dt>
+<dd><p>TVM intrinsic for ptx tensor core mma instructions.
 <a class="reference external" href="https://docs.nvidia.com/cuda/parallel-thread-execution/index.html#warp-level-matrix-instructions-for-mma">https://docs.nvidia.com/cuda/parallel-thread-execution/index.html#warp-level-matrix-instructions-for-mma</a></p>
+<p>Each per-thread register of every operand is addressed by its OWN pointer
+(one <code class="docutils literal notranslate"><span class="pre">void*</span></code> per b32/f32 register), so the register fragments need not be
+contiguous in the register file. <code class="docutils literal notranslate"><span class="pre">d_ptrs</span></code> / <code class="docutils literal notranslate"><span class="pre">a_ptrs</span></code> / <code class="docutils literal notranslate"><span class="pre">b_ptrs</span></code> /
+<code class="docutils literal notranslate"><span class="pre">c_ptrs</span></code> are lists of one pointer per 32-bit register (b32 for
+fp16/bf16/tf32/int8 multiplicands, f32/f64 for the accumulator), enumerated
+in the fixed PTX register order (see the gemm dispatch /
+<code class="docutils literal notranslate"><span class="pre">tests/python/tirx-base/test_tir_ptx_mma.py</span></code>).</p>
+<p>Within one b32 register the packed elements (e.g. 2 fp16 along k_pack)
+must stay contiguous (stride 1); only the b32 registers themselves may be
+scattered.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -3197,13 +3240,14 @@ instead of <code class="docutils literal notranslate"><span class="pre">void</sp
 <li><p><strong>a_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The data type of multiplicand fragment A.</p></li>
 <li><p><strong>b_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The data type of multiplicand fragment B.</p></li>
 <li><p><strong>c_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The data type of accumulator fragment C.</p></li>
-<li><p><strong>d_ptr</strong> (<a class="reference internal" href="../ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a>) – The pointer to the result fragment D.</p></li>
-<li><p><strong>a_ptr</strong> (<a class="reference internal" href="../ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a>) – The pointer to the multiplicand fragment A.</p></li>
-<li><p><strong>b_ptr</strong> (<a class="reference internal" href="../ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a>) – The pointer to the multiplicand fragment B.</p></li>
-<li><p><strong>c_ptr</strong> (<a class="reference internal" href="../ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a>) – The pointer to the accumulator fragment C.
-If it’s IntImm(0), it means the accumulator is not used.</p></li>
+<li><p><strong>d_ptrs</strong> (<em>List</em><em>[</em><a class="reference internal" href="../ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a><em>]</em>) – One pointer per result-fragment D register, in PTX order.</p></li>
+<li><p><strong>a_ptrs</strong> (<em>List</em><em>[</em><a class="reference internal" href="../ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a><em>]</em>) – One pointer per multiplicand-A register, in PTX order.</p></li>
+<li><p><strong>b_ptrs</strong> (<em>List</em><em>[</em><a class="reference internal" href="../ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a><em>]</em>) – One pointer per multiplicand-B register, in PTX order.</p></li>
+<li><p><strong>c_ptrs</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="../ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a><em>]</em><em>]</em>) – One pointer per accumulator-C register, in PTX order. <code class="docutils literal notranslate"><span class="pre">None</span></code> (the
+default) means the accumulator is not used (beta == 0): codegen feeds
+a literal 0 for each C slot.</p></li>
 <li><p><strong>saturate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – The optional saturation at the output.</p></li>
-<li><p><strong>bit_op</strong> (<em>Optional</em><em>[</em><em>Literal</em><em>[</em><em>&quot;xor&quot;</em><em>, </em><em>&quot;and&quot;</em><em>]</em><em>]</em>) – The 1-bit operator. If it’s None, it means the bit operator is not used.</p></li>
+<li><p><strong>bit_op</strong> (<em>Optional</em><em>[</em><em>Literal</em><em>[</em><em>&quot;xor&quot;</em><em>, </em><em>&quot;and&quot;</em><em>]</em><em>]</em>) – The 1-bit operator (for the b1 subbyte form). <code class="docutils literal notranslate"><span class="pre">None</span></code> means unused.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -5289,8 +5333,8 @@ The rounding rule is to the nearest value, rounding half up
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.tirx.ExecScope">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.tirx.</span></span><span class="sig-name descname"><span class="pre">ExecScope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.ExecScope" title="Link to this definition"></a></dt>
-<dd><p>An execution scope, identified by one of {world, kernel, cluster, cta, warpgroup,
-warp, thread}. The ctor FATALs on any other name.</p>
+<dd><p>An execution scope, identified by one of {cluster, cta, warpgroup, warp,
+thread}. The ctor FATALs on any other name.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="tvm.tirx.ExecScope.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#tvm.tirx.ExecScope.name" title="Link to this definition"></a></dt>
@@ -5629,6 +5673,18 @@ without span scaling (unlike tiling).</p>
 <dd class="field-odd"><p><a class="reference internal" href="#tvm.tirx.Layout" title="tvm.tirx.Layout">Layout</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tvm.tirx.Layout.broadcast">
+<span class="sig-name descname"><span class="pre">broadcast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'Axis'</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'m'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#tvm.tirx.Layout" title="tvm.tirx.Layout"><span class="pre">Layout</span></a></span></span><a class="headerlink" href="#tvm.tirx.Layout.broadcast" title="Link to this definition"></a></dt>
+<dd><p>Insert a stride-0 broadcast dim of extent <code class="docutils literal notranslate"><span class="pre">num</span></code> at <code class="docutils literal notranslate"><span class="pre">position</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">position</span></code> follows Python list-insert semantics (negative indices
+count from the end; <code class="docutils literal notranslate"><span class="pre">-1</span></code> appends after the last shard dim).  The
+new dim has stride 0 — accessing along it doesn’t move the byte
+offset, so the same physical element is “seen” <code class="docutils literal notranslate"><span class="pre">num</span></code> times.</p>
+<p>Useful for layouts where a consumer reads the same SMEM datum
+multiple times (e.g. <code class="docutils literal notranslate"><span class="pre">sf_reuse</span></code> over MMA-K steps).</p>
 </dd></dl>
 
 <dl class="py method">

@@ -50,12 +50,13 @@ Standard Format
 Let's take an example of ``mm_relu`` from :ref:`tirx-learning`. Here is the complete
 format of the ir_module and in TVMScript:
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-93
+.. GENERATED FROM PYTHON SOURCE LINES 54-94
 
 .. code-block:: Python
 
 
     import numpy as np
+    import tvm_ffi
 
     import tvm
     from tvm.script import ir as I
@@ -100,7 +101,7 @@ format of the ir_module and in TVMScript:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 94-103
+.. GENERATED FROM PYTHON SOURCE LINES 95-104
 
 Concise with Syntactic Sugar
 ****************************
@@ -112,7 +113,7 @@ streamline the code:
 - Exclude ``T.reads`` and ``T.writes`` for blocks whose content can
   be inferred from the block body;
 
-.. GENERATED FROM PYTHON SOURCE LINES 103-126
+.. GENERATED FROM PYTHON SOURCE LINES 104-127
 
 .. code-block:: Python
 
@@ -146,16 +147,16 @@ streamline the code:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 127-128
+.. GENERATED FROM PYTHON SOURCE LINES 128-129
 
 We can use the following code to verify that the two modules are equivalent:
 
-.. GENERATED FROM PYTHON SOURCE LINES 128-131
+.. GENERATED FROM PYTHON SOURCE LINES 129-132
 
 .. code-block:: Python
 
 
-    print(tvm.ir.structural_equal(MyModule, ConciseModule))
+    print(tvm_ffi.structural_equal(MyModule, ConciseModule))
 
 
 
@@ -170,7 +171,7 @@ We can use the following code to verify that the two modules are equivalent:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 132-137
+.. GENERATED FROM PYTHON SOURCE LINES 133-138
 
 Interactive with Python Variables
 *********************************
@@ -178,7 +179,7 @@ Despite TVMScript not being executed by a Python interpreter, limited
 interaction with Python is feasible. For instance, Python variables can
 be used to ascertain the shape and data type of a TensorIR.
 
-.. GENERATED FROM PYTHON SOURCE LINES 137-165
+.. GENERATED FROM PYTHON SOURCE LINES 138-166
 
 .. code-block:: Python
 
@@ -217,16 +218,16 @@ be used to ascertain the shape and data type of a TensorIR.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 166-167
+.. GENERATED FROM PYTHON SOURCE LINES 167-168
 
 Check the equivalence:
 
-.. GENERATED FROM PYTHON SOURCE LINES 167-171
+.. GENERATED FROM PYTHON SOURCE LINES 168-172
 
 .. code-block:: Python
 
 
-    print(tvm.ir.structural_equal(ConciseModule, ConciseModuleFromPython))
+    print(tvm_ffi.structural_equal(ConciseModule, ConciseModuleFromPython))
 
 
 
@@ -242,7 +243,7 @@ Check the equivalence:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 172-177
+.. GENERATED FROM PYTHON SOURCE LINES 173-178
 
 TensorIR Function with Dynamic Shapes
 *************************************
@@ -250,7 +251,7 @@ Despite TVMScript not being executed by a Python interpreter, limited
 interaction with Python is feasible. For instance, Python variables can
 be used to ascertain the shape and data type of a TensorIR.
 
-.. GENERATED FROM PYTHON SOURCE LINES 177-205
+.. GENERATED FROM PYTHON SOURCE LINES 178-206
 
 .. code-block:: Python
 
@@ -289,11 +290,11 @@ be used to ascertain the shape and data type of a TensorIR.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 206-207
+.. GENERATED FROM PYTHON SOURCE LINES 207-208
 
 Now let's check the runtime dynamic shape inference:
 
-.. GENERATED FROM PYTHON SOURCE LINES 207-223
+.. GENERATED FROM PYTHON SOURCE LINES 208-224
 
 .. code-block:: Python
 
@@ -321,22 +322,22 @@ Now let's check the runtime dynamic shape inference:
 
  .. code-block:: none
 
-    [[0.5769679  0.2008124  0.9679575  0.38210747]
-     [0.97830576 0.47942027 1.2650903  0.590257  ]
-     [0.70747304 0.13538048 1.1339451  0.41344175]
-     [1.4254565  0.5049138  2.187963   0.84844494]]
-    [[27.646132 28.46037  26.079481 ... 25.405678 25.352045 28.007856]
-     [31.217897 31.187424 30.026388 ... 30.230858 28.100557 32.38415 ]
-     [30.782629 31.164898 29.726316 ... 29.271563 28.844524 30.51834 ]
+    [[0.9260787  0.9065142  1.1947331  0.6398271 ]
+     [0.40134212 0.4204354  0.5174354  0.0471789 ]
+     [0.15024361 0.2891506  0.7591468  0.41997543]
+     [1.7696996  1.4667975  1.4521731  0.58943045]]
+    [[29.95968  32.845413 34.348763 ... 31.73002  34.408703 32.143948]
+     [28.3778   31.915874 30.387547 ... 30.395792 33.36958  29.381313]
+     [32.21677  34.31417  33.961227 ... 33.592983 35.020508 33.33209 ]
      ...
-     [29.561506 28.212294 28.837044 ... 28.222494 29.111425 32.09607 ]
-     [31.652706 30.959435 30.880787 ... 29.076946 28.524052 32.438835]
-     [28.481401 30.737093 28.18066  ... 27.762045 26.349022 30.151638]]
+     [31.324177 33.92153  34.061264 ... 34.05852  34.804928 32.672516]
+     [30.380304 33.78577  32.080204 ... 32.067463 33.706573 31.598228]
+     [31.593483 32.11873  32.009335 ... 30.78904  35.237114 29.961601]]
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 224-244
+.. GENERATED FROM PYTHON SOURCE LINES 225-245
 
 Create TensorIR using Tensor Expression
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -359,7 +360,7 @@ Create Static-Shape Functions
 We use the same example of ``mm_relu`` from the last subsection to demonstrate the
 TE creation method.
 
-.. GENERATED FROM PYTHON SOURCE LINES 244-253
+.. GENERATED FROM PYTHON SOURCE LINES 245-254
 
 .. code-block:: Python
 
@@ -379,7 +380,7 @@ TE creation method.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 254-267
+.. GENERATED FROM PYTHON SOURCE LINES 255-268
 
 Here ``te.compute`` takes the signature ``te.compute(output_shape, fcompute)``.
 And the fcompute function describes how we want to compute the value of each
@@ -395,7 +396,7 @@ we can formulate a TensorIR function by incorporating the pertinent parameters o
 In this specific instance, we aim to construct a function with two input parameters **A, B**
 and one output parameter **C**.
 
-.. GENERATED FROM PYTHON SOURCE LINES 267-272
+.. GENERATED FROM PYTHON SOURCE LINES 268-273
 
 .. code-block:: Python
 
@@ -442,14 +443,14 @@ and one output parameter **C**.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 273-277
+.. GENERATED FROM PYTHON SOURCE LINES 274-278
 
 Create Dynamic-Shape Functions
 ******************************
 We can also create a dynamic-shape function using Tensor Expression. The only difference
 is that we need to specify the shape of the input tensors as symbolic variables.
 
-.. GENERATED FROM PYTHON SOURCE LINES 277-289
+.. GENERATED FROM PYTHON SOURCE LINES 278-290
 
 .. code-block:: Python
 

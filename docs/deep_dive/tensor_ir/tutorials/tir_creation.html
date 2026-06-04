@@ -331,6 +331,7 @@ the decorated function, subsequently parsing it into TensorIR.</p>
 <p>Let’s take an example of <code class="docutils literal notranslate"><span class="pre">mm_relu</span></code> from <a class="reference internal" href="../learning.html#tirx-learning"><span class="std std-ref">Understand TensorIR Abstraction</span></a>. Here is the complete
 format of the ir_module and in TVMScript:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tvm_ffi</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">tvm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tvm.script</span><span class="w"> </span><span class="kn">import</span> <span class="n">ir</span> <span class="k">as</span> <span class="n">I</span>
@@ -401,7 +402,7 @@ be inferred from the block body;</p></li>
 </pre></div>
 </div>
 <p>We can use the following code to verify that the two modules are equivalent:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><a href="../../../reference/api/python/ir.html#tvm.ir.structural_equal" title="tvm.ir.structural_equal" class="sphx-glr-backref-module-tvm-ir sphx-glr-backref-type-py-function"><span class="n">tvm</span><span class="o">.</span><span class="n">ir</span><span class="o">.</span><span class="n">structural_equal</span></a><span class="p">(</span><span class="n">MyModule</span><span class="p">,</span> <span class="n">ConciseModule</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tvm_ffi</span><span class="o">.</span><span class="n">structural_equal</span><span class="p">(</span><span class="n">MyModule</span><span class="p">,</span> <span class="n">ConciseModule</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -441,7 +442,7 @@ be used to ascertain the shape and data type of a TensorIR.</p>
 </pre></div>
 </div>
 <p>Check the equivalence:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><a href="../../../reference/api/python/ir.html#tvm.ir.structural_equal" title="tvm.ir.structural_equal" class="sphx-glr-backref-module-tvm-ir sphx-glr-backref-type-py-function"><span class="n">tvm</span><span class="o">.</span><span class="n">ir</span><span class="o">.</span><span class="n">structural_equal</span></a><span class="p">(</span><span class="n">ConciseModule</span><span class="p">,</span> <span class="n">ConciseModuleFromPython</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tvm_ffi</span><span class="o">.</span><span class="n">structural_equal</span><span class="p">(</span><span class="n">ConciseModule</span><span class="p">,</span> <span class="n">ConciseModuleFromPython</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>False
@@ -495,17 +496,17 @@ be used to ascertain the shape and data type of a TensorIR.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">evaluate_dynamic_shape</span><span class="p">(</span><span class="n">dyn_shape_lib</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <a href="../../../reference/api/python/tirx/tirx.html#tvm.tirx.IterVar" title="tvm.tirx.IterVar" class="sphx-glr-backref-module-tvm-tirx sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a><span class="o">=</span><span class="mi">128</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[0.5769679  0.2008124  0.9679575  0.38210747]
- [0.97830576 0.47942027 1.2650903  0.590257  ]
- [0.70747304 0.13538048 1.1339451  0.41344175]
- [1.4254565  0.5049138  2.187963   0.84844494]]
-[[27.646132 28.46037  26.079481 ... 25.405678 25.352045 28.007856]
- [31.217897 31.187424 30.026388 ... 30.230858 28.100557 32.38415 ]
- [30.782629 31.164898 29.726316 ... 29.271563 28.844524 30.51834 ]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[0.9260787  0.9065142  1.1947331  0.6398271 ]
+ [0.40134212 0.4204354  0.5174354  0.0471789 ]
+ [0.15024361 0.2891506  0.7591468  0.41997543]
+ [1.7696996  1.4667975  1.4521731  0.58943045]]
+[[29.95968  32.845413 34.348763 ... 31.73002  34.408703 32.143948]
+ [28.3778   31.915874 30.387547 ... 30.395792 33.36958  29.381313]
+ [32.21677  34.31417  33.961227 ... 33.592983 35.020508 33.33209 ]
  ...
- [29.561506 28.212294 28.837044 ... 28.222494 29.111425 32.09607 ]
- [31.652706 30.959435 30.880787 ... 29.076946 28.524052 32.438835]
- [28.481401 30.737093 28.18066  ... 27.762045 26.349022 30.151638]]
+ [31.324177 33.92153  34.061264 ... 34.05852  34.804928 32.672516]
+ [30.380304 33.78577  32.080204 ... 32.067463 33.706573 31.598228]
+ [31.593483 32.11873  32.009335 ... 30.78904  35.237114 29.961601]]
 </pre></div>
 </div>
 </section>

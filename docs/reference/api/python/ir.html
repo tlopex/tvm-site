@@ -229,8 +229,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#tvm.ir.assert_structural_equal"><code class="docutils literal notranslate"><span class="pre">assert_structural_equal()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.ir.load_json"><code class="docutils literal notranslate"><span class="pre">load_json()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.ir.save_json"><code class="docutils literal notranslate"><span class="pre">save_json()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.ir.structural_equal"><code class="docutils literal notranslate"><span class="pre">structural_equal()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.ir.structural_hash"><code class="docutils literal notranslate"><span class="pre">structural_hash()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.ir.BaseExpr"><code class="docutils literal notranslate"><span class="pre">BaseExpr</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.ir.GlobalVar"><code class="docutils literal notranslate"><span class="pre">GlobalVar</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.ir.PrimExpr"><code class="docutils literal notranslate"><span class="pre">PrimExpr</span></code></a></li>
@@ -555,12 +553,6 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.save_json" title="tvm.ir.save_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_json</span></code></a>(node)</p></td>
 <td><p>Save tvm object as json string.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.structural_equal" title="tvm.ir.structural_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">structural_equal</span></code></a>(lhs, rhs[, map_free_vars])</p></td>
-<td><p>Check structural equality of lhs and rhs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.structural_hash" title="tvm.ir.structural_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">structural_hash</span></code></a>(node[, map_free_vars])</p></td>
-<td><p>Compute structural hash of node</p></td>
-</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.register_intrin_lowering" title="tvm.ir.register_intrin_lowering"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_intrin_lowering</span></code></a>(op_name, target, *)</p></td>
 <td><p>Register Op lowering function</p></td>
 </tr>
@@ -809,7 +801,7 @@ not bound to any definitions as equal to each other.</p></li>
 <p>:raises ValueError : if assertion does not hold.:</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#tvm.ir.structural_equal" title="tvm.ir.structural_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">structural_equal</span></code></a></p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tvm_ffi.structural_equal</span></code></p>
 </div>
 </dd></dl>
 
@@ -845,91 +837,6 @@ not bound to any definitions as equal to each other.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tvm.ir.structural_equal">
-<span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">structural_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_free_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.structural_equal" title="Link to this definition"></a></dt>
-<dd><p>Check structural equality of lhs and rhs.</p>
-<p>The structural equality is recursively defined in the DAG of IRNodes.
-There are two kinds of nodes:</p>
-<ul class="simple">
-<li><p>Graph node: a graph node in lhs can only be mapped as equal to
-one and only one graph node in rhs.</p></li>
-<li><p>Normal node: equality is recursively defined without the restriction
-of graph nodes.</p></li>
-</ul>
-<p>Vars(tirx::Var, relax::Var) are graph nodes.</p>
-<p>A var-type node(e.g. tirx::Var) can be mapped as equal to another var
-with the same type if one of the following condition holds:</p>
-<ul class="simple">
-<li><p>They appear in a same definition point(e.g. function argument).</p></li>
-<li><p>They points to the same VarNode via the same_as relation.</p></li>
-<li><p>They appear in a same usage point, and map_free_vars is set to be True.</p></li>
-</ul>
-<p>The rules for var are used to remap variables occurs in function
-arguments and let-bindings.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>lhs</strong> (<a class="reference internal" href="#tvm.ir.diagnostics.Object" title="tvm.ir.diagnostics.Object"><em>Object</em></a>) – The left operand.</p></li>
-<li><p><strong>rhs</strong> (<a class="reference internal" href="#tvm.ir.diagnostics.Object" title="tvm.ir.diagnostics.Object"><em>Object</em></a>) – The left operand.</p></li>
-<li><p><strong>map_free_vars</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether free variables (i.e. variables without a definition site) should be mapped
-as equal to each other.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>result</strong> – The comparison result.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#tvm.ir.structural_hash" title="tvm.ir.structural_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">structural_hash</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_strucural_equal</span></code></p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tvm.ir.structural_hash">
-<span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">structural_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_free_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.structural_hash" title="Link to this definition"></a></dt>
-<dd><p>Compute structural hash of node</p>
-<p>The structural hash value is recursively defined in the DAG of IRNodes.
-There are two kinds of nodes:</p>
-<ul class="simple">
-<li><p>Normal node: the hash value is defined by its content and type only.</p></li>
-<li><p>Graph node: each graph node will be assigned a unique index ordered by the
-first occurrence during the visit. The hash value of a graph node is
-combined from the hash values of its contents and the index.</p></li>
-</ul>
-<p>structural_hash is made to be concistent with structural_equal.
-If two nodes are structurally equal to each other,
-then their structural hash (with the same map_free_vars option)
-should be equal to each other as well.</p>
-<p>If the structural hash of two nodes equals to each other,
-then it is highly likely(except for rare hash value collison cases)
-that the two nodes are structurally equal to each other.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>node</strong> (<a class="reference internal" href="#tvm.ir.diagnostics.Object" title="tvm.ir.diagnostics.Object"><em>Object</em></a>) – The input to be hashed.</p></li>
-<li><p><strong>map_free_vars</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – If map_free_vars is set to true, we will hash free variables
-by the order of their occurrences. Otherwise, we will hash by
-their in-memory pointer address.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>result</strong> – The hash result</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">structrual_equal</span></code></p>
-</div>
 </dd></dl>
 
 <dl class="py class">

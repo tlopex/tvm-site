@@ -378,16 +378,16 @@
 <p class="admonition-title">Note</p>
 <p>This function does not remap variable bindings, it will not
 return true for (let x = 1 in x + 1) vs (let y = 1 in y + 1), unless x.same_as(y).
-Use py:func:<cite>tvm.ir.structural_equal</cite> to handle structural variable remapping.</p>
+Use py:func:<cite>tvm_ffi.structural_equal</cite> to handle structural variable remapping.</p>
 <p>Due to the restriction of not remapping variables, this function can run
 faster than StructuralEqual and can be used as a utility function during arithmetic
 simplifications.</p>
-<p>Always consider py:func:<cite>tvm.ir.structural_equal</cite> first, which handles
+<p>Always consider py:func:<cite>tvm_ffi.structural_equal</cite> first, which handles
 the structural remapping.</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="../ir.html#tvm.ir.structural_equal" title="tvm.ir.structural_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tvm.ir.structural_equal</span></code></a></p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tvm_ffi.structural_equal</span></code></p>
 </div>
 </dd></dl>
 

@@ -334,7 +334,7 @@ It is recommended to use them under trusted networking environment or encrypted 
 <section id="subroutine-cache-hash-collision">
 <h3>Subroutine Cache Hash Collision<a class="headerlink" href="#subroutine-cache-hash-collision" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">SubroutineMixin._get_subroutine()</span></code> in <code class="docutils literal notranslate"><span class="pre">python/tvm/relax/frontend/nn/subroutine.py</span></code>
-used <code class="docutils literal notranslate"><span class="pre">ir.structural_hash</span></code> as the sole cache lookup key without a subsequent
+used <code class="docutils literal notranslate"><span class="pre">tvm_ffi.structural_hash</span></code> as the sole cache lookup key without a subsequent
 <code class="docutils literal notranslate"><span class="pre">structural_equal</span></code> verification. If two different <code class="docutils literal notranslate"><span class="pre">arg_sinfo</span></code> values produced the
 same 64-bit hash, the cache would return a previously compiled function with
 mismatched parameter shapes, leading to silently incorrect compiled output.</p>

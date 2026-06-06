@@ -82,6 +82,9 @@ $(function() {
 <li>PassConfigWithDefaults()
 : <a class="el" href="namespacetvm_1_1transform.html#af0a18b4d7ea2290541577f3c0b9382d3">tvm::transform</a>
 </li>
+<li>permute_layout()
+: <a class="el" href="namespacetvm_1_1tirx.html#a6b47d9ab4cbf47935986d53a272afd2e">tvm::tirx</a>
+</li>
 <li>placeholder()
 : <a class="el" href="namespacetvm_1_1te.html#ae723237632c7373f754f056168605892">tvm::te</a>
 </li>
@@ -154,8 +157,14 @@ $(function() {
 <li>ptr_byte_offset()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a524afc28aa893570fbc9a26a76f42db7">tvm::tirx::builtin</a>
 </li>
-<li>ptx_add_packed_f32x2()
-: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#af6feac3e98a9d6696fadf4d6e33d4fe2">tvm::tirx::builtin</a>
+<li>ptx_add_f32()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a36232afc759be7f88114377b53f6258c">tvm::tirx::builtin</a>
+</li>
+<li>ptx_add_f32x2()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a3454c087a1c566587d556793e0b24a83">tvm::tirx::builtin</a>
+</li>
+<li>ptx_add_f64()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a012a647eeccb5a9938221303a39ea7b9">tvm::tirx::builtin</a>
 </li>
 <li>ptx_any_sync()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a38e4de2981d68fbec773f0b0d2a01186">tvm::tirx::builtin</a>
@@ -229,14 +238,26 @@ $(function() {
 <li>ptx_fetch_register()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a0ab65282ca30f4607ffc72b02792c58e">tvm::tirx::builtin</a>
 </li>
-<li>ptx_fma_packed_f32x2()
-: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#ad845af459ae7e991b4b5185188436e22">tvm::tirx::builtin</a>
+<li>ptx_fma_f32()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#aa2c73a96bb81477fc4c3227972eb3ee9">tvm::tirx::builtin</a>
+</li>
+<li>ptx_fma_f32x2()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a9810e40cd15868f99b7205615ecc7631">tvm::tirx::builtin</a>
+</li>
+<li>ptx_fma_f64()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a59bc7d29993c7cacc0f3550fec28c8e1">tvm::tirx::builtin</a>
+</li>
+<li>ptx_griddepcontrol_launch_dependents()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a6cf1f2db2e18126fc8314c322a5ad4c0">tvm::tirx::builtin</a>
+</li>
+<li>ptx_griddepcontrol_wait()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#aa209808ef0117950b7c1dd5ec2381dce">tvm::tirx::builtin</a>
 </li>
 <li>ptx_ld_global_acquire()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a17113764806dc1d755e91a065caba749">tvm::tirx::builtin</a>
 </li>
 <li>ptx_ldg32()
-: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#abab432af46ed1516e0d48c4687938f8b">tvm::tirx::builtin</a>
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#af6ad0e9d3e14f473835ec576623ddf33">tvm::tirx::builtin</a>
 </li>
 <li>ptx_ldmatrix()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a52615772c1658873d1a070b253fdb59e">tvm::tirx::builtin</a>
@@ -246,6 +267,9 @@ $(function() {
 </li>
 <li>ptx_map_shared_rank()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a1f585d5cc4a750322a99e9501d0da898">tvm::tirx::builtin</a>
+</li>
+<li>ptx_max_f32()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#ac6bb53b90ca1b03bfd6f43062ff51d1e">tvm::tirx::builtin</a>
 </li>
 <li>ptx_mbarrier_arrive()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a05b1aa00faae5ab416b2daf45cdcc41a">tvm::tirx::builtin</a>
@@ -268,8 +292,14 @@ $(function() {
 <li>ptx_mma_sp()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a56d61670194ae794dfb3105e0db7f065">tvm::tirx::builtin</a>
 </li>
-<li>ptx_mul_packed_f32x2()
-: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#aeba800fe01f1e5907b9a1013dc3449fa">tvm::tirx::builtin</a>
+<li>ptx_mul_f32()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a6e7697dbfe2ce254032148ed0a18526a">tvm::tirx::builtin</a>
+</li>
+<li>ptx_mul_f32x2()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a03c453f9d79376d37186a769b04d694e">tvm::tirx::builtin</a>
+</li>
+<li>ptx_mul_f64()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a526227790afa24e866a268d65c934da4">tvm::tirx::builtin</a>
 </li>
 <li>ptx_rcp()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a4a26cf811e799402acf62dc160d71cb8">tvm::tirx::builtin</a>
@@ -286,8 +316,14 @@ $(function() {
 <li>ptx_stmatrix()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a2fcbc931597461835775f77338ea0e71">tvm::tirx::builtin</a>
 </li>
-<li>ptx_sub_packed_f32x2()
-: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a8cdb4c13f2eaa1017b284a4f6acdf1e8">tvm::tirx::builtin</a>
+<li>ptx_sub_f32()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#a03781328bfc43e52106bb5753c84ba89">tvm::tirx::builtin</a>
+</li>
+<li>ptx_sub_f32x2()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#ac59c62234722c3672e6768c082bfe81b">tvm::tirx::builtin</a>
+</li>
+<li>ptx_sub_f64()
+: <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#aba70e6418f50aa02660a961ecebf9cc3">tvm::tirx::builtin</a>
 </li>
 <li>ptx_tcgen05_alloc()
 : <a class="el" href="namespacetvm_1_1tirx_1_1builtin.html#ad65a682a22f1fa706503cf102f6aeb38">tvm::tirx::builtin</a>

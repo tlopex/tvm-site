@@ -253,7 +253,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtFunctor.visit_evaluate_"><code class="docutils literal notranslate"><span class="pre">StmtFunctor.visit_evaluate_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtFunctor.visit_block_"><code class="docutils literal notranslate"><span class="pre">StmtFunctor.visit_block_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtFunctor.visit_block_realize_"><code class="docutils literal notranslate"><span class="pre">StmtFunctor.visit_block_realize_()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtFunctor.visit_exec_scope_stmt_"><code class="docutils literal notranslate"><span class="pre">StmtFunctor.visit_exec_scope_stmt_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtFunctor.visit_scope_id_def_stmt_"><code class="docutils literal notranslate"><span class="pre">StmtFunctor.visit_scope_id_def_stmt_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtFunctor.visit_op_call_"><code class="docutils literal notranslate"><span class="pre">StmtFunctor.visit_op_call_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtFunctor.visit_buffer_region_"><code class="docutils literal notranslate"><span class="pre">StmtFunctor.visit_buffer_region_()</span></code></a></li>
@@ -278,7 +277,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtVisitor.visit_evaluate_"><code class="docutils literal notranslate"><span class="pre">StmtVisitor.visit_evaluate_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtVisitor.visit_block_"><code class="docutils literal notranslate"><span class="pre">StmtVisitor.visit_block_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtVisitor.visit_block_realize_"><code class="docutils literal notranslate"><span class="pre">StmtVisitor.visit_block_realize_()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtVisitor.visit_exec_scope_stmt_"><code class="docutils literal notranslate"><span class="pre">StmtVisitor.visit_exec_scope_stmt_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtVisitor.visit_scope_id_def_stmt_"><code class="docutils literal notranslate"><span class="pre">StmtVisitor.visit_scope_id_def_stmt_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtVisitor.visit_op_call_"><code class="docutils literal notranslate"><span class="pre">StmtVisitor.visit_op_call_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtVisitor.visit_buffer_region_"><code class="docutils literal notranslate"><span class="pre">StmtVisitor.visit_buffer_region_()</span></code></a></li>
@@ -307,7 +305,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtMutator.visit_evaluate_"><code class="docutils literal notranslate"><span class="pre">StmtMutator.visit_evaluate_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtMutator.visit_block_"><code class="docutils literal notranslate"><span class="pre">StmtMutator.visit_block_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtMutator.visit_block_realize_"><code class="docutils literal notranslate"><span class="pre">StmtMutator.visit_block_realize_()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtMutator.visit_exec_scope_stmt_"><code class="docutils literal notranslate"><span class="pre">StmtMutator.visit_exec_scope_stmt_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtMutator.visit_scope_id_def_stmt_"><code class="docutils literal notranslate"><span class="pre">StmtMutator.visit_scope_id_def_stmt_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtMutator.visit_op_call_"><code class="docutils literal notranslate"><span class="pre">StmtMutator.visit_op_call_()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.stmt_functor.StmtMutator.visit_buffer_region_"><code class="docutils literal notranslate"><span class="pre">StmtMutator.visit_buffer_region_()</span></code></a></li>
@@ -595,12 +592,6 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="tvm.tirx.stmt_functor.StmtFunctor.visit_exec_scope_stmt_">
-<span class="sig-name descname"><span class="pre">visit_exec_scope_stmt_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.stmt_functor.StmtFunctor.visit_exec_scope_stmt_" title="Link to this definition"></a></dt>
-<dd><p>Visitor for ExecScopeStmt nodes.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="tvm.tirx.stmt_functor.StmtFunctor.visit_scope_id_def_stmt_">
 <span class="sig-name descname"><span class="pre">visit_scope_id_def_stmt_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.stmt_functor.StmtFunctor.visit_scope_id_def_stmt_" title="Link to this definition"></a></dt>
 <dd><p>Visitor for ScopeIdDefStmt nodes.</p>
@@ -739,12 +730,6 @@ traversal in a statement visitor.</p>
 <dt class="sig sig-object py" id="tvm.tirx.stmt_functor.StmtVisitor.visit_block_realize_">
 <span class="sig-name descname"><span class="pre">visit_block_realize_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.stmt_functor.StmtVisitor.visit_block_realize_" title="Link to this definition"></a></dt>
 <dd><p>Visitor implementation for BlockRealize.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tvm.tirx.stmt_functor.StmtVisitor.visit_exec_scope_stmt_">
-<span class="sig-name descname"><span class="pre">visit_exec_scope_stmt_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.stmt_functor.StmtVisitor.visit_exec_scope_stmt_" title="Link to this definition"></a></dt>
-<dd><p>Visitor implementation for ExecScopeStmt.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -919,12 +904,6 @@ mutation in a statement mutator.</p>
 <dt class="sig sig-object py" id="tvm.tirx.stmt_functor.StmtMutator.visit_block_realize_">
 <span class="sig-name descname"><span class="pre">visit_block_realize_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.stmt_functor.StmtMutator.visit_block_realize_" title="Link to this definition"></a></dt>
 <dd><p>Mutator implementation for BlockRealize.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tvm.tirx.stmt_functor.StmtMutator.visit_exec_scope_stmt_">
-<span class="sig-name descname"><span class="pre">visit_exec_scope_stmt_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.stmt_functor.StmtMutator.visit_exec_scope_stmt_" title="Link to this definition"></a></dt>
-<dd><p>Mutator implementation for ExecScopeStmt.</p>
 </dd></dl>
 
 <dl class="py method">

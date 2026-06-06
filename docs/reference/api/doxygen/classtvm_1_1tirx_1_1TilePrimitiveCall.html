@@ -93,8 +93,8 @@ Collaboration diagram for tvm::tirx::TilePrimitiveCall:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9c89f7a388605f2bf4bb01aff07cc474"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1TilePrimitiveCall.html#a9c89f7a388605f2bf4bb01aff07cc474">TilePrimitiveCall</a> (<a class="el" href="classtvm_1_1Op.html">tvm::Op</a> op, ffi::Array&lt; ffi::Any &gt; args, ffi::Map&lt; ffi::String, <a class="el" href="classtvm_1_1tirx_1_1Buffer.html">Buffer</a> &gt; workspace={}, ffi::Map&lt; ffi::String, ffi::Any &gt; config={}, ffi::Optional&lt; ffi::String &gt; dispatch=std::nullopt)</td></tr>
-<tr class="separator:a9c89f7a388605f2bf4bb01aff07cc474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac318c39314e0e6701242f3a9ffcd89fb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1TilePrimitiveCall.html#ac318c39314e0e6701242f3a9ffcd89fb">TilePrimitiveCall</a> (<a class="el" href="classtvm_1_1Op.html">tvm::Op</a> op, ffi::Array&lt; ffi::Any &gt; args, ffi::Map&lt; ffi::String, <a class="el" href="classtvm_1_1tirx_1_1Buffer.html">Buffer</a> &gt; workspace={}, ffi::Map&lt; ffi::String, ffi::Any &gt; config={}, ffi::Optional&lt; ffi::String &gt; dispatch=std::nullopt, <a class="el" href="classtvm_1_1tirx_1_1ExecScope.html">ExecScope</a> scope=<a class="el" href="classtvm_1_1tirx_1_1ExecScope.html">ExecScope</a>(<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4aba6384690d22712050b53a0074ebcc3c">ScopeKind::kThread</a>))</td></tr>
+<tr class="separator:ac318c39314e0e6701242f3a9ffcd89fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af67af429a534e3621fb3b5e73c6e39c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1TilePrimitiveCall.html#af67af429a534e3621fb3b5e73c6e39c7">TVM_FFI_DEFINE_OBJECT_REF_METHODS_NULLABLE</a> (<a class="el" href="classtvm_1_1tirx_1_1TilePrimitiveCall.html">TilePrimitiveCall</a>, <a class="el" href="classtvm_1_1tirx_1_1Stmt.html">Stmt</a>, <a class="el" href="classtvm_1_1tirx_1_1TilePrimitiveCallNode.html">TilePrimitiveCallNode</a>)</td></tr>
 <tr class="separator:af67af429a534e3621fb3b5e73c6e39c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11c32b9a436019c17e286203de1fccd0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1tirx_1_1TilePrimitiveCall.html#a11c32b9a436019c17e286203de1fccd0">TVM_DEFINE_OBJECT_REF_COW_METHOD</a> (<a class="el" href="classtvm_1_1tirx_1_1TilePrimitiveCallNode.html">TilePrimitiveCallNode</a>)</td></tr>
@@ -112,8 +112,8 @@ Static Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Managed reference to <a class="el" href="classtvm_1_1tirx_1_1TilePrimitiveCallNode.html" title="TIRX TilePrimitiveCall stmt.">TilePrimitiveCallNode</a>. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classtvm_1_1tirx_1_1TilePrimitiveCallNode.html" title="TIRX TilePrimitiveCall stmt.">TilePrimitiveCallNode</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a9c89f7a388605f2bf4bb01aff07cc474"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c89f7a388605f2bf4bb01aff07cc474">&#9670;&nbsp;</a></span>TilePrimitiveCall()</h2>
+<a id="ac318c39314e0e6701242f3a9ffcd89fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac318c39314e0e6701242f3a9ffcd89fb">&#9670;&nbsp;</a></span>TilePrimitiveCall()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -146,7 +146,13 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">ffi::Optional&lt; ffi::String &gt;&#160;</td>
-          <td class="paramname"><em>dispatch</em> = <code>std::nullopt</code>&#160;</td>
+          <td class="paramname"><em>dispatch</em> = <code>std::nullopt</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtvm_1_1tirx_1_1ExecScope.html">ExecScope</a>&#160;</td>
+          <td class="paramname"><em>scope</em> = <code><a class="el" href="classtvm_1_1tirx_1_1ExecScope.html">ExecScope</a>(<a class="el" href="namespacetvm_1_1tirx.html#a5557ec0aa484324e44adaa012ff081c4aba6384690d22712050b53a0074ebcc3c">ScopeKind::kThread</a>)</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

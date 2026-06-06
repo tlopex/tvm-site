@@ -1849,8 +1849,6 @@
 </li>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.ExecScope">ExecScope (class in tvm.tirx)</a>
 </li>
-      <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.ExecScopeStmt">ExecScopeStmt (class in tvm.tirx)</a>
-</li>
       <li><a href="reference/api/python/contrib.html#tvm.contrib.cudnn.exists">exists() (in module tvm.contrib.cudnn)</a>
 
       <ul>
@@ -4248,14 +4246,16 @@
         <li><a href="reference/api/python/relax/op.html#tvm.relax.op.op_attrs.TileAttrs.repeats">(tvm.relax.op.op_attrs.TileAttrs property)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/s_tir/schedule.html#tvm.s_tir.schedule.ScheduleState.replace">replace() (tvm.s_tir.schedule.ScheduleState method)</a>
 
       <ul>
         <li><a href="reference/api/python/testing.html#tvm.testing.Path.replace">(tvm.testing.Path method)</a>
 </li>
+        <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.TilePrimitiveCall.replace">(tvm.tirx.TilePrimitiveCall method)</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.DataflowBlockRewrite.replace_all_uses">replace_all_uses() (tvm.relax.DataflowBlockRewrite method)</a>
 </li>
       <li><a href="reference/api/python/relax/distributed.html#tvm.relax.distributed.PlacementSpec.replica">replica() (tvm.relax.distributed.PlacementSpec static method)</a>
@@ -6312,14 +6312,6 @@
         <li><a href="reference/api/python/tirx/stmt_functor.html#tvm.tirx.stmt_functor.StmtVisitor.visit_evaluate_">(tvm.tirx.stmt_functor.StmtVisitor method)</a>
 </li>
       </ul></li>
-      <li><a href="reference/api/python/tirx/stmt_functor.html#tvm.tirx.stmt_functor.StmtFunctor.visit_exec_scope_stmt_">visit_exec_scope_stmt_() (tvm.tirx.stmt_functor.StmtFunctor method)</a>
-
-      <ul>
-        <li><a href="reference/api/python/tirx/stmt_functor.html#tvm.tirx.stmt_functor.StmtMutator.visit_exec_scope_stmt_">(tvm.tirx.stmt_functor.StmtMutator method)</a>
-</li>
-        <li><a href="reference/api/python/tirx/stmt_functor.html#tvm.tirx.stmt_functor.StmtVisitor.visit_exec_scope_stmt_">(tvm.tirx.stmt_functor.StmtVisitor method)</a>
-</li>
-      </ul></li>
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.ExprFunctor.visit_expr">visit_expr() (tvm.relax.ExprFunctor method)</a>
 
       <ul>
@@ -6366,14 +6358,14 @@
         <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.PyStmtExprVisitor.visit_floor_div_">(tvm.tirx.PyStmtExprVisitor method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.PyStmtExprMutator.visit_floor_mod_">visit_floor_mod_() (tvm.tirx.PyStmtExprMutator method)</a>
 
       <ul>
         <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.PyStmtExprVisitor.visit_floor_mod_">(tvm.tirx.PyStmtExprVisitor method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.ExprFunctor.visit_floordiv_">visit_floordiv_() (tvm.tirx.ExprFunctor method)</a>
 </li>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.ExprFunctor.visit_floormod_">visit_floormod_() (tvm.tirx.ExprFunctor method)</a>
@@ -6827,6 +6819,8 @@
       <li><a href="reference/api/python/rpc.html#tvm.rpc.with_minrpc">with_minrpc() (in module tvm.rpc)</a>
 </li>
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.PyExprMutator.with_struct_info">with_struct_info() (tvm.relax.PyExprMutator method)</a>
+</li>
+      <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.TilePrimitiveCall.with_workspace">with_workspace() (tvm.tirx.TilePrimitiveCall method)</a>
 </li>
       <li><a href="reference/api/python/ir.html#tvm.ir.BaseFunc.without_attr">without_attr() (tvm.ir.BaseFunc method)</a>
 

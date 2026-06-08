@@ -200,9 +200,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a459894b924503ba1c48257435b14f69d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1s__tir.html#a459894b924503ba1c48257435b14f69d">VerifyGPUCode</a> (const <a class="el" href="classtvm_1_1tirx_1_1PrimFunc.html">PrimFunc</a> &amp;func, ffi::Map&lt; ffi::String, <a class="el" href="classtvm_1_1PrimExpr.html">PrimExpr</a> &gt; constraints)</td></tr>
 <tr class="memdesc:a459894b924503ba1c48257435b14f69d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify the correctness of a GPU code.  <a href="namespacetvm_1_1s__tir.html#a459894b924503ba1c48257435b14f69d">More...</a><br /></td></tr>
 <tr class="separator:a459894b924503ba1c48257435b14f69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14876dbd6a12a36951c5c8b21d3909c6"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structtvm_1_1s__tir_1_1MemCpyDetails.html">MemCpyDetails</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1s__tir.html#a14876dbd6a12a36951c5c8b21d3909c6">IdentifyMemCpy</a> (const <a class="el" href="classtvm_1_1tirx_1_1For.html">For</a> &amp;loop, <a class="el" href="classtvm_1_1arith_1_1Analyzer.html">arith::Analyzer</a> *analyzer)</td></tr>
-<tr class="memdesc:a14876dbd6a12a36951c5c8b21d3909c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identify whether a For loop is semantically equivalent to MemCpy.  <a href="namespacetvm_1_1s__tir.html#a14876dbd6a12a36951c5c8b21d3909c6">More...</a><br /></td></tr>
-<tr class="separator:a14876dbd6a12a36951c5c8b21d3909c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9321358deb760387181852c366c315a9"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structtvm_1_1s__tir_1_1MemCpyDetails.html">MemCpyDetails</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1s__tir.html#a9321358deb760387181852c366c315a9">IdentifyMemCpy</a> (const <a class="el" href="classtvm_1_1tirx_1_1For.html">For</a> &amp;loop, const <a class="el" href="classtvm_1_1arith_1_1Analyzer.html">arith::Analyzer</a> &amp;analyzer)</td></tr>
+<tr class="memdesc:a9321358deb760387181852c366c315a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identify whether a For loop is semantically equivalent to MemCpy.  <a href="namespacetvm_1_1s__tir.html#a9321358deb760387181852c366c315a9">More...</a><br /></td></tr>
+<tr class="separator:a9321358deb760387181852c366c315a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a626b61a60fa95de7a3a1351829760a27"><td class="memItemLeft" align="right" valign="top">ffi::Map&lt; ffi::String, ffi::Map&lt; ffi::String, int64_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1s__tir.html#a626b61a60fa95de7a3a1351829760a27">CalculateAllocatedBytes</a> (const <a class="el" href="classtvm_1_1tirx_1_1PrimFunc.html">PrimFunc</a> &amp;func)</td></tr>
 <tr class="memdesc:a626b61a60fa95de7a3a1351829760a27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the allocated memory per scope in bytes needed inside the TIR PrimFunc.  <a href="namespacetvm_1_1s__tir.html#a626b61a60fa95de7a3a1351829760a27">More...</a><br /></td></tr>
 <tr class="separator:a626b61a60fa95de7a3a1351829760a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -594,8 +594,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a14876dbd6a12a36951c5c8b21d3909c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14876dbd6a12a36951c5c8b21d3909c6">&#9670;&nbsp;</a></span>IdentifyMemCpy()</h2>
+<a id="a9321358deb760387181852c366c315a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9321358deb760387181852c366c315a9">&#9670;&nbsp;</a></span>IdentifyMemCpy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -609,7 +609,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtvm_1_1arith_1_1Analyzer.html">arith::Analyzer</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classtvm_1_1arith_1_1Analyzer.html">arith::Analyzer</a> &amp;&#160;</td>
           <td class="paramname"><em>analyzer</em>&#160;</td>
         </tr>
         <tr>

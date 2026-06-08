@@ -737,9 +737,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a169f1ba5726abaea8701bd929e72a8de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1tirx_1_1Var.html">Var</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a169f1ba5726abaea8701bd929e72a8de">GetShardingVarFromIndex</a> (<a class="el" href="classtvm_1_1PrimExpr.html">PrimExpr</a> index, ffi::Map&lt; <a class="el" href="classtvm_1_1tirx_1_1Var.html">Var</a>, <a class="el" href="classtvm_1_1Range.html">Range</a> &gt; var_range, <a class="el" href="classtvm_1_1arith_1_1Analyzer.html">arith::Analyzer</a> *analyzer)</td></tr>
-<tr class="memdesc:a169f1ba5726abaea8701bd929e72a8de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suppose we want to shard a buffer along a specific dimension, we need to know how to rewrite the access index of the buffer. To make it simple, we only support the case that the access can be rewritten by changing the extent of an iter var.  <a href="namespacetvm_1_1tirx.html#a169f1ba5726abaea8701bd929e72a8de">More...</a><br /></td></tr>
-<tr class="separator:a169f1ba5726abaea8701bd929e72a8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9688bfdd5cc9741579c3d6cb2fe60fb5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1tirx_1_1Var.html">Var</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a9688bfdd5cc9741579c3d6cb2fe60fb5">GetShardingVarFromIndex</a> (<a class="el" href="classtvm_1_1PrimExpr.html">PrimExpr</a> index, ffi::Map&lt; <a class="el" href="classtvm_1_1tirx_1_1Var.html">Var</a>, <a class="el" href="classtvm_1_1Range.html">Range</a> &gt; var_range, const <a class="el" href="classtvm_1_1arith_1_1Analyzer.html">arith::Analyzer</a> &amp;analyzer)</td></tr>
+<tr class="memdesc:a9688bfdd5cc9741579c3d6cb2fe60fb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suppose we want to shard a buffer along a specific dimension, we need to know how to rewrite the access index of the buffer. To make it simple, we only support the case that the access can be rewritten by changing the extent of an iter var.  <a href="namespacetvm_1_1tirx.html#a9688bfdd5cc9741579c3d6cb2fe60fb5">More...</a><br /></td></tr>
+<tr class="separator:a9688bfdd5cc9741579c3d6cb2fe60fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addd7ecd6b194c6e28c06df3d652bd262"><td class="memItemLeft" align="right" valign="top">ffi::Array&lt; ffi::Array&lt; <a class="el" href="classtvm_1_1tirx_1_1BufferRegion.html">BufferRegion</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#addd7ecd6b194c6e28c06df3d652bd262">GetSBlockAccessRegion</a> (const <a class="el" href="classtvm_1_1tirx_1_1SBlock.html">SBlock</a> &amp;block, const ffi::Map&lt; <a class="el" href="classtvm_1_1tirx_1_1Var.html">Var</a>, <a class="el" href="classtvm_1_1tirx_1_1Buffer.html">Buffer</a> &gt; &amp;buffer_var_map)</td></tr>
 <tr class="memdesc:addd7ecd6b194c6e28c06df3d652bd262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auto detect the block access region according to its body stmt It will detect the access region as an array in order of appearance in AST.  <a href="namespacetvm_1_1tirx.html#addd7ecd6b194c6e28c06df3d652bd262">More...</a><br /></td></tr>
 <tr class="separator:addd7ecd6b194c6e28c06df3d652bd262"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2665,8 +2665,8 @@ template&lt;typename FReduce &gt; </div>
 
 </div>
 </div>
-<a id="a169f1ba5726abaea8701bd929e72a8de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a169f1ba5726abaea8701bd929e72a8de">&#9670;&nbsp;</a></span>GetShardingVarFromIndex()</h2>
+<a id="a9688bfdd5cc9741579c3d6cb2fe60fb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9688bfdd5cc9741579c3d6cb2fe60fb5">&#9670;&nbsp;</a></span>GetShardingVarFromIndex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2686,7 +2686,7 @@ template&lt;typename FReduce &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtvm_1_1arith_1_1Analyzer.html">arith::Analyzer</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classtvm_1_1arith_1_1Analyzer.html">arith::Analyzer</a> &amp;&#160;</td>
           <td class="paramname"><em>analyzer</em>&#160;</td>
         </tr>
         <tr>

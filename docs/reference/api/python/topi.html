@@ -1032,8 +1032,9 @@ specific workload.</p>
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.topi.</span></span><span class="sig-name descname"><span class="pre">Analyzer</span></span></dt>
 <dd><p>Integer arithmetic analyzer</p>
-<p>This is a stateful analyzer class that can
-be used to perform various symbolic integer analysis.</p>
+<p>This is a stateful analyzer class that can be used to perform
+various symbolic integer analysis. The same analyzer instance can
+be passed to FFI APIs to share accumulated facts across calls.</p>
 <p><strong>Methods:</strong></p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
@@ -1055,23 +1056,29 @@ be used to perform various symbolic integer analysis.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">canonical_simplify</span></code>(expr)</p></td>
 <td><p>Simplify expression via canonicalization.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">int_set</span></code>(expr, dom_map)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">int_set</span></code>(expr[, dom_map])</p></td>
 <td><p>Compute a symbolic IntSet that covers expr for all values in dom_map.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">can_prove</span></code>(expr[, strength])</p></td>
 <td><p>Check whether we can prove expr to be true.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind</span></code>(var, expr[, allow_override])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_maximum_rewrite_steps</span></code>(maximum)</p></td>
+<td><p>Set the maximum allowed number of rewrite-simplify steps.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind</span></code>(var, expr[, allow_override])</p></td>
 <td><p>Bind a variable to the expression.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">constraint_scope</span></code>(constraint)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">constraint_scope</span></code>(constraint)</p></td>
 <td><p>Create a constraint scope.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code>(var, info[, override])</p></td>
-<td><p>Update infomation about var</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code>(var, info[, override])</p></td>
+<td><p>Update information about var.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">can_prove_equal</span></code>(lhs, rhs)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">can_prove_equal</span></code>(lhs, rhs)</p></td>
 <td><p>Whether we can prove that lhs == rhs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">try_compare</span></code>(lhs, rhs[, propagate_inequalities])</p></td>
+<td><p>Compare lhs and rhs using previously provided known comparisons.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1193,13 +1200,14 @@ Default is 2, i.e., rewrite_simplify + canonical_simplify.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">int_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.expr.PrimExpr"><span class="pre">PrimExpr</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dom_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.expr.Var"><span class="pre">Var</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="arith.html#tvm.arith.IntSet" title="tvm.arith.int_set.IntSet"><span class="pre">IntSet</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="arith.html#tvm.arith.IntSet" title="tvm.arith.int_set.IntSet"><span class="pre">IntSet</span></a></span></span></dt>
+<span class="sig-name descname"><span class="pre">int_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.expr.PrimExpr"><span class="pre">PrimExpr</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dom_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.expr.Var"><span class="pre">Var</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="arith.html#tvm.arith.IntSet" title="tvm.arith.int_set.IntSet"><span class="pre">IntSet</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="arith.html#tvm.arith.IntSet" title="tvm.arith.int_set.IntSet"><span class="pre">IntSet</span></a></span></span></dt>
 <dd><p>Compute a symbolic IntSet that covers expr for all values in dom_map.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a>) – The expression.</p></li>
-<li><p><strong>dom_map</strong> (<em>Dict</em><em>[</em><a class="reference internal" href="tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.Var"><em>tvm.tirx.Var</em></a><em>, </em><a class="reference internal" href="arith.html#tvm.arith.IntSet" title="tvm.arith.IntSet"><em>tvm.arith.IntSet</em></a><em>]</em>) – The domain for variables to be relaxed.</p></li>
+<li><p><strong>dom_map</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference internal" href="tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.Var"><em>tvm.tirx.Var</em></a><em>, </em><a class="reference internal" href="arith.html#tvm.arith.IntSet" title="tvm.arith.IntSet"><em>tvm.arith.IntSet</em></a><em>]</em><em>]</em>) – The domain for variables to be relaxed.  When omitted, the analyzer
+uses the domains of the variables already bound to it.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1227,6 +1235,21 @@ Default is 2, i.e., rewrite_simplify + canonical_simplify.</p></li>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Expr</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">set_maximum_rewrite_steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maximum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span></dt>
+<dd><p>Set the maximum allowed number of rewrite-simplify steps.</p>
+<p>When a positive limit is set, the simplifier raises an exception once
+it exceeds that number of rewrite steps.  This is useful for guarding
+against performance regressions in tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>maximum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The maximum number of rewrite steps, or a non-positive value to
+allow an unlimited number of steps.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1264,7 +1287,7 @@ Default is 2, i.e., rewrite_simplify + canonical_simplify.</p></li>
 <p class="rubric">Examples</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">te</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
 <span class="n">analyzer</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">arith</span><span class="o">.</span><span class="n">Analyzer</span><span class="p">()</span>
-<span class="k">with</span> <span class="n">analzyer</span><span class="o">.</span><span class="n">constraint_scope</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">constraint_scope</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
     <span class="c1"># constraint in effect</span>
     <span class="k">assert</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">modular_set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">coeff</span> <span class="o">==</span> <span class="mi">3</span>
 <span class="c1"># constraint no longer in effect</span>
@@ -1275,13 +1298,15 @@ Default is 2, i.e., rewrite_simplify + canonical_simplify.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.expr.Var"><span class="pre">Var</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="arith.html#tvm.arith.ConstIntBound" title="tvm.arith.analyzer.ConstIntBound"><span class="pre">ConstIntBound</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span></dt>
-<dd><p>Update infomation about var</p>
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.expr.Var"><span class="pre">Var</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="arith.html#tvm.arith.ConstIntBound" title="tvm.arith.analyzer.ConstIntBound"><span class="pre">ConstIntBound</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="arith.html#tvm.arith.ModularSet" title="tvm.arith.analyzer.ModularSet"><span class="pre">ModularSet</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="arith.html#tvm.arith.IntSet" title="tvm.arith.int_set.IntSet"><span class="pre">IntSet</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span></dt>
+<dd><p>Update information about var.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>var</strong> (<a class="reference internal" href="tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.Var"><em>tvm.tirx.Var</em></a>) – The variable.</p></li>
-<li><p><strong>info</strong> (<em>tvm.Object</em>) – Related information.</p></li>
+<li><p><strong>info</strong> (<em>Union</em><em>[</em><a class="reference internal" href="arith.html#tvm.arith.ConstIntBound" title="tvm.arith.ConstIntBound"><em>ConstIntBound</em></a><em>, </em><a class="reference internal" href="arith.html#tvm.arith.ModularSet" title="tvm.arith.ModularSet"><em>ModularSet</em></a><em>, </em><a class="reference internal" href="arith.html#tvm.arith.IntSet" title="tvm.arith.IntSet"><em>IntSet</em></a><em>]</em>) – Related information.  A <code class="docutils literal notranslate"><span class="pre">ConstIntBound</span></code> updates the constant
+integer bound, a <code class="docutils literal notranslate"><span class="pre">ModularSet</span></code> updates the modular set, and an
+<code class="docutils literal notranslate"><span class="pre">IntSet</span></code> updates the integer-set domain of <code class="docutils literal notranslate"><span class="pre">var</span></code>.</p></li>
 <li><p><strong>override</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether allow override.</p></li>
 </ul>
 </dd>
@@ -1304,6 +1329,29 @@ Default is 2, i.e., rewrite_simplify + canonical_simplify.</p></li>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">try_compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.expr.PrimExpr"><span class="pre">PrimExpr</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.expr.PrimExpr"><span class="pre">PrimExpr</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">propagate_inequalities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="arith.html#tvm.arith.CompareResult" title="tvm.arith.analyzer.CompareResult"><span class="pre">CompareResult</span></a></span></span></dt>
+<dd><p>Compare lhs and rhs using previously provided known comparisons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lhs</strong> (<a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a>) – The left-hand side of the comparison.</p></li>
+<li><p><strong>rhs</strong> (<a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a>) – The right-hand side of the comparison.</p></li>
+<li><p><strong>propagate_inequalities</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – If true, attempt to find a sequence of transitive inequalities that
+allow lhs and rhs to be compared.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>result</strong> – The most specific result that can be proven about the comparison.
+Returns <code class="docutils literal notranslate"><span class="pre">CompareResult.UNKNOWN</span></code> when nothing can be proven.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="arith.html#tvm.arith.CompareResult" title="tvm.arith.CompareResult">CompareResult</a></p>
 </dd>
 </dl>
 </dd></dl>

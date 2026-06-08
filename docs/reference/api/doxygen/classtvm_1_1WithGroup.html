@@ -114,8 +114,8 @@ class tvm::WithGroup&lt; ContextType &gt;</h3>
 <p>A group of RAII contexts managed together. </p>
 <p>Allows dynamically emplacing multiple context objects that are all exited (in reverse order) when the group is destroyed. ContextType must declare <code>friend class <a class="el" href="classtvm_1_1With.html" title="RAII wrapper function to enter and exit a context object similar to python&#39;s with syntax.">With</a>&lt;ContextType&gt;</code> and provide EnterWithScope() / ExitWithScope() methods.</p>
 <div class="fragment"><div class="line">WithGroup&lt;ConstraintContext&gt; group;</div>
-<div class="line">group.Emplace(&amp;analyzer, cond1);  <span class="comment">// constructs and enters</span></div>
-<div class="line">group.Emplace(&amp;analyzer, cond2);  <span class="comment">// constructs and enters</span></div>
+<div class="line">group.Emplace(analyzer, cond1);  <span class="comment">// constructs and enters</span></div>
+<div class="line">group.Emplace(analyzer, cond2);  <span class="comment">// constructs and enters</span></div>
 <div class="line"><span class="comment">// destructor: exits cond2, then cond1</span></div>
 </div><!-- fragment --><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

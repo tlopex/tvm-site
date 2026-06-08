@@ -129,8 +129,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a88d594816df596eed10643082b0d0805"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1arith_1_1RewriteSimplifier.html#a88d594816df596eed10643082b0d0805">Analyzer</a></td></tr>
-<tr class="separator:a88d594816df596eed10643082b0d0805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab502b81f91a3692606541f1ec44911de"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1arith_1_1RewriteSimplifier.html#ab502b81f91a3692606541f1ec44911de">AnalyzerObj</a></td></tr>
+<tr class="separator:ab502b81f91a3692606541f1ec44911de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8bf22547cf1df0a28fc4ee98841ab89"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1arith_1_1RewriteSimplifier.html#ab8bf22547cf1df0a28fc4ee98841ab89">ConstraintContext</a></td></tr>
 <tr class="separator:ab8bf22547cf1df0a28fc4ee98841ab89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd092d074e3063da6d7bb0c67115a33f"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1arith_1_1RewriteSimplifier.html#abd092d074e3063da6d7bb0c67115a33f">CanonicalSimplifier</a></td></tr>
@@ -320,7 +320,7 @@ Friends</h2></td></tr>
 
 <p>Set the maximum allowed number of rewrite steps. </p>
 <p>By default, the simplifier may perform as many steps as are required. If a positive limit is set, then the simplifier will throw an exception when exceeding that number of rewrite steps. This allows tests to guard against performance regressions.</p>
-<p>Note: To maintain accurate usage counters, <code><a class="el" href="classtvm_1_1arith_1_1Analyzer.html" title="Analyzer that contains bunch of sub-analyzers.">Analyzer</a></code> instances should be re-used wherever possible. For example, TIR transformations should declare a single <code><a class="el" href="classtvm_1_1arith_1_1Analyzer.html" title="Analyzer that contains bunch of sub-analyzers.">Analyzer</a></code> that is used throughout the pass, and utility functions should receive an <code>Analyzer*</code> from their calling scope. </p>
+<p>Note: To maintain accurate usage counters, <code><a class="el" href="classtvm_1_1arith_1_1Analyzer.html" title="Managed reference to AnalyzerObj.">Analyzer</a></code> instances should be re-used wherever possible. For example, TIR transformations should declare a single <code><a class="el" href="classtvm_1_1arith_1_1Analyzer.html" title="Managed reference to AnalyzerObj.">Analyzer</a></code> that is used throughout the pass. Internal helper functions that only borrow the analyzer temporarily may receive the underlying <code>AnalyzerObj*</code> from their calling scope. </p>
 
 </div>
 </div>
@@ -369,8 +369,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a88d594816df596eed10643082b0d0805"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88d594816df596eed10643082b0d0805">&#9670;&nbsp;</a></span>Analyzer</h2>
+<a id="ab502b81f91a3692606541f1ec44911de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab502b81f91a3692606541f1ec44911de">&#9670;&nbsp;</a></span>AnalyzerObj</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -379,7 +379,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">friend class <a class="el" href="classtvm_1_1arith_1_1Analyzer.html">Analyzer</a></td>
+          <td class="memname">friend class <a class="el" href="classtvm_1_1arith_1_1AnalyzerObj.html">AnalyzerObj</a></td>
         </tr>
       </table>
   </td>

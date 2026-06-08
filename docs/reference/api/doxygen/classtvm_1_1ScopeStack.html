@@ -116,7 +116,7 @@ class tvm::ScopeStack&lt; T &gt;</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// In VisitStmt_(ForNode):</span></div>
 <div class="line"><span class="keywordflow">return</span> constraints.WithNewScope([&amp;]() -&gt; Stmt {</div>
-<div class="line">  constraints.Current().Emplace(&amp;analyzer, condition);</div>
+<div class="line">  constraints.Current().Emplace(analyzer, condition);</div>
 <div class="line">  <span class="keywordflow">return</span> StmtExprMutator::VisitStmt_(op);</div>
 <div class="line">});</div>
 </div><!-- fragment --><dl class="tparams"><dt>Template Parameters</dt><dd>

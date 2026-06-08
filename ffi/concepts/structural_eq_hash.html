@@ -33,7 +33,6 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=38aa6179" />
@@ -44,7 +43,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=a0222484"></script>
+    <script src="../_static/documentation_options.js?v=ecced4fd"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -498,8 +497,8 @@ window.runMermaid = runMermaid;</script>
     <link rel="prev" title="Exception Handling" href="exception_handling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+gb4525d2bb" />
-    <meta name="docbuild:last-update" content="May 04, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
+    <meta name="docbuild:last-update" content="Jun 08, 2026"/>
   </head>
   
   
@@ -863,7 +862,7 @@ window.runMermaid = runMermaid;</script>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#singleton-singletons"><code class="docutils literal notranslate"><span class="pre">"singleton"</span></code> — Singletons</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#field-level-annotations">Field-Level Annotations</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-eq-ignore-exclude-a-field"><code class="docutils literal notranslate"><span class="pre">structural_eq="ignore"</span></code> — Exclude a field</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-eq-def-definition-region"><code class="docutils literal notranslate"><span class="pre">structural_eq="def"</span></code> — Definition region</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-eq-def-recursive-def-non-recursive-definition-region"><code class="docutils literal notranslate"><span class="pre">structural_eq="def-recursive"</span></code> / <code class="docutils literal notranslate"><span class="pre">"def-non-recursive"</span></code> — Definition region</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-equality-and-hashing-s-equal-s-hash">Custom Equality and Hashing: <code class="docutils literal notranslate"><span class="pre">__s_equal__</span></code> / <code class="docutils literal notranslate"><span class="pre">__s_hash__</span></code></a><ul class="visible nav section-nav flex-column">
@@ -1458,11 +1457,11 @@ redundant to compare.</p></li>
 <li><p><strong>Debug annotations</strong> — names, comments, metadata for human consumption.</p></li>
 </ul>
 </section>
-<section id="structural-eq-def-definition-region">
-<h3><code class="docutils literal notranslate"><span class="pre">structural_eq=&quot;def&quot;</span></code> — Definition region<a class="headerlink" href="#structural-eq-def-definition-region" title="Link to this heading">#</a></h3>
+<section id="structural-eq-def-recursive-def-non-recursive-definition-region">
+<h3><code class="docutils literal notranslate"><span class="pre">structural_eq=&quot;def-recursive&quot;</span></code> / <code class="docutils literal notranslate"><span class="pre">&quot;def-non-recursive&quot;</span></code> — Definition region<a class="headerlink" href="#structural-eq-def-recursive-def-non-recursive-definition-region" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@py_class</span><span class="p">(</span><span class="n">structural_eq</span><span class="o">=</span><span class="s2">&quot;tree&quot;</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Lambda</span><span class="p">(</span><span class="n">Object</span><span class="p">):</span>
-    <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Var</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">structural_eq</span><span class="o">=</span><span class="s2">&quot;def&quot;</span><span class="p">)</span>
+    <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Var</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">structural_eq</span><span class="o">=</span><span class="s2">&quot;def-recursive&quot;</span><span class="p">)</span>
     <span class="n">body</span><span class="p">:</span> <span class="n">Expr</span>
 </pre></div>
 </div>
@@ -1470,14 +1469,41 @@ redundant to compare.</p></li>
 or hashing this field, allow new variable correspondences to be
 established.”</p>
 <p>This is the counterpart to <code class="docutils literal notranslate"><span class="pre">&quot;var&quot;</span></code>. A <code class="docutils literal notranslate"><span class="pre">&quot;var&quot;</span></code> type says “I am a
-variable”; <code class="docutils literal notranslate"><span class="pre">structural_eq=&quot;def&quot;</span></code> says “this field is where variables are
-defined.” Together they enable alpha-equivalence: comparing functions up
-to consistent variable renaming.</p>
+variable”; the <code class="docutils literal notranslate"><span class="pre">&quot;def-*&quot;</span></code> flags on a field say “this field is where
+variables are defined.” Together they enable alpha-equivalence:
+comparing functions up to consistent variable renaming.</p>
+<p>There are two flavors of definition region, distinguished by what
+happens when a <code class="docutils literal notranslate"><span class="pre">&quot;var&quot;</span></code> reached through the field carries its own
+sub-fields (for example, a shape annotation in the var’s type):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;def-recursive&quot;</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">&quot;def&quot;</span></code>) — the variable’s sub-fields
+stay inside the definition region. Any free variables encountered
+in those sub-fields are themselves treated as fresh definitions at
+the same site. One example is <strong>function parameter lists</strong>, where
+the value var and any shape parameters in its type are co-introduced
+together at the function boundary.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;def-non-recursive&quot;</span></code> — only the immediate variable(s) reached
+through the field bind. The variable’s sub-fields are walked
+outside the definition region, so any free variables there are
+<em>use</em> references that must resolve against an outer-scope binding.
+One example is a <strong>normal binding</strong> whose value type references
+outer-scope shape parameters (a <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">v</span> <span class="pre">=</span> <span class="pre">expr</span></code> where <code class="docutils literal notranslate"><span class="pre">v</span></code>’s
+type refers to vars defined earlier).</p></li>
+</ul>
+<p>When the distinction does not matter (no nested free vars under the
+bound variable), either flavor works and <code class="docutils literal notranslate"><span class="pre">&quot;def-recursive&quot;</span></code> is the
+conventional default — that’s why the bare <code class="docutils literal notranslate"><span class="pre">&quot;def&quot;</span></code> alias resolves
+to it.</p>
 <p>Use for:</p>
 <ul class="simple">
-<li><p><strong>Function parameter lists</strong></p></li>
-<li><p><strong>Let-binding left-hand sides</strong></p></li>
-<li><p><strong>Any field that introduces names into scope</strong></p></li>
+<li><p><strong>Function parameter lists</strong> — <code class="docutils literal notranslate"><span class="pre">&quot;def-recursive&quot;</span></code> so shape
+parameters in each param’s type co-introduce at the same site.</p></li>
+<li><p><strong>Normal binding left-hand sides</strong> (let bindings, for-loop
+iterators) whose value type references outer-scope vars —
+<code class="docutils literal notranslate"><span class="pre">&quot;def-non-recursive&quot;</span></code> so those references don’t rebind.</p></li>
+<li><p><strong>Any field that introduces names into scope</strong> — pick the flavor
+that matches the binding form’s contract; default to
+<code class="docutils literal notranslate"><span class="pre">&quot;def-recursive&quot;</span></code> when in doubt.</p></li>
 </ul>
 </section>
 </section>
@@ -1507,19 +1533,31 @@ what</em> <code class="docutils literal notranslate"><span class="pre">def_regio
 <p><code class="docutils literal notranslate"><span class="pre">__s_equal__</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(self, other, eq_cb) -&gt; bool
 
-eq_cb(lhs, rhs, def_region: bool, field_name: str) -&gt; bool
+eq_cb(lhs, rhs, def_region_kind: int, field_name: str) -&gt; bool
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">__s_hash__</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(self, init_hash: int, hash_cb) -&gt; int
 
-hash_cb(value, init_hash: int, def_region: bool) -&gt; int
+hash_cb(value, init_hash: int, def_region_kind: int) -&gt; int
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">def_region</span></code> flag on each recursive call controls whether the
-sub-value is compared/hashed in a definition region (enabling new
-variable bindings, just like <code class="docutils literal notranslate"><span class="pre">field(structural_eq=&quot;def&quot;)</span></code>).  The
-<code class="docutils literal notranslate"><span class="pre">field_name</span></code> argument on <code class="docutils literal notranslate"><span class="pre">eq_cb</span></code> is used only for mismatch path
+<p>The <code class="docutils literal notranslate"><span class="pre">def_region_kind</span></code> argument on each recursive call mirrors the
+field-level <code class="docutils literal notranslate"><span class="pre">&quot;def-*&quot;</span></code> flags and controls whether the sub-value is
+compared/hashed inside a definition region:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> — not in a def region (matches <code class="docutils literal notranslate"><span class="pre">None</span></code> on a field).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> — recursive def region (matches <code class="docutils literal notranslate"><span class="pre">&quot;def-recursive&quot;</span></code>, alias
+<code class="docutils literal notranslate"><span class="pre">&quot;def&quot;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> — non-recursive def region (matches <code class="docutils literal notranslate"><span class="pre">&quot;def-non-recursive&quot;</span></code>).</p></li>
+</ul>
+<p>For back-compat with the original single-flag API, the callback also
+accepts a plain <code class="docutils literal notranslate"><span class="pre">bool</span></code>: <code class="docutils literal notranslate"><span class="pre">True</span></code> is treated as <code class="docutils literal notranslate"><span class="pre">1</span></code> (recursive) and
+<code class="docutils literal notranslate"><span class="pre">False</span></code> as <code class="docutils literal notranslate"><span class="pre">0</span></code> (not in a def region). The Python examples below
+use <code class="docutils literal notranslate"><span class="pre">True</span></code> / <code class="docutils literal notranslate"><span class="pre">False</span></code> for that reason; pass an explicit <code class="docutils literal notranslate"><span class="pre">2</span></code> (or
+the <code class="docutils literal notranslate"><span class="pre">kTVMFFIDefRegionKindNonRecursive</span></code> enum value from C++) when the
+non-recursive kind is needed.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">field_name</span></code> argument on <code class="docutils literal notranslate"><span class="pre">eq_cb</span></code> is used only for mismatch path
 reporting from <code class="xref py py-func docutils literal notranslate"><span class="pre">get_first_structural_mismatch()</span></code>.</p>
 </section>
 <section id="example-python">
@@ -1815,7 +1853,7 @@ fun [y] → y + 1       (span=&quot;b.py:5&quot;)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#singleton-singletons"><code class="docutils literal notranslate"><span class="pre">"singleton"</span></code> — Singletons</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#field-level-annotations">Field-Level Annotations</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-eq-ignore-exclude-a-field"><code class="docutils literal notranslate"><span class="pre">structural_eq="ignore"</span></code> — Exclude a field</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-eq-def-definition-region"><code class="docutils literal notranslate"><span class="pre">structural_eq="def"</span></code> — Definition region</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-eq-def-recursive-def-non-recursive-definition-region"><code class="docutils literal notranslate"><span class="pre">structural_eq="def-recursive"</span></code> / <code class="docutils literal notranslate"><span class="pre">"def-non-recursive"</span></code> — Definition region</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-equality-and-hashing-s-equal-s-hash">Custom Equality and Hashing: <code class="docutils literal notranslate"><span class="pre">__s_equal__</span></code> / <code class="docutils literal notranslate"><span class="pre">__s_hash__</span></code></a><ul class="visible nav section-nav flex-column">
@@ -1853,7 +1891,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 04, 2026.
+  Last updated on Jun 08, 2026.
   <br/>
 </p>
   </div>

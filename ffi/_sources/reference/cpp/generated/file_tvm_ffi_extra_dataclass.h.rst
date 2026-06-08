@@ -35,9 +35,15 @@ Includes
 --------
 
 
+- ``ostream``
+
 - ``tvm/ffi/any.h`` (:ref:`file_tvm_ffi_any.h`)
 
+- ``tvm/ffi/container/variant.h`` (:ref:`file_tvm_ffi_container_variant.h`)
+
 - ``tvm/ffi/extra/base.h`` (:ref:`file_tvm_ffi_extra_base.h`)
+
+- ``tvm/ffi/optional.h`` (:ref:`file_tvm_ffi_optional.h`)
 
 - ``tvm/ffi/string.h`` (:ref:`file_tvm_ffi_string.h`)
 

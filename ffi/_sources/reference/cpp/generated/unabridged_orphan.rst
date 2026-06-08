@@ -292,6 +292,11 @@ Files
 
    file_tvm_ffi_container_variant.h.rst
 
+.. toctree::
+   :maxdepth: 5
+
+   file_tvm_ffi_extra_visit_error_context.h.rst
+
 Pages
 *****
 

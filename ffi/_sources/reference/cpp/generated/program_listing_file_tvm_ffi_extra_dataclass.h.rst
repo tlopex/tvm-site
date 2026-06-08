@@ -32,8 +32,12 @@ Program Listing for File dataclass.h
    #define TVM_FFI_EXTRA_DATACLASS_H_
    
    #include <tvm/ffi/any.h>
+   #include <tvm/ffi/container/variant.h>
    #include <tvm/ffi/extra/base.h>
+   #include <tvm/ffi/optional.h>
    #include <tvm/ffi/string.h>
+   
+   #include <ostream>
    
    namespace tvm {
    namespace ffi {
@@ -53,6 +57,26 @@ Program Listing for File dataclass.h
    TVM_FFI_EXTRA_CXX_API bool RecursiveGt(const Any& lhs, const Any& rhs);
    
    TVM_FFI_EXTRA_CXX_API bool RecursiveGe(const Any& lhs, const Any& rhs);
+   
+   // std::ostream overloads
+   
+   inline std::ostream& operator<<(std::ostream& os, const Any& value) {
+     return os << ReprPrint(value);
+   }
+   
+   inline std::ostream& operator<<(std::ostream& os, const ObjectRef& value) {
+     return os << ReprPrint(Any(value));
+   }
+   
+   template <typename... V>
+   inline std::ostream& operator<<(std::ostream& os, const Variant<V...>& value) {
+     return os << ReprPrint(Any(value));
+   }
+   
+   template <typename T>
+   inline std::ostream& operator<<(std::ostream& os, const Optional<T>& value) {
+     return os << ReprPrint(Any(value));
+   }
    
    }  // namespace ffi
    }  // namespace tvm

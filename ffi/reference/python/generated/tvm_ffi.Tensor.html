@@ -33,7 +33,6 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=38aa6179" />
@@ -44,7 +43,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=a0222484"></script>
+    <script src="../../../_static/documentation_options.js?v=ecced4fd"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -62,8 +61,8 @@
     <link rel="prev" title="tvm_ffi.Object" href="tvm_ffi.Object.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+gb4525d2bb" />
-    <meta name="docbuild:last-update" content="May 04, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
+    <meta name="docbuild:last-update" content="Jun 08, 2026"/>
   </head>
   
   
@@ -402,7 +401,11 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.__dlpack_device__"><code class="docutils literal notranslate"><span class="pre">Tensor.__dlpack_device__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.device"><code class="docutils literal notranslate"><span class="pre">Tensor.device</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.dtype"><code class="docutils literal notranslate"><span class="pre">Tensor.dtype</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.is_contiguous"><code class="docutils literal notranslate"><span class="pre">Tensor.is_contiguous()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.ndim"><code class="docutils literal notranslate"><span class="pre">Tensor.ndim</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.numel"><code class="docutils literal notranslate"><span class="pre">Tensor.numel()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.shape"><code class="docutils literal notranslate"><span class="pre">Tensor.shape</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.size"><code class="docutils literal notranslate"><span class="pre">Tensor.size()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.strides"><code class="docutils literal notranslate"><span class="pre">Tensor.strides</span></code></a></li>
 </ul>
 </li>
@@ -461,8 +464,17 @@ through the DLPack protocol. Instances are typically created with
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_</span></code>(other)</p></td>
 <td><p><em>Defined in</em> <a class="reference internal" href="tvm_ffi.Object.html#tvm_ffi.Object" title="tvm_ffi.Object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></a> <em>as method</em> <code class="xref py py-meth docutils literal notranslate"><span class="pre">is_()</span></code>.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm_ffi.Tensor.is_contiguous" title="tvm_ffi.Tensor.is_contiguous"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_contiguous</span></code></a>()</p></td>
+<td><p>True if the Tensor is C-contiguous (row-major), False otherwise.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tvm_ffi.Tensor.numel" title="tvm_ffi.Tensor.numel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numel</span></code></a>()</p></td>
+<td><p>Total number of elements in the tensor.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">same_as</span></code>(other)</p></td>
 <td><p><em>Defined in</em> <a class="reference internal" href="tvm_ffi.Object.html#tvm_ffi.Object" title="tvm_ffi.Object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></a> <em>as method</em> <a class="reference internal" href="tvm_ffi.Object.html#tvm_ffi.Object.same_as" title="tvm_ffi.Object.same_as"><code class="xref py py-meth docutils literal notranslate"><span class="pre">same_as()</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tvm_ffi.Tensor.size" title="tvm_ffi.Tensor.size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code></a>(idx)</p></td>
+<td><p>Get the size of the <code class="docutils literal notranslate"><span class="pre">idx</span></code>-th dimension.</p></td>
 </tr>
 </tbody>
 </table>
@@ -479,10 +491,13 @@ through the DLPack protocol. Instances are typically created with
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">id_</span></code></p></td>
 <td><p><em>Defined in</em> <a class="reference internal" href="tvm_ffi.Object.html#tvm_ffi.Object" title="tvm_ffi.Object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></a> <em>as attribute</em> <code class="xref py py-attr docutils literal notranslate"><span class="pre">id_</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tvm_ffi.Tensor.shape" title="tvm_ffi.Tensor.shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm_ffi.Tensor.ndim" title="tvm_ffi.Tensor.ndim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndim</span></code></a></p></td>
+<td><p>Number of dimensions of the tensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tvm_ffi.Tensor.shape" title="tvm_ffi.Tensor.shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></a></p></td>
 <td><p>Tensor shape as a tuple of integers.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tvm_ffi.Tensor.strides" title="tvm_ffi.Tensor.strides"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strides</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm_ffi.Tensor.strides" title="tvm_ffi.Tensor.strides"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strides</span></code></a></p></td>
 <td><p>Tensor strides as a tuple of integers.</p></td>
 </tr>
 </tbody>
@@ -534,10 +549,52 @@ consumer. When <code class="docutils literal notranslate"><span class="pre">None
 <dd><p>Data type as <a class="reference internal" href="tvm_ffi.dtype.html#tvm_ffi.dtype" title="tvm_ffi.dtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">tvm_ffi.dtype</span></code></a> (<code class="docutils literal notranslate"><span class="pre">str</span></code> subclass).</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="tvm_ffi.Tensor.is_contiguous">
+<span class="sig-name descname"><span class="pre">is_contiguous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm_ffi.Tensor.is_contiguous" title="Link to this definition">#</a></dt>
+<dd><p>True if the Tensor is C-contiguous (row-major), False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tvm_ffi.Tensor.ndim">
+<span class="sig-name descname"><span class="pre">ndim</span></span><a class="headerlink" href="#tvm_ffi.Tensor.ndim" title="Link to this definition">#</a></dt>
+<dd><p>Number of dimensions of the tensor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tvm_ffi.Tensor.numel">
+<span class="sig-name descname"><span class="pre">numel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm_ffi.Tensor.numel" title="Link to this definition">#</a></dt>
+<dd><p>Total number of elements in the tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="tvm_ffi.Tensor.shape">
 <span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#tvm_ffi.Tensor.shape" title="Link to this definition">#</a></dt>
 <dd><p>Tensor shape as a tuple of integers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tvm_ffi.Tensor.size">
+<span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm_ffi.Tensor.size" title="Link to this definition">#</a></dt>
+<dd><p>Get the size of the <code class="docutils literal notranslate"><span class="pre">idx</span></code>-th dimension. Negative <code class="docutils literal notranslate"><span class="pre">idx</span></code> counts from the last dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>idx</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -603,7 +660,11 @@ consumer. When <code class="docutils literal notranslate"><span class="pre">None
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.__dlpack_device__"><code class="docutils literal notranslate"><span class="pre">Tensor.__dlpack_device__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.device"><code class="docutils literal notranslate"><span class="pre">Tensor.device</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.dtype"><code class="docutils literal notranslate"><span class="pre">Tensor.dtype</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.is_contiguous"><code class="docutils literal notranslate"><span class="pre">Tensor.is_contiguous()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.ndim"><code class="docutils literal notranslate"><span class="pre">Tensor.ndim</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.numel"><code class="docutils literal notranslate"><span class="pre">Tensor.numel()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.shape"><code class="docutils literal notranslate"><span class="pre">Tensor.shape</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.size"><code class="docutils literal notranslate"><span class="pre">Tensor.size()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm_ffi.Tensor.strides"><code class="docutils literal notranslate"><span class="pre">Tensor.strides</span></code></a></li>
 </ul>
 </li>
@@ -633,7 +694,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 04, 2026.
+  Last updated on Jun 08, 2026.
   <br/>
 </p>
   </div>

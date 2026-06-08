@@ -73,7 +73,11 @@ Included By
 
 - :ref:`file_tvm_ffi_container_variant.h`
 
+- :ref:`file_tvm_ffi_extra_dataclass.h`
+
 - :ref:`file_tvm_ffi_extra_structural_equal.h`
+
+- :ref:`file_tvm_ffi_extra_visit_error_context.h`
 
 - :ref:`file_tvm_ffi_reflection_overload.h`
 

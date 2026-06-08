@@ -76,6 +76,36 @@ Program Listing for File base_details.h
    #define TVM_FFI_UNREACHABLE() __builtin_unreachable()
    #endif
    
+   #if defined(__GNUC__) || defined(__clang__)
+   #define TVM_FFI_COLD_CODE [[gnu::cold]]
+   #else
+   #define TVM_FFI_COLD_CODE
+   #endif
+   
+   #if defined(__GNUC__) || defined(__clang__)
+   #define TVM_FFI_PREDICT_FALSE(cond) (__builtin_expect(static_cast<bool>(cond), 0))
+   #define TVM_FFI_PREDICT_TRUE(cond) (__builtin_expect(static_cast<bool>(cond), 1))
+   #else
+   #define TVM_FFI_PREDICT_FALSE(cond) (cond)
+   #define TVM_FFI_PREDICT_TRUE(cond) (cond)
+   #endif
+   
+   #if defined(__clang__)
+   #define TVM_FFI_UNSAFE_ASSUME(cond) __builtin_assume(cond)
+   #elif defined(__GNUC__)
+   // GCC 13+ supports __attribute__((assume(...))); fall back to the void-cast
+   // no-op for older GCC where __builtin_assume is absent.
+   #if __GNUC__ >= 13
+   #define TVM_FFI_UNSAFE_ASSUME(cond) __attribute__((assume(cond)))
+   #else
+   #define TVM_FFI_UNSAFE_ASSUME(cond) static_cast<void>(0)
+   #endif
+   #elif defined(_MSC_VER)
+   #define TVM_FFI_UNSAFE_ASSUME(cond) __assume(cond)
+   #else
+   #define TVM_FFI_UNSAFE_ASSUME(cond) static_cast<void>(0)
+   #endif
+   
    #define TVM_FFI_STR_CONCAT_(__x, __y) __x##__y
    #define TVM_FFI_STR_CONCAT(__x, __y) TVM_FFI_STR_CONCAT_(__x, __y)
    

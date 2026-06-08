@@ -33,7 +33,6 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=38aa6179" />
@@ -44,7 +43,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=a0222484"></script>
+    <script src="../../../_static/documentation_options.js?v=ecced4fd"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -60,8 +59,8 @@
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+gb4525d2bb" />
-    <meta name="docbuild:last-update" content="May 04, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
+    <meta name="docbuild:last-update" content="Jun 08, 2026"/>
   </head>
   
   
@@ -402,7 +401,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlagE"><code class="docutils literal notranslate"><span class="pre">tvm::ffi::reflection::AttachFieldFlag</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag15AttachFieldFlagE7int32_t"><code class="docutils literal notranslate"><span class="pre">AttachFieldFlag()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK3tvm3ffi10reflection15AttachFieldFlag5ApplyEP15TVMFFIFieldInfo"><code class="docutils literal notranslate"><span class="pre">Apply()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag10SEqHashDefEv"><code class="docutils literal notranslate"><span class="pre">SEqHashDef()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag19SEqHashDefRecursiveEv"><code class="docutils literal notranslate"><span class="pre">SEqHashDefRecursive()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag22SEqHashDefNonRecursiveEv"><code class="docutils literal notranslate"><span class="pre">SEqHashDefNonRecursive()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag13SEqHashIgnoreEv"><code class="docutils literal notranslate"><span class="pre">SEqHashIgnore()</span></code></a></li>
 </ul>
 </li>
@@ -467,9 +467,17 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N3tvm3ffi10reflection15AttachFieldFlag10SEqHashDefEv">
-<span class="target" id="classtvm_1_1ffi_1_1reflection_1_1AttachFieldFlag_1afb73683e4e6175d26a8149ba807ba462"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlagE" title="tvm::ffi::reflection::AttachFieldFlag"><span class="n"><span class="pre">AttachFieldFlag</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SEqHashDef</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag10SEqHashDefEv" title="Link to this definition">#</a><br /></dt>
-<dd><p>Attach kTVMFFIFieldFlagBitMaskSEqHashDef. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N3tvm3ffi10reflection15AttachFieldFlag19SEqHashDefRecursiveEv">
+<span class="target" id="classtvm_1_1ffi_1_1reflection_1_1AttachFieldFlag_1add57cbb4ad5da1bca03084c08dc4a453"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlagE" title="tvm::ffi::reflection::AttachFieldFlag"><span class="n"><span class="pre">AttachFieldFlag</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SEqHashDefRecursive</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag19SEqHashDefRecursiveEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Attach kTVMFFIFieldFlagBitMaskSEqHashDefRecursive. </p>
+<p>The field enters a recursive def region: free vars discovered both at the field’s value and inside that value’s sub-fields bind as fresh defs at the same site. Use for “function-style” bindings. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3tvm3ffi10reflection15AttachFieldFlag22SEqHashDefNonRecursiveEv">
+<span class="target" id="classtvm_1_1ffi_1_1reflection_1_1AttachFieldFlag_1a75ee2b4b4e539fa8b0f6a44a7e5cfaaf"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlagE" title="tvm::ffi::reflection::AttachFieldFlag"><span class="n"><span class="pre">AttachFieldFlag</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SEqHashDefNonRecursive</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag22SEqHashDefNonRecursiveEv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Attach kTVMFFIFieldFlagBitMaskSEqHashDefNonRecursive. </p>
+<p>The field enters a non-recursive def region: only the immediate free var at the field’s value binds; free vars in its sub-fields are uses that must already be bound by an outer def region. Use for “let-style” bindings whose sub-fields reference outer-scope vars. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -521,7 +529,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlagE"><code class="docutils literal notranslate"><span class="pre">tvm::ffi::reflection::AttachFieldFlag</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag15AttachFieldFlagE7int32_t"><code class="docutils literal notranslate"><span class="pre">AttachFieldFlag()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK3tvm3ffi10reflection15AttachFieldFlag5ApplyEP15TVMFFIFieldInfo"><code class="docutils literal notranslate"><span class="pre">Apply()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag10SEqHashDefEv"><code class="docutils literal notranslate"><span class="pre">SEqHashDef()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag19SEqHashDefRecursiveEv"><code class="docutils literal notranslate"><span class="pre">SEqHashDefRecursive()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag22SEqHashDefNonRecursiveEv"><code class="docutils literal notranslate"><span class="pre">SEqHashDefNonRecursive()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag13SEqHashIgnoreEv"><code class="docutils literal notranslate"><span class="pre">SEqHashIgnore()</span></code></a></li>
 </ul>
 </li>
@@ -553,7 +562,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 04, 2026.
+  Last updated on Jun 08, 2026.
   <br/>
 </p>
   </div>

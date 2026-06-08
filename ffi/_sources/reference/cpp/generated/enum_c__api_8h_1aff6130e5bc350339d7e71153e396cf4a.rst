@@ -1,0 +1,14 @@
+.. _exhale_enum_c__api_8h_1aff6130e5bc350339d7e71153e396cf4a:
+
+Enum TVMFFIDefRegionKind
+========================
+
+- Defined in :ref:`file_tvm_ffi_c_api.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: TVMFFIDefRegionKind
+   :project: tvm-ffi

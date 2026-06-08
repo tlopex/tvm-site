@@ -153,3 +153,10 @@ Typedefs
 
 - :ref:`exhale_typedef_namespacetvm_1_1ffi_1_1reflection_1a96513314d45b43eada132d9b96653d9a`
 
+
+Variables
+---------
+
+
+- :ref:`exhale_variable_namespacetvm_1_1ffi_1_1reflection_1aab5d2ed0a499b8237fedeead671a3fa0`
+

@@ -114,6 +114,8 @@ Enums
 
 - :ref:`exhale_enum_c__api_8h_1ad6a441d28d4a6406418489609e975a19`
 
+- :ref:`exhale_enum_c__api_8h_1aff6130e5bc350339d7e71153e396cf4a`
+
 - :ref:`exhale_enum_c__api_8h_1ad5a608f648c4f86cafdc8dc09f870bc5`
 
 - :ref:`exhale_enum_c__api_8h_1a8eb3fb55f6ec3c46b6e57740af4ca58a`

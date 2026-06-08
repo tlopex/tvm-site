@@ -71,7 +71,7 @@ Program Listing for File c_api.h
    // NOLINTBEGIN(modernize-macro-to-enum)
    #define TVM_FFI_VERSION_MAJOR 0
    #define TVM_FFI_VERSION_MINOR 1
-   #define TVM_FFI_VERSION_PATCH 11
+   #define TVM_FFI_VERSION_PATCH 12
    // NOLINTEND(modernize-macro-to-enum)
    
    #ifdef __cplusplus
@@ -378,7 +378,7 @@ Program Listing for File c_api.h
      kTVMFFIFieldFlagBitMaskHasDefault = 1 << 1,
      kTVMFFIFieldFlagBitMaskIsStaticMethod = 1 << 2,
      kTVMFFIFieldFlagBitMaskSEqHashIgnore = 1 << 3,
-     kTVMFFIFieldFlagBitMaskSEqHashDef = 1 << 4,
+     kTVMFFIFieldFlagBitMaskSEqHashDefRecursive = 1 << 4,
      kTVMFFIFieldFlagBitMaskDefaultFromFactory = 1 << 5,
      kTVMFFIFieldFlagBitMaskReprOff = 1 << 6,
      kTVMFFIFieldFlagBitMaskCompareOff = 1 << 7,
@@ -386,6 +386,7 @@ Program Listing for File c_api.h
      kTVMFFIFieldFlagBitMaskInitOff = 1 << 9,
      kTVMFFIFieldFlagBitMaskKwOnly = 1 << 10,
      kTVMFFIFieldFlagBitSetterIsFunctionObj = 1 << 11,
+     kTVMFFIFieldFlagBitMaskSEqHashDefNonRecursive = 1 << 12,
    #ifdef __cplusplus
    };
    #else
@@ -407,6 +408,20 @@ Program Listing for File c_api.h
    };
    #else
    } TVMFFISEqHashKind;
+   #endif
+   
+   #ifdef __cplusplus
+   enum TVMFFIDefRegionKind : int32_t {
+   #else
+   typedef enum {
+   #endif
+     kTVMFFIDefRegionKindNone = 0,
+     kTVMFFIDefRegionKindRecursive = 1,
+     kTVMFFIDefRegionKindNonRecursive = 2,
+   #ifdef __cplusplus
+   };
+   #else
+   } TVMFFIDefRegionKind;
    #endif
    
    typedef struct {

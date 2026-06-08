@@ -61,5 +61,7 @@ Included By
 
 - :ref:`file_tvm_ffi_extra_structural_hash.h`
 
+- :ref:`file_tvm_ffi_extra_visit_error_context.h`
+
 
 

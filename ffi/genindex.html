@@ -32,7 +32,6 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=38aa6179" />
@@ -43,12 +42,11 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=a0222484"></script>
+    <script src="_static/documentation_options.js?v=ecced4fd"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/tabs.js?v=3030b3cb"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
@@ -496,8 +494,8 @@ window.runMermaid = runMermaid;</script>
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+gb4525d2bb" />
-    <meta name="docbuild:last-update" content="May 04, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
+    <meta name="docbuild:last-update" content="Jun 08, 2026"/>
   </head>
   
   
@@ -1024,13 +1022,15 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.init_ffi_api.html#tvm_ffi.init_ffi_api">init_ffi_api() (in module tvm_ffi)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/python/generated/tvm_ffi.Module.html#tvm_ffi.Module.inspect_source">inspect_source() (tvm_ffi.Module method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/python/generated/tvm_ffi.Module.html#tvm_ffi.Module.is_binary_serializable">is_binary_serializable() (tvm_ffi.Module method)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Module.html#tvm_ffi.Module.is_compilation_exportable">is_compilation_exportable() (tvm_ffi.Module method)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor.is_contiguous">is_contiguous() (tvm_ffi.Tensor method)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.access_path.AccessPath.html#tvm_ffi.access_path.AccessPath.is_prefix_of">is_prefix_of() (tvm_ffi.access_path.AccessPath method)</a>
 </li>
@@ -1141,6 +1141,12 @@ window.runMermaid = runMermaid;</script>
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor.ndim">ndim (tvm_ffi.Tensor attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor.numel">numel() (tvm_ffi.Tensor method)</a>
+</li>
       <li><a href="reference/python/cpp/generated/tvm_ffi.cpp.nvrtc.nvrtc_compile.html#tvm_ffi.cpp.nvrtc.nvrtc_compile">nvrtc_compile() (in module tvm_ffi.cpp.nvrtc)</a>
 </li>
   </ul></td>
@@ -1203,6 +1209,8 @@ window.runMermaid = runMermaid;</script>
       <li><a href="reference/python/generated/tvm_ffi.Shape.html#tvm_ffi.Shape">Shape (class in tvm_ffi)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor.shape">shape (tvm_ffi.Tensor attribute)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor.size">size() (tvm_ffi.Tensor method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -1646,7 +1654,7 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4NKR3tvm3ffi8Expected5valueEv">tvm::ffi::Expected::value (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4NO3tvm3ffi8Expected5valueEv">[1]</a>
 </li>
-      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4I0ENK3tvm3ffi8Expected8value_orE1TRR1U">tvm::ffi::Expected::value_or (C++ function)</a>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4I0ENKR3tvm3ffi8Expected8value_orE1TRR1U">tvm::ffi::Expected::value_or (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4I0ENO3tvm3ffi8Expected8value_orE1TRR1U">[1]</a>
 </li>
       <li><a href="reference/cpp/generated/structtvm_1_1ffi_1_1FallbackOnlyTraitsBase.html#_CPPv4I0DpEN3tvm3ffi22FallbackOnlyTraitsBaseE">tvm::ffi::FallbackOnlyTraitsBase (C++ struct)</a>
 </li>
@@ -2122,7 +2130,9 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1AttachFieldFlag.html#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag15AttachFieldFlagE7int32_t">tvm::ffi::reflection::AttachFieldFlag::AttachFieldFlag (C++ function)</a>
 </li>
-      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1AttachFieldFlag.html#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag10SEqHashDefEv">tvm::ffi::reflection::AttachFieldFlag::SEqHashDef (C++ function)</a>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1AttachFieldFlag.html#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag22SEqHashDefNonRecursiveEv">tvm::ffi::reflection::AttachFieldFlag::SEqHashDefNonRecursive (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1AttachFieldFlag.html#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag19SEqHashDefRecursiveEv">tvm::ffi::reflection::AttachFieldFlag::SEqHashDefRecursive (C++ function)</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1AttachFieldFlag.html#_CPPv4N3tvm3ffi10reflection15AttachFieldFlag13SEqHashIgnoreEv">tvm::ffi::reflection::AttachFieldFlag::SEqHashIgnore (C++ function)</a>
 </li>
@@ -2240,11 +2250,11 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1ObjectDef.html#_CPPv4I0DpEN3tvm3ffi10reflection9ObjectDef10def_staticER9ObjectDefPKcRR4FuncDpRR5Extra">tvm::ffi::reflection::ObjectDef::def_static (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1ObjectDef.html#_CPPv4IDpEN3tvm3ffi10reflection9ObjectDef9ObjectDefEDpRR9ExtraArgs">tvm::ffi::reflection::ObjectDef::ObjectDef (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1ObjectDef.html#_CPPv4N3tvm3ffi10reflection9ObjectDef9ObjectDefERK9ObjectDef">[1]</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1ObjectDef.html#_CPPv4N3tvm3ffi10reflection9ObjectDef9ObjectDefERR9ObjectDef">[2]</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1ObjectDef.html#_CPPv4N3tvm3ffi10reflection9ObjectDefD0Ev">tvm::ffi::reflection::ObjectDef::~ObjectDef (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/variable_namespacetvm_1_1ffi_1_1reflection_1aab5d2ed0a499b8237fedeead671a3fa0.html#_CPPv4IDpEN3tvm3ffi10reflection13overload_castE">tvm::ffi::reflection::overload_cast (C++ member)</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1OverloadObjectDef.html#_CPPv4I0EN3tvm3ffi10reflection17OverloadObjectDefE">tvm::ffi::reflection::OverloadObjectDef (C++ class)</a>
 </li>
@@ -2254,6 +2264,8 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1OverloadObjectDef.html#_CPPv4I00DpEN3tvm3ffi10reflection17OverloadObjectDef6def_rwER17OverloadObjectDefPKcM9BaseClass1TDpRR5Extra">tvm::ffi::reflection::OverloadObjectDef::def_rw (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1OverloadObjectDef.html#_CPPv4I0DpEN3tvm3ffi10reflection17OverloadObjectDef10def_staticER17OverloadObjectDefPKcRR4FuncDpRR5Extra">tvm::ffi::reflection::OverloadObjectDef::def_static (C++ function)</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1OverloadObjectDef.html#_CPPv4IDpEN3tvm3ffi10reflection17OverloadObjectDef17OverloadObjectDefEDpRR9ExtraArgs">tvm::ffi::reflection::OverloadObjectDef::OverloadObjectDef (C++ function)</a>
@@ -2720,6 +2732,18 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1Variant.html#_CPPv4I00EN3tvm3ffi7Variant7VariantE1T">tvm::ffi::Variant::Variant (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1Variant.html#_CPPv4N3tvm3ffi7Variant7VariantERK7VariantIDp1VE">[1]</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1Variant.html#_CPPv4N3tvm3ffi7Variant7VariantERR7VariantIDp1VE">[2]</a>
 </li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitErrorContext.html#_CPPv4N3tvm3ffi17VisitErrorContextE">tvm::ffi::VisitErrorContext (C++ class)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitErrorContext.html#_CPPv4N3tvm3ffi17VisitErrorContext15FindAccessPathsERK9ObjectRefRK17VisitErrorContextb">tvm::ffi::VisitErrorContext::FindAccessPaths (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitErrorContext.html#_CPPv4N3tvm3ffi17VisitErrorContext15TryGetFromErrorERK5Error">tvm::ffi::VisitErrorContext::TryGetFromError (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitErrorContextObj.html#_CPPv4N3tvm3ffi20VisitErrorContextObjE">tvm::ffi::VisitErrorContextObj (C++ class)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitErrorContextObj.html#_CPPv4N3tvm3ffi20VisitErrorContextObj18prev_error_contextE">tvm::ffi::VisitErrorContextObj::prev_error_context (C++ member)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitErrorContextObj.html#_CPPv4N3tvm3ffi20VisitErrorContextObj21reverse_visit_patternE">tvm::ffi::VisitErrorContextObj::reverse_visit_pattern (C++ member)</a>
+</li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WeakObjectPtr.html#_CPPv4I0EN3tvm3ffi13WeakObjectPtrE">tvm::ffi::WeakObjectPtr (C++ class)</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WeakObjectPtr.html#_CPPv4NK3tvm3ffi13WeakObjectPtr7expiredEv">tvm::ffi::WeakObjectPtr::expired (C++ function)</a>
@@ -2853,6 +2877,12 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/define_c__api_8h_1a42634cb2690dce4d9af6c2a402fc903c.html#c.TVM_FFI_VERSION_PATCH">TVM_FFI_VERSION_PATCH (C macro)</a>
 </li>
+      <li><a href="reference/cpp/generated/define_visit__error__context_8h_1a2c7a0445bca80cbe5572c1210ece5d9a.html#c.TVM_FFI_VISIT_BEGIN">TVM_FFI_VISIT_BEGIN (C macro)</a>
+</li>
+      <li><a href="reference/cpp/generated/define_visit__error__context_8h_1ad7a104799c7bc592fb7f7bb33b15549c.html#c.TVM_FFI_VISIT_END">TVM_FFI_VISIT_END (C macro)</a>
+</li>
+      <li><a href="reference/cpp/generated/define_visit__error__context_8h_1a83081a2550b85038ac6195ee80dbc3d5.html#c.TVM_FFI_VISIT_THROW">TVM_FFI_VISIT_THROW (C macro)</a>
+</li>
       <li><a href="reference/cpp/generated/define_c__api_8h_1a01871644eed04162005df7faa5442f92.html#c.TVM_FFI_WEAK">TVM_FFI_WEAK (C macro)</a>
 </li>
       <li><a href="reference/cpp/generated/structTVMFFIAny.html#_CPPv49TVMFFIAny">TVMFFIAny (C++ struct)</a>
@@ -2904,6 +2934,14 @@ window.runMermaid = runMermaid;</script>
       <li><a href="reference/cpp/generated/function_c__api_8h_1a44604b1d0db208ed82cbc7cf0fd0f47c.html#_CPPv424TVMFFIDataTypeFromStringPK15TVMFFIByteArrayP10DLDataType">TVMFFIDataTypeFromString (C++ function)</a>
 </li>
       <li><a href="reference/cpp/generated/function_c__api_8h_1a402f64dec7a665f281e55cf946a7481b.html#_CPPv422TVMFFIDataTypeToStringPK10DLDataTypeP9TVMFFIAny">TVMFFIDataTypeToString (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/enum_c__api_8h_1aff6130e5bc350339d7e71153e396cf4a.html#_CPPv419TVMFFIDefRegionKind">TVMFFIDefRegionKind (C++ enum)</a>
+</li>
+      <li><a href="reference/cpp/generated/enum_c__api_8h_1aff6130e5bc350339d7e71153e396cf4a.html#_CPPv4N19TVMFFIDefRegionKind24kTVMFFIDefRegionKindNoneE">TVMFFIDefRegionKind::kTVMFFIDefRegionKindNone (C++ enumerator)</a>
+</li>
+      <li><a href="reference/cpp/generated/enum_c__api_8h_1aff6130e5bc350339d7e71153e396cf4a.html#_CPPv4N19TVMFFIDefRegionKind32kTVMFFIDefRegionKindNonRecursiveE">TVMFFIDefRegionKind::kTVMFFIDefRegionKindNonRecursive (C++ enumerator)</a>
+</li>
+      <li><a href="reference/cpp/generated/enum_c__api_8h_1aff6130e5bc350339d7e71153e396cf4a.html#_CPPv4N19TVMFFIDefRegionKind29kTVMFFIDefRegionKindRecursiveE">TVMFFIDefRegionKind::kTVMFFIDefRegionKindRecursive (C++ enumerator)</a>
 </li>
       <li><a href="reference/cpp/generated/function_c__api_8h_1a762fc5c881dc5f66066eb45b65a5781f.html#_CPPv425TVMFFIDLDeviceFromIntPair7int32_t7int32_t">TVMFFIDLDeviceFromIntPair (C++ function)</a>
 </li>
@@ -2973,7 +3011,9 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/enum_c__api_8h_1ad5a608f648c4f86cafdc8dc09f870bc5.html#_CPPv4N22TVMFFIFieldFlagBitMask30kTVMFFIFieldFlagBitMaskReprOffE">TVMFFIFieldFlagBitMask::kTVMFFIFieldFlagBitMaskReprOff (C++ enumerator)</a>
 </li>
-      <li><a href="reference/cpp/generated/enum_c__api_8h_1ad5a608f648c4f86cafdc8dc09f870bc5.html#_CPPv4N22TVMFFIFieldFlagBitMask33kTVMFFIFieldFlagBitMaskSEqHashDefE">TVMFFIFieldFlagBitMask::kTVMFFIFieldFlagBitMaskSEqHashDef (C++ enumerator)</a>
+      <li><a href="reference/cpp/generated/enum_c__api_8h_1ad5a608f648c4f86cafdc8dc09f870bc5.html#_CPPv4N22TVMFFIFieldFlagBitMask45kTVMFFIFieldFlagBitMaskSEqHashDefNonRecursiveE">TVMFFIFieldFlagBitMask::kTVMFFIFieldFlagBitMaskSEqHashDefNonRecursive (C++ enumerator)</a>
+</li>
+      <li><a href="reference/cpp/generated/enum_c__api_8h_1ad5a608f648c4f86cafdc8dc09f870bc5.html#_CPPv4N22TVMFFIFieldFlagBitMask42kTVMFFIFieldFlagBitMaskSEqHashDefRecursiveE">TVMFFIFieldFlagBitMask::kTVMFFIFieldFlagBitMaskSEqHashDefRecursive (C++ enumerator)</a>
 </li>
       <li><a href="reference/cpp/generated/enum_c__api_8h_1ad5a608f648c4f86cafdc8dc09f870bc5.html#_CPPv4N22TVMFFIFieldFlagBitMask36kTVMFFIFieldFlagBitMaskSEqHashIgnoreE">TVMFFIFieldFlagBitMask::kTVMFFIFieldFlagBitMaskSEqHashIgnore (C++ enumerator)</a>
 </li>
@@ -3340,7 +3380,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 04, 2026.
+  Last updated on Jun 08, 2026.
   <br/>
 </p>
   </div>

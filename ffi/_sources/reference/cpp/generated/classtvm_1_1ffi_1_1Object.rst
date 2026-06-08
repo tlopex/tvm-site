@@ -21,6 +21,7 @@ Derived Types
 - ``public tvm::ffi::ShapeObj`` (:ref:`exhale_class_classtvm_1_1ffi_1_1ShapeObj`)
 - ``public tvm::ffi::StructuralKeyObj`` (:ref:`exhale_class_classtvm_1_1ffi_1_1StructuralKeyObj`)
 - ``public tvm::ffi::TensorObj`` (:ref:`exhale_class_classtvm_1_1ffi_1_1TensorObj`)
+- ``public tvm::ffi::VisitErrorContextObj`` (:ref:`exhale_class_classtvm_1_1ffi_1_1VisitErrorContextObj`)
 - ``public tvm::ffi::details::BytesObjBase``
 - ``public tvm::ffi::reflection::AccessPathObj`` (:ref:`exhale_class_classtvm_1_1ffi_1_1reflection_1_1AccessPathObj`)
 - ``public tvm::ffi::reflection::AccessStepObj`` (:ref:`exhale_class_classtvm_1_1ffi_1_1reflection_1_1AccessStepObj`)

@@ -73,6 +73,8 @@ Included By
 
 - :ref:`file_tvm_ffi_extra_stl.h`
 
+- :ref:`file_tvm_ffi_extra_visit_error_context.h`
+
 - :ref:`file_tvm_ffi_memory.h`
 
 - :ref:`file_tvm_ffi_optional.h`

@@ -49,7 +49,6 @@ Tensor
   DLDeviceType
   device
 
-
 Function
 ~~~~~~~~
 .. autosummary::

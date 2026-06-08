@@ -33,7 +33,6 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=38aa6179" />
@@ -44,7 +43,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=a0222484"></script>
+    <script src="../../../_static/documentation_options.js?v=ecced4fd"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -60,8 +59,8 @@
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+gb4525d2bb" />
-    <meta name="docbuild:last-update" content="May 04, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
+    <meta name="docbuild:last-update" content="Jun 08, 2026"/>
   </head>
   
   
@@ -627,14 +626,24 @@
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ErrorBuilder</span><span class="w"> </span><span class="p">{</span>
 <span class="w"> </span><span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">TVM_FFI_COLD_CODE</span>
 <span class="w">  </span><span class="k">explicit</span><span class="w"> </span><span class="n">ErrorBuilder</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">kind</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">backtrace</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">log_before_throw</span><span class="p">)</span>
 <span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">kind_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">kind</span><span class="p">)),</span>
 <span class="w">        </span><span class="n">backtrace_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">backtrace</span><span class="p">)),</span>
 <span class="w">        </span><span class="n">log_before_throw_</span><span class="p">(</span><span class="n">log_before_throw</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 
+<span class="w">  </span><span class="n">TVM_FFI_COLD_CODE</span>
 <span class="w">  </span><span class="k">explicit</span><span class="w"> </span><span class="n">ErrorBuilder</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">kind</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">TVMFFIByteArray</span><span class="o">*</span><span class="w"> </span><span class="n">backtrace</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">log_before_throw</span><span class="p">)</span>
 <span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">ErrorBuilder</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">kind</span><span class="p">),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">backtrace</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">backtrace</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">),</span>
 <span class="w">                     </span><span class="n">log_before_throw</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">  </span><span class="n">TVM_FFI_COLD_CODE</span>
+<span class="w">  </span><span class="k">explicit</span><span class="w"> </span><span class="n">ErrorBuilder</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">kind</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">TVMFFIByteArray</span><span class="o">*</span><span class="w"> </span><span class="n">backtrace</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">log_before_throw</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cause_chain</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">ObjectRef</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extra_context</span><span class="p">)</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">ErrorBuilder</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">kind</span><span class="p">),</span><span class="w"> </span><span class="n">backtrace</span><span class="p">,</span><span class="w"> </span><span class="n">log_before_throw</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cause_chain_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">cause_chain</span><span class="p">);</span>
+<span class="w">    </span><span class="n">extra_context_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">extra_context</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
 <span class="c1">// MSVC disable warning in error builder as it is exepected</span>
 <span class="cp">#ifdef _MSC_VER</span>
@@ -642,8 +651,9 @@
 <span class="cp">#pragma warning(disable : 4722)</span>
 <span class="cp">#endif</span>
 <span class="w">  </span><span class="c1">// avoid inline to reduce binary size, error throw path do not need to be fast</span>
-<span class="w">  </span><span class="p">[[</span><span class="n">noreturn</span><span class="p">]]</span><span class="w"> </span><span class="o">~</span><span class="n">ErrorBuilder</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="o">::</span><span class="n">tvm</span><span class="o">::</span><span class="n">ffi</span><span class="o">::</span><span class="n">Error</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">kind_</span><span class="p">),</span><span class="w"> </span><span class="n">stream_</span><span class="p">.</span><span class="n">str</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">backtrace_</span><span class="p">));</span>
+<span class="w">  </span><span class="p">[[</span><span class="n">noreturn</span><span class="p">]]</span><span class="w"> </span><span class="n">TVM_FFI_COLD_CODE</span><span class="w"> </span><span class="o">~</span><span class="n">ErrorBuilder</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">::</span><span class="n">tvm</span><span class="o">::</span><span class="n">ffi</span><span class="o">::</span><span class="n">Error</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">kind_</span><span class="p">),</span><span class="w"> </span><span class="n">stream_</span><span class="p">.</span><span class="n">str</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">backtrace_</span><span class="p">),</span>
+<span class="w">                            </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">cause_chain_</span><span class="p">),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">extra_context_</span><span class="p">));</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">log_before_throw_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="n">FullMessage</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
@@ -660,6 +670,8 @@
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span><span class="w"> </span><span class="n">stream_</span><span class="p">;</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">backtrace_</span><span class="p">;</span>
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">log_before_throw_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cause_chain_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">ObjectRef</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extra_context_</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="p">}</span><span class="w">  </span><span class="c1">// namespace details</span>
@@ -729,7 +741,8 @@
 <span class="cp">  TVM_FFI_THROW(ErrorKind) &lt;&lt; &quot;Check failed: &quot; &lt;&lt; #x &quot; &quot; #op &quot; &quot; #y &lt;&lt; *__tvm_ffi_log_err &lt;&lt; &quot;: &quot;</span>
 
 <span class="cp">#define TVM_FFI_CHECK(cond, ErrorKind) \</span>
-<span class="cp">  if (!(cond)) TVM_FFI_THROW(ErrorKind) &lt;&lt; &quot;Check failed: (&quot; #cond &lt;&lt; &quot;) is false: &quot;</span>
+<span class="cp">  if (TVM_FFI_PREDICT_FALSE(!(cond)))  \</span>
+<span class="cp">  TVM_FFI_THROW(ErrorKind) &lt;&lt; &quot;Check failed: (&quot; #cond &lt;&lt; &quot;) is false: &quot;</span>
 
 <span class="cp">#define TVM_FFI_CHECK_LT(x, y, ErrorKind) TVM_FFI_CHECK_BINARY_OP(_LT, &lt;, x, y, ErrorKind)</span>
 <span class="cp">#define TVM_FFI_CHECK_GT(x, y, ErrorKind) TVM_FFI_CHECK_BINARY_OP(_GT, &gt;, x, y, ErrorKind)</span>
@@ -823,7 +836,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on May 04, 2026.
+  Last updated on Jun 08, 2026.
   <br/>
 </p>
   </div>

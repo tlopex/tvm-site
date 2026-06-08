@@ -77,7 +77,7 @@ Program Listing for File function.h
    #define TVM_FFI_CHECK_SAFE_CALL(func)                      \
      {                                                        \
        int ret_code = (func);                                 \
-       if (ret_code != 0) {                                   \
+       if (TVM_FFI_PREDICT_FALSE(ret_code != 0)) {            \
          throw ::tvm::ffi::details::MoveFromSafeCallRaised(); \
        }                                                      \
      }
@@ -519,6 +519,10 @@ Program Listing for File function.h
    
      TVM_FFI_INLINE static TypedFunction<FType> CopyFromAnyViewAfterCheck(const TVMFFIAny* src) {
        return TypedFunction<FType>(TypeTraits<Function>::CopyFromAnyViewAfterCheck(src));
+     }
+   
+     TVM_FFI_INLINE static TypedFunction<FType> MoveFromAnyAfterCheck(TVMFFIAny* src) {
+       return TypedFunction<FType>(TypeTraits<Function>::MoveFromAnyAfterCheck(src));
      }
    
      TVM_FFI_INLINE static std::optional<TypedFunction<FType>> TryCastFromAnyView(

@@ -148,8 +148,11 @@ Program Listing for File registry.h
     public:
      explicit AttachFieldFlag(int32_t flag) : flag_(flag) {}
    
-     TVM_FFI_INLINE static AttachFieldFlag SEqHashDef() {
-       return AttachFieldFlag(kTVMFFIFieldFlagBitMaskSEqHashDef);
+     TVM_FFI_INLINE static AttachFieldFlag SEqHashDefRecursive() {
+       return AttachFieldFlag(kTVMFFIFieldFlagBitMaskSEqHashDefRecursive);
+     }
+     TVM_FFI_INLINE static AttachFieldFlag SEqHashDefNonRecursive() {
+       return AttachFieldFlag(kTVMFFIFieldFlagBitMaskSEqHashDefNonRecursive);
      }
      TVM_FFI_INLINE static AttachFieldFlag SEqHashIgnore() {
        return AttachFieldFlag(kTVMFFIFieldFlagBitMaskSEqHashIgnore);
@@ -647,6 +650,58 @@ Program Listing for File registry.h
      TVM_FFI_CHECK_SAFE_CALL(TVMFFITypeRegisterAttr(kTVMFFINone, &name_array,
                                                     reinterpret_cast<const TVMFFIAny*>(&any_view)));
    }
+   
+   namespace details {
+   
+   template <typename... Args>
+   struct OverloadCastImpl {
+     // The first triplet handles the case where Args... is the complete
+     // parameter list of the picked overload. The second triplet handles
+     // the prefix-match case where the picked overload has additional
+     // trailing parameters Rest... beyond Args...; partial ordering picks
+     // the first triplet when both apply, which lets the caller
+     // disambiguate against shared-prefix overload sets by spelling the
+     // full parameter list.
+   
+     template <typename Ret>
+     constexpr auto operator()(Ret (*fn)(Args...)) const noexcept {
+       return fn;
+     }
+     template <typename Ret, typename Cls>
+     constexpr auto operator()(Ret (Cls::*pmf)(Args...), std::false_type = {}) const noexcept {
+       return pmf;
+     }
+     template <typename Ret, typename Cls>
+     constexpr auto operator()(Ret (Cls::*pmf)(Args...) const, std::true_type) const noexcept {
+       return pmf;
+     }
+   
+     template <typename Ret, typename... Rest>
+     constexpr auto operator()(Ret (*fn)(Args..., Rest...)) const noexcept {
+       return fn;
+     }
+     template <typename Ret, typename Cls, typename... Rest>
+     constexpr auto operator()(Ret (Cls::*pmf)(Args..., Rest...),
+                               std::false_type = {}) const noexcept {
+       return pmf;
+     }
+     template <typename Ret, typename Cls, typename... Rest>
+     constexpr auto operator()(Ret (Cls::*pmf)(Args..., Rest...) const,
+                               std::true_type) const noexcept {
+       return pmf;
+     }
+   };
+   
+   }  // namespace details
+   
+   template <typename... Args>
+   inline constexpr details::OverloadCastImpl<Args...> overload_cast = {};
+   
+   // `const_`'s trailing underscore triggers RST hyperlink-reference syntax in
+   // the exhale-generated per-variable page; suppress doc emission for it.
+   // The symbol is still referenced (and rendered as inline literal) from the
+   // overload_cast docstring above.
+   inline constexpr auto const_ = std::true_type{};
    
    }  // namespace reflection
    }  // namespace ffi

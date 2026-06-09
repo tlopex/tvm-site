@@ -58,7 +58,7 @@ This function will throw an error if the function is not found.</p>
 </ul>
 </div></details><details class="toggle method-toggle" open><summary><section id="method.from_extern_c" class="method"><a class="src rightside" href="../../src/tvm_ffi/function.rs.html#258-276">Source</a><h4 class="code-header">pub unsafe fn <a href="#method.from_extern_c" class="fn">from_extern_c</a>(
     handle: <a class="primitive" href="https://doc.rust-lang.org/1.95.0/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/1.95.0/core/ffi/enum.c_void.html" title="enum core::ffi::c_void">c_void</a>,
-    safe_call: TVMFFISafeCallType,
+    safe_call: <a class="type" href="../../tvm_ffi_sys/c_api/type.TVMFFISafeCallType.html" title="type tvm_ffi_sys::c_api::TVMFFISafeCallType">TVMFFISafeCallType</a>,
     deleter: <a class="enum" href="https://doc.rust-lang.org/1.95.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;unsafe extern &quot;C&quot; <a class="primitive" href="https://doc.rust-lang.org/1.95.0/std/primitive.fn.html">fn</a>(<a class="primitive" href="https://doc.rust-lang.org/1.95.0/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/1.95.0/core/ffi/enum.c_void.html" title="enum core::ffi::c_void">c_void</a>)&gt;,
 ) -&gt; Self</h4></section></summary><div class="docblock"><h5 id="safety"><a class="doc-anchor" href="#safety">§</a>Safety</h5>
 <p><code>handle</code> must be a valid pointer (or null) that is compatible with

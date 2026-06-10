@@ -267,7 +267,7 @@ device and returns the measured cost. Network overhead is excluded.
 
  .. code-block:: none
 
-    1.13e-07 secs/op
+    1.1e-07 secs/op
 
 
 
@@ -857,8 +857,8 @@ This workflow is applicable to various deployment scenarios:
     Converted PyTorch model to Relax:
       - Number of parameters: 4
     Using local target for demonstration
-    Exported library to: /tmp/tmpxj9_ru4w/model_deployed.so
-    Saved parameters to: /tmp/tmpxj9_ru4w/model_params.npz
+    Exported library to: /tmp/tmpfzmruc3f/model_deployed.so
+    Saved parameters to: /tmp/tmpfzmruc3f/model_params.npz
 
     RPC workflow (works for any remote device):
     ==================================================

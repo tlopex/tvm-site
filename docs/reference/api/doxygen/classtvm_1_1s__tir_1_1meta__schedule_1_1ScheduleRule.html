@@ -100,9 +100,6 @@ Public Types</h2></td></tr>
 <tr class="memitem:a74f509fd31d0d05e7470d2c889b1418b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a74f509fd31d0d05e7470d2c889b1418b">FApply</a> = ffi::TypedFunction&lt; ffi::Array&lt; <a class="el" href="classtvm_1_1s__tir_1_1Schedule.html">s_tir::Schedule</a> &gt;(const <a class="el" href="classtvm_1_1s__tir_1_1Schedule.html">s_tir::Schedule</a> &amp;, const <a class="el" href="classtvm_1_1s__tir_1_1SBlockRV.html">s_tir::SBlockRV</a> &amp;)&gt;</td></tr>
 <tr class="memdesc:a74f509fd31d0d05e7470d2c889b1418b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function type of <code>Apply</code> method.  <a href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a74f509fd31d0d05e7470d2c889b1418b">More...</a><br /></td></tr>
 <tr class="separator:a74f509fd31d0d05e7470d2c889b1418b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7299d9281647cb87d009ef94edfd14e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ab7299d9281647cb87d009ef94edfd14e">FAsString</a> = ffi::TypedFunction&lt; ffi::String()&gt;</td></tr>
-<tr class="memdesc:ab7299d9281647cb87d009ef94edfd14e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the schedule rule as string with name.  <a href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ab7299d9281647cb87d009ef94edfd14e">More...</a><br /></td></tr>
-<tr class="separator:ab7299d9281647cb87d009ef94edfd14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e66ab947a473f5d0b7638fbc596bc25"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a7e66ab947a473f5d0b7638fbc596bc25">FClone</a> = ffi::TypedFunction&lt; <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html">ScheduleRule</a>()&gt;</td></tr>
 <tr class="memdesc:a7e66ab947a473f5d0b7638fbc596bc25"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function type of <code>Clone</code> method.  <a href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a7e66ab947a473f5d0b7638fbc596bc25">More...</a><br /></td></tr>
 <tr class="separator:a7e66ab947a473f5d0b7638fbc596bc25"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,9 +150,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae6d6f4b042673e543ce030815a75c8f6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html">ScheduleRule</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ae6d6f4b042673e543ce030815a75c8f6">AutoBind</a> (int max_threadblocks, ffi::Array&lt; int64_t &gt; thread_extents, int max_threads_per_block=-1)</td></tr>
 <tr class="memdesc:ae6d6f4b042673e543ce030815a75c8f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auto bind loops around the block to BlockIdx and ThreadIdx.  <a href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ae6d6f4b042673e543ce030815a75c8f6">More...</a><br /></td></tr>
 <tr class="separator:ae6d6f4b042673e543ce030815a75c8f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfee95059c5fbcca95c22ea5690f1dc8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html">ScheduleRule</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#abfee95059c5fbcca95c22ea5690f1dc8">PyScheduleRule</a> (<a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ab2e65e3b78b80802ae47b8a75585af13">FInitializeWithTuneContext</a> f_initialize_with_tune_context, <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a74f509fd31d0d05e7470d2c889b1418b">FApply</a> f_apply, <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a7e66ab947a473f5d0b7638fbc596bc25">FClone</a> f_clone, <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ab7299d9281647cb87d009ef94edfd14e">FAsString</a> f_as_string)</td></tr>
-<tr class="memdesc:abfee95059c5fbcca95c22ea5690f1dc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a schedule rule with customized methods on the python-side.  <a href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#abfee95059c5fbcca95c22ea5690f1dc8">More...</a><br /></td></tr>
-<tr class="separator:abfee95059c5fbcca95c22ea5690f1dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c71f5d4f3f9ad07e86be12cd70cee48"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html">ScheduleRule</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a8c71f5d4f3f9ad07e86be12cd70cee48">PyScheduleRule</a> (<a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ab2e65e3b78b80802ae47b8a75585af13">FInitializeWithTuneContext</a> f_initialize_with_tune_context, <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a74f509fd31d0d05e7470d2c889b1418b">FApply</a> f_apply, <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a7e66ab947a473f5d0b7638fbc596bc25">FClone</a> f_clone)</td></tr>
+<tr class="memdesc:a8c71f5d4f3f9ad07e86be12cd70cee48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a schedule rule with customized methods on the python-side.  <a href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a8c71f5d4f3f9ad07e86be12cd70cee48">More...</a><br /></td></tr>
+<tr class="separator:a8c71f5d4f3f9ad07e86be12cd70cee48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0c5b4c18e769fe032c8e538dd3c4410"><td class="memItemLeft" align="right" valign="top">static ffi::Array&lt; <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html">ScheduleRule</a>, void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ab0c5b4c18e769fe032c8e538dd3c4410">DefaultLLVM</a> ()</td></tr>
 <tr class="memdesc:ab0c5b4c18e769fe032c8e538dd3c4410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create default schedule rules for LLVM.  <a href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ab0c5b4c18e769fe032c8e538dd3c4410">More...</a><br /></td></tr>
 <tr class="separator:ab0c5b4c18e769fe032c8e538dd3c4410"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -203,23 +200,6 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The list of schedules generated by applying the schedule rule. </dd></dl>
-
-</div>
-</div>
-<a id="ab7299d9281647cb87d009ef94edfd14e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7299d9281647cb87d009ef94edfd14e">&#9670;&nbsp;</a></span>FAsString</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ab7299d9281647cb87d009ef94edfd14e">tvm::s_tir::meta_schedule::ScheduleRule::FAsString</a> =  ffi::TypedFunction&lt;ffi::String()&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the schedule rule as string with name. </p>
-<dl class="section return"><dt>Returns</dt><dd>The string of the schedule rule. </dd></dl>
 
 </div>
 </div>
@@ -1153,8 +1133,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="abfee95059c5fbcca95c22ea5690f1dc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfee95059c5fbcca95c22ea5690f1dc8">&#9670;&nbsp;</a></span>PyScheduleRule()</h2>
+<a id="a8c71f5d4f3f9ad07e86be12cd70cee48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c71f5d4f3f9ad07e86be12cd70cee48">&#9670;&nbsp;</a></span>PyScheduleRule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1178,13 +1158,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#a7e66ab947a473f5d0b7638fbc596bc25">FClone</a>&#160;</td>
-          <td class="paramname"><em>f_clone</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1ScheduleRule.html#ab7299d9281647cb87d009ef94edfd14e">FAsString</a>&#160;</td>
-          <td class="paramname"><em>f_as_string</em>&#160;</td>
+          <td class="paramname"><em>f_clone</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1205,7 +1179,6 @@ Static Public Member Functions</h2></td></tr>
     <tr><td class="paramname">f_initialize_with_tune_context</td><td>The packed function of <code>InitializeWithTuneContext</code>. </td></tr>
     <tr><td class="paramname">f_apply</td><td>The packed function of <code>Apply</code>. </td></tr>
     <tr><td class="paramname">f_clone</td><td>The packed function of <code>Clone</code>. </td></tr>
-    <tr><td class="paramname">f_as_string</td><td>The packed function of <code>AsString</code>. </td></tr>
   </table>
   </dd>
 </dl>

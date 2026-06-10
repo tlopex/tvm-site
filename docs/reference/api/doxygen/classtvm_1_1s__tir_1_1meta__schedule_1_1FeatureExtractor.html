@@ -101,9 +101,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3c589ca934beb119e641b918018692c1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractor.html">FeatureExtractor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractor.html#a3c589ca934beb119e641b918018692c1">PerStoreFeature</a> (int buffers_per_store=5, int arith_intensity_curve_num_samples=10, int cache_line_bytes=64, bool extract_workload=false)</td></tr>
 <tr class="memdesc:a3c589ca934beb119e641b918018692c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a feature extractor that extracts features from each BufferStore.  <a href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractor.html#a3c589ca934beb119e641b918018692c1">More...</a><br /></td></tr>
 <tr class="separator:a3c589ca934beb119e641b918018692c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22eabf2e0a4939a8c06590f92c43c7be"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractor.html">FeatureExtractor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractor.html#a22eabf2e0a4939a8c06590f92c43c7be">PyFeatureExtractor</a> (<a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1PyFeatureExtractorNode.html#a878fa61d65822f5359cb1abf94b4889c">PyFeatureExtractorNode::FExtractFrom</a> f_extract_from, <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1PyFeatureExtractorNode.html#a07d58bf9c2093b2267cd07b38981e9e8">PyFeatureExtractorNode::FAsString</a> f_as_string)</td></tr>
-<tr class="memdesc:a22eabf2e0a4939a8c06590f92c43c7be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a feature extractor with customized methods on the python-side.  <a href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractor.html#a22eabf2e0a4939a8c06590f92c43c7be">More...</a><br /></td></tr>
-<tr class="separator:a22eabf2e0a4939a8c06590f92c43c7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15f6112092f8864002fbfd752b03ceab"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractor.html">FeatureExtractor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractor.html#a15f6112092f8864002fbfd752b03ceab">PyFeatureExtractor</a> (<a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1PyFeatureExtractorNode.html#a878fa61d65822f5359cb1abf94b4889c">PyFeatureExtractorNode::FExtractFrom</a> f_extract_from)</td></tr>
+<tr class="memdesc:a15f6112092f8864002fbfd752b03ceab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a feature extractor with customized methods on the python-side.  <a href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractor.html#a15f6112092f8864002fbfd752b03ceab">More...</a><br /></td></tr>
+<tr class="separator:a15f6112092f8864002fbfd752b03ceab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Managed reference to <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractorNode.html" title="Extractor for features from measure candidates for use in cost model.">FeatureExtractorNode</a>. </p>
@@ -169,8 +169,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a22eabf2e0a4939a8c06590f92c43c7be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22eabf2e0a4939a8c06590f92c43c7be">&#9670;&nbsp;</a></span>PyFeatureExtractor()</h2>
+<a id="a15f6112092f8864002fbfd752b03ceab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15f6112092f8864002fbfd752b03ceab">&#9670;&nbsp;</a></span>PyFeatureExtractor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,18 +182,8 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">static <a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1FeatureExtractor.html">FeatureExtractor</a> tvm::s_tir::meta_schedule::FeatureExtractor::PyFeatureExtractor </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1PyFeatureExtractorNode.html#a878fa61d65822f5359cb1abf94b4889c">PyFeatureExtractorNode::FExtractFrom</a>&#160;</td>
-          <td class="paramname"><em>f_extract_from</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>f_extract_from</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtvm_1_1s__tir_1_1meta__schedule_1_1PyFeatureExtractorNode.html#a07d58bf9c2093b2267cd07b38981e9e8">PyFeatureExtractorNode::FAsString</a>&#160;</td>
-          <td class="paramname"><em>f_as_string</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -207,7 +197,6 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">f_extract_from</td><td>The packed function of <code>ExtractFrom</code>. </td></tr>
-    <tr><td class="paramname">f_as_string</td><td>The packed function of <code>AsString</code>. </td></tr>
   </table>
   </dd>
 </dl>

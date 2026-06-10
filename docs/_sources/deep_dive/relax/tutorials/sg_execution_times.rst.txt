@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.274** total execution time for 2 files **from deep_dive/relax/tutorials**:
+**00:00.275** total execution time for 2 files **from deep_dive/relax/tutorials**:
 
 .. container::
 

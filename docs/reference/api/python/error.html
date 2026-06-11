@@ -205,7 +205,6 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Python API</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">tvm.error</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.error.register_error"><code class="docutils literal notranslate"><span class="pre">register_error()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.error.TVMError"><code class="docutils literal notranslate"><span class="pre">TVMError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.error.InternalError"><code class="docutils literal notranslate"><span class="pre">InternalError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.error.RPCError"><code class="docutils literal notranslate"><span class="pre">RPCError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.error.RPCSessionTimeoutError"><code class="docutils literal notranslate"><span class="pre">RPCSessionTimeoutError</span></code></a></li>
@@ -380,34 +379,31 @@ copy the examples and raise errors with the same message convention.</p>
 <p><strong>Exceptions:</strong></p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="testing.html#tvm.testing.TVMError" title="tvm.error.TVMError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TVMError</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tvm.error.InternalError" title="tvm.error.InternalError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InternalError</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.error.InternalError" title="tvm.error.InternalError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InternalError</span></code></a></p></td>
 <td><p>Internal error in the system.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.error.RPCError" title="tvm.error.RPCError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RPCError</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm.error.RPCError" title="tvm.error.RPCError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RPCError</span></code></a></p></td>
 <td><p>Error thrown by the remote server handling the RPC call.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tvm.error.RPCSessionTimeoutError" title="tvm.error.RPCSessionTimeoutError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RPCSessionTimeoutError</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.error.RPCSessionTimeoutError" title="tvm.error.RPCSessionTimeoutError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RPCSessionTimeoutError</span></code></a></p></td>
 <td><p>Error thrown by the remote server when the RPC session has expired.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.error.OpError" title="tvm.error.OpError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpError</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm.error.OpError" title="tvm.error.OpError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpError</span></code></a></p></td>
 <td><p>Base class of all operator errors in frontends.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tvm.error.OpNotImplemented" title="tvm.error.OpNotImplemented"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpNotImplemented</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.error.OpNotImplemented" title="tvm.error.OpNotImplemented"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpNotImplemented</span></code></a></p></td>
 <td><p>Operator is not implemented.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.error.OpAttributeRequired" title="tvm.error.OpAttributeRequired"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpAttributeRequired</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm.error.OpAttributeRequired" title="tvm.error.OpAttributeRequired"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpAttributeRequired</span></code></a></p></td>
 <td><p>Required attribute is not found.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tvm.error.OpAttributeInvalid" title="tvm.error.OpAttributeInvalid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpAttributeInvalid</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.error.OpAttributeInvalid" title="tvm.error.OpAttributeInvalid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpAttributeInvalid</span></code></a></p></td>
 <td><p>Attribute value is invalid when taking in a frontend operator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.error.OpAttributeUnImplemented" title="tvm.error.OpAttributeUnImplemented"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpAttributeUnImplemented</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm.error.OpAttributeUnImplemented" title="tvm.error.OpAttributeUnImplemented"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpAttributeUnImplemented</span></code></a></p></td>
 <td><p>Attribute is not supported in a certain frontend.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tvm.error.DiagnosticError" title="tvm.error.DiagnosticError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DiagnosticError</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.error.DiagnosticError" title="tvm.error.DiagnosticError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DiagnosticError</span></code></a></p></td>
 <td><p>Error diagnostics were reported during the execution of a pass.</p></td>
 </tr>
 </tbody>
@@ -446,11 +442,6 @@ copy the examples and raise errors with the same message convention.</p>
 </pre></div>
 </div>
 </dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="tvm.error.TVMError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.error.</span></span><span class="sig-name descname"><span class="pre">TVMError</span></span><a class="headerlink" href="#tvm.error.TVMError" title="Link to this definition"></a></dt>
-<dd></dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="tvm.error.InternalError">

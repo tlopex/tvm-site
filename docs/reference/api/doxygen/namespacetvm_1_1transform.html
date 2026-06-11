@@ -109,6 +109,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a324e27bc383f41e3bc2bc1438ec2db87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1transform_1_1Pass.html">Pass</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1transform.html#a324e27bc383f41e3bc2bc1438ec2db87">PrintIR</a> (ffi::String header=&quot;&quot;)</td></tr>
 <tr class="memdesc:a324e27bc383f41e3bc2bc1438ec2db87"><td class="mdescLeft">&#160;</td><td class="mdescRight">A special trace pass that prints the header and IR to LOG(INFO).  <a href="namespacetvm_1_1transform.html#a324e27bc383f41e3bc2bc1438ec2db87">More...</a><br /></td></tr>
 <tr class="separator:a324e27bc383f41e3bc2bc1438ec2db87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82441d5e64ba39817159a26b006e6e7c"><td class="memItemLeft" align="right" valign="top">ffi::Error&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1transform.html#a82441d5e64ba39817159a26b006e6e7c">EnrichPassErrorWithContext</a> (const ffi::Error &amp;err, const <a class="el" href="classtvm_1_1IRModule.html">IRModule</a> &amp;mod, ffi::String pass_name, ffi::Optional&lt; <a class="el" href="classtvm_1_1GlobalVar.html">GlobalVar</a> &gt; func=ffi::Optional&lt; <a class="el" href="classtvm_1_1GlobalVar.html">GlobalVar</a> &gt;(std::nullopt))</td></tr>
+<tr class="memdesc:a82441d5e64ba39817159a26b006e6e7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enrich a pass-time error with a TVMScript-rendered, underlined source location derived from the error's embedded VisitErrorContext.  <a href="namespacetvm_1_1transform.html#a82441d5e64ba39817159a26b006e6e7c">More...</a><br /></td></tr>
+<tr class="separator:a82441d5e64ba39817159a26b006e6e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ac187da646052618b2eec54c2c6a1845b"></a>
@@ -154,6 +157,60 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a82441d5e64ba39817159a26b006e6e7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82441d5e64ba39817159a26b006e6e7c">&#9670;&nbsp;</a></span>EnrichPassErrorWithContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ffi::Error tvm::transform::EnrichPassErrorWithContext </td>
+          <td>(</td>
+          <td class="paramtype">const ffi::Error &amp;&#160;</td>
+          <td class="paramname"><em>err</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classtvm_1_1IRModule.html">IRModule</a> &amp;&#160;</td>
+          <td class="paramname"><em>mod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ffi::String&#160;</td>
+          <td class="paramname"><em>pass_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ffi::Optional&lt; <a class="el" href="classtvm_1_1GlobalVar.html">GlobalVar</a> &gt;&#160;</td>
+          <td class="paramname"><em>func</em> = <code>ffi::Optional&lt;&#160;<a class="el" href="classtvm_1_1GlobalVar.html">GlobalVar</a>&#160;&gt;(std::nullopt)</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enrich a pass-time error with a TVMScript-rendered, underlined source location derived from the error's embedded VisitErrorContext. </p>
+<p>Returns an ffi::Error that preserves err's kind, original message, and backtrace, and appends the failing pass name plus the offending location rendered as TVMScript (the whole <code>mod</code>, or local to <code>func</code> when provided). The returned error drops the VisitErrorContext payload, so an outer catch that re-enriches finds no context and returns the error unchanged.</p>
+<p>Pure and total: never throws; returns <code>err</code> unchanged when there is no context, the path is unresolvable, or rendering fails.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">err</td><td>The error thrown by the pass body. </td></tr>
+    <tr><td class="paramname">mod</td><td>The <a class="el" href="classtvm_1_1IRModule.html" title="Managed reference class to IRModuleNode.">IRModule</a> the pass ran on (the access-path root, or the container of <code>func</code> when <code>func</code> is provided). </td></tr>
+    <tr><td class="paramname">pass_name</td><td>The name of the failing pass, shown in the message. </td></tr>
+    <tr><td class="paramname">func</td><td>When set, resolve and render the location local to <code>mod-&gt;functions</code>[func]; otherwise use the whole module. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The enriched (or, on any fallback, the original) error. </dd></dl>
 
 </div>
 </div>

@@ -79,7 +79,6 @@ $(function() {
 <code>#include &lt;tvm/ffi/reflection/creator.h&gt;</code><br />
 <code>#include &lt;tvm/ffi/reflection/registry.h&gt;</code><br />
 <code>#include &lt;tvm/ffi/string.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="diagnostic_8h_source.html">tvm/ir/diagnostic.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="instrument_8h_source.html">tvm/ir/instrument.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="module_8h_source.html">tvm/ir/module.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="with__context_8h_source.html">tvm/ir/with_context.h</a>&gt;</code><br />
@@ -89,7 +88,7 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for transform.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="ir_2transform_8h__incl.svg" width="4050" height="918"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="ir_2transform_8h__incl.svg" width="3847" height="843"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -153,6 +152,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a324e27bc383f41e3bc2bc1438ec2db87"><td class="memItemLeft" align="right" valign="top">Pass&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1transform.html#a324e27bc383f41e3bc2bc1438ec2db87">tvm::transform::PrintIR</a> (ffi::String header=&quot;&quot;)</td></tr>
 <tr class="memdesc:a324e27bc383f41e3bc2bc1438ec2db87"><td class="mdescLeft">&#160;</td><td class="mdescRight">A special trace pass that prints the header and IR to LOG(INFO).  <a href="namespacetvm_1_1transform.html#a324e27bc383f41e3bc2bc1438ec2db87">More...</a><br /></td></tr>
 <tr class="separator:a324e27bc383f41e3bc2bc1438ec2db87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82441d5e64ba39817159a26b006e6e7c"><td class="memItemLeft" align="right" valign="top">ffi::Error&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1transform.html#a82441d5e64ba39817159a26b006e6e7c">tvm::transform::EnrichPassErrorWithContext</a> (const ffi::Error &amp;err, const IRModule &amp;mod, ffi::String pass_name, ffi::Optional&lt; <a class="el" href="classGlobalVar.html">GlobalVar</a> &gt; func=ffi::Optional&lt; <a class="el" href="classGlobalVar.html">GlobalVar</a> &gt;(std::nullopt))</td></tr>
+<tr class="memdesc:a82441d5e64ba39817159a26b006e6e7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enrich a pass-time error with a TVMScript-rendered, underlined source location derived from the error's embedded VisitErrorContext.  <a href="namespacetvm_1_1transform.html#a82441d5e64ba39817159a26b006e6e7c">More...</a><br /></td></tr>
+<tr class="separator:a82441d5e64ba39817159a26b006e6e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file implements a pass manager. The pass manager manages a sequence of IRModule -&gt; IRModule transformation passes over a particlar unit of AST. The design is largely inspired from LLVM's pass manager and modern deep learning frameworks that perform tensor-&gt;tensor transformations.</p>
@@ -207,7 +209,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">  TVM_FFI_STR_CONCAT(<a class="code" href="ir_2transform_8h.html#af18caf4263a1f9e5f8f300c4aae5e094">TVM_PASS_CTX_CONFIG_VAR_DEF</a>, __COUNTER__) = \</div>
 <div class="line">      ::tvm::transform::PassContext::RegisterConfigOption&lt;ValueType&gt;(Key)</div>
-<div class="ttc" id="air_2transform_8h_html_af18caf4263a1f9e5f8f300c4aae5e094"><div class="ttname"><a href="ir_2transform_8h.html#af18caf4263a1f9e5f8f300c4aae5e094">TVM_PASS_CTX_CONFIG_VAR_DEF</a></div><div class="ttdeci">#define TVM_PASS_CTX_CONFIG_VAR_DEF</div><div class="ttdef"><b>Definition:</b> transform.h:324</div></div>
+<div class="ttc" id="air_2transform_8h_html_af18caf4263a1f9e5f8f300c4aae5e094"><div class="ttname"><a href="ir_2transform_8h.html#af18caf4263a1f9e5f8f300c4aae5e094">TVM_PASS_CTX_CONFIG_VAR_DEF</a></div><div class="ttdeci">#define TVM_PASS_CTX_CONFIG_VAR_DEF</div><div class="ttdef"><b>Definition:</b> transform.h:320</div></div>
 </div><!-- fragment -->
 <p>Helper macro to register the object type to runtime. Makes sure that the runtime type table is correctly populated. </p>
 <p>Use this macro in the cc file for each terminal class. </p>

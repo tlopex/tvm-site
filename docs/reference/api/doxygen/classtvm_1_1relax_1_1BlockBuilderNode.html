@@ -108,9 +108,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9e6755182f969ac7ef85b5219104bebf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BlockBuilderNode.html#a9e6755182f969ac7ef85b5219104bebf">UpdateFunction</a> (const <a class="el" href="classtvm_1_1GlobalVar.html">GlobalVar</a> &amp;gv, <a class="el" href="classtvm_1_1BaseFunc.html">BaseFunc</a> function)=0</td></tr>
 <tr class="memdesc:a9e6755182f969ac7ef85b5219104bebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update a Relax function or a TIR PrimFunc in the internal context module.  <a href="classtvm_1_1relax_1_1BlockBuilderNode.html#a9e6755182f969ac7ef85b5219104bebf">More...</a><br /></td></tr>
 <tr class="separator:a9e6755182f969ac7ef85b5219104bebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d75cea9b45e192109a522d5cf679fcb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BlockBuilderNode.html#a5d75cea9b45e192109a522d5cf679fcb">ReportFatal</a> (const <a class="el" href="classtvm_1_1Diagnostic.html">Diagnostic</a> &amp;diagnostic)=0</td></tr>
-<tr class="memdesc:a5d75cea9b45e192109a522d5cf679fcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report an error during transformation construction.  <a href="classtvm_1_1relax_1_1BlockBuilderNode.html#a5d75cea9b45e192109a522d5cf679fcb">More...</a><br /></td></tr>
-<tr class="separator:a5d75cea9b45e192109a522d5cf679fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a446ad38b68641342799cba0c505258e2"><td class="memItemLeft" align="right" valign="top">virtual ffi::Optional&lt; <a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BlockBuilderNode.html#a446ad38b68641342799cba0c505258e2">LookupBinding</a> (const <a class="el" href="classtvm_1_1relax_1_1Var.html">Var</a> &amp;var)=0</td></tr>
 <tr class="memdesc:a446ad38b68641342799cba0c505258e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lookup the binding value that var binds to in the current emitted sequences.  <a href="classtvm_1_1relax_1_1BlockBuilderNode.html#a446ad38b68641342799cba0c505258e2">More...</a><br /></td></tr>
 <tr class="separator:a446ad38b68641342799cba0c505258e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -871,40 +868,6 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The normalized expression.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This function will create a binding var for non-leaf expressions such as <a class="el" href="classtvm_1_1relax_1_1Call.html">Call</a>. </dd></dl>
-
-</div>
-</div>
-<a id="a5d75cea9b45e192109a522d5cf679fcb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d75cea9b45e192109a522d5cf679fcb">&#9670;&nbsp;</a></span>ReportFatal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void tvm::relax::BlockBuilderNode::ReportFatal </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classtvm_1_1Diagnostic.html">Diagnostic</a> &amp;&#160;</td>
-          <td class="paramname"><em>diagnostic</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Report an error during transformation construction. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">diagnostic</td><td>The diagnostic information. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

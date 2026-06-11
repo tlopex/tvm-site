@@ -885,9 +885,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a205aa2060f1e013a9e72666a2a0b41e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#a205aa2060f1e013a9e72666a2a0b41e3">ContainsImpureCall</a> (const <a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a> &amp;expr, const ffi::Optional&lt; <a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a> &gt; &amp;own_name=ffi::Optional&lt; <a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a> &gt;(std::nullopt))</td></tr>
 <tr class="memdesc:a205aa2060f1e013a9e72666a2a0b41e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the given expression (likely a function body) contains any impure calls.  <a href="namespacetvm_1_1relax.html#a205aa2060f1e013a9e72666a2a0b41e3">More...</a><br /></td></tr>
 <tr class="separator:a205aa2060f1e013a9e72666a2a0b41e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73f71a11cfb52e59f09df83a984cc007"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#a73f71a11cfb52e59f09df83a984cc007">WellFormed</a> (ffi::Variant&lt; <a class="el" href="classtvm_1_1IRModule.html">IRModule</a>, <a class="el" href="classtvm_1_1relax_1_1Function.html">Function</a> &gt; obj, bool check_struct_info=true)</td></tr>
-<tr class="memdesc:a73f71a11cfb52e59f09df83a984cc007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the <a class="el" href="classtvm_1_1IRModule.html" title="Managed reference class to IRModuleNode.">IRModule</a> is well formed.  <a href="namespacetvm_1_1relax.html#a73f71a11cfb52e59f09df83a984cc007">More...</a><br /></td></tr>
-<tr class="separator:a73f71a11cfb52e59f09df83a984cc007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac60672086d4fd28f131f7e1e2ada8948"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#ac60672086d4fd28f131f7e1e2ada8948">WellFormed</a> (ffi::Variant&lt; <a class="el" href="classtvm_1_1IRModule.html">IRModule</a>, <a class="el" href="classtvm_1_1relax_1_1Function.html">Function</a> &gt; obj, bool check_struct_info=true)</td></tr>
+<tr class="memdesc:ac60672086d4fd28f131f7e1e2ada8948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an <a class="el" href="classtvm_1_1IRModule.html" title="Managed reference class to IRModuleNode.">IRModule</a> or <a class="el" href="classtvm_1_1relax_1_1Function.html">Function</a> is well-formed.  <a href="namespacetvm_1_1relax.html#ac60672086d4fd28f131f7e1e2ada8948">More...</a><br /></td></tr>
+<tr class="separator:ac60672086d4fd28f131f7e1e2ada8948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a8859a727a94a42738329f9c510991c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#a4a8859a727a94a42738329f9c510991c">CheckWellFormed</a> (ffi::Variant&lt; <a class="el" href="classtvm_1_1IRModule.html">IRModule</a>, <a class="el" href="classtvm_1_1relax_1_1Function.html">Function</a> &gt; obj, bool check_struct_info=true)</td></tr>
+<tr class="memdesc:a4a8859a727a94a42738329f9c510991c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return whether an <a class="el" href="classtvm_1_1IRModule.html" title="Managed reference class to IRModuleNode.">IRModule</a> or <a class="el" href="classtvm_1_1relax_1_1Function.html">Function</a> is well-formed.  <a href="namespacetvm_1_1relax.html#a4a8859a727a94a42738329f9c510991c">More...</a><br /></td></tr>
+<tr class="separator:a4a8859a727a94a42738329f9c510991c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12a0c990e7633f6afc831bc95af3267f"><td class="memItemLeft" align="right" valign="top">ffi::Map&lt; <a class="el" href="classtvm_1_1tirx_1_1SBlock.html">tirx::SBlock</a>, ffi::Map&lt; ffi::ObjectRef, <a class="el" href="classtvm_1_1tirx_1_1IndexMap.html">tirx::IndexMap</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#a12a0c990e7633f6afc831bc95af3267f">SuggestLayoutTransforms</a> (const <a class="el" href="classtvm_1_1relax_1_1Function.html">Function</a> &amp;fn, ffi::Array&lt; <a class="el" href="classtvm_1_1tirx_1_1IndexMap.html">tirx::IndexMap</a> &gt; write_buffer_transformations)</td></tr>
 <tr class="memdesc:a12a0c990e7633f6afc831bc95af3267f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Using the layout transforms on the outputs, suggest layout transformation on the blocks and buffers for the PrimFunc.  <a href="namespacetvm_1_1relax.html#a12a0c990e7633f6afc831bc95af3267f">More...</a><br /></td></tr>
 <tr class="separator:a12a0c990e7633f6afc831bc95af3267f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1761,6 +1764,45 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The prove result.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This function does best effort prove, which means if result is false, there is still possibility that two shapes equals to each other during runtime. </dd></dl>
+
+</div>
+</div>
+<a id="a4a8859a727a94a42738329f9c510991c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a8859a727a94a42738329f9c510991c">&#9670;&nbsp;</a></span>CheckWellFormed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tvm::relax::CheckWellFormed </td>
+          <td>(</td>
+          <td class="paramtype">ffi::Variant&lt; <a class="el" href="classtvm_1_1IRModule.html">IRModule</a>, <a class="el" href="classtvm_1_1relax_1_1Function.html">Function</a> &gt;&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>check_struct_info</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return whether an <a class="el" href="classtvm_1_1IRModule.html" title="Managed reference class to IRModuleNode.">IRModule</a> or <a class="el" href="classtvm_1_1relax_1_1Function.html">Function</a> is well-formed. </p>
+<p>Wraps <a class="el" href="namespacetvm_1_1relax.html#ac60672086d4fd28f131f7e1e2ada8948">WellFormed</a>, returning false instead of throwing on the first violation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>The <a class="el" href="classtvm_1_1IRModule.html" title="Managed reference class to IRModuleNode.">IRModule</a> or <a class="el" href="classtvm_1_1relax_1_1Function.html">relax::Function</a> to check. </td></tr>
+    <tr><td class="paramname">check_struct_info</td><td><a class="el" href="classtvm_1_1relax_1_1If.html">If</a> true, verify that every Expr has struct_info populated. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the object is well-formed, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -4636,14 +4678,14 @@ template&lt;typename T , std::size_t N, typename FType &gt; </div>
 
 </div>
 </div>
-<a id="a73f71a11cfb52e59f09df83a984cc007"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73f71a11cfb52e59f09df83a984cc007">&#9670;&nbsp;</a></span>WellFormed()</h2>
+<a id="ac60672086d4fd28f131f7e1e2ada8948"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac60672086d4fd28f131f7e1e2ada8948">&#9670;&nbsp;</a></span>WellFormed()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool tvm::relax::WellFormed </td>
+          <td class="memname">void tvm::relax::WellFormed </td>
           <td>(</td>
           <td class="paramtype">ffi::Variant&lt; <a class="el" href="classtvm_1_1IRModule.html">IRModule</a>, <a class="el" href="classtvm_1_1relax_1_1Function.html">Function</a> &gt;&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -4662,16 +4704,15 @@ template&lt;typename T , std::size_t N, typename FType &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Check if the <a class="el" href="classtvm_1_1IRModule.html" title="Managed reference class to IRModuleNode.">IRModule</a> is well formed. </p>
+<p>Check if an <a class="el" href="classtvm_1_1IRModule.html" title="Managed reference class to IRModuleNode.">IRModule</a> or <a class="el" href="classtvm_1_1relax_1_1Function.html">Function</a> is well-formed. </p>
+<p>Throws an ffi::Error on the first well-formedness violation. The error is seeded with the offending node so a pass runner can resolve a precise access path. Use <a class="el" href="namespacetvm_1_1relax.html#a4a8859a727a94a42738329f9c510991c">CheckWellFormed</a> for a boolean answer.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">obj</td><td>The <a class="el" href="classtvm_1_1IRModule.html" title="Managed reference class to IRModuleNode.">IRModule</a> or <a class="el" href="classtvm_1_1relax_1_1Function.html">relax::Function</a> to check. </td></tr>
-    <tr><td class="paramname">check_struct_info</td><td>A boolean flag indicating if the property "every Expr
-must have defined structure info" will be checked. </td></tr>
+    <tr><td class="paramname">check_struct_info</td><td><a class="el" href="classtvm_1_1relax_1_1If.html">If</a> true, verify that every Expr has struct_info populated. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the object is well formed, false if not. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>By default the structure info is always checked. It is only in test cases where <code>check_struct_info</code> might be false, so that other well-formed requirements will be well tested and will not be blocked by not having structure info. </dd></dl>
 
 </div>

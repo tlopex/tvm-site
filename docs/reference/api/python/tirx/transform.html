@@ -298,6 +298,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.transform.StorageRewrite"><code class="docutils literal notranslate"><span class="pre">StorageRewrite()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.transform.TilePrimitiveDispatch"><code class="docutils literal notranslate"><span class="pre">TilePrimitiveDispatch()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.transform.UnrollLoop"><code class="docutils literal notranslate"><span class="pre">UnrollLoop()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.transform.UnrollLoopConfig"><code class="docutils literal notranslate"><span class="pre">UnrollLoopConfig</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.tirx.transform.UnrollLoopConfig.auto_max_depth"><code class="docutils literal notranslate"><span class="pre">UnrollLoopConfig.auto_max_depth</span></code></a></li>
@@ -1088,6 +1089,20 @@ lowers host-to-device calls into the device kernel launch ABI.</p>
 <p>Moves the allocation to outer most possible scope.
 Trying to share space between allocations to make
 a static allocation plan when possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fpass</strong> – The result pass</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tvm.transform.Pass</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tvm.tirx.transform.TilePrimitiveDispatch">
+<span class="sig-prename descclassname"><span class="pre">tvm.tirx.transform.</span></span><span class="sig-name descname"><span class="pre">TilePrimitiveDispatch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.transform.TilePrimitiveDispatch" title="Link to this definition"></a></dt>
+<dd><p>Lower TIRx tile primitive calls through the active backend dispatch table.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>fpass</strong> – The result pass</p>

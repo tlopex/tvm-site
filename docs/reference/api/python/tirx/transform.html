@@ -272,7 +272,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.transform.InlinePrivateFunctions"><code class="docutils literal notranslate"><span class="pre">InlinePrivateFunctions()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.transform.LowerCustomDatatypes"><code class="docutils literal notranslate"><span class="pre">LowerCustomDatatypes()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.transform.LowerIntrin"><code class="docutils literal notranslate"><span class="pre">LowerIntrin()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.transform.LowerTIRx"><code class="docutils literal notranslate"><span class="pre">LowerTIRx()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.tirx.transform.LowerTIRxOpaque"><code class="docutils literal notranslate"><span class="pre">LowerTIRxOpaque()</span></code></a></li>
@@ -800,21 +799,6 @@ hoisted to the outermost loop possible.</p>
 <dt class="sig sig-object py" id="tvm.tirx.transform.InlinePrivateFunctions">
 <span class="sig-prename descclassname"><span class="pre">tvm.tirx.transform.</span></span><span class="sig-name descname"><span class="pre">InlinePrivateFunctions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.transform.InlinePrivateFunctions" title="Link to this definition"></a></dt>
 <dd><p>Inline calls to private functions</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>fpass</strong> – The result pass</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tvm.transform.Pass</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tvm.tirx.transform.LowerCustomDatatypes">
-<span class="sig-prename descclassname"><span class="pre">tvm.tirx.transform.</span></span><span class="sig-name descname"><span class="pre">LowerCustomDatatypes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.tirx.transform.LowerCustomDatatypes" title="Link to this definition"></a></dt>
-<dd><p>Lower custom datatypes.</p>
-<p>See tvm::datatypes::Registry for more information on adding custom datatypes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>fpass</strong> – The result pass</p>

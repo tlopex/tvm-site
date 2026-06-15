@@ -857,7 +857,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a35575aa79fc3de14931b299b13561b08"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a35575aa79fc3de14931b299b13561b08">IsPointerType</a> (const <a class="el" href="classtvm_1_1Type.html">Type</a> &amp;type, const <a class="el" href="namespacetvm.html#a41918af1a1dc386388639a9d3ad06c5d">DataType</a> &amp;element_type)</td></tr>
 <tr class="memdesc:a35575aa79fc3de14931b299b13561b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if type is a pointer to a runtime element type.  <a href="namespacetvm_1_1tirx.html#a35575aa79fc3de14931b299b13561b08">More...</a><br /></td></tr>
 <tr class="separator:a35575aa79fc3de14931b299b13561b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48cee62fe6d9261257f2da8840670639"><td class="memTemplParams" colspan="2">template&lt;typename ValueType , typename  = typename std::enable_if&lt;std::is_pod&lt;ValueType&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a48cee62fe6d9261257f2da8840670639"><td class="memTemplParams" colspan="2">template&lt;typename ValueType , typename  = typename std::enable_if&lt;std::is_standard_layout&lt;ValueType&gt;::value &amp;&amp;                                             std::is_trivial&lt;ValueType&gt;::value&gt;::type&gt; </td></tr>
 <tr class="memitem:a48cee62fe6d9261257f2da8840670639"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1PrimExpr.html">PrimExpr</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">make_const</a> (<a class="el" href="namespacetvm.html#a41918af1a1dc386388639a9d3ad06c5d">DataType</a> t, ValueType value, <a class="el" href="classtvm_1_1Span.html">Span</a> span=<a class="el" href="classtvm_1_1Span.html">Span</a>())</td></tr>
 <tr class="memdesc:a48cee62fe6d9261257f2da8840670639"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a const value with certain data type.  <a href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">More...</a><br /></td></tr>
 <tr class="separator:a48cee62fe6d9261257f2da8840670639"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3218,7 +3218,7 @@ template&lt;typename FReduce &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ValueType , typename  = typename std::enable_if&lt;std::is_pod&lt;ValueType&gt;::value&gt;::type&gt; </div>
+template&lt;typename ValueType , typename  = typename std::enable_if&lt;std::is_standard_layout&lt;ValueType&gt;::value &amp;&amp;                                             std::is_trivial&lt;ValueType&gt;::value&gt;::type&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

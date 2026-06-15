@@ -394,7 +394,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a35575aa79fc3de14931b299b13561b08"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a35575aa79fc3de14931b299b13561b08">tvm::tirx::IsPointerType</a> (const Type &amp;type, const DataType &amp;element_type)</td></tr>
 <tr class="memdesc:a35575aa79fc3de14931b299b13561b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if type is a pointer to a runtime element type.  <a href="namespacetvm_1_1tirx.html#a35575aa79fc3de14931b299b13561b08">More...</a><br /></td></tr>
 <tr class="separator:a35575aa79fc3de14931b299b13561b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48cee62fe6d9261257f2da8840670639"><td class="memTemplParams" colspan="2">template&lt;typename ValueType , typename  = typename std::enable_if&lt;std::is_pod&lt;ValueType&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a48cee62fe6d9261257f2da8840670639"><td class="memTemplParams" colspan="2">template&lt;typename ValueType , typename  = typename std::enable_if&lt;std::is_standard_layout&lt;ValueType&gt;::value &amp;&amp;                                             std::is_trivial&lt;ValueType&gt;::value&gt;::type&gt; </td></tr>
 <tr class="memitem:a48cee62fe6d9261257f2da8840670639"><td class="memTemplItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a> (DataType t, ValueType value, Span span=Span())</td></tr>
 <tr class="memdesc:a48cee62fe6d9261257f2da8840670639"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a const value with certain data type.  <a href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">More...</a><br /></td></tr>
 <tr class="separator:a48cee62fe6d9261257f2da8840670639"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -880,7 +880,7 @@ Functions</h2></td></tr>
 <div class="line">  inline PrimExpr Name(<span class="keyword">const</span> PrimExpr&amp; a, <span class="keywordtype">double</span> b) {                               \</div>
 <div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(DataType::Float(64), b));                       \</div>
 <div class="line">  }</div>
-<div class="ttc" id="anamespacetvm_1_1tirx_html_a48cee62fe6d9261257f2da8840670639"><div class="ttname"><a href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a></div><div class="ttdeci">PrimExpr make_const(DataType t, ValueType value, Span span=Span())</div><div class="ttdoc">Make a const value with certain data type.</div><div class="ttdef"><b>Definition:</b> op.h:1011</div></div>
+<div class="ttc" id="anamespacetvm_1_1tirx_html_a48cee62fe6d9261257f2da8840670639"><div class="ttname"><a href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a></div><div class="ttdeci">PrimExpr make_const(DataType t, ValueType value, Span span=Span())</div><div class="ttdoc">Make a const value with certain data type.</div><div class="ttdef"><b>Definition:</b> op.h:1012</div></div>
 </div><!-- fragment -->
 </div>
 </div>

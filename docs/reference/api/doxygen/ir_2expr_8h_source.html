@@ -408,19 +408,18 @@ $(function() {
 <div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="comment"> * or `std::unordered_set&lt;T, ffi::ObjectPtrHash, ffi::ObjectPtrEqual&gt;`).</span></div>
 <div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="keyword">struct </span>std::hash&lt;<a class="code" href="namespacetvm.html">tvm</a>::<a class="code" href="classGlobalVar.html">GlobalVar</a>&gt; {</div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="keyword">struct </span>std::hash&lt;<a class="code" href="namespacetvm.html">tvm</a>::GlobalVar&gt; {</div>
 <div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;  std::size_t operator()(<span class="keyword">const</span> <a class="code" href="classtvm_1_1GlobalVar.html">tvm::GlobalVar</a>&amp; <a class="code" href="namespacetvm_1_1te.html#ae0c71f84710b436cbe0b32289d0838f4">var</a>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> tvm::ffi::ObjectPtrHash()(<a class="code" href="namespacetvm_1_1te.html#ae0c71f84710b436cbe0b32289d0838f4">var</a>); }</div>
 <div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;};</div>
 <div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160; </div>
 <div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="keyword">struct </span>std::equal_to&lt;<a class="code" href="namespacetvm.html">tvm</a>::<a class="code" href="classGlobalVar.html">GlobalVar</a>&gt; {</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="keyword">struct </span>std::equal_to&lt;<a class="code" href="namespacetvm.html">tvm</a>::GlobalVar&gt; {</div>
 <div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;  <span class="keywordtype">bool</span> operator()(<span class="keyword">const</span> <a class="code" href="classtvm_1_1GlobalVar.html">tvm::GlobalVar</a>&amp; var_a, <span class="keyword">const</span> <a class="code" href="classtvm_1_1GlobalVar.html">tvm::GlobalVar</a>&amp; var_b)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;    <span class="keywordflow">return</span> tvm::ffi::ObjectPtrEqual()(var_a, var_b);</div>
 <div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;  }</div>
 <div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;};</div>
 <div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// TVM_IR_EXPR_H_</span></div>
 <div class="ttc" id="acast_8h_html"><div class="ttname"><a href="cast_8h.html">cast.h</a></div><div class="ttdoc">Value casting helpers.</div></div>
-<div class="ttc" id="aclassGlobalVar_html"><div class="ttname"><a href="classGlobalVar.html">GlobalVar</a></div></div>
 <div class="ttc" id="aclasstvm_1_1BaseExprNode_html"><div class="ttname"><a href="classtvm_1_1BaseExprNode.html">tvm::BaseExprNode</a></div><div class="ttdoc">Base type of all the expressions.</div><div class="ttdef"><b>Definition:</b> expr.h:50</div></div>
 <div class="ttc" id="aclasstvm_1_1BaseExprNode_html_a1c4db1562af2034749bc929ed00600a3"><div class="ttname"><a href="classtvm_1_1BaseExprNode.html#a1c4db1562af2034749bc929ed00600a3">tvm::BaseExprNode::_type_child_slots</a></div><div class="ttdeci">static constexpr const uint32_t _type_child_slots</div><div class="ttdef"><b>Definition:</b> expr.h:67</div></div>
 <div class="ttc" id="aclasstvm_1_1BaseExprNode_html_a360cd3906961332ecba3b93a54b48bc5"><div class="ttname"><a href="classtvm_1_1BaseExprNode.html#a360cd3906961332ecba3b93a54b48bc5">tvm::BaseExprNode::RegisterReflection</a></div><div class="ttdeci">static void RegisterReflection()</div><div class="ttdef"><b>Definition:</b> expr.h:58</div></div>

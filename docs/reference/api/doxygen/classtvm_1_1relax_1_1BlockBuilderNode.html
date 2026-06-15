@@ -93,9 +93,9 @@ Collaboration diagram for tvm::relax::BlockBuilderNode:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0d90afaaadeab9dedac9a61311c910f5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtvm_1_1NameSupply.html">NameSupply</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BlockBuilderNode.html#a0d90afaaadeab9dedac9a61311c910f5">name_supply</a> ()=0</td></tr>
-<tr class="memdesc:a0d90afaaadeab9dedac9a61311c910f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name supply for generating unique names.  <a href="classtvm_1_1relax_1_1BlockBuilderNode.html#a0d90afaaadeab9dedac9a61311c910f5">More...</a><br /></td></tr>
-<tr class="separator:a0d90afaaadeab9dedac9a61311c910f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bad9475833a0f69b003945b1b4bd42c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtvm_1_1UniqueNameSupply.html">UniqueNameSupply</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BlockBuilderNode.html#a8bad9475833a0f69b003945b1b4bd42c">name_supply</a> ()=0</td></tr>
+<tr class="memdesc:a8bad9475833a0f69b003945b1b4bd42c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the unique name supply for generating unique names.  <a href="classtvm_1_1relax_1_1BlockBuilderNode.html#a8bad9475833a0f69b003945b1b4bd42c">More...</a><br /></td></tr>
+<tr class="separator:a8bad9475833a0f69b003945b1b4bd42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a171f5fefcf9b22e1ae14ecc307ed4862"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtvm_1_1IRModule.html">IRModule</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BlockBuilderNode.html#a171f5fefcf9b22e1ae14ecc307ed4862">GetContextIRModule</a> () const =0</td></tr>
 <tr class="memdesc:a171f5fefcf9b22e1ae14ecc307ed4862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the context <a class="el" href="classtvm_1_1IRModule.html" title="Managed reference class to IRModuleNode.">IRModule</a> in this builder.  <a href="classtvm_1_1relax_1_1BlockBuilderNode.html#a171f5fefcf9b22e1ae14ecc307ed4862">More...</a><br /></td></tr>
 <tr class="separator:a171f5fefcf9b22e1ae14ecc307ed4862"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -771,8 +771,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0d90afaaadeab9dedac9a61311c910f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d90afaaadeab9dedac9a61311c910f5">&#9670;&nbsp;</a></span>name_supply()</h2>
+<a id="a8bad9475833a0f69b003945b1b4bd42c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bad9475833a0f69b003945b1b4bd42c">&#9670;&nbsp;</a></span>name_supply()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -781,7 +781,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classtvm_1_1NameSupply.html">NameSupply</a> tvm::relax::BlockBuilderNode::name_supply </td>
+          <td class="memname">virtual <a class="el" href="classtvm_1_1UniqueNameSupply.html">UniqueNameSupply</a> tvm::relax::BlockBuilderNode::name_supply </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -794,8 +794,8 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the name supply for generating unique names. </p>
-<dl class="section return"><dt>Returns</dt><dd>The name supply. </dd></dl>
+<p>Get the unique name supply for generating unique names. </p>
+<dl class="section return"><dt>Returns</dt><dd>The unique name supply. </dd></dl>
 
 </div>
 </div>

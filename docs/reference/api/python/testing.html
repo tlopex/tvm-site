@@ -217,11 +217,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#tvm.testing.CompareBeforeAfter.test_compare"><code class="docutils literal notranslate"><span class="pre">CompareBeforeAfter.test_compare()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.testing.Feature"><code class="docutils literal notranslate"><span class="pre">Feature</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.testing.Feature.marks"><code class="docutils literal notranslate"><span class="pre">Feature.marks()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.testing.Feature.require"><code class="docutils literal notranslate"><span class="pre">Feature.require()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.testing.Path.cwd"><code class="docutils literal notranslate"><span class="pre">Path.cwd()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.testing.Path.home"><code class="docutils literal notranslate"><span class="pre">Path.home()</span></code></a></li>
@@ -283,9 +278,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.parameter"><code class="docutils literal notranslate"><span class="pre">parameter()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.parameters"><code class="docutils literal notranslate"><span class="pre">parameters()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.parametrize_targets"><code class="docutils literal notranslate"><span class="pre">parametrize_targets()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.testing.requires_cuda_compute_version"><code class="docutils literal notranslate"><span class="pre">requires_cuda_compute_version()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.testing.requires_llvm_minimum_version"><code class="docutils literal notranslate"><span class="pre">requires_llvm_minimum_version()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.testing.requires_nvcc_version"><code class="docutils literal notranslate"><span class="pre">requires_nvcc_version()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.requires_package"><code class="docutils literal notranslate"><span class="pre">requires_package()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.strtobool"><code class="docutils literal notranslate"><span class="pre">strtobool()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.terminate_self"><code class="docutils literal notranslate"><span class="pre">terminate_self()</span></code></a></li>
@@ -554,110 +546,6 @@ that inherits from <cite>Exception</cite>.</p></li>
 <dt class="sig sig-object py" id="tvm.testing.CompareBeforeAfter.test_compare">
 <span class="sig-name descname"><span class="pre">test_compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">before</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.CompareBeforeAfter.test_compare" title="Link to this definition"></a></dt>
 <dd><p>Unit test to compare the expected TIR PrimFunc to actual</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="tvm.testing.Feature">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">Feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">long_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmake_flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_kind_enabled</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compile_time_check</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_kind_hardware</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_time_check</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.Feature" title="Link to this definition"></a></dt>
-<dd><p>A feature that may be required to run a test.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The short name of the feature.  Should match the name in the
-requires_* decorator.  This is applied as a mark to all tests
-using this feature, and can be used in pytests <code class="docutils literal notranslate"><span class="pre">-m</span></code>
-argument.</p></li>
-<li><p><strong>long_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – <p>The long name of the feature, to be used in error messages.</p>
-<p>If None, defaults to the short name.</p>
-</p></li>
-<li><p><strong>cmake_flag</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – <p>The flag that must be enabled in the config.cmake in order to
-use this feature.</p>
-<p>If None, no flag is required to use this feature.</p>
-</p></li>
-<li><p><strong>target_kind_enabled</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – <p>The target kind that must be enabled to run tests using this
-feature.  If present, the target_kind must appear in the
-TVM_TEST_TARGETS environment variable, or in
-tvm.testing.DEFAULT_TEST_TARGETS if TVM_TEST_TARGETS is
-undefined.</p>
-<p>If None, this feature does not require a specific target to be
-enabled.</p>
-</p></li>
-<li><p><strong>compile_time_check</strong> (<em>Optional</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>]</em><em>, </em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>,</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – <p>A check that returns True if the feature can be used at
-compile-time.  (e.g. Validating the version number of the nvcc
-compiler.)  If the feature does not have support to perform
-compile-time tests, the check should returns False to display
-a generic error message, or a string to display a more
-specific error message.</p>
-<p>If None, no additional check is performed.</p>
-</p></li>
-<li><p><strong>target_kind_hardware</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – <p>The target kind that must have available hardware in order to
-run tests using this feature.  This is checked using
-tvm.device(target_kind_hardware).exist.  If a feature requires
-a different check, this should be implemented using
-run_time_check.</p>
-<p>If None, this feature does not require a specific
-tvm.device to exist.</p>
-</p></li>
-<li><p><strong>run_time_check</strong> (<em>Optional</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>]</em><em>, </em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>,</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – <p>A check that returns True if the feature can be used at
-run-time.  (e.g. Validating the compute version supported by a
-GPU.)  If the feature does not have support to perform
-run-time tests, the check should returns False to display a
-generic error message, or a string to display a more specific
-error message.</p>
-<p>If None, no additional check is performed.</p>
-</p></li>
-<li><p><strong>parent_features</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>,</em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – <p>The short name of a feature or features that are required in
-order to use this feature.  (e.g. Using cuDNN requires using
-CUDA) This feature should inherit all checks of the parent
-feature, with the exception of the <cite>target_kind_enabled</cite>
-checks.</p>
-<p>If None, this feature does not require any other parent
-features.</p>
-</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="tvm.testing.Feature.marks">
-<span class="sig-name descname"><span class="pre">marks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">support_required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'compile-and-run'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.Feature.marks" title="Link to this definition"></a></dt>
-<dd><p>Return a list of marks to be used</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>support_required</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>Allowed values: “compile-and-run” (default),
-“compile-only”, or “optional”.</p>
-<p>See Feature.__call__ for details.</p>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tvm.testing.Feature.require">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">require</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">support_required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'compile-and-run'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.Feature.require" title="Link to this definition"></a></dt>
-<dd><p>Returns a decorator that marks a test as requiring a feature</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The name of the feature that is used by the test</p></li>
-<li><p><strong>support_required</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – <p>Allowed values: “compile-and-run” (default),
-“compile-only”, or “optional”.</p>
-<p>See Feature.__call__ for details.</p>
-</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@Feature</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_compile_and_run</span><span class="p">():</span>
-    <span class="o">...</span>
-
-<span class="nd">@Feature</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span> <span class="n">compile_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_compile_only</span><span class="p">():</span>
-    <span class="o">...</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </dd></dl>
@@ -1055,7 +943,7 @@ device is an optional part of the test.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">uses_gpu</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">gpu</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_mytest</span><span class="p">():</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span> <span class="s2">&quot;llvm&quot;</span><span class="p">]:</span>
 <span class="gp">&gt;&gt;&gt; </span>        <span class="k">if</span> <span class="n">device_enabled</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
@@ -1077,8 +965,8 @@ this target, the target name appears in the TVM_TEST_TARGETS
 environment variable, and a suitable device for running this
 target exists.  If TVM_TEST_TARGETS is not set, it defaults to
 variable DEFAULT_TEST_TARGETS in this module.</p>
-<p>If you use this function in a test, you <strong>must</strong> decorate the test with
-<code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.uses_gpu()</span></code> (otherwise it will never be run on the gpu).</p>
+<p>If you use this function in a test, you <strong>must</strong> mark the test with
+<code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.gpu</span></code> (otherwise it will never be run on the gpu).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>targets</strong> – A list of pairs of all enabled devices and the associated context</p>
@@ -1413,57 +1301,6 @@ where <cite>xxxxxxxxx</cite> is any name.</p></li>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>  <span class="c1"># do something</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tvm.testing.requires_cuda_compute_version">
-<span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">requires_cuda_compute_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">major_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minor_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.requires_cuda_compute_version" title="Link to this definition"></a></dt>
-<dd><p>Mark a test as requiring at least a compute architecture</p>
-<p>Unit test marked with this decorator will run only if the CUDA
-compute architecture of the GPU is at least <cite>(major_version,
-minor_version)</cite>.</p>
-<p>This also marks the test as requiring a cuda support.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>major_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The major version of the (major,minor) version tuple.</p></li>
-<li><p><strong>minor_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The minor version of the (major,minor) version tuple.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tvm.testing.requires_llvm_minimum_version">
-<span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">requires_llvm_minimum_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">major_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.requires_llvm_minimum_version" title="Link to this definition"></a></dt>
-<dd><p>Mark a test as requiring at least a specific version of LLVM.</p>
-<p>Unit test marked with this decorator will run only if the
-installed version of LLVM is at least <cite>major_version</cite>.</p>
-<p>This also marks the test as requiring LLVM backend support.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>major_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tvm.testing.requires_nvcc_version">
-<span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">requires_nvcc_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">major_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minor_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.requires_nvcc_version" title="Link to this definition"></a></dt>
-<dd><p>Mark a test as requiring at least a specific version of nvcc.</p>
-<p>Unit test marked with this decorator will run only if the
-installed version of NVCC is at least <cite>(major_version,
-minor_version, release_version)</cite>.</p>
-<p>This also marks the test as requiring a cuda support.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>major_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The major version of the (major,minor,release) version tuple.</p></li>
-<li><p><strong>minor_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The minor version of the (major,minor,release) version tuple.</p></li>
-<li><p><strong>release_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The release version of the (major,minor,release) version tuple.</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">

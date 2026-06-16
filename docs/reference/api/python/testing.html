@@ -213,10 +213,6 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">tvm.testing</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.local_run"><code class="docutils literal notranslate"><span class="pre">local_run()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.rpc_run"><code class="docutils literal notranslate"><span class="pre">rpc_run()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.testing.CompareBeforeAfter"><code class="docutils literal notranslate"><span class="pre">CompareBeforeAfter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.testing.CompareBeforeAfter.test_compare"><code class="docutils literal notranslate"><span class="pre">CompareBeforeAfter.test_compare()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.testing.Path.cwd"><code class="docutils literal notranslate"><span class="pre">Path.cwd()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.testing.Path.home"><code class="docutils literal notranslate"><span class="pre">Path.home()</span></code></a></li>
@@ -483,70 +479,6 @@ If not specified, it will be inferred from the <cite>export_func</cite> argument
 </p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="tvm.testing.CompareBeforeAfter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">CompareBeforeAfter</span></span><a class="headerlink" href="#tvm.testing.CompareBeforeAfter" title="Link to this definition"></a></dt>
-<dd><p>Utility for comparing before/after of TIR transforms</p>
-<p>A standard framework for writing tests that take a TIR PrimFunc as
-input, apply a transformation, then either compare against an
-expected output or assert that the transformation raised an error.
-A test should subclass CompareBeforeAfter, defining class members
-<cite>before</cite> / <cite>Before</cite>, <cite>transform</cite>, and <cite>expected</cite> / <cite>Expected</cite>.  CompareBeforeAfter will
-then use these members to define a test method and test fixture.</p>
-<p><cite>transform</cite> may be one of the following.</p>
-<ul class="simple">
-<li><p>An instance of <cite>tvm.ir.transform.Pass</cite></p></li>
-<li><p>A method that takes no arguments and returns a <cite>tvm.ir.transform.Pass</cite></p></li>
-<li><p>A pytest fixture that returns a <cite>tvm.ir.transform.Pass</cite></p></li>
-</ul>
-<p><cite>before</cite> / <cite>Before</cite> may be any one of the following.</p>
-<ul class="simple">
-<li><p>An instance of <cite>tvm.tirx.PrimFunc</cite>.  This is allowed, but is not
-the preferred method, as any errors in constructing the
-<cite>PrimFunc</cite> occur while collecting the test, preventing any other
-tests in the same file from being run.</p></li>
-<li><p>An TVMScript function, without the <code class="docutils literal notranslate"><span class="pre">&#64;T.prim_func</span></code> decoration.
-The <code class="docutils literal notranslate"><span class="pre">&#64;T.prim_func</span></code> decoration will be applied when running the
-test, rather than at module import.</p></li>
-<li><p>A method that takes no arguments and returns a <cite>tvm.tirx.PrimFunc</cite></p></li>
-<li><p>A pytest fixture that returns a <cite>tvm.tirx.PrimFunc</cite></p></li>
-</ul>
-<p><cite>expected</cite> / <cite>Expected</cite> may be any one of the following.  The type of
-<cite>expected</cite> / <cite>Expected</cite> defines the test being performed.  If <cite>expected</cite>
-provides a <cite>tvm.tirx.PrimFunc</cite>, the result of the transformation
-must match <cite>expected</cite>.  If <cite>expected</cite> is an exception, then the
-transformation must raise that exception type.</p>
-<ul class="simple">
-<li><p>Any option supported for <cite>before</cite> / <cite>Before</cite>.</p></li>
-<li><p>The <cite>Exception</cite> class object, or a class object that inherits
-from <cite>Exception</cite>.</p></li>
-<li><p>A method that takes no arguments and returns <cite>Exception</cite> or a
-class object that inherits from <cite>Exception</cite>.</p></li>
-<li><p>A pytest fixture that returns <cite>Exception</cite> or an class object
-that inherits from <cite>Exception</cite>.</p></li>
-</ul>
-<p class="rubric">Examples</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestRemoveIf</span><span class="p">(</span><span class="n">tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">CompareBeforeAfter</span><span class="p">):</span>
-    <span class="n">transform</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">tirx</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">StmtSimplify</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">before</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;int32&quot;</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">expected</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;int32&quot;</span><span class="p">)):</span>
-        <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="tvm.testing.CompareBeforeAfter.test_compare">
-<span class="sig-name descname"><span class="pre">test_compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">before</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.CompareBeforeAfter.test_compare" title="Link to this definition"></a></dt>
-<dd><p>Unit test to compare the expected TIR PrimFunc to actual</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">

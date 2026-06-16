@@ -400,9 +400,9 @@ parameters.  For instance, there may be target-specific
 implementations that should be tested, where some targets have more
 than one implementation.  These can be done by explicitly
 parametrizing over tuples of arguments, such as shown below.  In these
-cases, only the explicitly listed targets will run, but they will
-still have the appropriate <code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.requires_RUNTIME</span></code> mark
-applied to them.</p>
+cases, only the explicitly listed targets will run, and each target is
+automatically gated on whether it can run on the current machine (a GPU
+target gets <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.gpu</span></code> plus a skip when no device is present).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;target,impl&#39;</span><span class="p">,</span> <span class="p">[</span>
      <span class="p">(</span><span class="s1">&#39;llvm&#39;</span><span class="p">,</span> <span class="n">cpu_implementation</span><span class="p">),</span>
      <span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">,</span> <span class="n">gpu_implementation_small_batch</span><span class="p">),</span>
@@ -417,34 +417,37 @@ on top of pytest marks.  Each test function can
 be decorated with <a class="reference external" href="pytest-marks">pytest marks</a>
 to include metadata.  The most frequently applied
 marks are as follows.</p>
-<ul class="simple">
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.gpu</span></code> - Tags a function as using GPU
 capabilities. This has no effect on its own, but can be paired with
-command-line arguments <code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">gpu</span></code> or <code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">'not</span> <span class="pre">gpu'</span></code> to restrict
-which tests pytest will execute.  This should not be called on its
-own, but is part of other marks used in unit-tests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.uses_gpu</span></code> - Applies <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.gpu</span></code>.  This
-should be used to mark unit tests that may use the GPU, if one is
-present.  This decorator is only needed for tests that explicitly
-loop over <code class="docutils literal notranslate"><span class="pre">tvm.testing.enabled_targets()</span></code>, but that is no longer
-the preferred style of writing unit tests (see below).  When using
-<code class="docutils literal notranslate"><span class="pre">tvm.testing.parametrize_targets()</span></code>, this decorator is implicit
-for GPU targets, and does not need to be explicitly applied.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.requires_gpu</span></code> - Applies <code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.uses_gpu</span></code>,
-and additionally marks that the test should be skipped
-(<code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.skipif</span></code>) entirely if no GPU is present.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.requires_RUNTIME</span></code> - Several decorators
-(e.g. <code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.requires_cuda</span></code>), each of which skips a test if
-the specified runtime cannot be used. A runtime cannot be used if it
-is disabled in the <code class="docutils literal notranslate"><span class="pre">config.cmake</span></code>, or if a compatible device is
-not present. For runtimes that use the GPU, this includes
-<code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.requires_gpu</span></code>.</p></li>
+the command-line arguments <code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">gpu</span></code> or <code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">'not</span> <span class="pre">gpu'</span></code> to restrict
+which tests pytest will execute.  Apply it to any test that needs a
+GPU so that the CI runs it only on GPU nodes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.skipif(not</span> <span class="pre">tvm.testing.env.has_X(),</span> <span class="pre">reason=...)</span></code> -
+Skips a test when a required runtime or hardware feature is not
+available.  The <code class="xref py py-mod docutils literal notranslate"><span class="pre">tvm.testing.env</span></code> module exposes one memoized
+probe per capability (e.g. <code class="docutils literal notranslate"><span class="pre">has_cuda()</span></code>, <code class="docutils literal notranslate"><span class="pre">has_rocm()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">has_vulkan()</span></code>, <code class="docutils literal notranslate"><span class="pre">has_gpu()</span></code>, <code class="docutils literal notranslate"><span class="pre">has_llvm()</span></code>), each of which
+returns <code class="docutils literal notranslate"><span class="pre">False</span></code> when the runtime is disabled in <code class="docutils literal notranslate"><span class="pre">config.cmake</span></code> or
+no compatible device is present.  Pair it with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.gpu</span></code>
+for tests that use the GPU:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">gpu</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span><span class="ow">not</span> <span class="n">tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">has_cuda</span><span class="p">(),</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;need cuda&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_cuda_vectorize_add</span><span class="p">():</span>
+    <span class="c1"># Test code goes here</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest.importorskip(&quot;package_name&quot;)</span></code> - Skips a test (or the whole
+module, when called at import time) if an optional Python package is
+not installed.  Use this instead of a <code class="docutils literal notranslate"><span class="pre">skipif</span></code> for package
+dependencies.</p></li>
 </ul>
-<p>When using parametrized targets, each test run is decorated with the
-<code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.requires_RUNTIME</span></code> that corresponds to the target
-being used.  As a result, if a target is disabled in <code class="docutils literal notranslate"><span class="pre">config.cmake</span></code>
-or does not have appropriate hardware to run, it will be explicitly
-listed as skipped.</p>
+<p>When using <code class="docutils literal notranslate"><span class="pre">tvm.testing.parametrize_targets()</span></code>, each parametrized run
+is gated automatically on whether its target can run on the current
+machine.  As a result, if a target is disabled in <code class="docutils literal notranslate"><span class="pre">config.cmake</span></code> or
+does not have appropriate hardware to run, it will be explicitly listed
+as skipped, and GPU targets are tagged with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.gpu</span></code> for you.</p>
 <p>There also exists a <code class="docutils literal notranslate"><span class="pre">tvm.testing.enabled_targets()</span></code> that returns
 all targets that are enabled and runnable on the current machine,
 based on the environment variable <code class="docutils literal notranslate"><span class="pre">TVM_TEST_TARGETS</span></code>, the build

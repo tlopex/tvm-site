@@ -272,7 +272,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.known_failing_targets"><code class="docutils literal notranslate"><span class="pre">known_failing_targets()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.np_dtype_from_str"><code class="docutils literal notranslate"><span class="pre">np_dtype_from_str()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.parameter"><code class="docutils literal notranslate"><span class="pre">parameter()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.testing.parameters"><code class="docutils literal notranslate"><span class="pre">parameters()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.parametrize_targets"><code class="docutils literal notranslate"><span class="pre">parametrize_targets()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.strtobool"><code class="docutils literal notranslate"><span class="pre">strtobool()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.terminate_self"><code class="docutils literal notranslate"><span class="pre">terminate_self()</span></code></a></li>
@@ -1146,53 +1145,6 @@ values and ids.</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">parameter</span><span class="p">(</span><span class="n">by_dict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;small&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;large&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">1024</span><span class="p">)})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_using_size</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span> <span class="c1"># Test code here</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tvm.testing.parameters">
-<span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">value_sets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.parameters" title="Link to this definition"></a></dt>
-<dd><p>Convenience function to define pytest parametrized fixtures.</p>
-<p>Declaring a variable using tvm.testing.parameters will define a
-parametrized pytest fixture that can be used by test
-functions. Like <a class="reference internal" href="#tvm.testing.parameter" title="tvm.testing.parameter"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.parameter()</span></code></a>, this is intended
-for cases that have no setup cost, such as strings, integers,
-tuples, etc.  For cases that have a significant setup cost, please
-use <a class="reference internal" href="#tvm.testing.fixture" title="tvm.testing.fixture"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.fixture()</span></code></a> instead.</p>
-<p>Unlike <a class="reference internal" href="#tvm.testing.parameter" title="tvm.testing.parameter"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.parameter()</span></code></a>, if a test function
-accepts multiple parameters defined using a single call to
-<code class="docutils literal notranslate"><span class="pre">tvm.testing.parameters</span></code>, then the test will only be run once
-for each set of parameters, not for all combinations of
-parameters.</p>
-<p>These parameter definitions apply to all tests in a module.  If a
-specific test should have different values for some parameters,
-that test should be marked with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.parametrize</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>values</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>]</em>) – A list of parameter value sets.  Each set of values represents
-a single combination of values to be tested.  A unit test that
-accepts parameters defined will be run once for every set of
-parameters in the list.</p></li>
-<li><p><strong>ids</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – A list of names for the parameter sets.  If None, pytest will
-generate a name from each parameter set.  These generated names may
-not be readable/useful for composite types such as tuples.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Function outputs from pytest.fixture.  These should be unpacked
-into individual named parameters.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[function]</p>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">parameters</span><span class="p">(</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="s1">&#39;float32&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="s1">&#39;float16&#39;</span><span class="p">)</span> <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_feature_x</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># Test code here</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">assert</span><span class="p">(</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="n">dtype</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">16</span><span class="p">,</span><span class="s1">&#39;float32&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="s1">&#39;float16&#39;</span><span class="p">)])</span>
 </pre></div>
 </div>
 </dd></dl>

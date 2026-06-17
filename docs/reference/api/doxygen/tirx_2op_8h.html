@@ -751,7 +751,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">inline</span> PrimExpr OpName(PrimExpr x, PrimExpr y, Span span = Span()) { \</div>
-<div class="line">    static <span class="keyword">const</span> Op&amp; op = Op::Get(<span class="stringliteral">&quot;tirx.&quot;</span> #OpName);                    \</div>
+<div class="line">    static <span class="keyword">const</span> Op op = Op::Get(<span class="stringliteral">&quot;tirx.&quot;</span> #OpName);                     \</div>
 <div class="line">    return tirx::Call(x.dtype(), op, {x, y}, {}, span);                \</div>
 <div class="line">  }</div>
 </div><!-- fragment -->
@@ -801,7 +801,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">inline</span> PrimExpr OpName(PrimExpr x, Span span = Span()) {                   \</div>
-<div class="line">    static <span class="keyword">const</span> Op&amp; op = Op::Get(<span class="stringliteral">&quot;tirx.&quot;</span> #OpName);                          \</div>
+<div class="line">    static <span class="keyword">const</span> Op op = Op::Get(<span class="stringliteral">&quot;tirx.&quot;</span> #OpName);                           \</div>
 <div class="line">    CheckInputDType(#OpName, x.dtype());                                     \</div>
 <div class="line">    if (x.dtype().is_bfloat16()) {                                           \</div>
 <div class="line">      DataType bf16_dtype = x.dtype();                                       \</div>

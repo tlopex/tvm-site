@@ -113,23 +113,26 @@
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="classtvm_1_1IntImm.html" target="_top" xlink:title="Managed reference class to IntImmNode.">
-<polygon fill="white" stroke="black" points="177,-331.5 177,-432.5 336,-432.5 336,-331.5 177,-331.5"/>
-<text text-anchor="middle" x="256.5" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::IntImm</text>
-<polyline fill="none" stroke="black" points="177,-413.5 336,-413.5 "/>
-<text text-anchor="middle" x="256.5" y="-401.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="177,-394.5 336,-394.5 "/>
-<text text-anchor="start" x="185" y="-382.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ IntImm()</text>
-<text text-anchor="start" x="185" y="-371.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DEFINE_OBJECT</text>
-<text text-anchor="start" x="185" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00">_REF_METHODS_NULLABLE()</text>
-<text text-anchor="start" x="185" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_DEFINE_OBJECT_REF</text>
-<text text-anchor="start" x="185" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_COW_METHOD()</text>
+<polygon fill="white" stroke="black" points="177,-315 177,-449 336,-449 336,-315 177,-315"/>
+<text text-anchor="middle" x="256.5" y="-437" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::IntImm</text>
+<polyline fill="none" stroke="black" points="177,-430 336,-430 "/>
+<text text-anchor="middle" x="256.5" y="-418" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polyline fill="none" stroke="black" points="177,-411 336,-411 "/>
+<text text-anchor="start" x="185" y="-399" font-family="Helvetica,sans-Serif" font-size="10.00">+ IntImm()</text>
+<text text-anchor="start" x="185" y="-388" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DEFINE_OBJECT</text>
+<text text-anchor="start" x="185" y="-377" font-family="Helvetica,sans-Serif" font-size="10.00">_REF_METHODS_NULLABLE()</text>
+<text text-anchor="start" x="185" y="-366" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_DEFINE_OBJECT_REF</text>
+<text text-anchor="start" x="185" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">_COW_METHOD()</text>
+<text text-anchor="start" x="185" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ Bool()</text>
+<text text-anchor="start" x="185" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ Int32()</text>
+<text text-anchor="start" x="185" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ Int64()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
 <title>Node3&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M2910.94,-546.81C2475.3,-547.84 588.7,-546.94 344.5,-455 330.83,-449.85 317.71,-441.67 305.96,-432.63"/>
+<path fill="none" stroke="midnightblue" d="M2910.94,-546.81C2475.3,-547.84 588.7,-546.94 344.5,-455 340.07,-453.33 335.69,-451.34 331.4,-449.11"/>
 <polygon fill="none" stroke="midnightblue" points="2910.97,-550.31 2920.96,-546.78 2910.95,-543.31 2910.97,-550.31"/>
 </g>
 <!-- Node6 -->

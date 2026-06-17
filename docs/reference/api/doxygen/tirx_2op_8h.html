@@ -394,19 +394,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a35575aa79fc3de14931b299b13561b08"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a35575aa79fc3de14931b299b13561b08">tvm::tirx::IsPointerType</a> (const Type &amp;type, const DataType &amp;element_type)</td></tr>
 <tr class="memdesc:a35575aa79fc3de14931b299b13561b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if type is a pointer to a runtime element type.  <a href="namespacetvm_1_1tirx.html#a35575aa79fc3de14931b299b13561b08">More...</a><br /></td></tr>
 <tr class="separator:a35575aa79fc3de14931b299b13561b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48cee62fe6d9261257f2da8840670639"><td class="memTemplParams" colspan="2">template&lt;typename ValueType , typename  = typename std::enable_if&lt;std::is_standard_layout&lt;ValueType&gt;::value &amp;&amp;                                             std::is_trivial&lt;ValueType&gt;::value&gt;::type&gt; </td></tr>
-<tr class="memitem:a48cee62fe6d9261257f2da8840670639"><td class="memTemplItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a> (DataType t, ValueType value, Span span=Span())</td></tr>
-<tr class="memdesc:a48cee62fe6d9261257f2da8840670639"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a const value with certain data type.  <a href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">More...</a><br /></td></tr>
-<tr class="separator:a48cee62fe6d9261257f2da8840670639"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73f079723f7ba66d502edd1315e9dfe5"><td class="memItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a73f079723f7ba66d502edd1315e9dfe5">tvm::tirx::make_zero</a> (DataType t, Span span=Span())</td></tr>
-<tr class="memdesc:a73f079723f7ba66d502edd1315e9dfe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a const zero expr.  <a href="namespacetvm_1_1tirx.html#a73f079723f7ba66d502edd1315e9dfe5">More...</a><br /></td></tr>
-<tr class="separator:a73f079723f7ba66d502edd1315e9dfe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a3040d6fd3a96395a2a4ba2820b19f4"><td class="memItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a8a3040d6fd3a96395a2a4ba2820b19f4">tvm::tirx::const_true</a> (int lanes=1, Span span=Span())</td></tr>
-<tr class="memdesc:a8a3040d6fd3a96395a2a4ba2820b19f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a constant true expression.  <a href="namespacetvm_1_1tirx.html#a8a3040d6fd3a96395a2a4ba2820b19f4">More...</a><br /></td></tr>
-<tr class="separator:a8a3040d6fd3a96395a2a4ba2820b19f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d11f206d246941865ae5f2a08d98bfa"><td class="memItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a5d11f206d246941865ae5f2a08d98bfa">tvm::tirx::const_false</a> (int lanes=1, Span span=Span())</td></tr>
-<tr class="memdesc:a5d11f206d246941865ae5f2a08d98bfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a constant false expression.  <a href="namespacetvm_1_1tirx.html#a5d11f206d246941865ae5f2a08d98bfa">More...</a><br /></td></tr>
-<tr class="separator:a5d11f206d246941865ae5f2a08d98bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581980472b0e7e78a87f289c527416dd"><td class="memTemplParams" colspan="2">template&lt;typename ValueType , typename  = typename std::enable_if&lt;std::is_standard_layout&lt;ValueType&gt;::value &amp;&amp;                                             std::is_trivial&lt;ValueType&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a581980472b0e7e78a87f289c527416dd"><td class="memTemplItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tvm::tirx::MakeConst</a> (DataType dtype, ValueType value, Span span=Span())</td></tr>
+<tr class="memdesc:a581980472b0e7e78a87f289c527416dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a const value with certain data type.  <a href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">More...</a><br /></td></tr>
+<tr class="separator:a581980472b0e7e78a87f289c527416dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a3cfd5265e42c230c08de23e5465596"><td class="memItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a1a3cfd5265e42c230c08de23e5465596">tvm::tirx::ConstHandle</a> (int64_t value, Span span=Span())</td></tr>
+<tr class="memdesc:a1a3cfd5265e42c230c08de23e5465596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a constant handle value.  <a href="namespacetvm_1_1tirx.html#a1a3cfd5265e42c230c08de23e5465596">More...</a><br /></td></tr>
+<tr class="separator:a1a3cfd5265e42c230c08de23e5465596"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecbfdda2d28f068cc47264bb95e13be6"><td class="memItemLeft" align="right" valign="top">const int64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#aecbfdda2d28f068cc47264bb95e13be6">tvm::tirx::as_const_int</a> (const PrimExpr &amp;x)</td></tr>
 <tr class="memdesc:aecbfdda2d28f068cc47264bb95e13be6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get x as constant int expression.  <a href="namespacetvm_1_1tirx.html#aecbfdda2d28f068cc47264bb95e13be6">More...</a><br /></td></tr>
 <tr class="separator:aecbfdda2d28f068cc47264bb95e13be6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -439,12 +433,12 @@ Functions</h2></td></tr>
 <tr class="separator:a3ca220615f0bf33899b9e8a5e351fe88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9029ad9f89943905927b273addbeaaf8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a9029ad9f89943905927b273addbeaaf8">tvm::tirx::is_negative_const</a> (const PrimExpr &amp;a)</td></tr>
 <tr class="separator:a9029ad9f89943905927b273addbeaaf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a501e512bc761c32463a164371a4e387f"><td class="memTemplParams" colspan="2">template&lt;typename ValueType &gt; </td></tr>
-<tr class="memitem:a501e512bc761c32463a164371a4e387f"><td class="memTemplItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a501e512bc761c32463a164371a4e387f">tvm::tirx::MakeConstScalar</a> (DataType t, ValueType value, Span span=Span())</td></tr>
-<tr class="separator:a501e512bc761c32463a164371a4e387f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f9cd2c0711d112adbb1a94b248dea5a"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a3f9cd2c0711d112adbb1a94b248dea5a"><td class="memTemplItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a3f9cd2c0711d112adbb1a94b248dea5a">tvm::tirx::MakeConstScalar</a> (DataType t, bool value, Span span)</td></tr>
-<tr class="separator:a3f9cd2c0711d112adbb1a94b248dea5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613099dcc59db3d096460a46a8764444"><td class="memTemplParams" colspan="2">template&lt;typename ValueType &gt; </td></tr>
+<tr class="memitem:a613099dcc59db3d096460a46a8764444"><td class="memTemplItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a613099dcc59db3d096460a46a8764444">tvm::tirx::MakeConstScalar</a> (DataType dtype, ValueType value, Span span=Span())</td></tr>
+<tr class="separator:a613099dcc59db3d096460a46a8764444"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66436e37b44c1025fbc36ed197177df7"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a66436e37b44c1025fbc36ed197177df7"><td class="memTemplItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1tirx.html#a66436e37b44c1025fbc36ed197177df7">tvm::tirx::MakeConstScalar</a> (DataType dtype, bool value, Span span)</td></tr>
+<tr class="separator:a66436e37b44c1025fbc36ed197177df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96061840d12f84eeecc8fae11e245242"><td class="memItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm.html#a96061840d12f84eeecc8fae11e245242">tvm::operator+=</a> (PrimExpr &amp;a, PrimExpr b)</td></tr>
 <tr class="separator:a96061840d12f84eeecc8fae11e245242"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a164d454c519fecaa5611c86b65469acc"><td class="memItemLeft" align="right" valign="top">PrimExpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetvm.html#a164d454c519fecaa5611c86b65469acc">tvm::operator-=</a> (PrimExpr &amp;a, PrimExpr b)</td></tr>
@@ -872,15 +866,15 @@ Functions</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">inline</span> PrimExpr Name(<span class="keyword">const</span> PrimExpr&amp; a, <span class="keywordtype">float</span> b) { <span class="keywordflow">return</span> Name(a, PrimExpr(b)); } \</div>
 <div class="line">  inline PrimExpr Name(<span class="keywordtype">float</span> a, <span class="keyword">const</span> PrimExpr&amp; b) { <span class="keywordflow">return</span> Name(PrimExpr(a), b); } \</div>
 <div class="line">  inline PrimExpr Name(<span class="keywordtype">int</span> a, <span class="keyword">const</span> PrimExpr&amp; b) {                                  \</div>
-<div class="line">    return Name(<a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(b.dtype(), a), b);                                 \</div>
+<div class="line">    return Name(<a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tirx::MakeConst</a>(b.dtype(), a), b);                                  \</div>
 <div class="line">  }                                                                                 \</div>
 <div class="line">  inline PrimExpr Name(<span class="keyword">const</span> PrimExpr&amp; a, <span class="keywordtype">int</span> b) {                                  \</div>
-<div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(a.dtype(), b));                                 \</div>
+<div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tirx::MakeConst</a>(a.dtype(), b));                                  \</div>
 <div class="line">  }                                                                                 \</div>
 <div class="line">  inline PrimExpr Name(<span class="keyword">const</span> PrimExpr&amp; a, <span class="keywordtype">double</span> b) {                               \</div>
-<div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(DataType::Float(64), b));                       \</div>
+<div class="line">    return Name(a, FloatImm(DataType::Float(64), b));                               \</div>
 <div class="line">  }</div>
-<div class="ttc" id="anamespacetvm_1_1tirx_html_a48cee62fe6d9261257f2da8840670639"><div class="ttname"><a href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a></div><div class="ttdeci">PrimExpr make_const(DataType t, ValueType value, Span span=Span())</div><div class="ttdoc">Make a const value with certain data type.</div><div class="ttdef"><b>Definition:</b> op.h:1012</div></div>
+<div class="ttc" id="anamespacetvm_1_1tirx_html_a581980472b0e7e78a87f289c527416dd"><div class="ttname"><a href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tvm::tirx::MakeConst</a></div><div class="ttdeci">PrimExpr MakeConst(DataType dtype, ValueType value, Span span=Span())</div><div class="ttdoc">Make a const value with certain data type.</div><div class="ttdef"><b>Definition:</b> op.h:1003</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -906,13 +900,13 @@ Functions</h2></td></tr>
 <div class="line">    return Name(PrimExpr(a), b, span);                                    \</div>
 <div class="line">  }                                                                       \</div>
 <div class="line">  inline PrimExpr Name(<span class="keywordtype">int</span> a, <span class="keyword">const</span> PrimExpr&amp; b, Span span = Span()) {    \</div>
-<div class="line">    return Name(<a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(b.dtype(), a), b, span);                 \</div>
+<div class="line">    return Name(<a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tirx::MakeConst</a>(b.dtype(), a), b, span);                  \</div>
 <div class="line">  }                                                                       \</div>
 <div class="line">  inline PrimExpr Name(<span class="keyword">const</span> PrimExpr&amp; a, <span class="keywordtype">int</span> b, Span span = Span()) {    \</div>
-<div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(a.dtype(), b), span);                 \</div>
+<div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tirx::MakeConst</a>(a.dtype(), b), span);                  \</div>
 <div class="line">  }                                                                       \</div>
 <div class="line">  inline PrimExpr Name(<span class="keyword">const</span> PrimExpr&amp; a, <span class="keywordtype">double</span> b, Span span = Span()) { \</div>
-<div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(DataType::Float(64), b), span);       \</div>
+<div class="line">    return Name(a, FloatImm(DataType::Float(64), b), span);               \</div>
 <div class="line">  }</div>
 </div><!-- fragment -->
 </div>
@@ -932,10 +926,10 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">inline</span> PrimExpr Name(<span class="keyword">const</span> PrimExpr&amp; a, <span class="keywordtype">int</span> b) {  \</div>
-<div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(a.dtype(), b)); \</div>
-<div class="line">  }                                                 \</div>
-<div class="line">  inline PrimExpr Name(<span class="keywordtype">int</span> a, <span class="keyword">const</span> PrimExpr&amp; b) { <span class="keywordflow">return</span> Name(<a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(b.dtype(), a), b); }</div>
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">inline</span> PrimExpr Name(<span class="keyword">const</span> PrimExpr&amp; a, <span class="keywordtype">int</span> b) { \</div>
+<div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tirx::MakeConst</a>(a.dtype(), b)); \</div>
+<div class="line">  }                                                \</div>
+<div class="line">  inline PrimExpr Name(<span class="keywordtype">int</span> a, <span class="keyword">const</span> PrimExpr&amp; b) { <span class="keywordflow">return</span> Name(<a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tirx::MakeConst</a>(b.dtype(), a), b); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -955,10 +949,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">inline</span> PrimExpr Name(<span class="keyword">const</span> PrimExpr&amp; a, <span class="keywordtype">int</span> b, Span span = Span()) { \</div>
-<div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(a.dtype(), b), span);              \</div>
+<div class="line">    return Name(a, <a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tirx::MakeConst</a>(a.dtype(), b), span);               \</div>
 <div class="line">  }                                                                    \</div>
 <div class="line">  inline PrimExpr Name(<span class="keywordtype">int</span> a, <span class="keyword">const</span> PrimExpr&amp; b, Span span = Span()) { \</div>
-<div class="line">    return Name(<a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tirx::make_const</a>(b.dtype(), a), b, span);              \</div>
+<div class="line">    return Name(<a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tirx::MakeConst</a>(b.dtype(), a), b, span);               \</div>
 <div class="line">  }</div>
 </div><!-- fragment -->
 </div>

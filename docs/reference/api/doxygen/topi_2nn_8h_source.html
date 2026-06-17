@@ -114,7 +114,7 @@ $(function() {
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="namespacetvm_1_1te.html#ad98d13fdbc71aede147f419e218fc680">tvm::te::compute</a>(</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      t-&gt;shape,</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      [&amp;](<span class="keyword">const</span> tvm::ffi::Array&lt;tvm::tirx::Var&gt;&amp; i) {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        auto threshold_const = tvm::tirx::make_const(t-&gt;dtype, threshold);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        auto threshold_const = tvm::tirx::MakeConst(t-&gt;dtype, threshold);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        return tvm::max(t(i), threshold_const);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      },</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      name, tag);</div>
@@ -127,7 +127,7 @@ $(function() {
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      t-&gt;shape,</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      [&amp;](<span class="keyword">const</span> tvm::ffi::Array&lt;tvm::tirx::Var&gt;&amp; i) {</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        auto value = t(i);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        auto calpha = tvm::tirx::make_const(value.dtype(), alpha);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        auto calpha = tvm::tirx::MakeConst(value.dtype(), alpha);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        return tvm::tirx::Select(value &gt; 0, value, value * calpha);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      },</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      name, tag);</div>
@@ -191,7 +191,7 @@ $(function() {
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  }</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordflow">if</span> (!pad_value.defined()) {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    pad_value = <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a>(t-&gt;dtype, 0);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    pad_value = <a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tvm::tirx::MakeConst</a>(t-&gt;dtype, 0);</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  }</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="keyword">auto</span> l = [&amp;](tvm::ffi::Array&lt;tvm::tirx::Var&gt; ovars) {</div>
@@ -229,12 +229,12 @@ $(function() {
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;      <span class="keywordflow">if</span> (pad_mode == <span class="stringliteral">&quot;constant&quot;</span>) {</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="namespacetvm.html#a353217978feabae3575560bf1586885f">tvm::if_then_else</a>(</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            <a class="code" href="namespacetvm_1_1tirx.html#aa57bc10f244afa1dd6373861181786b5">foldl</a>([](<a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> a, <a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> b, <a class="code" href="classtvm_1_1Span.html">Span</a> span) { <span class="keywordflow">return</span> <a class="code" href="namespacetvm.html#a27d5567b95675d383c4675fdcd85346c">tvm::logical_and</a>(a, b, span); },</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                  <a class="code" href="namespacetvm_1_1tirx.html#a8a3040d6fd3a96395a2a4ba2820b19f4">const_true</a>(1), sel),</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                  <a class="code" href="classtvm_1_1IntImm.html#a69ab239f9cf67b833786df443ac31a33">IntImm::Bool</a>(<span class="keyword">true</span>), sel),</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            t(indices), pad_value);</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pad_mode == <span class="stringliteral">&quot;edge&quot;</span> || pad_mode == <span class="stringliteral">&quot;reflect&quot;</span>) {</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="namespacetvm.html#a353217978feabae3575560bf1586885f">tvm::if_then_else</a>(</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            <a class="code" href="namespacetvm_1_1tirx.html#aa57bc10f244afa1dd6373861181786b5">foldl</a>([](<a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> a, <a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> b, <a class="code" href="classtvm_1_1Span.html">Span</a> span) { <span class="keywordflow">return</span> <a class="code" href="namespacetvm.html#a27d5567b95675d383c4675fdcd85346c">tvm::logical_and</a>(a, b, span); },</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                  <a class="code" href="namespacetvm_1_1tirx.html#a8a3040d6fd3a96395a2a4ba2820b19f4">const_true</a>(1), sel),</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                  <a class="code" href="classtvm_1_1IntImm.html#a69ab239f9cf67b833786df443ac31a33">IntImm::Bool</a>(<span class="keyword">true</span>), sel),</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            t(indices), t(pad_idx));</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;      }</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    }</div>
@@ -412,7 +412,7 @@ $(function() {
 <div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160; </div>
 <div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;  <span class="comment">// pad the input with paddings provided</span></div>
 <div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;  <span class="keywordflow">if</span> (!pad_value.defined()) {</div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;    pad_value = <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a>(data-&gt;dtype, 0);</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;    pad_value = <a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tvm::tirx::MakeConst</a>(data-&gt;dtype, 0);</div>
 <div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;  }</div>
 <div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;  padded_t = <a class="code" href="namespacetvm_1_1topi.html#a8b25c82fe78fb593e495461cc54aedc3">pad</a>(data, pad_before_int32, pad_after_int32, pad_value);</div>
 <div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160; </div>
@@ -439,7 +439,7 @@ $(function() {
 <div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;        &lt;&lt; padded_input &lt;&lt; <span class="stringliteral">&quot;)&quot;</span></div>
 <div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        &lt;&lt; <span class="stringliteral">&quot; must be divisible by its block size (&quot;</span> &lt;&lt; block_size &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
 <div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160; </div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;    <a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> bs = <a class="code" href="classtvm_1_1IntImm.html">IntImm</a>(<a class="code" href="classtvm_1_1runtime_1_1DataType.html#ab45f13dd70d982d9f977c79b6f7fac98">DataType::Int</a>(64), block_shape[i - 1]);</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;    <a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> bs = <a class="code" href="classtvm_1_1IntImm.html#ad8282f87bbc258ab5ed94b924a9442da">IntImm::Int64</a>(block_shape[i - 1]);</div>
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    r_shape.push_back(<a class="code" href="namespacetvm.html#a16f9cd9219b505e2cc05c5a7558ac61f">div</a>(padded_shape[i], bs));</div>
 <div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;    r_shape.push_back(bs);</div>
 <div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;    block_shape_prod *= bs;</div>
@@ -454,7 +454,7 @@ $(function() {
 <div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;  }</div>
 <div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;  o_shape.push_back(<a class="code" href="classtvm_1_1PrimExpr.html">tvm::PrimExpr</a>(batch) * block_shape_prod);</div>
 <div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt;= num_block_dims; i++) {</div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;    <a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> bs = <a class="code" href="classtvm_1_1IntImm.html">IntImm</a>(<a class="code" href="classtvm_1_1runtime_1_1DataType.html#ab45f13dd70d982d9f977c79b6f7fac98">DataType::Int</a>(64), block_shape[i - 1]);</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;    <a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> bs = <a class="code" href="classtvm_1_1IntImm.html#ad8282f87bbc258ab5ed94b924a9442da">IntImm::Int64</a>(block_shape[i - 1]);</div>
 <div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;    o_shape.push_back(<a class="code" href="namespacetvm.html#a16f9cd9219b505e2cc05c5a7558ac61f">div</a>(padded_shape[i], bs));</div>
 <div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;  }</div>
 <div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;  <span class="comment">// append remaining shape</span></div>
@@ -488,7 +488,7 @@ $(function() {
 <div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;  <span class="keywordtype">int</span> batch = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(GetConstInt(in_shape[0]));</div>
 <div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160; </div>
 <div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; num_block_dims; i++) {</div>
-<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;    <a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> bs = <a class="code" href="classtvm_1_1IntImm.html">IntImm</a>(<a class="code" href="classtvm_1_1runtime_1_1DataType.html#ab45f13dd70d982d9f977c79b6f7fac98">DataType::Int</a>(64), block_shape[i]);</div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;    <a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> bs = <a class="code" href="classtvm_1_1IntImm.html#ad8282f87bbc258ab5ed94b924a9442da">IntImm::Int64</a>(block_shape[i]);</div>
 <div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;    r_shape.push_back(bs);</div>
 <div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;    block_shape_prod *= bs;</div>
 <div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;  }</div>
@@ -507,7 +507,7 @@ $(function() {
 <div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;  ffi::Array&lt;PrimExpr&gt; r_p_shape;</div>
 <div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;  r_p_shape.push_back(batch / block_shape_prod);</div>
 <div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt;= num_block_dims; i++) {</div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;    <a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> bs = <a class="code" href="classtvm_1_1IntImm.html">IntImm</a>(<a class="code" href="classtvm_1_1runtime_1_1DataType.html#ab45f13dd70d982d9f977c79b6f7fac98">DataType::Int</a>(64), block_shape[i - 1]);</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;    <a class="code" href="classtvm_1_1PrimExpr.html">PrimExpr</a> bs = <a class="code" href="classtvm_1_1IntImm.html#ad8282f87bbc258ab5ed94b924a9442da">IntImm::Int64</a>(block_shape[i - 1]);</div>
 <div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;    r_p_shape.push_back(in_shape[i] * bs);</div>
 <div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;  }</div>
 <div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = num_block_dims + 1; i &lt; num_input_dims; i++) {</div>
@@ -557,7 +557,7 @@ $(function() {
 <div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;        [&amp;](<span class="keyword">const</span> tvm::ffi::Array&lt;tvm::tirx::Var&gt;&amp; target_indices) {</div>
 <div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;          <span class="keyword">auto</span> c = targets();</div>
 <div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="classtvm_1_1tirx_1_1Select.html">tvm::tirx::Select</a>(c != ignore_index, -predictions(c) * weights(c),</div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;                                   <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a>(predictions-&gt;dtype, 0));</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;                                   <a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tvm::tirx::MakeConst</a>(predictions-&gt;dtype, 0));</div>
 <div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;        },</div>
 <div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;        name, tag);</div>
 <div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    <span class="keywordflow">if</span> (reduction == <span class="stringliteral">&quot;mean&quot;</span>) {</div>
@@ -566,7 +566,7 @@ $(function() {
 <div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;          [&amp;](<span class="keyword">const</span> tvm::ffi::Array&lt;tvm::tirx::Var&gt;&amp; target_indices) {</div>
 <div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;            <span class="keyword">auto</span> c = targets();</div>
 <div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classtvm_1_1tirx_1_1Select.html">tvm::tirx::Select</a>(c != ignore_index, weights(c),</div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;                                     <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a>(predictions-&gt;dtype, 0));</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;                                     <a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tvm::tirx::MakeConst</a>(predictions-&gt;dtype, 0));</div>
 <div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;          },</div>
 <div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;          name, tag);</div>
 <div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="namespacetvm_1_1topi.html#a582bc98a3956894e8e90a3a3da929568">topi::divide</a>(T, W);</div>
@@ -585,7 +585,7 @@ $(function() {
 <div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;          pred_indices.push_back(target_indices[i]);  <span class="comment">// indices for multidimensional loss</span></div>
 <div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;        }</div>
 <div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classtvm_1_1tirx_1_1Select.html">tvm::tirx::Select</a>(c != ignore_index, -predictions(pred_indices) * weights(c),</div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;                                 <a class="code" href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a>(predictions-&gt;dtype, 0));</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;                                 <a class="code" href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tvm::tirx::MakeConst</a>(predictions-&gt;dtype, 0));</div>
 <div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;      },</div>
 <div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;      name, tag);</div>
 <div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;  TVM_FFI_ICHECK(T-&gt;shape.size() != 0);</div>
@@ -595,7 +595,7 @@ $(function() {
 <div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;        [&amp;](<span class="keyword">const</span> tvm::ffi::Array&lt;tvm::tirx::Var&gt;&amp; target_indices) {</div>
 <div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;          auto c = targets(target_indices);</div>
 <div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;          return tvm::tirx::Select(c != ignore_index, weights(c),</div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;                                   tvm::tirx::make_const(predictions-&gt;dtype, 0));</div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;                                   tvm::tirx::MakeConst(predictions-&gt;dtype, 0));</div>
 <div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;        },</div>
 <div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;        name, tag);</div>
 <div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacetvm_1_1topi.html#a582bc98a3956894e8e90a3a3da929568">topi::divide</a>(<a class="code" href="namespacetvm_1_1topi.html#a024f602456bcafef58c6ea930caa5a4b">topi::sum</a>(T, tvm::ffi::Array&lt;int64_t&gt;(<span class="keyword">nullptr</span>)),</div>
@@ -612,8 +612,10 @@ $(function() {
 <div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// TVM_TOPI_NN_H_</span></div>
 <div class="ttc" id="aanalyzer_8h_html"><div class="ttname"><a href="analyzer_8h.html">analyzer.h</a></div><div class="ttdoc">Algebra expression simplifications.</div></div>
 <div class="ttc" id="aclasstvm_1_1IntImm_html"><div class="ttname"><a href="classtvm_1_1IntImm.html">tvm::IntImm</a></div><div class="ttdoc">Managed reference class to IntImmNode.</div><div class="ttdef"><b>Definition:</b> expr.h:508</div></div>
+<div class="ttc" id="aclasstvm_1_1IntImm_html_a69ab239f9cf67b833786df443ac31a33"><div class="ttname"><a href="classtvm_1_1IntImm.html#a69ab239f9cf67b833786df443ac31a33">tvm::IntImm::Bool</a></div><div class="ttdeci">static IntImm Bool(bool value, Span span=Span())</div><div class="ttdoc">Construct a scalar boolean constant.</div><div class="ttdef"><b>Definition:</b> expr.h:523</div></div>
+<div class="ttc" id="aclasstvm_1_1IntImm_html_ad8282f87bbc258ab5ed94b924a9442da"><div class="ttname"><a href="classtvm_1_1IntImm.html#ad8282f87bbc258ab5ed94b924a9442da">tvm::IntImm::Int64</a></div><div class="ttdeci">static IntImm Int64(int64_t value, Span span=Span())</div><div class="ttdoc">Construct a scalar int64 constant.</div><div class="ttdef"><b>Definition:</b> expr.h:541</div></div>
 <div class="ttc" id="aclasstvm_1_1PrimExpr_html"><div class="ttname"><a href="classtvm_1_1PrimExpr.html">tvm::PrimExpr</a></div><div class="ttdoc">Reference to PrimExprNode.</div><div class="ttdef"><b>Definition:</b> expr.h:123</div></div>
-<div class="ttc" id="aclasstvm_1_1Range_html"><div class="ttname"><a href="classtvm_1_1Range.html">tvm::Range</a></div><div class="ttdoc">Range container</div><div class="ttdef"><b>Definition:</b> expr.h:585</div></div>
+<div class="ttc" id="aclasstvm_1_1Range_html"><div class="ttname"><a href="classtvm_1_1Range.html">tvm::Range</a></div><div class="ttdoc">Range container</div><div class="ttdef"><b>Definition:</b> expr.h:612</div></div>
 <div class="ttc" id="aclasstvm_1_1Span_html"><div class="ttname"><a href="classtvm_1_1Span.html">tvm::Span</a></div><div class="ttdef"><b>Definition:</b> source_map.h:111</div></div>
 <div class="ttc" id="aclasstvm_1_1arith_1_1Analyzer_html"><div class="ttname"><a href="classtvm_1_1arith_1_1Analyzer.html">tvm::arith::Analyzer</a></div><div class="ttdoc">Managed reference to AnalyzerObj.</div><div class="ttdef"><b>Definition:</b> analyzer.h:776</div></div>
 <div class="ttc" id="aclasstvm_1_1runtime_1_1DataType_html"><div class="ttname"><a href="classtvm_1_1runtime_1_1DataType.html">tvm::runtime::DataType</a></div><div class="ttdoc">Runtime primitive data type.</div><div class="ttdef"><b>Definition:</b> data_type.h:45</div></div>
@@ -626,9 +628,8 @@ $(function() {
 <div class="ttc" id="anamespacetvm_1_1te_html"><div class="ttname"><a href="namespacetvm_1_1te.html">tvm::te</a></div><div class="ttdoc">Tensor expression language DSL.</div><div class="ttdef"><b>Definition:</b> extracted_task.h:32</div></div>
 <div class="ttc" id="anamespacetvm_1_1te_html_aae384e9b73c2271905486e4a74b69265"><div class="ttname"><a href="namespacetvm_1_1te.html#aae384e9b73c2271905486e4a74b69265">tvm::te::reduce_axis</a></div><div class="ttdeci">IterVar reduce_axis(Range dom, std::string name=&quot;rv&quot;)</div><div class="ttdoc">Create a new IterVar for reduction operations.</div></div>
 <div class="ttc" id="anamespacetvm_1_1te_html_ad98d13fdbc71aede147f419e218fc680"><div class="ttname"><a href="namespacetvm_1_1te.html#ad98d13fdbc71aede147f419e218fc680">tvm::te::compute</a></div><div class="ttdeci">Tensor compute(ffi::Array&lt; PrimExpr &gt; shape, FCompute fcompute, std::string name=&quot;tensor&quot;, std::string tag=&quot;&quot;, ffi::Map&lt; ffi::String, ffi::Any &gt; attrs={})</div><div class="ttdoc">Construct a new tensor by computing over shape, using the computation rule: result_tensor[axis] = fco...</div></div>
-<div class="ttc" id="anamespacetvm_1_1tirx_html_a48cee62fe6d9261257f2da8840670639"><div class="ttname"><a href="namespacetvm_1_1tirx.html#a48cee62fe6d9261257f2da8840670639">tvm::tirx::make_const</a></div><div class="ttdeci">PrimExpr make_const(DataType t, ValueType value, Span span=Span())</div><div class="ttdoc">Make a const value with certain data type.</div><div class="ttdef"><b>Definition:</b> op.h:1012</div></div>
-<div class="ttc" id="anamespacetvm_1_1tirx_html_a8a3040d6fd3a96395a2a4ba2820b19f4"><div class="ttname"><a href="namespacetvm_1_1tirx.html#a8a3040d6fd3a96395a2a4ba2820b19f4">tvm::tirx::const_true</a></div><div class="ttdeci">PrimExpr const_true(int lanes=1, Span span=Span())</div><div class="ttdoc">Make a constant true expression.</div><div class="ttdef"><b>Definition:</b> op.h:842</div></div>
-<div class="ttc" id="anamespacetvm_1_1tirx_html_aa57bc10f244afa1dd6373861181786b5"><div class="ttname"><a href="namespacetvm_1_1tirx.html#aa57bc10f244afa1dd6373861181786b5">tvm::tirx::foldl</a></div><div class="ttdeci">PrimExpr foldl(FReduce freduce, PrimExpr init_value, const ffi::Array&lt; PrimExpr &gt; &amp;values, Span span=Span())</div><div class="ttdoc">Left fold.</div><div class="ttdef"><b>Definition:</b> op.h:924</div></div>
+<div class="ttc" id="anamespacetvm_1_1tirx_html_a581980472b0e7e78a87f289c527416dd"><div class="ttname"><a href="namespacetvm_1_1tirx.html#a581980472b0e7e78a87f289c527416dd">tvm::tirx::MakeConst</a></div><div class="ttdeci">PrimExpr MakeConst(DataType dtype, ValueType value, Span span=Span())</div><div class="ttdoc">Make a const value with certain data type.</div><div class="ttdef"><b>Definition:</b> op.h:1003</div></div>
+<div class="ttc" id="anamespacetvm_1_1tirx_html_aa57bc10f244afa1dd6373861181786b5"><div class="ttname"><a href="namespacetvm_1_1tirx.html#aa57bc10f244afa1dd6373861181786b5">tvm::tirx::foldl</a></div><div class="ttdeci">PrimExpr foldl(FReduce freduce, PrimExpr init_value, const ffi::Array&lt; PrimExpr &gt; &amp;values, Span span=Span())</div><div class="ttdoc">Left fold.</div><div class="ttdef"><b>Definition:</b> op.h:913</div></div>
 <div class="ttc" id="anamespacetvm_1_1topi_html_a024f602456bcafef58c6ea930caa5a4b"><div class="ttname"><a href="namespacetvm_1_1topi.html#a024f602456bcafef58c6ea930caa5a4b">tvm::topi::sum</a></div><div class="ttdeci">Tensor sum(const Tensor &amp;data, const ffi::Optional&lt; ffi::Array&lt; int64_t &gt;&gt; &amp;axis, bool keepdims=false, bool atleast1d=false)</div><div class="ttdoc">Creates an operation that sums array elements over a given axis.</div><div class="ttdef"><b>Definition:</b> reduction.h:331</div></div>
 <div class="ttc" id="anamespacetvm_1_1topi_html_a0250c4095f19ae8a22ed85bc4ce5a40d"><div class="ttname"><a href="namespacetvm_1_1topi.html#a0250c4095f19ae8a22ed85bc4ce5a40d">tvm::topi::kElementWise</a></div><div class="ttdeci">constexpr auto kElementWise</div><div class="ttdef"><b>Definition:</b> tags.h:32</div></div>
 <div class="ttc" id="anamespacetvm_1_1topi_html_a06be7037fe13aff48756d9282aa03861"><div class="ttname"><a href="namespacetvm_1_1topi.html#a06be7037fe13aff48756d9282aa03861">tvm::topi::transpose</a></div><div class="ttdeci">Tensor transpose(const Tensor &amp;x, ffi::Optional&lt; ffi::Array&lt; int64_t &gt;&gt; opt_axes, std::string name=&quot;T_transpose&quot;, std::string tag=kInjective)</div><div class="ttdoc">Permute the dimensions of an array.</div><div class="ttdef"><b>Definition:</b> transform.h:205</div></div>

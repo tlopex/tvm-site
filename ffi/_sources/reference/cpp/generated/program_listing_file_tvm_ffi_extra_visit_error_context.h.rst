@@ -82,6 +82,13 @@ Program Listing for File visit_error_context.h
        throw;                                                                     \
      }
    
+   #define TVM_FFI_VISIT_END_RETURN_EXPECTED(node)                                \
+     }                                                                            \
+     catch (::tvm::ffi::Error & _tvm_ffi_visit_err_) {                            \
+       ::tvm::ffi::details::UpdateVisitErrorContext(_tvm_ffi_visit_err_, (node)); \
+       return ::tvm::ffi::Unexpected(_tvm_ffi_visit_err_);                        \
+     }
+   
    #define TVM_FFI_VISIT_THROW(ErrorKind, node)                                                    \
      ::tvm::ffi::details::ErrorBuilder(                                                            \
          #ErrorKind, TVMFFIBacktrace(__FILE__, __LINE__, TVM_FFI_FUNC_SIG, 0),                     \

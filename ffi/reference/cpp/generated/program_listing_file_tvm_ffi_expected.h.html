@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=ecced4fd"></script>
+    <script src="../../../_static/documentation_options.js?v=e435db62"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -59,8 +59,8 @@
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
-    <meta name="docbuild:last-update" content="Jun 09, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+gf90410468" />
+    <meta name="docbuild:last-update" content="Jun 17, 2026"/>
   </head>
   
   
@@ -172,7 +172,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../concepts/tensor.html">Tensor and DLPack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../concepts/func_module.html">Function and Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../concepts/exception_handling.html">Exception Handling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../concepts/structural_eq_hash.html">Structural Equality and Hashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../concepts/structural_eq_hash.html">Structural Equality, Hashing, and Walk</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packaging</span></p>
 <ul class="nav bd-sidenav">
@@ -197,6 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.load_module.html">tvm_ffi.load_module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.Array.html">tvm_ffi.Array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.Map.html">tvm_ffi.Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.StructuralKey.html">tvm_ffi.StructuralKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.StructuralVisitor.html">tvm_ffi.StructuralVisitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.VisitInterrupt.html">tvm_ffi.VisitInterrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.WalkOrder.html">tvm_ffi.WalkOrder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.WalkResult.html">tvm_ffi.WalkResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.get_first_structural_mismatch.html">tvm_ffi.get_first_structural_mismatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.structural_equal.html">tvm_ffi.structural_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.structural_hash.html">tvm_ffi.structural_hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.structural_walk.html">tvm_ffi.structural_walk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.register_error.html">tvm_ffi.register_error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.register_object.html">tvm_ffi.register_object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.register_global_func.html">tvm_ffi.register_global_func</a></li>
@@ -451,6 +460,12 @@
 <span class="n">Unexpected</span><span class="p">(</span><span class="n">E</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Unexpected</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="cp">#endif</span>
 
+<span class="k">namespace</span><span class="w"> </span><span class="nn">details</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">ExpectedUnsafe</span><span class="p">;</span>
+
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace details</span>
+
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Expected</span><span class="w"> </span><span class="p">{</span>
 <span class="w"> </span><span class="k">public</span><span class="o">:</span>
@@ -465,6 +480,8 @@
 <span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">E</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">enable_if_t</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">is_base_of_v</span><span class="o">&lt;</span><span class="n">Error</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">remove_cv_t</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;&gt;&gt;</span>
 <span class="w">  </span><span class="c1">// NOLINTNEXTLINE(google-explicit-constructor,runtime/explicit)</span>
 <span class="w">  </span><span class="n">Expected</span><span class="p">(</span><span class="n">Unexpected</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="n">unexpected</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">data_</span><span class="p">(</span><span class="n">Any</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">unexpected</span><span class="p">).</span><span class="n">error</span><span class="p">()))</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">  </span><span class="n">TVM_FFI_INLINE</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">type_index</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="p">.</span><span class="n">type_index</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
 
 <span class="w">  </span><span class="n">TVM_FFI_INLINE</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_ok</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="p">.</span><span class="n">type_index</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TypeIndex</span><span class="o">::</span><span class="n">kTVMFFIError</span><span class="p">;</span>
@@ -525,8 +542,44 @@
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w"> </span><span class="k">private</span><span class="o">:</span>
+<span class="w">  </span><span class="n">Expected</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">friend</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">details</span><span class="o">::</span><span class="n">ExpectedUnsafe</span><span class="p">;</span>
+
 <span class="w">  </span><span class="n">Any</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span><span class="w">  </span><span class="c1">// Invariant: holds a T (type_index != kTVMFFIError) or an Error.</span>
 <span class="p">};</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">details</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">ExpectedUnsafe</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="n">TVM_FFI_INLINE</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MoveFromTVMFFIAny</span><span class="p">(</span><span class="n">TVMFFIAny</span><span class="w"> </span><span class="n">raw</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="n">result</span><span class="p">.</span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AnyUnsafe</span><span class="o">::</span><span class="n">MoveTVMFFIAnyToAny</span><span class="p">(</span><span class="o">&amp;</span><span class="n">raw</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="n">TVM_FFI_INLINE</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">TVMFFIAny</span><span class="w"> </span><span class="n">MoveToTVMFFIAny</span><span class="p">(</span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">AnyUnsafe</span><span class="o">::</span><span class="n">MoveAnyToTVMFFIAny</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">data_</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="n">TVM_FFI_INLINE</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Any</span><span class="o">&amp;</span><span class="w"> </span><span class="n">GetData</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">data_</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">U</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="n">TVM_FFI_INLINE</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">ValueAs</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Any</span><span class="o">&amp;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">data_</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TVM_FFI_PREDICT_TRUE</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">type_index</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TypeIndex</span><span class="o">::</span><span class="n">kTVMFFIError</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">AnyUnsafe</span><span class="o">::</span><span class="n">CopyFromAnyViewAfterCheck</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="n">AnyUnsafe</span><span class="o">::</span><span class="n">CopyFromAnyViewAfterCheck</span><span class="o">&lt;</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace details</span>
 
 <span class="c1">// TypeTraits specialization for Expected&lt;T&gt;</span>
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
@@ -634,7 +687,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Jun 09, 2026.
+  Last updated on Jun 17, 2026.
   <br/>
 </p>
   </div>

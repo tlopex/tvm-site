@@ -53,6 +53,8 @@ Included By
 
 - :ref:`file_tvm_ffi_enum.h`
 
+- :ref:`file_tvm_ffi_extra_structural_visit.h`
+
 - :ref:`file_tvm_ffi_reflection_creator.h`
 
 - :ref:`file_tvm_ffi_reflection_enum_def.h`
@@ -144,4 +146,6 @@ Variables
 - :ref:`exhale_variable_namespacetvm_1_1ffi_1_1reflection_1_1type__attr_1ac92fdfe731cfda2d51324cea574c7e08`
 
 - :ref:`exhale_variable_namespacetvm_1_1ffi_1_1reflection_1_1type__attr_1a18dd88667c1998578f7fdbbf25c9a33d`
+
+- :ref:`exhale_variable_namespacetvm_1_1ffi_1_1reflection_1_1type__attr_1a121b81bcda7ce56913cd5cee586ab85f`
 

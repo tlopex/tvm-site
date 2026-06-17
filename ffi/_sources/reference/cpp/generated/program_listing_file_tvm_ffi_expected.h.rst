@@ -63,6 +63,12 @@ Program Listing for File expected.h
    Unexpected(E) -> Unexpected<E>;
    #endif
    
+   namespace details {
+   
+   struct ExpectedUnsafe;
+   
+   }  // namespace details
+   
    template <typename T>
    class Expected {
     public:
@@ -77,6 +83,8 @@ Program Listing for File expected.h
      template <typename E, typename = std::enable_if_t<std::is_base_of_v<Error, std::remove_cv_t<E>>>>
      // NOLINTNEXTLINE(google-explicit-constructor,runtime/explicit)
      Expected(Unexpected<E> unexpected) : data_(Any(std::move(unexpected).error())) {}
+   
+     TVM_FFI_INLINE int32_t type_index() const noexcept { return data_.type_index(); }
    
      TVM_FFI_INLINE bool is_ok() const noexcept {
        return data_.type_index() != TypeIndex::kTVMFFIError;
@@ -137,8 +145,44 @@ Program Listing for File expected.h
      }
    
     private:
+     Expected() = default;
+   
+     friend struct details::ExpectedUnsafe;
+   
      Any data_;  // Invariant: holds a T (type_index != kTVMFFIError) or an Error.
    };
+   
+   namespace details {
+   
+   struct ExpectedUnsafe {
+     template <typename T>
+     TVM_FFI_INLINE static Expected<T> MoveFromTVMFFIAny(TVMFFIAny raw) {
+       Expected<T> result;
+       result.data_ = AnyUnsafe::MoveTVMFFIAnyToAny(&raw);
+       return result;
+     }
+   
+     template <typename T>
+     TVM_FFI_INLINE static TVMFFIAny MoveToTVMFFIAny(Expected<T>&& result) {
+       return AnyUnsafe::MoveAnyToTVMFFIAny(std::move(result.data_));
+     }
+   
+     template <typename T>
+     TVM_FFI_INLINE static const Any& GetData(const Expected<T>& result) noexcept {
+       return result.data_;
+     }
+   
+     template <typename T, typename U>
+     TVM_FFI_INLINE static T ValueAs(const Expected<U>& result) {
+       const Any& data = result.data_;
+       if (TVM_FFI_PREDICT_TRUE(data.type_index() != TypeIndex::kTVMFFIError)) {
+         return AnyUnsafe::CopyFromAnyViewAfterCheck<T>(data);
+       }
+       throw AnyUnsafe::CopyFromAnyViewAfterCheck<Error>(data);
+     }
+   };
+   
+   }  // namespace details
    
    // TypeTraits specialization for Expected<T>
    template <typename T>

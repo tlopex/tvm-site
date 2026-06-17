@@ -71,7 +71,7 @@ Program Listing for File c_api.h
    // NOLINTBEGIN(modernize-macro-to-enum)
    #define TVM_FFI_VERSION_MAJOR 0
    #define TVM_FFI_VERSION_MINOR 1
-   #define TVM_FFI_VERSION_PATCH 12
+   #define TVM_FFI_VERSION_PATCH 13
    // NOLINTEND(modernize-macro-to-enum)
    
    #ifdef __cplusplus
@@ -132,6 +132,7 @@ Program Listing for File c_api.h
      kTVMFFIOpaquePyObject = 74,
      kTVMFFIList = 75,
      kTVMFFIDict = 76,
+     kTVMFFIVisitInterrupt = 77,
      //----------------------------------------------------------------
      // more complex objects
      //----------------------------------------------------------------

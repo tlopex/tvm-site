@@ -1,0 +1,1500 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tvm_ffi.structural &#8212; tvm-ffi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=38aa6179" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=e435db62"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+    <script src="../../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/downloads/require.min.js"></script>
+    <script src="../../_static/downloads/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}`;
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        all_mermaids.forEach((el) => {
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+        await mermaid.run();
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+const load = async () => {
+    initStyles();
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...JSON.parse(
+                    `{"startOnLoad": false}`
+                ),
+                ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...JSON.parse(
+        `{"startOnLoad": false}`
+    ),
+    ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/tvm_ffi/structural';</script>
+    <link rel="icon" href="https://tvm.apache.org/images/logo/tvm-logo-square.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.dev1+gf90410468" />
+    <meta name="docbuild:last-update" content="Jun 17, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">tvm-ffi</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../get_started/quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../get_started/stable_c_abi.html">Stable C ABI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../guides/export_func_cls.html">Export Functions and Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/dataclass_reflection.html">Dataclass-Style Reflection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/kernel_library_guide.html">Kernel Library Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/compiler_integration.html">Compiler Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/cubin_launcher.html">CUBIN Launcher Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/python_lang_guide.html">Python Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/cpp_lang_guide.html">C++ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/rust_lang_guide.html">Rust Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/abi_overview.html">ABI Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/any.html">Any and AnyView</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/containers.html">Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/object_and_class.html">Object and Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/tensor.html">Tensor and DLPack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/func_module.html">Function and Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/exception_handling.html">Exception Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/structural_eq_hash.html">Structural Equality, Hashing, and Walk</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Packaging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../packaging/python_packaging.html">Python Packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging/stubgen.html">Stub Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging/cpp_tooling.html">C++ Tooling</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/python/index.html">Python API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.Object.html">tvm_ffi.Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.Tensor.html">tvm_ffi.Tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.from_dlpack.html">tvm_ffi.from_dlpack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.Shape.html">tvm_ffi.Shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.dtype.html">tvm_ffi.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.Device_class.html">tvm_ffi.Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.DLDeviceType.html">tvm_ffi.DLDeviceType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.device_function.html">tvm_ffi.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.Function.html">tvm_ffi.Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.Module.html">tvm_ffi.Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.system_lib.html">tvm_ffi.system_lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.load_module.html">tvm_ffi.load_module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.Array.html">tvm_ffi.Array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.Map.html">tvm_ffi.Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.StructuralKey.html">tvm_ffi.StructuralKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.StructuralVisitor.html">tvm_ffi.StructuralVisitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.VisitInterrupt.html">tvm_ffi.VisitInterrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.WalkOrder.html">tvm_ffi.WalkOrder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.WalkResult.html">tvm_ffi.WalkResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.get_first_structural_mismatch.html">tvm_ffi.get_first_structural_mismatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.structural_equal.html">tvm_ffi.structural_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.structural_hash.html">tvm_ffi.structural_hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.structural_walk.html">tvm_ffi.structural_walk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.register_error.html">tvm_ffi.register_error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.register_object.html">tvm_ffi.register_object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.register_global_func.html">tvm_ffi.register_global_func</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.get_global_func.html">tvm_ffi.get_global_func</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.get_global_func_metadata.html">tvm_ffi.get_global_func_metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.init_ffi_api.html">tvm_ffi.init_ffi_api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.remove_global_func.html">tvm_ffi.remove_global_func</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.StreamContext.html">tvm_ffi.StreamContext</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.use_torch_stream.html">tvm_ffi.use_torch_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.use_raw_stream.html">tvm_ffi.use_raw_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.get_raw_stream.html">tvm_ffi.get_raw_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/cpp/generated/tvm_ffi.cpp.load_inline.html">tvm_ffi.cpp.load_inline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/cpp/generated/tvm_ffi.cpp.build_inline.html">tvm_ffi.cpp.build_inline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/cpp/generated/tvm_ffi.cpp.load.html">tvm_ffi.cpp.load</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/cpp/generated/tvm_ffi.cpp.build.html">tvm_ffi.cpp.build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/cpp/generated/tvm_ffi.libinfo.load_lib_module.html">tvm_ffi.libinfo.load_lib_module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/cpp/generated/tvm_ffi.cpp.nvrtc.nvrtc_compile.html">tvm_ffi.cpp.nvrtc.nvrtc_compile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.serialization.from_json_graph_str.html">tvm_ffi.serialization.from_json_graph_str</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.serialization.to_json_graph_str.html">tvm_ffi.serialization.to_json_graph_str</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.access_path.AccessKind.html">tvm_ffi.access_path.AccessKind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.access_path.AccessPath.html">tvm_ffi.access_path.AccessPath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.access_path.AccessStep.html">tvm_ffi.access_path.AccessStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.convert.html">tvm_ffi.convert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.convert_func.html">tvm_ffi.convert_func</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/python/generated/tvm_ffi.ObjectConvertible.html">tvm_ffi.ObjectConvertible</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/cpp/index.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/rust/index.html">Rust API</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../dev/source_build.html">Build from Source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/doc_build.html">Build This Doc Site</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/ci_cd.html">Reproduce CI/CD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/release_process.html">Release Process</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/apache/tvm-ffi" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for tvm_ffi.structural</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1"># or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1"># distributed with this work for additional information</span>
+<span class="c1"># regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1"># to you under the Apache License, Version 2.0 (the</span>
+<span class="c1"># &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1"># with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing,</span>
+<span class="c1"># software distributed under the License is distributed on an</span>
+<span class="c1"># &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
+<span class="c1"># KIND, either express or implied.  See the License for the</span>
+<span class="c1"># specific language governing permissions and limitations</span>
+<span class="c1"># under the License.</span>
+<span class="c1"># pylint: disable=invalid-name</span>
+<span class="sd">&quot;&quot;&quot;Structural helper objects and functions.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntEnum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.access_path</span><span class="w"> </span><span class="kn">import</span> <span class="n">AccessPath</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ffi_api</span><span class="p">,</span> <span class="n">core</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Object</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">register_object</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;DefRegionKind&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;StructuralKey&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;StructuralVisitor&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VisitInterrupt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WalkOrder&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WalkResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get_first_structural_mismatch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;structural_equal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;structural_hash&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;structural_walk&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="WalkOrder">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.WalkOrder.html#tvm_ffi.WalkOrder">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">WalkOrder</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Callback placement before or after visiting children for structural walks.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :py:func:`tvm_ffi.structural_walk`</span>
+<span class="sd">        Walk an object graph, invoke matching callbacks.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">PREORDER</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">POSTORDER</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+
+<div class="viewcode-block" id="WalkResult">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.WalkResult.html#tvm_ffi.WalkResult">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">WalkResult</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Control signal for structural walks.</span>
+
+<span class="sd">    Advance continues visiting a node&#39;s children; skip continues traversal but</span>
+<span class="sd">    skips the current node&#39;s children.</span>
+
+<span class="sd">    Use :class:`VisitInterrupt` when traversal should stop entirely.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :py:func:`tvm_ffi.structural_walk`</span>
+<span class="sd">        Walk an object graph, invoke matching callbacks.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ADVANCE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">SKIP</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DefRegionKind</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Def-region state active during structural visiting.</span>
+
+<span class="sd">    The values mirror ``TVMFFIDefRegionKind`` in the C ABI.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :py:class:`tvm_ffi.StructuralVisitor`</span>
+<span class="sd">        Structural traversal visitor that carries object dispatch and def-region</span>
+<span class="sd">        state across recursive visits.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">DEF_RECURSIVE</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">DEF_NON_RECURSIVE</span> <span class="o">=</span> <span class="mi">2</span>
+
+
+<div class="viewcode-block" id="structural_equal">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.structural_equal.html#tvm_ffi.structural_equal">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">structural_equal</span><span class="p">(</span>
+    <span class="n">lhs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">rhs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">map_free_vars</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">skip_tensor_content</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check structural equality between two values.</span>
+
+<span class="sd">    Structural equality compares the *shape/content structure* of two values</span>
+<span class="sd">    instead of Python object identity. For container-like values, this means</span>
+<span class="sd">    recursive comparison of elements/fields. For object types that provide</span>
+<span class="sd">    structural equal hooks, those hooks are used.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lhs</span>
+<span class="sd">        Left-hand side value.</span>
+<span class="sd">    rhs</span>
+<span class="sd">        Right-hand side value.</span>
+
+<span class="sd">    map_free_vars</span>
+<span class="sd">        Whether free variables (variables without a definition site) can be</span>
+<span class="sd">        mapped to each other during comparison.</span>
+
+<span class="sd">    skip_tensor_content</span>
+<span class="sd">        Whether to skip tensor data content when comparing tensors.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result</span>
+<span class="sd">        Whether the two values are structurally equal.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        import tvm_ffi</span>
+
+<span class="sd">        assert tvm_ffi.structural_equal([1, 2, 3], [1, 2, 3])</span>
+<span class="sd">        assert not tvm_ffi.structural_equal([1, 2, 3], [1, 2, 4])</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :py:func:`tvm_ffi.structural_hash`</span>
+<span class="sd">        Hash function compatible with structural equality.</span>
+<span class="sd">    :py:func:`tvm_ffi.get_first_structural_mismatch`</span>
+<span class="sd">        Mismatch diagnostics with access paths.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_ffi_api</span><span class="o">.</span><span class="n">StructuralEqual</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">map_free_vars</span><span class="p">,</span> <span class="n">skip_tensor_content</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="structural_hash">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.structural_hash.html#tvm_ffi.structural_hash">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">structural_hash</span><span class="p">(</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">map_free_vars</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">skip_tensor_content</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute structural hash of a value.</span>
+
+<span class="sd">    This hash is designed to be consistent with :py:func:`structural_equal`</span>
+<span class="sd">    under the same options. If two values are structurally equal, they should</span>
+<span class="sd">    have the same structural hash.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    value</span>
+<span class="sd">        Input value to hash.</span>
+
+<span class="sd">    map_free_vars</span>
+<span class="sd">        Whether free variables mapped to each other during hashing.</span>
+
+<span class="sd">    skip_tensor_content</span>
+<span class="sd">        Whether tensor data content is ignored when hashing tensors.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    hash_value</span>
+<span class="sd">        Structural hash value.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        import tvm_ffi</span>
+
+<span class="sd">        h0 = tvm_ffi.structural_hash([1, 2, 3])</span>
+<span class="sd">        h1 = tvm_ffi.structural_hash([1, 2, 3])</span>
+<span class="sd">        assert h0 == h1</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Structural hash is intended for hash-table bucketing and fast pre-checks.</span>
+<span class="sd">    Always use structural equality to confirm semantic equivalence.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># need to mask the result so negative values are converted to u64</span>
+    <span class="c1"># this is because hash value were stored as int64_t in the C++ code</span>
+    <span class="k">return</span> <span class="n">_ffi_api</span><span class="o">.</span><span class="n">StructuralHash</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">map_free_vars</span><span class="p">,</span> <span class="n">skip_tensor_content</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFFFFFFFFFF</span></div>
+
+
+
+<div class="viewcode-block" id="get_first_structural_mismatch">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.get_first_structural_mismatch.html#tvm_ffi.get_first_structural_mismatch">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_first_structural_mismatch</span><span class="p">(</span>
+    <span class="n">lhs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">rhs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">map_free_vars</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">skip_tensor_content</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">AccessPath</span><span class="p">,</span> <span class="n">AccessPath</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Like structural_equal(), but returns the AccessPath pair of the first detected mismatch.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lhs</span>
+<span class="sd">        The left operand.</span>
+
+<span class="sd">    rhs</span>
+<span class="sd">        The right operand.</span>
+
+<span class="sd">    map_free_vars</span>
+<span class="sd">        Whether free variables (i.e. variables without a definition site) should be mapped</span>
+<span class="sd">        as equal to each other.</span>
+
+<span class="sd">    skip_tensor_content</span>
+<span class="sd">        Whether to skip the data content of tensor.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    mismatch: tuple[AccessPath, AccessPath] | None</span>
+<span class="sd">        `None` if `lhs` and `rhs` are structurally equal.</span>
+<span class="sd">        Otherwise, a tuple of two AccessPath objects that point to the first detected mismatch.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_ffi_api</span><span class="o">.</span><span class="n">GetFirstStructuralMismatch</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">map_free_vars</span><span class="p">,</span> <span class="n">skip_tensor_content</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="StructuralKey">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.StructuralKey.html#tvm_ffi.StructuralKey">[docs]</a>
+<span class="nd">@register_object</span><span class="p">(</span><span class="s2">&quot;ffi.StructuralKey&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StructuralKey</span><span class="p">(</span><span class="n">Object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Hash-cached structural key wrapper.</span>
+
+<span class="sd">    This wrapper can be used to hint that a dict uses structural equality and hash for the key.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Use ``StructuralKey`` with Python dictionaries when you want key lookup by</span>
+<span class="sd">    structural semantics:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        import tvm_ffi</span>
+
+<span class="sd">        k0 = tvm_ffi.StructuralKey([1, 2, 3])</span>
+<span class="sd">        k1 = tvm_ffi.StructuralKey([1, 2, 3])</span>
+<span class="sd">        k2 = tvm_ffi.StructuralKey([1, 2, 4])</span>
+
+<span class="sd">        d = {k0: &quot;value-a&quot;, k2: &quot;value-b&quot;}</span>
+<span class="sd">        assert d[k1] == &quot;value-a&quot;  # k1 matches k0 structurally</span>
+<span class="sd">        assert d[k2] == &quot;value-b&quot;</span>
+
+<span class="sd">    It can also be used directly with :py:class:`tvm_ffi.Map`:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        m = tvm_ffi.Map({k0: 1, k1: 2})</span>
+<span class="sd">        assert len(m) == 1</span>
+<span class="sd">        assert m[k0] == 2</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :py:func:`tvm_ffi.structural_equal`</span>
+<span class="sd">        Structural equality comparison.</span>
+<span class="sd">    :py:func:`tvm_ffi.structural_hash`</span>
+<span class="sd">        Structural hash computation.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># tvm-ffi-stubgen(begin): object/ffi.StructuralKey</span>
+    <span class="c1"># fmt: off</span>
+    <span class="n">key</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="n">hash_i64</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">hash_i64</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+<div class="viewcode-block" id="StructuralKey.__ffi_init__">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.StructuralKey.html#tvm_ffi.StructuralKey.__ffi_init__">[docs]</a>
+        <span class="k">def</span><span class="w"> </span><span class="nf">__ffi_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_0</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># ty: ignore[invalid-method-override]</span></div>
+
+    <span class="c1"># fmt: on</span>
+    <span class="c1"># tvm-ffi-stubgen(end)</span>
+
+<div class="viewcode-block" id="StructuralKey.__init__">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.StructuralKey.html#tvm_ffi.StructuralKey.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a structural key from ``key``.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key</span>
+<span class="sd">            The underlying value used for structural hash/equality.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_handle_by_constructor__</span><span class="p">(</span><span class="n">_ffi_api</span><span class="o">.</span><span class="n">StructuralKey</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return cached structural hash.&quot;&quot;&quot;</span>
+        <span class="c1"># need to mask the result so negative values are converted to u64</span>
+        <span class="c1"># this is because hash value were stored as int64_t in the C++ code</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_i64</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFFFFFFFFFF</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compare by structural equality.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StructuralKey</span><span class="p">)</span> <span class="ow">and</span> <span class="n">_ffi_api</span><span class="o">.</span><span class="n">StructuralKeyEqual</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="VisitInterrupt">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.VisitInterrupt.html#tvm_ffi.VisitInterrupt">[docs]</a>
+<span class="nd">@register_object</span><span class="p">(</span><span class="s2">&quot;ffi.VisitInterrupt&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">VisitInterrupt</span><span class="p">(</span><span class="n">Object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Payload-carrying signal that stops a structural visit.</span>
+
+<span class="sd">    This object can be returned from structural walk callbacks and structural</span>
+<span class="sd">    visit hooks to halt traversal early. The optional payload is preserved in</span>
+<span class="sd">    :py:attr:`value` and returned to the caller.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Use ``VisitInterrupt`` to stop a structural walk when a target node is found:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        import tvm_ffi</span>
+
+
+<span class="sd">        def on_node(node):</span>
+<span class="sd">            if is_target(node):</span>
+<span class="sd">                return tvm_ffi.VisitInterrupt(node)</span>
+<span class="sd">            return None</span>
+
+
+<span class="sd">        result = tvm_ffi.structural_walk(root, (object, on_node))</span>
+<span class="sd">        if result is not None:</span>
+<span class="sd">            found = result.value</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :py:func:`tvm_ffi.structural_walk`</span>
+<span class="sd">        Structural walk API whose callbacks may return ``VisitInterrupt``.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># tvm-ffi-stubgen(begin): object/ffi.VisitInterrupt</span>
+    <span class="c1"># fmt: off</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+<div class="viewcode-block" id="VisitInterrupt.__ffi_init__">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.VisitInterrupt.html#tvm_ffi.VisitInterrupt.__ffi_init__">[docs]</a>
+        <span class="k">def</span><span class="w"> </span><span class="nf">__ffi_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_0</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># ty: ignore[invalid-method-override]</span></div>
+
+    <span class="c1"># fmt: on</span>
+    <span class="c1"># tvm-ffi-stubgen(end)</span>
+
+<div class="viewcode-block" id="VisitInterrupt.__init__">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.VisitInterrupt.html#tvm_ffi.VisitInterrupt.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an interrupt with an optional payload.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value</span>
+<span class="sd">            Payload returned to the caller when traversal stops.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_handle_by_constructor__</span><span class="p">(</span><span class="n">_ffi_api</span><span class="o">.</span><span class="n">VisitInterrupt</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="StructuralVisitor">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor">[docs]</a>
+<span class="nd">@register_object</span><span class="p">(</span><span class="s2">&quot;ffi.StructuralVisitor&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StructuralVisitor</span><span class="p">(</span><span class="n">Object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Low-level structural traversal visitor.</span>
+
+<span class="sd">    This class exposes the low-level visitor object used by structural</span>
+<span class="sd">    traversal hooks.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># tvm-ffi-stubgen(begin): object/ffi.StructuralVisitor</span>
+    <span class="c1"># fmt: off</span>
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+<div class="viewcode-block" id="StructuralVisitor.__ffi_init__">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor.__ffi_init__">[docs]</a>
+        <span class="k">def</span><span class="w"> </span><span class="nf">__ffi_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># ty: ignore[invalid-method-override]</span></div>
+
+    <span class="c1"># fmt: on</span>
+    <span class="c1"># tvm-ffi-stubgen(end)</span>
+
+<div class="viewcode-block" id="StructuralVisitor.__init__">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a default structural visitor.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_handle_by_constructor__</span><span class="p">(</span><span class="n">_ffi_api</span><span class="o">.</span><span class="n">StructuralVisitor</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StructuralVisitor.visit">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor.visit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VisitInterrupt</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Low-level API to visit ``value`` using this visitor&#39;s dispatch behavior.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value</span>
+<span class="sd">            Value to visit.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        result</span>
+<span class="sd">            ``None`` if traversal should continue, otherwise a</span>
+<span class="sd">            :class:`VisitInterrupt` carrying the early-exit payload.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_ffi_api</span><span class="o">.</span><span class="n">StructuralVisitorVisit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StructuralVisitor.def_region_kind">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor.def_region_kind">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">def_region_kind</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DefRegionKind</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Low-level API to return the currently active structural def-region kind.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        kind</span>
+<span class="sd">            The active :class:`DefRegionKind`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">DefRegionKind</span><span class="p">(</span><span class="n">_ffi_api</span><span class="o">.</span><span class="n">StructuralVisitorDefRegionKind</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="StructuralVisitor.with_def_region_kind">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor.with_def_region_kind">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">with_def_region_kind</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">kind</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Low-level API to run ``callback`` with a temporarily active def-region kind.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kind</span>
+<span class="sd">            Def region kind to use while running ``callback``.</span>
+
+<span class="sd">        callback</span>
+<span class="sd">            Nullary callable to execute inside the scoped region.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        result</span>
+<span class="sd">            The value returned by ``callback``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_ffi_api</span><span class="o">.</span><span class="n">StructuralVisitorWithDefRegionKind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="structural_walk">
+<a class="viewcode-back" href="../../reference/python/generated/tvm_ffi.structural_walk.html#tvm_ffi.structural_walk">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">structural_walk</span><span class="p">(</span>
+    <span class="n">root</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">callbacks</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="n">Sequence</span> <span class="o">|</span> <span class="n">Callable</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">with_def_region_kind</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="n">Sequence</span> <span class="o">|</span> <span class="n">Callable</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">order</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">WalkOrder</span> <span class="o">=</span> <span class="s2">&quot;pre&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VisitInterrupt</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Walk a value structurally and invoke the first matching typed callback.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    root</span>
+<span class="sd">        Root value to traverse.</span>
+
+<span class="sd">    callbacks</span>
+<span class="sd">        Normal callbacks. These callbacks receive one argument: ``value``.</span>
+<span class="sd">        Callback entries are tried in order.</span>
+
+<span class="sd">        May be one of:</span>
+
+<span class="sd">        - A single callback, used as a ``typing.Any`` catch-all.</span>
+<span class="sd">        - A ``(type, callback)`` entry.</span>
+<span class="sd">        - A grouped ``((type1, type2, ...), callback)`` entry.</span>
+<span class="sd">        - A sequence of entries.</span>
+
+<span class="sd">        Types may be builtins, registered FFI object classes, or</span>
+<span class="sd">        ``typing.Any``/``object`` as a catch-all.</span>
+
+<span class="sd">    with_def_region_kind</span>
+<span class="sd">        Def-region-aware callbacks. These callbacks receive two arguments:</span>
+<span class="sd">        ``(value, def_region_kind)``. They accept the same callback entry forms</span>
+<span class="sd">        as ``callbacks``.</span>
+
+<span class="sd">    order</span>
+<span class="sd">        ``&quot;pre&quot;``/``WalkOrder.PREORDER`` to invoke callbacks before children, or</span>
+<span class="sd">        ``&quot;post&quot;``/``WalkOrder.POSTORDER`` to invoke callbacks after children.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result</span>
+<span class="sd">        ``None`` if traversal completed, otherwise a :class:`VisitInterrupt`</span>
+<span class="sd">        returned by a callback.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        visited = []</span>
+
+
+<span class="sd">        uses = []</span>
+<span class="sd">        result = tvm_ffi.structural_walk(</span>
+<span class="sd">            node,</span>
+<span class="sd">            ((int, float), lambda value: visited.append((&quot;leaf&quot;, value))),</span>
+<span class="sd">            with_def_region_kind=(</span>
+<span class="sd">                Var,</span>
+<span class="sd">                lambda var, kind: (</span>
+<span class="sd">                    uses.append(var) if kind == tvm_ffi.DefRegionKind.NONE else None</span>
+<span class="sd">                ),</span>
+<span class="sd">            ),</span>
+<span class="sd">        )</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">WalkOrder</span><span class="p">):</span>
+        <span class="n">order_int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">order</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;pre&quot;</span><span class="p">,</span> <span class="s2">&quot;post&quot;</span><span class="p">):</span>
+        <span class="n">order_int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">WalkOrder</span><span class="o">.</span><span class="n">PREORDER</span> <span class="k">if</span> <span class="n">order</span> <span class="o">==</span> <span class="s2">&quot;pre&quot;</span> <span class="k">else</span> <span class="n">WalkOrder</span><span class="o">.</span><span class="n">POSTORDER</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown structural walk order: </span><span class="si">{</span><span class="n">order</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">normalize_callbacks</span><span class="p">(</span>
+        <span class="n">callbacks</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="n">Sequence</span> <span class="o">|</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">object</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]]:</span>
+        <span class="n">callback_entries</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">add_callback_entry</span><span class="p">(</span><span class="n">callback_entry</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">callback_type</span><span class="p">,</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">callback_entry</span>
+            <span class="n">callback_types</span> <span class="o">=</span> <span class="n">callback_type</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">callback_type</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="n">callback_type</span><span class="p">,)</span>
+            <span class="n">callback_entries</span><span class="o">.</span><span class="n">extend</span><span class="p">((</span><span class="n">t</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">callback_types</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">callbacks</span><span class="p">):</span>
+            <span class="n">callback_entries</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Any</span><span class="p">,</span> <span class="n">callbacks</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">callbacks</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">callbacks</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">callbacks</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">add_callback_entry</span><span class="p">(</span><span class="n">callbacks</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">callbacks</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">callbacks</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="n">callbacks</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span>
+                    <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span>
+                    <span class="ow">or</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">callback</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                        <span class="s2">&quot;structural_walk callbacks within a sequence must be &quot;</span>
+                        <span class="s2">&quot;(type, callback) tuples&quot;</span>
+                    <span class="p">)</span>
+                <span class="n">add_callback_entry</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;structural_walk callbacks must be callbacks, (type, callback) entries, &quot;</span>
+                <span class="s2">&quot;((type1, type2, ...), callback) entries, or sequences of tuple entries&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">callback_entries</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrap_callback_with_def_region_kind</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">DefRegionKind</span><span class="p">(</span><span class="n">kind</span><span class="p">))</span>
+
+    <span class="n">callback_entries</span> <span class="o">=</span> <span class="n">normalize_callbacks</span><span class="p">(</span><span class="n">callbacks</span><span class="p">)</span>
+    <span class="n">callback_entries_with_def_region_kind</span> <span class="o">=</span> <span class="n">normalize_callbacks</span><span class="p">(</span><span class="n">with_def_region_kind</span><span class="p">)</span>
+
+    <span class="n">entries</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">_callback_type_to_type_index</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">fn</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">callback_entries</span>
+    <span class="p">]</span>
+    <span class="n">entries_with_def_region_kind</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">_callback_type_to_type_index</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">wrap_callback_with_def_region_kind</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">callback_entries_with_def_region_kind</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">_ffi_api</span><span class="o">.</span><span class="n">StructuralWalk</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">entries</span><span class="p">,</span> <span class="n">entries_with_def_region_kind</span><span class="p">,</span> <span class="n">order_int</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_callback_type_to_type_index</span><span class="p">(</span><span class="n">callback_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a callback arg type to a type index.&quot;&quot;&quot;</span>
+    <span class="n">annotation</span> <span class="o">=</span> <span class="n">Any</span> <span class="k">if</span> <span class="n">callback_type</span> <span class="ow">is</span> <span class="nb">object</span> <span class="k">else</span> <span class="n">callback_type</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">type_index</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">TypeSchema</span><span class="o">.</span><span class="n">from_annotation</span><span class="p">(</span><span class="n">annotation</span><span class="p">)</span><span class="o">.</span><span class="n">origin_type_index</span>
+    <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;structural_walk callback type must be a supported builtin, &quot;</span>
+            <span class="s2">&quot;typing.Any/object, or an FFI-registered object class&quot;</span>
+        <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
+    <span class="k">if</span> <span class="n">type_index</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">annotation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;structural_walk callback type_index is negative, the only&quot;</span>
+            <span class="s2">&quot;acceptable negative type_index is -1 for Any&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">type_index</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Apache TVM FFI contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jun 17, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  
+  <div class="footer-container" style="margin: 5px 0; font-size: 0.9em; color: #6c757d;">
+      <div class="footer-line1" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
+          <div class="footer-copyright-short">
+              Copyright © 2025, Apache Software Foundation
+          </div>
+          <div class="footer-dropdown">
+              <div class="dropdown">
+                  <button class="btn btn-link dropdown-toggle" type="button" id="footerDropdown" data-bs-toggle="dropdown"
+                  aria-expanded="false" style="font-size: 0.9em; color: #6c757d; text-decoration: none; padding: 0; border: none; background: none;">
+                      ASF
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="footerDropdown" style="font-size: 0.9em;">
+<li><a class="dropdown-item" href="https://apache.org/" target="_blank" style="font-size: 0.9em;">ASF Homepage</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/licenses/" target="_blank" style="font-size: 0.9em;">License</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html" target="_blank" style="font-size: 0.9em;">Sponsorship</a></li>
+<li><a class="dropdown-item" href="https://tvm.apache.org/docs/reference/security.html" target="_blank" style="font-size: 0.9em;">Security</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html" target="_blank" style="font-size: 0.9em;">Thanks</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/events/current-event" target="_blank" style="font-size: 0.9em;">Events</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="footer-line2" style="font-size: 0.9em; color: #6c757d;">
+          Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.
+      </div>
+  </div>
+  
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

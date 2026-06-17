@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Structural Equality and Hashing &#8212; tvm-ffi</title>
+    <title>Structural Equality, Hashing, and Walk &#8212; tvm-ffi</title>
   
   
   
@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=ecced4fd"></script>
+    <script src="../_static/documentation_options.js?v=e435db62"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -497,8 +497,8 @@ window.runMermaid = runMermaid;</script>
     <link rel="prev" title="Exception Handling" href="exception_handling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
-    <meta name="docbuild:last-update" content="Jun 09, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+gf90410468" />
+    <meta name="docbuild:last-update" content="Jun 17, 2026"/>
   </head>
   
   
@@ -610,7 +610,7 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l1"><a class="reference internal" href="tensor.html">Tensor and DLPack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="func_module.html">Function and Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exception_handling.html">Exception Handling</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Structural Equality and Hashing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Structural Equality, Hashing, and Walk</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packaging</span></p>
 <ul class="nav bd-sidenav">
@@ -635,6 +635,15 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.load_module.html">tvm_ffi.load_module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.Array.html">tvm_ffi.Array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.Map.html">tvm_ffi.Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.StructuralKey.html">tvm_ffi.StructuralKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.StructuralVisitor.html">tvm_ffi.StructuralVisitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.VisitInterrupt.html">tvm_ffi.VisitInterrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.WalkOrder.html">tvm_ffi.WalkOrder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.WalkResult.html">tvm_ffi.WalkResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.get_first_structural_mismatch.html">tvm_ffi.get_first_structural_mismatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.structural_equal.html">tvm_ffi.structural_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.structural_hash.html">tvm_ffi.structural_hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.structural_walk.html">tvm_ffi.structural_walk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.register_error.html">tvm_ffi.register_error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.register_object.html">tvm_ffi.register_object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.register_global_func.html">tvm_ffi.register_global_func</a></li>
@@ -821,7 +830,7 @@ window.runMermaid = runMermaid;</script>
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Structural Equality and Hashing</h1>
+    <h1>Structural Equality, Hashing, and Walk</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -874,6 +883,16 @@ window.runMermaid = runMermaid;</script>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-kinds-at-a-glance">All Kinds at a Glance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-guide">Decision Guide</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example">Worked Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-walk-and-visit">Structural Walk and Visit</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-walk">Basic Walk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grouped-types">Grouped Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catch-all-and-object-callbacks">Catch-All and Object Callbacks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#def-region-aware-walk">Def-Region Aware Walk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traversal-order">Traversal Order</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-walk">C++ Walk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#low-level-structuralvisitor">Low-Level <code class="docutils literal notranslate"><span class="pre">StructuralVisitor</span></code></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -885,8 +904,8 @@ window.runMermaid = runMermaid;</script>
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="structural-equality-and-hashing">
-<h1>Structural Equality and Hashing<a class="headerlink" href="#structural-equality-and-hashing" title="Link to this heading">#</a></h1>
+  <section id="structural-equality-hashing-and-walk">
+<h1>Structural Equality, Hashing, and Walk<a class="headerlink" href="#structural-equality-hashing-and-walk" title="Link to this heading">#</a></h1>
 <p>TVM FFI provides <code class="docutils literal notranslate"><span class="pre">structural_equal</span></code> and <code class="docutils literal notranslate"><span class="pre">structural_hash</span></code> for the
 object graph. These compare objects by <strong>content</strong> — recursively walking
 fields — rather than by pointer identity.</p>
@@ -1558,7 +1577,7 @@ use <code class="docutils literal notranslate"><span class="pre">True</span></co
 the <code class="docutils literal notranslate"><span class="pre">kTVMFFIDefRegionKindNonRecursive</span></code> enum value from C++) when the
 non-recursive kind is needed.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">field_name</span></code> argument on <code class="docutils literal notranslate"><span class="pre">eq_cb</span></code> is used only for mismatch path
-reporting from <code class="xref py py-func docutils literal notranslate"><span class="pre">get_first_structural_mismatch()</span></code>.</p>
+reporting from <a class="reference internal" href="../reference/python/generated/tvm_ffi.get_first_structural_mismatch.html#tvm_ffi.get_first_structural_mismatch" title="tvm_ffi.get_first_structural_mismatch"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_first_structural_mismatch()</span></code></a>.</p>
 </section>
 <section id="example-python">
 <h3>Example (Python)<a class="headerlink" href="#example-python" title="Link to this heading">#</a></h3>
@@ -1773,6 +1792,168 @@ fun [y] → y + 1       (span=&quot;b.py:5&quot;)
 </pre></div>
 </div>
 </section>
+<section id="structural-walk-and-visit">
+<h2>Structural Walk and Visit<a class="headerlink" href="#structural-walk-and-visit" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">structural_equal</span></code> and <code class="docutils literal notranslate"><span class="pre">structural_hash</span></code> are built on a structural traversal
+of the value graph.  <code class="docutils literal notranslate"><span class="pre">structural_walk</span></code> exposes that traversal directly: it
+visits containers, object fields, and POD leaves, and invokes user callbacks for
+values whose runtime type matches a callback entry.</p>
+<p>It is useful when you want to collect information, validate a tree, find a node, or
+stop traversal early without writing a custom equality/hash hook.</p>
+<section id="basic-walk">
+<h3>Basic Walk<a class="headerlink" href="#basic-walk" title="Link to this heading">#</a></h3>
+<p>Pass callbacks as ordered <code class="docutils literal notranslate"><span class="pre">(type,</span> <span class="pre">callback)</span></code> entries.  The first matching
+entry runs for each visited value.  Normal Python callbacks receive one
+argument, <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tvm_ffi</span>
+
+<span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">on_int</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tvm_ffi</span><span class="o">.</span><span class="n">VisitInterrupt</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tvm_ffi</span><span class="o">.</span><span class="n">WalkResult</span><span class="o">.</span><span class="n">ADVANCE</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">tvm_ffi</span><span class="o">.</span><span class="n">structural_walk</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">on_int</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;pre&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stopped at&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Callbacks may return:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">WalkResult.ADVANCE</span></code> to continue into children.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WalkResult.SKIP</span></code> to skip the current value’s children.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VisitInterrupt(payload)</span></code> to stop the entire walk and return an interrupt
+carrying <code class="docutils literal notranslate"><span class="pre">payload</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> as shorthand for <code class="docutils literal notranslate"><span class="pre">WalkResult.ADVANCE</span></code>.</p></li>
+</ul>
+</section>
+<section id="grouped-types">
+<h3>Grouped Types<a class="headerlink" href="#grouped-types" title="Link to this heading">#</a></h3>
+<p>Several types can share one callback by passing a tuple of types:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">strings</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">tvm_ffi</span><span class="o">.</span><span class="n">structural_walk</span><span class="p">(</span>
+    <span class="n">root</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="p">((</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)),</span>
+        <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">strings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This is normalized as if the same callback had been registered separately for
+<code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">float</span></code>.  Callback entries are still tried in order, so broad
+callbacks should usually come after more specific ones.</p>
+</section>
+<section id="catch-all-and-object-callbacks">
+<h3>Catch-All and Object Callbacks<a class="headerlink" href="#catch-all-and-object-callbacks" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">object</span></code> and <code class="docutils literal notranslate"><span class="pre">typing.Any</span></code> are catch-all callbacks.  They match POD leaves
+and object-backed values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="n">seen</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tvm_ffi</span><span class="o">.</span><span class="n">structural_walk</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="p">(</span><span class="n">Any</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">seen</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tvm_ffi.Object</span></code> is different: it matches only object-backed FFI values, such
+as <code class="docutils literal notranslate"><span class="pre">Array</span></code>, <code class="docutils literal notranslate"><span class="pre">Map</span></code>, <code class="docutils literal notranslate"><span class="pre">Function</span></code>, <code class="docutils literal notranslate"><span class="pre">String</span></code> objects, or registered object
+classes.  It does not match POD leaves such as <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">objects</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">leaves</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">tvm_ffi</span><span class="o">.</span><span class="n">structural_walk</span><span class="p">(</span>
+    <span class="n">root</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">tvm_ffi</span><span class="o">.</span><span class="n">Object</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)),</span>
+        <span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">leaves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="def-region-aware-walk">
+<h3>Def-Region Aware Walk<a class="headerlink" href="#def-region-aware-walk" title="Link to this heading">#</a></h3>
+<p>Callbacks passed to <code class="docutils literal notranslate"><span class="pre">with_def_region_kind</span></code> receive a second argument that
+reports whether the current value is visited as a definition or a use.  This is
+useful for analyses such as collecting variable uses while skipping binders:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uses</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">tvm_ffi</span><span class="o">.</span><span class="n">structural_walk</span><span class="p">(</span>
+    <span class="n">func</span><span class="p">,</span>
+    <span class="n">with_def_region_kind</span><span class="o">=</span><span class="p">(</span>
+        <span class="n">Var</span><span class="p">,</span>
+        <span class="k">lambda</span> <span class="n">var</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">uses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="n">tvm_ffi</span><span class="o">.</span><span class="n">DefRegionKind</span><span class="o">.</span><span class="n">NONE</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For a function node, parameters are visited in a definition region, while
+occurrences in the body are visited with <code class="docutils literal notranslate"><span class="pre">DefRegionKind.NONE</span></code>.</p>
+</section>
+<section id="traversal-order">
+<h3>Traversal Order<a class="headerlink" href="#traversal-order" title="Link to this heading">#</a></h3>
+<p>The default order is pre-order: callbacks run before visiting children.
+Post-order callbacks run after children.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">tvm_ffi</span><span class="o">.</span><span class="n">structural_walk</span><span class="p">(</span>
+    <span class="n">tvm_ffi</span><span class="o">.</span><span class="n">Array</span><span class="p">([</span><span class="n">tvm_ffi</span><span class="o">.</span><span class="n">Array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">2</span><span class="p">]),</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">tvm_ffi</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">trace</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;array:</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">trace</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;int:</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)),</span>
+    <span class="p">],</span>
+    <span class="n">order</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">trace</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;int:1&quot;</span><span class="p">,</span> <span class="s2">&quot;array:1&quot;</span><span class="p">,</span> <span class="s2">&quot;int:2&quot;</span><span class="p">,</span> <span class="s2">&quot;array:2&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="c-walk">
+<h3>C++ Walk<a class="headerlink" href="#c-walk" title="Link to this heading">#</a></h3>
+<p>C++ code can use <code class="docutils literal notranslate"><span class="pre">StructuralWalk</span></code> with typed callbacks.  Callbacks are tried
+in order and dispatch on the first argument type:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">VisitInterrupt</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StructuralWalk</span><span class="o">&lt;</span><span class="n">WalkOrder</span><span class="o">::</span><span class="n">kPreOrder</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">root</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">Add</span><span class="o">&amp;</span><span class="w"> </span><span class="n">add</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">WalkResult</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="o">++</span><span class="n">num_adds</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">WalkResult</span><span class="o">::</span><span class="n">Advance</span><span class="p">();</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">Mul</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mul</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">WalkResult</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">WalkResult</span><span class="o">::</span><span class="n">Skip</span><span class="p">();</span>
+<span class="w">    </span><span class="p">});</span>
+</pre></div>
+</div>
+<p>C++ callbacks dispatch on their first argument, which may be <code class="docutils literal notranslate"><span class="pre">AnyView</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Any</span></code>, an <code class="docutils literal notranslate"><span class="pre">ObjectRef</span></code> subclass, an <code class="docutils literal notranslate"><span class="pre">Object</span></code> pointer type, or another
+FFI-convertible POD type.  They may also take an optional second
+<code class="docutils literal notranslate"><span class="pre">TVMFFIDefRegionKind</span></code> argument to distinguish definition sites from uses.
+Errors should be returned as <code class="docutils literal notranslate"><span class="pre">Expected&lt;WalkResult&gt;</span></code>.</p>
+</section>
+<section id="low-level-structuralvisitor">
+<h3>Low-Level <code class="docutils literal notranslate"><span class="pre">StructuralVisitor</span></code><a class="headerlink" href="#low-level-structuralvisitor" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">StructuralVisitor</span></code> is the lower-level traversal object.  It is mainly useful
+inside structural visit hooks or C++ integrations that need to participate in
+the same recursive traversal protocol.</p>
+<p>Python users normally call <code class="docutils literal notranslate"><span class="pre">structural_walk</span></code> instead.  The low-level visitor
+API exposes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">visitor.visit(value)</span></code> to recursively visit a child value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">visitor.def_region_kind()</span></code> to inspect the current definition-region mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">visitor.with_def_region_kind(kind,</span> <span class="pre">callback)</span></code> to run a recursive visit
+under a temporary definition-region mode.</p></li>
+</ul>
+<p>Custom visit hooks are registered as the <code class="docutils literal notranslate"><span class="pre">__s_visit__</span></code> type attribute.  They
+receive the active visitor and the current object, and are responsible for
+calling <code class="docutils literal notranslate"><span class="pre">visitor.visit(child)</span></code> on structural children.</p>
+</section>
+</section>
 </section>
 
 
@@ -1865,6 +2046,16 @@ fun [y] → y + 1       (span=&quot;b.py:5&quot;)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-kinds-at-a-glance">All Kinds at a Glance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-guide">Decision Guide</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example">Worked Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-walk-and-visit">Structural Walk and Visit</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-walk">Basic Walk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grouped-types">Grouped Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catch-all-and-object-callbacks">Catch-All and Object Callbacks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#def-region-aware-walk">Def-Region Aware Walk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traversal-order">Traversal Order</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-walk">C++ Walk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#low-level-structuralvisitor">Low-Level <code class="docutils literal notranslate"><span class="pre">StructuralVisitor</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -1891,7 +2082,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Jun 09, 2026.
+  Last updated on Jun 17, 2026.
   <br/>
 </p>
   </div>

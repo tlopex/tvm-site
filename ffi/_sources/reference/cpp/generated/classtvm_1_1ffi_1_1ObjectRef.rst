@@ -26,9 +26,11 @@ Derived Types
 - ``public tvm::ffi::Optional< T, std::enable_if_t< use_ptr_based_optional_v< T > > >``
 - ``public tvm::ffi::Shape`` (:ref:`exhale_class_classtvm_1_1ffi_1_1Shape`)
 - ``public tvm::ffi::StructuralKey`` (:ref:`exhale_class_classtvm_1_1ffi_1_1StructuralKey`)
+- ``public tvm::ffi::StructuralVisitor`` (:ref:`exhale_class_classtvm_1_1ffi_1_1StructuralVisitor`)
 - ``public tvm::ffi::Tensor`` (:ref:`exhale_class_classtvm_1_1ffi_1_1Tensor`)
 - ``public tvm::ffi::Tuple< Types >`` (:ref:`exhale_class_classtvm_1_1ffi_1_1Tuple`)
 - ``public tvm::ffi::VisitErrorContext`` (:ref:`exhale_class_classtvm_1_1ffi_1_1VisitErrorContext`)
+- ``public tvm::ffi::VisitInterrupt`` (:ref:`exhale_class_classtvm_1_1ffi_1_1VisitInterrupt`)
 - ``public tvm::ffi::details::VariantBase< true >``
 - ``public tvm::ffi::reflection::AccessPath`` (:ref:`exhale_class_classtvm_1_1ffi_1_1reflection_1_1AccessPath`)
 - ``public tvm::ffi::reflection::AccessStep`` (:ref:`exhale_class_classtvm_1_1ffi_1_1reflection_1_1AccessStep`)

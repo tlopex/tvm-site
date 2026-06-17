@@ -265,6 +265,11 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_tvm_ffi_extra_structural_visit.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_tvm_ffi_container_tensor.h.rst
 
 .. toctree::

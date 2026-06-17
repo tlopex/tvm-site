@@ -60,6 +60,8 @@ Classes
 
 - :ref:`exhale_struct_structtvm_1_1ffi_1_1StaticTypeKey`
 
+- :ref:`exhale_struct_structtvm_1_1ffi_1_1StructuralVisitorVTable`
+
 - :ref:`exhale_struct_structtvm_1_1ffi_1_1TypeToFieldStaticTypeIndex`
 
 - :ref:`exhale_struct_structtvm_1_1ffi_1_1TypeToRuntimeTypeIndex`
@@ -148,6 +150,10 @@ Classes
 
 - :ref:`exhale_class_classtvm_1_1ffi_1_1StructuralKeyObj`
 
+- :ref:`exhale_class_classtvm_1_1ffi_1_1StructuralVisitor`
+
+- :ref:`exhale_class_classtvm_1_1ffi_1_1StructuralVisitorObj`
+
 - :ref:`exhale_class_classtvm_1_1ffi_1_1Tensor`
 
 - :ref:`exhale_class_classtvm_1_1ffi_1_1TensorObj`
@@ -168,6 +174,12 @@ Classes
 
 - :ref:`exhale_class_classtvm_1_1ffi_1_1VisitErrorContextObj`
 
+- :ref:`exhale_class_classtvm_1_1ffi_1_1VisitInterrupt`
+
+- :ref:`exhale_class_classtvm_1_1ffi_1_1VisitInterruptObj`
+
+- :ref:`exhale_class_classtvm_1_1ffi_1_1WalkResult`
+
 - :ref:`exhale_class_classtvm_1_1ffi_1_1WeakObjectPtr`
 
 
@@ -177,14 +189,16 @@ Enums
 
 - :ref:`exhale_enum_dtype_8h_1a16f66b97fa44d7bd6114324c8b8e1bed`
 
+- :ref:`exhale_enum_structural__visit_8h_1ab164fdc59c01d20b5fa07b88ef5ac09a`
+
 
 Functions
 ---------
 
 
-- :ref:`exhale_function_base64_8h_1acb849cdb1d9b9620be10bbcda0257afa`
-
 - :ref:`exhale_function_base64_8h_1ae1d4736f7dc56b224acd303ba7bf7a45`
+
+- :ref:`exhale_function_base64_8h_1acb849cdb1d9b9620be10bbcda0257afa`
 
 - :ref:`exhale_function_base64_8h_1a279b4ba2f4c7ea16291ef24b73e43963`
 
@@ -212,11 +226,11 @@ Functions
 
 - :ref:`exhale_function_tensor_8h_1a71e4a492b5a03a19a95087771a7e9ed1`
 
-- :ref:`exhale_function_tensor_8h_1a65b3a61c540c72d9410150a3a7a76dde`
+- :ref:`exhale_function_tensor_8h_1a226723176642cde5996498e7da6a6368`
 
 - :ref:`exhale_function_tensor_8h_1a011d0a2dcbe5702156124d7a7223b3dd`
 
-- :ref:`exhale_function_tensor_8h_1a226723176642cde5996498e7da6a6368`
+- :ref:`exhale_function_tensor_8h_1a65b3a61c540c72d9410150a3a7a76dde`
 
 - :ref:`exhale_function_cast_8h_1a4dba749dd934d8a7891ad126a8fdcc1f`
 
@@ -254,6 +268,10 @@ Functions
 
 - :ref:`exhale_function_dtype_8h_1a8a71c64237efaa13a8d40dfacd6c3165`
 
+- :ref:`exhale_function_structural__visit_8h_1a22c788e5e785d50c51b588526601f9cb`
+
+- :ref:`exhale_function_structural__visit_8h_1ab94d5197b2b27e397f0bcdef5a63048b`
+
 - :ref:`exhale_function_serialization_8h_1a24d1febeb5c1026e7fd66dee9dd9915f`
 
 - :ref:`exhale_function_string_8h_1ad045700080c053c50d68cde298b2b4b2`
@@ -268,6 +286,8 @@ Typedefs
 
 
 - :ref:`exhale_typedef_memory_8h_1a65bf625279df21dec5c8097264415113`
+
+- :ref:`exhale_typedef_structural__visit_8h_1a745d053678181bd38e0fee17b772656b`
 
 - :ref:`exhale_typedef_object_8h_1a7ba296d84188e5970ba854332a1f04a6`
 

@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=ecced4fd"></script>
+    <script src="../_static/documentation_options.js?v=e435db62"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,8 +61,8 @@
     <link rel="prev" title="CUBIN Launcher Guide" href="cubin_launcher.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
-    <meta name="docbuild:last-update" content="Jun 09, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+gf90410468" />
+    <meta name="docbuild:last-update" content="Jun 17, 2026"/>
   </head>
   
   
@@ -174,7 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../concepts/tensor.html">Tensor and DLPack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts/func_module.html">Function and Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts/exception_handling.html">Exception Handling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../concepts/structural_eq_hash.html">Structural Equality and Hashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/structural_eq_hash.html">Structural Equality, Hashing, and Walk</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packaging</span></p>
 <ul class="nav bd-sidenav">
@@ -199,6 +199,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.load_module.html">tvm_ffi.load_module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.Array.html">tvm_ffi.Array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.Map.html">tvm_ffi.Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.StructuralKey.html">tvm_ffi.StructuralKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.StructuralVisitor.html">tvm_ffi.StructuralVisitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.VisitInterrupt.html">tvm_ffi.VisitInterrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.WalkOrder.html">tvm_ffi.WalkOrder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.WalkResult.html">tvm_ffi.WalkResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.get_first_structural_mismatch.html">tvm_ffi.get_first_structural_mismatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.structural_equal.html">tvm_ffi.structural_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.structural_hash.html">tvm_ffi.structural_hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.structural_walk.html">tvm_ffi.structural_walk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.register_error.html">tvm_ffi.register_error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.register_object.html">tvm_ffi.register_object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.register_global_func.html">tvm_ffi.register_global_func</a></li>
@@ -397,7 +406,10 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-run-module">Load and Run Module</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor">Tensor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-and-callbacks">Functions and Callbacks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-and-callbacks">Functions and Callbacks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#argument-conversion-protocols">Argument conversion protocols</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#container-types">Container Types</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-immutable-sequence">Array (immutable sequence)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-mutable-sequence">List (mutable sequence)</a></li>
@@ -519,6 +531,81 @@ You can also register a Python callback as a global function.</p>
 <span class="k">assert</span> <span class="n">tvm_ffi</span><span class="o">.</span><span class="n">get_global_func</span><span class="p">(</span><span class="s2">&quot;example.add_one&quot;</span><span class="p">)(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
 </pre></div>
 </div>
+<section id="argument-conversion-protocols">
+<span id="python-argument-conversion-protocols"></span><h3>Argument conversion protocols<a class="headerlink" href="#argument-conversion-protocols" title="Link to this heading">#</a></h3>
+<p>When Python calls a <a class="reference internal" href="../reference/python/generated/tvm_ffi.Function.html#tvm_ffi.Function" title="tvm_ffi.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">tvm_ffi.Function</span></code></a>, each argument is converted into the
+TVM FFI <code class="docutils literal notranslate"><span class="pre">Any</span></code> calling convention. Most common Python values are handled directly:
+<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">tuple</span></code>, <code class="docutils literal notranslate"><span class="pre">dict</span></code>, Python callables,
+<a class="reference internal" href="../reference/python/generated/tvm_ffi.Object.html#tvm_ffi.Object" title="tvm_ffi.Object"><code class="xref py py-class docutils literal notranslate"><span class="pre">tvm_ffi.Object</span></code></a>, <a class="reference internal" href="../reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor" title="tvm_ffi.Tensor"><code class="xref py py-class docutils literal notranslate"><span class="pre">tvm_ffi.Tensor</span></code></a>, DLPack-compatible tensors,
+and exceptions all have built-in conversions.</p>
+<p>Function calls also recognize the following special protocols that define
+argument conversion behavior. <a class="reference internal" href="../reference/python/generated/tvm_ffi.convert.html#tvm_ffi.convert" title="tvm_ffi.convert"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm_ffi.convert()</span></code></a> also recognizes some
+of them, but it may preserve protocol objects whose final target type is only
+known when a function is called.</p>
+<p>For DLPack-compatible objects, TVM-FFI follows the
+<a class="reference external" href="https://dmlc.github.io/dlpack/latest/">DLPack protocol</a>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Protocol</p></th>
+<th class="head"><p>Expected return</p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__tvm_ffi_object__(self)</span></code></p></td>
+<td><p>A <a class="reference internal" href="../reference/python/generated/tvm_ffi.Object.html#tvm_ffi.Object" title="tvm_ffi.Object"><code class="xref py py-class docutils literal notranslate"><span class="pre">tvm_ffi.Object</span></code></a> instance</p></td>
+<td><p>Passes the returned FFI object handle directly. Use this for wrapper classes that own or expose an existing FFI object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">__tvm_ffi_value__(self)</span></code></p></td>
+<td><p>Another Python value</p></td>
+<td><p>Recursively converts the returned value. This is useful for lightweight wrappers around values such as strings, arrays, maps, objects, or scalars. Conversion detects recursive cycles and reports them as conversion/type errors.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__tvm_ffi_opaque_ptr__(self)</span></code></p></td>
+<td><p>An integer pointer value</p></td>
+<td><p>Passes the value as an opaque pointer. This is for low-level interop with raw memory structs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">__tvm_ffi_int__(self)</span></code></p></td>
+<td><p>An integer</p></td>
+<td><p>Passes the value as an FFI integer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__tvm_ffi_float__(self)</span></code></p></td>
+<td><p>A float</p></td>
+<td><p>Passes the value as an FFI float.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">__tvm_ffi_env_stream__(self)</span></code></p></td>
+<td><p>An integer stream handle</p></td>
+<td><p>Used with non-CPU tensor inputs that expose DLPack. The stream is recorded in the FFI call context so the callee can observe the producer framework’s current stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__cuda_stream__(self)</span></code></p></td>
+<td><p>A <a class="reference external" href="https://nvidia.github.io/cuda-python/cuda-core/latest/interoperability.html">CUDA stream protocol</a> value</p></td>
+<td><p>Passes the stream as an opaque pointer.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The protocols above should be implemented on the class, not installed dynamically
+on a single object instance. The converter checks the value’s type for most
+protocols so dispatch can be cached efficiently.</p>
+<p>For example, a DSL compiler can use <code class="docutils literal notranslate"><span class="pre">__tvm_ffi_opaque_ptr__</span></code> to pass objects
+that map to raw memory pointers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tvm_ffi</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Workspace</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint8</span> <span class="o">*</span> <span class="n">size</span><span class="p">)()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__tvm_ffi_opaque_ptr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">addressof</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span>
+
+
+<span class="n">workspace</span> <span class="o">=</span> <span class="n">Workspace</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span>
+<span class="n">compile_kernel</span> <span class="o">=</span> <span class="n">tvm_ffi</span><span class="o">.</span><span class="n">get_global_func</span><span class="p">(</span><span class="s2">&quot;my_compiler.compile_kernel&quot;</span><span class="p">)</span>
+<span class="n">compile_kernel</span><span class="p">(</span><span class="n">workspace</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="container-types">
 <h2>Container Types<a class="headerlink" href="#container-types" title="Link to this heading">#</a></h2>
@@ -819,7 +906,10 @@ on both the base class and the child class.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-run-module">Load and Run Module</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor">Tensor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-and-callbacks">Functions and Callbacks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-and-callbacks">Functions and Callbacks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#argument-conversion-protocols">Argument conversion protocols</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#container-types">Container Types</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-immutable-sequence">Array (immutable sequence)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-mutable-sequence">List (mutable sequence)</a></li>
@@ -857,7 +947,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Jun 09, 2026.
+  Last updated on Jun 17, 2026.
   <br/>
 </p>
   </div>

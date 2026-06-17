@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=ecced4fd"></script>
+    <script src="../../_static/documentation_options.js?v=e435db62"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,8 +61,8 @@
     <link rel="prev" title="C++ Tooling" href="../../packaging/cpp_tooling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
-    <meta name="docbuild:last-update" content="Jun 09, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+gf90410468" />
+    <meta name="docbuild:last-update" content="Jun 17, 2026"/>
   </head>
   
   
@@ -174,7 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../concepts/tensor.html">Tensor and DLPack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../concepts/func_module.html">Function and Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../concepts/exception_handling.html">Exception Handling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../concepts/structural_eq_hash.html">Structural Equality and Hashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/structural_eq_hash.html">Structural Equality, Hashing, and Walk</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packaging</span></p>
 <ul class="nav bd-sidenav">
@@ -199,6 +199,15 @@
 <li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.load_module.html">tvm_ffi.load_module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.Array.html">tvm_ffi.Array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.Map.html">tvm_ffi.Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.StructuralKey.html">tvm_ffi.StructuralKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.StructuralVisitor.html">tvm_ffi.StructuralVisitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.VisitInterrupt.html">tvm_ffi.VisitInterrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.WalkOrder.html">tvm_ffi.WalkOrder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.WalkResult.html">tvm_ffi.WalkResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.get_first_structural_mismatch.html">tvm_ffi.get_first_structural_mismatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.structural_equal.html">tvm_ffi.structural_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.structural_hash.html">tvm_ffi.structural_hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.structural_walk.html">tvm_ffi.structural_walk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.register_error.html">tvm_ffi.register_error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.register_object.html">tvm_ffi.register_object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/tvm_ffi.register_global_func.html">tvm_ffi.register_global_func</a></li>
@@ -402,6 +411,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">Containers</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structural">Structural</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#global-registry">Global Registry</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stream-context">Stream Context</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-extension">C++ Extension</a></li>
@@ -432,11 +442,12 @@
 <li><p><a class="reference internal" href="#containers" id="id5">Containers</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#global-registry" id="id6">Global Registry</a></p></li>
-<li><p><a class="reference internal" href="#stream-context" id="id7">Stream Context</a></p></li>
-<li><p><a class="reference internal" href="#c-extension" id="id8">C++ Extension</a></p></li>
-<li><p><a class="reference internal" href="#nvrtc-utilities" id="id9">NVRTC Utilities</a></p></li>
-<li><p><a class="reference internal" href="#misc" id="id10">Misc</a></p></li>
+<li><p><a class="reference internal" href="#structural" id="id6">Structural</a></p></li>
+<li><p><a class="reference internal" href="#global-registry" id="id7">Global Registry</a></p></li>
+<li><p><a class="reference internal" href="#stream-context" id="id8">Stream Context</a></p></li>
+<li><p><a class="reference internal" href="#c-extension" id="id9">C++ Extension</a></p></li>
+<li><p><a class="reference internal" href="#nvrtc-utilities" id="id10">NVRTC Utilities</a></p></li>
+<li><p><a class="reference internal" href="#misc" id="id11">Misc</a></p></li>
 </ul>
 </nav>
 <section id="object">
@@ -521,8 +532,43 @@
 </div>
 </section>
 </section>
+<section id="structural">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Structural</a><a class="headerlink" href="#structural" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tvm_ffi.StructuralKey.html#tvm_ffi.StructuralKey" title="tvm_ffi.StructuralKey"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StructuralKey</span></code></a>(key)</p></td>
+<td><p>Hash-cached structural key wrapper.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor" title="tvm_ffi.StructuralVisitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StructuralVisitor</span></code></a>()</p></td>
+<td><p>Low-level structural traversal visitor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tvm_ffi.VisitInterrupt.html#tvm_ffi.VisitInterrupt" title="tvm_ffi.VisitInterrupt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VisitInterrupt</span></code></a>([value])</p></td>
+<td><p>Payload-carrying signal that stops a structural visit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tvm_ffi.WalkOrder.html#tvm_ffi.WalkOrder" title="tvm_ffi.WalkOrder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WalkOrder</span></code></a>(*values)</p></td>
+<td><p>Callback placement before or after visiting children for structural walks.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tvm_ffi.WalkResult.html#tvm_ffi.WalkResult" title="tvm_ffi.WalkResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WalkResult</span></code></a>(*values)</p></td>
+<td><p>Control signal for structural walks.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tvm_ffi.get_first_structural_mismatch.html#tvm_ffi.get_first_structural_mismatch" title="tvm_ffi.get_first_structural_mismatch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_first_structural_mismatch</span></code></a>(lhs, rhs[, ...])</p></td>
+<td><p>Like structural_equal(), but returns the AccessPath pair of the first detected mismatch.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tvm_ffi.structural_equal.html#tvm_ffi.structural_equal" title="tvm_ffi.structural_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">structural_equal</span></code></a>(lhs, rhs[, map_free_vars, ...])</p></td>
+<td><p>Check structural equality between two values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tvm_ffi.structural_hash.html#tvm_ffi.structural_hash" title="tvm_ffi.structural_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">structural_hash</span></code></a>(value[, map_free_vars, ...])</p></td>
+<td><p>Compute structural hash of a value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tvm_ffi.structural_walk.html#tvm_ffi.structural_walk" title="tvm_ffi.structural_walk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">structural_walk</span></code></a>(root[, callbacks, ...])</p></td>
+<td><p>Walk a value structurally and invoke the first matching typed callback.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="global-registry">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Global Registry</a><a class="headerlink" href="#global-registry" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Global Registry</a><a class="headerlink" href="#global-registry" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tvm_ffi.register_error.html#tvm_ffi.register_error" title="tvm_ffi.register_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_error</span></code></a>([name_or_cls, cls])</p></td>
@@ -551,7 +597,7 @@
 </div>
 </section>
 <section id="stream-context">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">Stream Context</a><a class="headerlink" href="#stream-context" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Stream Context</a><a class="headerlink" href="#stream-context" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tvm_ffi.StreamContext.html#tvm_ffi.StreamContext" title="tvm_ffi.StreamContext"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamContext</span></code></a>(device, stream)</p></td>
@@ -571,7 +617,7 @@
 </div>
 </section>
 <section id="c-extension">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">C++ Extension</a><a class="headerlink" href="#c-extension" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">C++ Extension</a><a class="headerlink" href="#c-extension" title="Link to this heading">#</a></h2>
 <p>C++ integration helpers for building and loading inline modules.</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
@@ -595,7 +641,7 @@
 </div>
 </section>
 <section id="nvrtc-utilities">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">NVRTC Utilities</a><a class="headerlink" href="#nvrtc-utilities" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">NVRTC Utilities</a><a class="headerlink" href="#nvrtc-utilities" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="cpp/generated/tvm_ffi.cpp.nvrtc.nvrtc_compile.html#tvm_ffi.cpp.nvrtc.nvrtc_compile" title="tvm_ffi.cpp.nvrtc.nvrtc_compile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpp.nvrtc.nvrtc_compile</span></code></a>(source, *[, name, ...])</p></td>
@@ -606,7 +652,7 @@
 </div>
 </section>
 <section id="misc">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Misc</a><a class="headerlink" href="#misc" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Misc</a><a class="headerlink" href="#misc" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tvm_ffi.serialization.from_json_graph_str.html#tvm_ffi.serialization.from_json_graph_str" title="tvm_ffi.serialization.from_json_graph_str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serialization.from_json_graph_str</span></code></a>(json_str)</p></td>
@@ -693,6 +739,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">Containers</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structural">Structural</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#global-registry">Global Registry</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stream-context">Stream Context</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-extension">C++ Extension</a></li>
@@ -724,7 +771,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Jun 09, 2026.
+  Last updated on Jun 17, 2026.
   <br/>
 </p>
   </div>

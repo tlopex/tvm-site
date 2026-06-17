@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=ecced4fd"></script>
+    <script src="../_static/documentation_options.js?v=e435db62"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -57,12 +57,12 @@
     <link rel="icon" href="https://tvm.apache.org/images/logo/tvm-logo-square.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Structural Equality and Hashing" href="structural_eq_hash.html" />
+    <link rel="next" title="Structural Equality, Hashing, and Walk" href="structural_eq_hash.html" />
     <link rel="prev" title="Function and Module" href="func_module.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
-    <meta name="docbuild:last-update" content="Jun 09, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+gf90410468" />
+    <meta name="docbuild:last-update" content="Jun 17, 2026"/>
   </head>
   
   
@@ -174,7 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="tensor.html">Tensor and DLPack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="func_module.html">Function and Module</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Exception Handling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="structural_eq_hash.html">Structural Equality and Hashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structural_eq_hash.html">Structural Equality, Hashing, and Walk</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packaging</span></p>
 <ul class="nav bd-sidenav">
@@ -199,6 +199,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.load_module.html">tvm_ffi.load_module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.Array.html">tvm_ffi.Array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.Map.html">tvm_ffi.Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.StructuralKey.html">tvm_ffi.StructuralKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.StructuralVisitor.html">tvm_ffi.StructuralVisitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.VisitInterrupt.html">tvm_ffi.VisitInterrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.WalkOrder.html">tvm_ffi.WalkOrder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.WalkResult.html">tvm_ffi.WalkResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.get_first_structural_mismatch.html">tvm_ffi.get_first_structural_mismatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.structural_equal.html">tvm_ffi.structural_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.structural_hash.html">tvm_ffi.structural_hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.structural_walk.html">tvm_ffi.structural_walk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.register_error.html">tvm_ffi.register_error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.register_object.html">tvm_ffi.register_object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/python/generated/tvm_ffi.register_global_func.html">tvm_ffi.register_global_func</a></li>
@@ -618,7 +627,7 @@ and backtrace. Access it by skipping the <a class="reference internal" href="../
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Structural Equality and Hashing</p>
+        <p class="prev-next-title">Structural Equality, Hashing, and Walk</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -679,7 +688,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Jun 09, 2026.
+  Last updated on Jun 17, 2026.
   <br/>
 </p>
   </div>

@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=ecced4fd"></script>
+    <script src="_static/documentation_options.js?v=e435db62"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -494,8 +494,8 @@ window.runMermaid = runMermaid;</script>
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
-    <meta name="docbuild:last-update" content="Jun 09, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+gf90410468" />
+    <meta name="docbuild:last-update" content="Jun 17, 2026"/>
   </head>
   
   
@@ -609,7 +609,7 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l1"><a class="reference internal" href="concepts/tensor.html">Tensor and DLPack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="concepts/func_module.html">Function and Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="concepts/exception_handling.html">Exception Handling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts/structural_eq_hash.html">Structural Equality and Hashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/structural_eq_hash.html">Structural Equality, Hashing, and Walk</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packaging</span></p>
 <ul class="nav bd-sidenav">
@@ -634,6 +634,15 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.load_module.html">tvm_ffi.load_module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.Array.html">tvm_ffi.Array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.Map.html">tvm_ffi.Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.StructuralKey.html">tvm_ffi.StructuralKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.StructuralVisitor.html">tvm_ffi.StructuralVisitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.VisitInterrupt.html">tvm_ffi.VisitInterrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.WalkOrder.html">tvm_ffi.WalkOrder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.WalkResult.html">tvm_ffi.WalkResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.get_first_structural_mismatch.html">tvm_ffi.get_first_structural_mismatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.structural_equal.html">tvm_ffi.structural_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.structural_hash.html">tvm_ffi.structural_hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.structural_walk.html">tvm_ffi.structural_walk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.register_error.html">tvm_ffi.register_error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.register_object.html">tvm_ffi.register_object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/python/generated/tvm_ffi.register_global_func.html">tvm_ffi.register_global_func</a></li>
@@ -796,6 +805,7 @@ window.runMermaid = runMermaid;</script>
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#K"><strong>K</strong></a>
  | <a href="#L"><strong>L</strong></a>
@@ -820,6 +830,14 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor.__dlpack_device__">__dlpack_device__() (tvm_ffi.Tensor method)</a>
 </li>
+      <li><a href="reference/python/generated/tvm_ffi.StructuralKey.html#tvm_ffi.StructuralKey.__ffi_init__">__ffi_init__() (tvm_ffi.StructuralKey method)</a>
+
+      <ul>
+        <li><a href="reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor.__ffi_init__">(tvm_ffi.StructuralVisitor method)</a>
+</li>
+        <li><a href="reference/python/generated/tvm_ffi.VisitInterrupt.html#tvm_ffi.VisitInterrupt.__ffi_init__">(tvm_ffi.VisitInterrupt method)</a>
+</li>
+      </ul></li>
       <li><a href="reference/python/generated/tvm_ffi.Function.html#tvm_ffi.Function.__from_extern_c__">__from_extern_c__() (tvm_ffi.Function static method)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Function.html#tvm_ffi.Function.__from_mlir_packed_safe_call__">__from_mlir_packed_safe_call__() (tvm_ffi.Function static method)</a>
@@ -853,7 +871,17 @@ window.runMermaid = runMermaid;</script>
 </li>
         <li><a href="reference/python/generated/tvm_ffi.StreamContext.html#tvm_ffi.StreamContext.__init__">(tvm_ffi.StreamContext method)</a>
 </li>
+        <li><a href="reference/python/generated/tvm_ffi.StructuralKey.html#tvm_ffi.StructuralKey.__init__">(tvm_ffi.StructuralKey method)</a>
+</li>
+        <li><a href="reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor.__init__">(tvm_ffi.StructuralVisitor method)</a>
+</li>
         <li><a href="reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor.__init__">(tvm_ffi.Tensor method)</a>
+</li>
+        <li><a href="reference/python/generated/tvm_ffi.VisitInterrupt.html#tvm_ffi.VisitInterrupt.__init__">(tvm_ffi.VisitInterrupt method)</a>
+</li>
+        <li><a href="reference/python/generated/tvm_ffi.WalkOrder.html#tvm_ffi.WalkOrder.__init__">(tvm_ffi.WalkOrder method)</a>
+</li>
+        <li><a href="reference/python/generated/tvm_ffi.WalkResult.html#tvm_ffi.WalkResult.__init__">(tvm_ffi.WalkResult method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -877,6 +905,8 @@ window.runMermaid = runMermaid;</script>
       <li><a href="reference/python/generated/tvm_ffi.access_path.AccessPath.html#tvm_ffi.access_path.AccessPath">AccessPath (class in tvm_ffi.access_path)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.access_path.AccessStep.html#tvm_ffi.access_path.AccessStep">AccessStep (class in tvm_ffi.access_path)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.WalkResult.html#tvm_ffi.WalkResult.ADVANCE">ADVANCE (tvm_ffi.WalkResult attribute)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Array.html#tvm_ffi.Array">Array (class in tvm_ffi)</a>
 </li>
@@ -934,16 +964,18 @@ window.runMermaid = runMermaid;</script>
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor.def_region_kind">def_region_kind() (tvm_ffi.StructuralVisitor method)</a>
+</li>
       <li><a href="reference/python/generated/tvm_ffi.access_path.AccessPath.html#tvm_ffi.access_path.AccessPath.depth">depth (tvm_ffi.access_path.AccessPath property)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Device_class.html#tvm_ffi.Device">Device (class in tvm_ffi)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor.device">device (tvm_ffi.Tensor attribute)</a>
 </li>
-      <li><a href="reference/python/generated/tvm_ffi.device_function.html#tvm_ffi.device">device() (in module tvm_ffi)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/python/generated/tvm_ffi.device_function.html#tvm_ffi.device">device() (in module tvm_ffi)</a>
+</li>
       <li><a href="reference/python/generated/tvm_ffi.DLDeviceType.html#tvm_ffi.DLDeviceType">DLDeviceType (class in tvm_ffi)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Device_class.html#tvm_ffi.Device.dlpack_device_type">dlpack_device_type() (tvm_ffi.Device method)</a>
@@ -986,6 +1018,8 @@ window.runMermaid = runMermaid;</script>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/python/generated/tvm_ffi.Map.html#tvm_ffi.Map.get">get() (tvm_ffi.Map method)</a>
 </li>
+      <li><a href="reference/python/generated/tvm_ffi.get_first_structural_mismatch.html#tvm_ffi.get_first_structural_mismatch">get_first_structural_mismatch() (in module tvm_ffi)</a>
+</li>
       <li><a href="reference/python/generated/tvm_ffi.Module.html#tvm_ffi.Module.get_function">get_function() (tvm_ffi.Module method)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Module.html#tvm_ffi.Module.get_function_doc">get_function_doc() (tvm_ffi.Module method)</a>
@@ -1003,6 +1037,14 @@ window.runMermaid = runMermaid;</script>
       <li><a href="reference/python/generated/tvm_ffi.get_raw_stream.html#tvm_ffi.get_raw_stream">get_raw_stream() (in module tvm_ffi)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Module.html#tvm_ffi.Module.get_write_formats">get_write_formats() (tvm_ffi.Module method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/python/generated/tvm_ffi.StructuralKey.html#tvm_ffi.StructuralKey.hash_i64">hash_i64 (tvm_ffi.StructuralKey property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1081,7 +1123,11 @@ window.runMermaid = runMermaid;</script>
       <li><a href="reference/python/generated/tvm_ffi.DLDeviceType.html#tvm_ffi.DLDeviceType.kDLWebGPU">kDLWebGPU (tvm_ffi.DLDeviceType attribute)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.access_path.AccessStep.html#tvm_ffi.access_path.AccessStep.key">key (tvm_ffi.access_path.AccessStep property)</a>
+
+      <ul>
+        <li><a href="reference/python/generated/tvm_ffi.StructuralKey.html#tvm_ffi.StructuralKey.key">(tvm_ffi.StructuralKey property)</a>
 </li>
+      </ul></li>
       <li><a href="reference/python/generated/tvm_ffi.Map.html#tvm_ffi.Map.keys">keys() (tvm_ffi.Map method)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.access_path.AccessStep.html#tvm_ffi.access_path.AccessStep.kind">kind (tvm_ffi.access_path.AccessStep property)</a>
@@ -1169,8 +1215,12 @@ window.runMermaid = runMermaid;</script>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/python/generated/tvm_ffi.access_path.AccessPath.html#tvm_ffi.access_path.AccessPath.parent">parent (tvm_ffi.access_path.AccessPath property)</a>
 </li>
+      <li><a href="reference/python/generated/tvm_ffi.WalkOrder.html#tvm_ffi.WalkOrder.POSTORDER">POSTORDER (tvm_ffi.WalkOrder attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/python/generated/tvm_ffi.WalkOrder.html#tvm_ffi.WalkOrder.PREORDER">PREORDER (tvm_ffi.WalkOrder attribute)</a>
+</li>
       <li>
     Python Enhancement Proposals
 
@@ -1212,13 +1262,25 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor.size">size() (tvm_ffi.Tensor method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/python/generated/tvm_ffi.WalkResult.html#tvm_ffi.WalkResult.SKIP">SKIP (tvm_ffi.WalkResult attribute)</a>
+</li>
       <li><a href="reference/python/generated/tvm_ffi.access_path.AccessPath.html#tvm_ffi.access_path.AccessPath.step">step (tvm_ffi.access_path.AccessPath property)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.StreamContext.html#tvm_ffi.StreamContext">StreamContext (class in tvm_ffi)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/python/generated/tvm_ffi.Tensor.html#tvm_ffi.Tensor.strides">strides (tvm_ffi.Tensor attribute)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.structural_equal.html#tvm_ffi.structural_equal">structural_equal() (in module tvm_ffi)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.structural_hash.html#tvm_ffi.structural_hash">structural_hash() (in module tvm_ffi)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.structural_walk.html#tvm_ffi.structural_walk">structural_walk() (in module tvm_ffi)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.StructuralKey.html#tvm_ffi.StructuralKey">StructuralKey (class in tvm_ffi)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor">StructuralVisitor (class in tvm_ffi)</a>
 </li>
       <li><a href="reference/python/generated/tvm_ffi.system_lib.html#tvm_ffi.system_lib">system_lib() (in module tvm_ffi)</a>
 </li>
@@ -1652,6 +1714,8 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4NK3tvm3ffi8Expected5is_okEv">tvm::ffi::Expected::is_ok (C++ function)</a>
 </li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4NK3tvm3ffi8Expected10type_indexEv">tvm::ffi::Expected::type_index (C++ function)</a>
+</li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4NKR3tvm3ffi8Expected5valueEv">tvm::ffi::Expected::value (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4NO3tvm3ffi8Expected5valueEv">[1]</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4I0ENKR3tvm3ffi8Expected8value_orE1TRR1U">tvm::ffi::Expected::value_or (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1Expected.html#_CPPv4I0ENO3tvm3ffi8Expected8value_orE1TRR1U">[1]</a>
@@ -1661,6 +1725,8 @@ window.runMermaid = runMermaid;</script>
       <li><a href="reference/cpp/generated/typedef_memory_8h_1a65bf625279df21dec5c8097264415113.html#_CPPv4N3tvm3ffi14FObjectDeleterE">tvm::ffi::FObjectDeleter (C++ type)</a>
 </li>
       <li><a href="reference/cpp/generated/function_serialization_8h_1a56baa5d1ca415dbdebf19ac1f54bd5b7.html#_CPPv4N3tvm3ffi13FromJSONGraphERKN4json5ValueE">tvm::ffi::FromJSONGraph (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/typedef_structural__visit_8h_1a745d053678181bd38e0fee17b772656b.html#_CPPv4N3tvm3ffi16FStructuralVisitE">tvm::ffi::FStructuralVisit (C++ type)</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1Function.html#_CPPv4N3tvm3ffi8FunctionE">tvm::ffi::Function (C++ class)</a>
 </li>
@@ -2264,8 +2330,6 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1OverloadObjectDef.html#_CPPv4I00DpEN3tvm3ffi10reflection17OverloadObjectDef6def_rwER17OverloadObjectDefPKcM9BaseClass1TDpRR5Extra">tvm::ffi::reflection::OverloadObjectDef::def_rw (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1OverloadObjectDef.html#_CPPv4I0DpEN3tvm3ffi10reflection17OverloadObjectDef10def_staticER17OverloadObjectDefPKcRR4FuncDpRR5Extra">tvm::ffi::reflection::OverloadObjectDef::def_static (C++ function)</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1OverloadObjectDef.html#_CPPv4IDpEN3tvm3ffi10reflection17OverloadObjectDef17OverloadObjectDefEDpRR9ExtraArgs">tvm::ffi::reflection::OverloadObjectDef::OverloadObjectDef (C++ function)</a>
@@ -2298,6 +2362,8 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/variable_namespacetvm_1_1ffi_1_1reflection_1_1type__attr_1a2235b3faf38b1017a13ef6178d9a8fa8.html#_CPPv4N3tvm3ffi10reflection9type_attr17kEnumValueEntriesE">tvm::ffi::reflection::type_attr::kEnumValueEntries (C++ member)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/cpp/generated/variable_namespacetvm_1_1ffi_1_1reflection_1_1type__attr_1a4e67838e846b587f2f82127c53b6ef86.html#_CPPv4N3tvm3ffi10reflection9type_attr3kEqE">tvm::ffi::reflection::type_attr::kEq (C++ member)</a>
 </li>
       <li><a href="reference/cpp/generated/variable_namespacetvm_1_1ffi_1_1reflection_1_1type__attr_1a8473fde721d924e9ffb48fc818f6b609.html#_CPPv4N3tvm3ffi10reflection9type_attr5kHashE">tvm::ffi::reflection::type_attr::kHash (C++ member)</a>
@@ -2313,6 +2379,8 @@ window.runMermaid = runMermaid;</script>
       <li><a href="reference/cpp/generated/variable_namespacetvm_1_1ffi_1_1reflection_1_1type__attr_1ac92fdfe731cfda2d51324cea574c7e08.html#_CPPv4N3tvm3ffi10reflection9type_attr12kShallowCopyE">tvm::ffi::reflection::type_attr::kShallowCopy (C++ member)</a>
 </li>
       <li><a href="reference/cpp/generated/variable_namespacetvm_1_1ffi_1_1reflection_1_1type__attr_1a18dd88667c1998578f7fdbbf25c9a33d.html#_CPPv4N3tvm3ffi10reflection9type_attr6kSHashE">tvm::ffi::reflection::type_attr::kSHash (C++ member)</a>
+</li>
+      <li><a href="reference/cpp/generated/variable_namespacetvm_1_1ffi_1_1reflection_1_1type__attr_1a121b81bcda7ce56913cd5cee586ab85f.html#_CPPv4N3tvm3ffi10reflection9type_attr16kStructuralVisitE">tvm::ffi::reflection::type_attr::kStructuralVisit (C++ member)</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1reflection_1_1TypeAttrColumn.html#_CPPv4N3tvm3ffi10reflection14TypeAttrColumnE">tvm::ffi::reflection::TypeAttrColumn (C++ class)</a>
 </li>
@@ -2502,6 +2570,8 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/structtvm_1_1ffi_1_1StaticTypeKey.html#_CPPv4N3tvm3ffi13StaticTypeKey13kTVMFFITensorE">tvm::ffi::StaticTypeKey::kTVMFFITensor (C++ member)</a>
 </li>
+      <li><a href="reference/cpp/generated/structtvm_1_1ffi_1_1StaticTypeKey.html#_CPPv4N3tvm3ffi13StaticTypeKey21kTVMFFIVisitInterruptE">tvm::ffi::StaticTypeKey::kTVMFFIVisitInterrupt (C++ member)</a>
+</li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StrictBool.html#_CPPv4N3tvm3ffi10StrictBoolE">tvm::ffi::StrictBool (C++ class)</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StrictBool.html#_CPPv4N3tvm3ffi10StrictBool10StrictBoolEb">tvm::ffi::StrictBool::StrictBool (C++ function)</a>
@@ -2561,6 +2631,38 @@ window.runMermaid = runMermaid;</script>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralKeyObj.html#_CPPv4N3tvm3ffi16StructuralKeyObj3keyE">tvm::ffi::StructuralKeyObj::key (C++ member)</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralKeyObj.html#_CPPv4N3tvm3ffi16StructuralKeyObj16StructuralKeyObjE3Any">tvm::ffi::StructuralKeyObj::StructuralKeyObj (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralKeyObj.html#_CPPv4N3tvm3ffi16StructuralKeyObj16StructuralKeyObjEv">[1]</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitor.html#_CPPv4N3tvm3ffi17StructuralVisitorE">tvm::ffi::StructuralVisitor (C++ class)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitor.html#_CPPv4N3tvm3ffi17StructuralVisitor17StructuralVisitorE9ObjectPtrI20StructuralVisitorObjE">tvm::ffi::StructuralVisitor::StructuralVisitor (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitor.html#_CPPv4N3tvm3ffi17StructuralVisitor17StructuralVisitorEv">[1]</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4N3tvm3ffi20StructuralVisitorObjE">tvm::ffi::StructuralVisitorObj (C++ class)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4NK3tvm3ffi20StructuralVisitorObj15def_region_kindEv">tvm::ffi::StructuralVisitorObj::def_region_kind (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4N3tvm3ffi20StructuralVisitorObj16def_region_mode_E">tvm::ffi::StructuralVisitorObj::def_region_mode_ (C++ member)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4N3tvm3ffi20StructuralVisitorObj12DefaultVisitE7AnyView">tvm::ffi::StructuralVisitorObj::DefaultVisit (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4N3tvm3ffi20StructuralVisitorObj20DefaultVisitExpectedE7AnyView">tvm::ffi::StructuralVisitorObj::DefaultVisitExpected (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4N3tvm3ffi20StructuralVisitorObj20StructuralVisitorObjEPK23StructuralVisitorVTable">tvm::ffi::StructuralVisitorObj::StructuralVisitorObj (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4N3tvm3ffi20StructuralVisitorObj20StructuralVisitorObjEv">[1]</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4N3tvm3ffi20StructuralVisitorObj5VisitE7AnyView">tvm::ffi::StructuralVisitorObj::Visit (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4N3tvm3ffi20StructuralVisitorObj13VisitExpectedE7AnyView">tvm::ffi::StructuralVisitorObj::VisitExpected (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4N3tvm3ffi20StructuralVisitorObj7vtable_E">tvm::ffi::StructuralVisitorObj::vtable_ (C++ member)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1StructuralVisitorObj.html#_CPPv4I0EN3tvm3ffi20StructuralVisitorObj17WithDefRegionKindEDa19TVMFFIDefRegionKindRR8Callback">tvm::ffi::StructuralVisitorObj::WithDefRegionKind (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/structtvm_1_1ffi_1_1StructuralVisitorVTable.html#_CPPv4N3tvm3ffi23StructuralVisitorVTableE">tvm::ffi::StructuralVisitorVTable (C++ struct)</a>
+</li>
+      <li><a href="reference/cpp/generated/structtvm_1_1ffi_1_1StructuralVisitorVTable.html#_CPPv4N3tvm3ffi23StructuralVisitorVTable5visitE">tvm::ffi::StructuralVisitorVTable::visit (C++ member)</a>
+</li>
+      <li><a href="reference/cpp/generated/function_structural__visit_8h_1a22c788e5e785d50c51b588526601f9cb.html#_CPPv4I_9WalkOrderDpEN3tvm3ffi14StructuralWalkE8OptionalI14VisitInterruptE7AnyViewDpRR9Callbacks">tvm::ffi::StructuralWalk (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/function_structural__visit_8h_1ab94d5197b2b27e397f0bcdef5a63048b.html#_CPPv4I_9WalkOrderDpEN3tvm3ffi22StructuralWalkExpectedE8ExpectedI8OptionalI14VisitInterruptEE7AnyViewDpRR9Callbacks">tvm::ffi::StructuralWalkExpected (C++ function)</a>
 </li>
       <li><a href="reference/cpp/generated/variable_module_8h_1a5a3a8ad10620c05ded5876f8e607e0eb.html#_CPPv4N3tvm3ffi6symbol18tvm_ffi_doc_prefixE">tvm::ffi::symbol::tvm_ffi_doc_prefix (C++ member)</a>
 </li>
@@ -2744,6 +2846,36 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitErrorContextObj.html#_CPPv4N3tvm3ffi20VisitErrorContextObj21reverse_visit_patternE">tvm::ffi::VisitErrorContextObj::reverse_visit_pattern (C++ member)</a>
 </li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitInterrupt.html#_CPPv4N3tvm3ffi14VisitInterruptE">tvm::ffi::VisitInterrupt (C++ class)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitInterrupt.html#_CPPv4N3tvm3ffi14VisitInterrupt14VisitInterruptE3Any">tvm::ffi::VisitInterrupt::VisitInterrupt (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitInterrupt.html#_CPPv4N3tvm3ffi14VisitInterrupt14VisitInterruptEv">[1]</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitInterruptObj.html#_CPPv4N3tvm3ffi17VisitInterruptObjE">tvm::ffi::VisitInterruptObj (C++ class)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitInterruptObj.html#_CPPv4N3tvm3ffi17VisitInterruptObj5valueE">tvm::ffi::VisitInterruptObj::value (C++ member)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitInterruptObj.html#_CPPv4N3tvm3ffi17VisitInterruptObj17VisitInterruptObjE3Any">tvm::ffi::VisitInterruptObj::VisitInterruptObj (C++ function)</a>, <a href="reference/cpp/generated/classtvm_1_1ffi_1_1VisitInterruptObj.html#_CPPv4N3tvm3ffi17VisitInterruptObj17VisitInterruptObjEv">[1]</a>
+</li>
+      <li><a href="reference/cpp/generated/enum_structural__visit_8h_1ab164fdc59c01d20b5fa07b88ef5ac09a.html#_CPPv4N3tvm3ffi9WalkOrderE">tvm::ffi::WalkOrder (C++ enum)</a>
+</li>
+      <li><a href="reference/cpp/generated/enum_structural__visit_8h_1ab164fdc59c01d20b5fa07b88ef5ac09a.html#_CPPv4N3tvm3ffi9WalkOrder10kPostOrderE">tvm::ffi::WalkOrder::kPostOrder (C++ enumerator)</a>
+</li>
+      <li><a href="reference/cpp/generated/enum_structural__visit_8h_1ab164fdc59c01d20b5fa07b88ef5ac09a.html#_CPPv4N3tvm3ffi9WalkOrder9kPreOrderE">tvm::ffi::WalkOrder::kPreOrder (C++ enumerator)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WalkResult.html#_CPPv4N3tvm3ffi10WalkResultE">tvm::ffi::WalkResult (C++ class)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WalkResult.html#_CPPv4N3tvm3ffi10WalkResult7AdvanceEv">tvm::ffi::WalkResult::Advance (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WalkResult.html#_CPPv4N3tvm3ffi10WalkResult9InterruptE14VisitInterrupt">tvm::ffi::WalkResult::Interrupt (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WalkResult.html#_CPPv4N3tvm3ffi10WalkResult11kAdvanceTagE">tvm::ffi::WalkResult::kAdvanceTag (C++ member)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WalkResult.html#_CPPv4N3tvm3ffi10WalkResult8kSkipTagE">tvm::ffi::WalkResult::kSkipTag (C++ member)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WalkResult.html#_CPPv4N3tvm3ffi10WalkResult4SkipEv">tvm::ffi::WalkResult::Skip (C++ function)</a>
+</li>
+      <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WalkResult.html#_CPPv4N3tvm3ffi10WalkResult7StorageE">tvm::ffi::WalkResult::Storage (C++ type)</a>
+</li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WeakObjectPtr.html#_CPPv4I0EN3tvm3ffi13WeakObjectPtrE">tvm::ffi::WeakObjectPtr (C++ class)</a>
 </li>
       <li><a href="reference/cpp/generated/classtvm_1_1ffi_1_1WeakObjectPtr.html#_CPPv4NK3tvm3ffi13WeakObjectPtr7expiredEv">tvm::ffi::WeakObjectPtr::expired (C++ function)</a>
@@ -2880,6 +3012,8 @@ window.runMermaid = runMermaid;</script>
       <li><a href="reference/cpp/generated/define_visit__error__context_8h_1a2c7a0445bca80cbe5572c1210ece5d9a.html#c.TVM_FFI_VISIT_BEGIN">TVM_FFI_VISIT_BEGIN (C macro)</a>
 </li>
       <li><a href="reference/cpp/generated/define_visit__error__context_8h_1ad7a104799c7bc592fb7f7bb33b15549c.html#c.TVM_FFI_VISIT_END">TVM_FFI_VISIT_END (C macro)</a>
+</li>
+      <li><a href="reference/cpp/generated/define_visit__error__context_8h_1a869b3127e19530e45aa7f2052dd290f7.html#c.TVM_FFI_VISIT_END_RETURN_EXPECTED">TVM_FFI_VISIT_END_RETURN_EXPECTED (C macro)</a>
 </li>
       <li><a href="reference/cpp/generated/define_visit__error__context_8h_1a83081a2550b85038ac6195ee80dbc3d5.html#c.TVM_FFI_VISIT_THROW">TVM_FFI_VISIT_THROW (C macro)</a>
 </li>
@@ -3251,6 +3385,8 @@ window.runMermaid = runMermaid;</script>
 </li>
       <li><a href="reference/cpp/generated/enum_c__api_8h_1a1925bb5d568a3f5c92a6c28934c9bcc2.html#_CPPv4N15TVMFFITypeIndex13kTVMFFITensorE">TVMFFITypeIndex::kTVMFFITensor (C++ enumerator)</a>
 </li>
+      <li><a href="reference/cpp/generated/enum_c__api_8h_1a1925bb5d568a3f5c92a6c28934c9bcc2.html#_CPPv4N15TVMFFITypeIndex21kTVMFFIVisitInterruptE">TVMFFITypeIndex::kTVMFFIVisitInterrupt (C++ enumerator)</a>
+</li>
       <li><a href="reference/cpp/generated/structTVMFFITypeInfo.html#_CPPv414TVMFFITypeInfo">TVMFFITypeInfo (C++ struct)</a>
 </li>
       <li><a href="reference/cpp/generated/structTVMFFITypeInfo.html#_CPPv4N14TVMFFITypeInfo6fieldsE">TVMFFITypeInfo::fields (C++ member)</a>
@@ -3323,7 +3459,15 @@ window.runMermaid = runMermaid;</script>
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/python/generated/tvm_ffi.VisitInterrupt.html#tvm_ffi.VisitInterrupt.value">value (tvm_ffi.VisitInterrupt property)</a>
+</li>
       <li><a href="reference/python/generated/tvm_ffi.Map.html#tvm_ffi.Map.values">values() (tvm_ffi.Map method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor.visit">visit() (tvm_ffi.StructuralVisitor method)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.VisitInterrupt.html#tvm_ffi.VisitInterrupt">VisitInterrupt (class in tvm_ffi)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -3331,10 +3475,16 @@ window.runMermaid = runMermaid;</script>
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/python/generated/tvm_ffi.dtype.html#tvm_ffi.dtype.with_lanes">with_lanes() (tvm_ffi.dtype method)</a>
+      <li><a href="reference/python/generated/tvm_ffi.WalkOrder.html#tvm_ffi.WalkOrder">WalkOrder (class in tvm_ffi)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.WalkResult.html#tvm_ffi.WalkResult">WalkResult (class in tvm_ffi)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/python/generated/tvm_ffi.StructuralVisitor.html#tvm_ffi.StructuralVisitor.with_def_region_kind">with_def_region_kind() (tvm_ffi.StructuralVisitor method)</a>
+</li>
+      <li><a href="reference/python/generated/tvm_ffi.dtype.html#tvm_ffi.dtype.with_lanes">with_lanes() (tvm_ffi.dtype method)</a>
+</li>
       <li><a href="reference/python/generated/tvm_ffi.Module.html#tvm_ffi.Module.write_to_file">write_to_file() (tvm_ffi.Module method)</a>
 </li>
   </ul></td>
@@ -3380,7 +3530,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Jun 09, 2026.
+  Last updated on Jun 17, 2026.
   <br/>
 </p>
   </div>

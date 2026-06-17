@@ -81,6 +81,8 @@ Included By
 
 - :ref:`file_tvm_ffi_extra_structural_key.h`
 
+- :ref:`file_tvm_ffi_extra_structural_visit.h`
+
 - :ref:`file_tvm_ffi_function.h`
 
 - :ref:`file_tvm_ffi_reflection_access_path.h`

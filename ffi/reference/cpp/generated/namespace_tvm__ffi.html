@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=ecced4fd"></script>
+    <script src="../../../_static/documentation_options.js?v=e435db62"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -59,8 +59,8 @@
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.dev1+g59da4c0b8" />
-    <meta name="docbuild:last-update" content="Jun 09, 2026"/>
+  <meta name="docsearch:version" content="0.1.dev1+gf90410468" />
+    <meta name="docbuild:last-update" content="Jun 17, 2026"/>
   </head>
   
   
@@ -172,7 +172,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../concepts/tensor.html">Tensor and DLPack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../concepts/func_module.html">Function and Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../concepts/exception_handling.html">Exception Handling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../concepts/structural_eq_hash.html">Structural Equality and Hashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../concepts/structural_eq_hash.html">Structural Equality, Hashing, and Walk</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Packaging</span></p>
 <ul class="nav bd-sidenav">
@@ -197,6 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.load_module.html">tvm_ffi.load_module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.Array.html">tvm_ffi.Array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.Map.html">tvm_ffi.Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.StructuralKey.html">tvm_ffi.StructuralKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.StructuralVisitor.html">tvm_ffi.StructuralVisitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.VisitInterrupt.html">tvm_ffi.VisitInterrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.WalkOrder.html">tvm_ffi.WalkOrder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.WalkResult.html">tvm_ffi.WalkResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.get_first_structural_mismatch.html">tvm_ffi.get_first_structural_mismatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.structural_equal.html">tvm_ffi.structural_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.structural_hash.html">tvm_ffi.structural_hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.structural_walk.html">tvm_ffi.structural_walk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.register_error.html">tvm_ffi.register_error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.register_object.html">tvm_ffi.register_object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/generated/tvm_ffi.register_global_func.html">tvm_ffi.register_global_func</a></li>
@@ -450,6 +459,7 @@
 <li><p><a class="reference internal" href="structtvm_1_1ffi_1_1ObjectPtrHash.html#exhale-struct-structtvm-1-1ffi-1-1objectptrhash"><span class="std std-ref">Struct ObjectPtrHash</span></a></p></li>
 <li><p><a class="reference internal" href="structtvm_1_1ffi_1_1ObjectRefWithFallbackTraitsBase.html#exhale-struct-structtvm-1-1ffi-1-1objectrefwithfallbacktraitsbase"><span class="std std-ref">Template Struct ObjectRefWithFallbackTraitsBase</span></a></p></li>
 <li><p><a class="reference internal" href="structtvm_1_1ffi_1_1StaticTypeKey.html#exhale-struct-structtvm-1-1ffi-1-1statictypekey"><span class="std std-ref">Struct StaticTypeKey</span></a></p></li>
+<li><p><a class="reference internal" href="structtvm_1_1ffi_1_1StructuralVisitorVTable.html#exhale-struct-structtvm-1-1ffi-1-1structuralvisitorvtable"><span class="std std-ref">Struct StructuralVisitorVTable</span></a></p></li>
 <li><p><a class="reference internal" href="structtvm_1_1ffi_1_1TypeToFieldStaticTypeIndex.html#exhale-struct-structtvm-1-1ffi-1-1typetofieldstatictypeindex"><span class="std std-ref">Template Struct TypeToFieldStaticTypeIndex</span></a></p></li>
 <li><p><a class="reference internal" href="structtvm_1_1ffi_1_1TypeToRuntimeTypeIndex.html#exhale-struct-structtvm-1-1ffi-1-1typetoruntimetypeindex"><span class="std std-ref">Template Struct TypeToRuntimeTypeIndex</span></a></p></li>
 <li><p><a class="reference internal" href="structtvm_1_1ffi_1_1UnsafeInit.html#exhale-struct-structtvm-1-1ffi-1-1unsafeinit"><span class="std std-ref">Struct UnsafeInit</span></a></p></li>
@@ -494,6 +504,8 @@
 <li><p><a class="reference internal" href="classtvm_1_1ffi_1_1StructuralHash.html#exhale-class-classtvm-1-1ffi-1-1structuralhash"><span class="std std-ref">Class StructuralHash</span></a></p></li>
 <li><p><a class="reference internal" href="classtvm_1_1ffi_1_1StructuralKey.html#exhale-class-classtvm-1-1ffi-1-1structuralkey"><span class="std std-ref">Class StructuralKey</span></a></p></li>
 <li><p><a class="reference internal" href="classtvm_1_1ffi_1_1StructuralKeyObj.html#exhale-class-classtvm-1-1ffi-1-1structuralkeyobj"><span class="std std-ref">Class StructuralKeyObj</span></a></p></li>
+<li><p><a class="reference internal" href="classtvm_1_1ffi_1_1StructuralVisitor.html#exhale-class-classtvm-1-1ffi-1-1structuralvisitor"><span class="std std-ref">Class StructuralVisitor</span></a></p></li>
+<li><p><a class="reference internal" href="classtvm_1_1ffi_1_1StructuralVisitorObj.html#exhale-class-classtvm-1-1ffi-1-1structuralvisitorobj"><span class="std std-ref">Class StructuralVisitorObj</span></a></p></li>
 <li><p><a class="reference internal" href="classtvm_1_1ffi_1_1Tensor.html#exhale-class-classtvm-1-1ffi-1-1tensor"><span class="std std-ref">Class Tensor</span></a></p></li>
 <li><p><a class="reference internal" href="classtvm_1_1ffi_1_1TensorObj.html#exhale-class-classtvm-1-1ffi-1-1tensorobj"><span class="std std-ref">Class TensorObj</span></a></p></li>
 <li><p><a class="reference internal" href="classtvm_1_1ffi_1_1TensorView.html#exhale-class-classtvm-1-1ffi-1-1tensorview"><span class="std std-ref">Class TensorView</span></a></p></li>
@@ -504,6 +516,9 @@
 <li><p><a class="reference internal" href="classtvm_1_1ffi_1_1Variant.html#exhale-class-classtvm-1-1ffi-1-1variant"><span class="std std-ref">Template Class Variant</span></a></p></li>
 <li><p><a class="reference internal" href="classtvm_1_1ffi_1_1VisitErrorContext.html#exhale-class-classtvm-1-1ffi-1-1visiterrorcontext"><span class="std std-ref">Class VisitErrorContext</span></a></p></li>
 <li><p><a class="reference internal" href="classtvm_1_1ffi_1_1VisitErrorContextObj.html#exhale-class-classtvm-1-1ffi-1-1visiterrorcontextobj"><span class="std std-ref">Class VisitErrorContextObj</span></a></p></li>
+<li><p><a class="reference internal" href="classtvm_1_1ffi_1_1VisitInterrupt.html#exhale-class-classtvm-1-1ffi-1-1visitinterrupt"><span class="std std-ref">Class VisitInterrupt</span></a></p></li>
+<li><p><a class="reference internal" href="classtvm_1_1ffi_1_1VisitInterruptObj.html#exhale-class-classtvm-1-1ffi-1-1visitinterruptobj"><span class="std std-ref">Class VisitInterruptObj</span></a></p></li>
+<li><p><a class="reference internal" href="classtvm_1_1ffi_1_1WalkResult.html#exhale-class-classtvm-1-1ffi-1-1walkresult"><span class="std std-ref">Class WalkResult</span></a></p></li>
 <li><p><a class="reference internal" href="classtvm_1_1ffi_1_1WeakObjectPtr.html#exhale-class-classtvm-1-1ffi-1-1weakobjectptr"><span class="std std-ref">Template Class WeakObjectPtr</span></a></p></li>
 </ul>
 </section>
@@ -511,13 +526,14 @@
 <h2>Enums<a class="headerlink" href="#enums" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="enum_dtype_8h_1a16f66b97fa44d7bd6114324c8b8e1bed.html#exhale-enum-dtype-8h-1a16f66b97fa44d7bd6114324c8b8e1bed"><span class="std std-ref">Enum DLExtDataTypeCode</span></a></p></li>
+<li><p><a class="reference internal" href="enum_structural__visit_8h_1ab164fdc59c01d20b5fa07b88ef5ac09a.html#exhale-enum-structural-visit-8h-1ab164fdc59c01d20b5fa07b88ef5ac09a"><span class="std std-ref">Enum WalkOrder</span></a></p></li>
 </ul>
 </section>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="function_base64_8h_1acb849cdb1d9b9620be10bbcda0257afa.html#exhale-function-base64-8h-1acb849cdb1d9b9620be10bbcda0257afa"><span class="std std-ref">Function tvm::ffi::Base64Decode(const String&amp;)</span></a></p></li>
 <li><p><a class="reference internal" href="function_base64_8h_1ae1d4736f7dc56b224acd303ba7bf7a45.html#exhale-function-base64-8h-1ae1d4736f7dc56b224acd303ba7bf7a45"><span class="std std-ref">Function tvm::ffi::Base64Decode(TVMFFIByteArray)</span></a></p></li>
+<li><p><a class="reference internal" href="function_base64_8h_1acb849cdb1d9b9620be10bbcda0257afa.html#exhale-function-base64-8h-1acb849cdb1d9b9620be10bbcda0257afa"><span class="std std-ref">Function tvm::ffi::Base64Decode(const String&amp;)</span></a></p></li>
 <li><p><a class="reference internal" href="function_base64_8h_1a279b4ba2f4c7ea16291ef24b73e43963.html#exhale-function-base64-8h-1a279b4ba2f4c7ea16291ef24b73e43963"><span class="std std-ref">Function tvm::ffi::Base64Encode(const Bytes&amp;)</span></a></p></li>
 <li><p><a class="reference internal" href="function_base64_8h_1aa5b2a4531449585b9f079cb170a79f0b.html#exhale-function-base64-8h-1aa5b2a4531449585b9f079cb170a79f0b"><span class="std std-ref">Function tvm::ffi::Base64Encode(TVMFFIByteArray)</span></a></p></li>
 <li><p><a class="reference internal" href="function_endian_8h_1ab4e0ed8000c632cd2c7cd089c0a0d1af.html#exhale-function-endian-8h-1ab4e0ed8000c632cd2c7cd089c0a0d1af"><span class="std std-ref">Function tvm::ffi::ByteSwap</span></a></p></li>
@@ -531,9 +547,9 @@
 <li><p><a class="reference internal" href="function_string_8h_1a88e8350835739df34d48ab4e9d776535.html#exhale-function-string-8h-1a88e8350835739df34d48ab4e9d776535"><span class="std std-ref">Function tvm::ffi::EscapeStringJSON</span></a></p></li>
 <li><p><a class="reference internal" href="function_serialization_8h_1a56baa5d1ca415dbdebf19ac1f54bd5b7.html#exhale-function-serialization-8h-1a56baa5d1ca415dbdebf19ac1f54bd5b7"><span class="std std-ref">Function tvm::ffi::FromJSONGraph</span></a></p></li>
 <li><p><a class="reference internal" href="function_tensor_8h_1a71e4a492b5a03a19a95087771a7e9ed1.html#exhale-function-tensor-8h-1a71e4a492b5a03a19a95087771a7e9ed1"><span class="std std-ref">Function tvm::ffi::GetDataSize(size_t, DLDataType)</span></a></p></li>
-<li><p><a class="reference internal" href="function_tensor_8h_1a65b3a61c540c72d9410150a3a7a76dde.html#exhale-function-tensor-8h-1a65b3a61c540c72d9410150a3a7a76dde"><span class="std std-ref">Function tvm::ffi::GetDataSize(const TensorView&amp;)</span></a></p></li>
-<li><p><a class="reference internal" href="function_tensor_8h_1a011d0a2dcbe5702156124d7a7223b3dd.html#exhale-function-tensor-8h-1a011d0a2dcbe5702156124d7a7223b3dd"><span class="std std-ref">Function tvm::ffi::GetDataSize(const Tensor&amp;)</span></a></p></li>
 <li><p><a class="reference internal" href="function_tensor_8h_1a226723176642cde5996498e7da6a6368.html#exhale-function-tensor-8h-1a226723176642cde5996498e7da6a6368"><span class="std std-ref">Function tvm::ffi::GetDataSize(const DLTensor&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor_8h_1a011d0a2dcbe5702156124d7a7223b3dd.html#exhale-function-tensor-8h-1a011d0a2dcbe5702156124d7a7223b3dd"><span class="std std-ref">Function tvm::ffi::GetDataSize(const Tensor&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor_8h_1a65b3a61c540c72d9410150a3a7a76dde.html#exhale-function-tensor-8h-1a65b3a61c540c72d9410150a3a7a76dde"><span class="std std-ref">Function tvm::ffi::GetDataSize(const TensorView&amp;)</span></a></p></li>
 <li><p><a class="reference internal" href="function_cast_8h_1a4dba749dd934d8a7891ad126a8fdcc1f.html#exhale-function-cast-8h-1a4dba749dd934d8a7891ad126a8fdcc1f"><span class="std std-ref">Template Function tvm::ffi::GetObjectPtr</span></a></p></li>
 <li><p><a class="reference internal" href="function_cast_8h_1a3c5fed9bb23b4804b61037c8ac4874f1.html#exhale-function-cast-8h-1a3c5fed9bb23b4804b61037c8ac4874f1"><span class="std std-ref">Template Function tvm::ffi::GetRef</span></a></p></li>
 <li><p><a class="reference internal" href="function_creator_8h_1a9f39a70dd0c30ef28f11b745a6753222.html#exhale-function-creator-8h-1a9f39a70dd0c30ef28f11b745a6753222"><span class="std std-ref">Function tvm::ffi::HasCreator</span></a></p></li>
@@ -552,6 +568,8 @@
 <li><p><a class="reference internal" href="function_dataclass_8h_1a5a1645610efa2f94feb1b0653839eb7d.html#exhale-function-dataclass-8h-1a5a1645610efa2f94feb1b0653839eb7d"><span class="std std-ref">Function tvm::ffi::RecursiveLt</span></a></p></li>
 <li><p><a class="reference internal" href="function_dataclass_8h_1af7642a00508a88b93e7103a109529a79.html#exhale-function-dataclass-8h-1af7642a00508a88b93e7103a109529a79"><span class="std std-ref">Function tvm::ffi::ReprPrint</span></a></p></li>
 <li><p><a class="reference internal" href="function_dtype_8h_1a8a71c64237efaa13a8d40dfacd6c3165.html#exhale-function-dtype-8h-1a8a71c64237efaa13a8d40dfacd6c3165"><span class="std std-ref">Function tvm::ffi::StringToDLDataType</span></a></p></li>
+<li><p><a class="reference internal" href="function_structural__visit_8h_1a22c788e5e785d50c51b588526601f9cb.html#exhale-function-structural-visit-8h-1a22c788e5e785d50c51b588526601f9cb"><span class="std std-ref">Template Function tvm::ffi::StructuralWalk</span></a></p></li>
+<li><p><a class="reference internal" href="function_structural__visit_8h_1ab94d5197b2b27e397f0bcdef5a63048b.html#exhale-function-structural-visit-8h-1ab94d5197b2b27e397f0bcdef5a63048b"><span class="std std-ref">Template Function tvm::ffi::StructuralWalkExpected</span></a></p></li>
 <li><p><a class="reference internal" href="function_serialization_8h_1a24d1febeb5c1026e7fd66dee9dd9915f.html#exhale-function-serialization-8h-1a24d1febeb5c1026e7fd66dee9dd9915f"><span class="std std-ref">Function tvm::ffi::ToJSONGraph</span></a></p></li>
 <li><p><a class="reference internal" href="function_string_8h_1ad045700080c053c50d68cde298b2b4b2.html#exhale-function-string-8h-1ad045700080c053c50d68cde298b2b4b2"><span class="std std-ref">Function tvm::ffi::ToStringView</span></a></p></li>
 <li><p><a class="reference internal" href="function_object_8h_1a0d6e075f219808c4ff7adebd99210a7b.html#exhale-function-object-8h-1a0d6e075f219808c4ff7adebd99210a7b"><span class="std std-ref">Function tvm::ffi::TypeIndexToTypeKey</span></a></p></li>
@@ -562,6 +580,7 @@
 <h2>Typedefs<a class="headerlink" href="#typedefs" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="typedef_memory_8h_1a65bf625279df21dec5c8097264415113.html#exhale-typedef-memory-8h-1a65bf625279df21dec5c8097264415113"><span class="std std-ref">Typedef tvm::ffi::FObjectDeleter</span></a></p></li>
+<li><p><a class="reference internal" href="typedef_structural__visit_8h_1a745d053678181bd38e0fee17b772656b.html#exhale-typedef-structural-visit-8h-1a745d053678181bd38e0fee17b772656b"><span class="std std-ref">Typedef tvm::ffi::FStructuralVisit</span></a></p></li>
 <li><p><a class="reference internal" href="typedef_object_8h_1a7ba296d84188e5970ba854332a1f04a6.html#exhale-typedef-object-8h-1a7ba296d84188e5970ba854332a1f04a6"><span class="std std-ref">Typedef tvm::ffi::TypeIndex</span></a></p></li>
 <li><p><a class="reference internal" href="typedef_object_8h_1ae125f5f5a8a94c7340577c1959805295.html#exhale-typedef-object-8h-1ae125f5f5a8a94c7340577c1959805295"><span class="std std-ref">Typedef tvm::ffi::TypeInfo</span></a></p></li>
 </ul>
@@ -635,7 +654,7 @@ By Apache TVM FFI contributors
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Jun 09, 2026.
+  Last updated on Jun 17, 2026.
   <br/>
 </p>
   </div>

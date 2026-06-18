@@ -264,7 +264,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.enabled_targets"><code class="docutils literal notranslate"><span class="pre">enabled_targets()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.fixture"><code class="docutils literal notranslate"><span class="pre">fixture()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.generate_random_array"><code class="docutils literal notranslate"><span class="pre">generate_random_array()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.testing.get_dtype_range"><code class="docutils literal notranslate"><span class="pre">get_dtype_range()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.identity_after"><code class="docutils literal notranslate"><span class="pre">identity_after()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.install_request_hook"><code class="docutils literal notranslate"><span class="pre">install_request_hook()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.is_ampere_or_newer"><code class="docutils literal notranslate"><span class="pre">is_ampere_or_newer()</span></code></a></li>
@@ -963,24 +962,6 @@ will disable this feature and no caching will be performed.</p>
 <dt>Supported dtypes:</dt><dd><ul class="simple">
 <li><p>“int8”, “uint8”, “float16”, “float32”, “bfloat16”, “float8_e4m3fn”, “float8_e5m2”</p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tvm.testing.get_dtype_range">
-<span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">get_dtype_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#tvm.testing.get_dtype_range" title="Link to this definition"></a></dt>
-<dd><p>Produces the min,max for a give data type.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dtype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – a type string (e.g., int8, float64)</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>type_info.min</strong> (<em>int</em>) – the minimum of the range</p></li>
-<li><p><strong>type_info.max</strong> (<em>int</em>) – the maximum of the range</p></li>
-</ul>
-</p>
 </dd>
 </dl>
 </dd></dl>

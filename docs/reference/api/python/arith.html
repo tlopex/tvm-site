@@ -221,6 +221,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#tvm.arith.ModularSet"><code class="docutils literal notranslate"><span class="pre">ModularSet</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.arith.ConstIntBound"><code class="docutils literal notranslate"><span class="pre">ConstIntBound</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.arith.Analyzer"><code class="docutils literal notranslate"><span class="pre">Analyzer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.is_z3_enabled"><code class="docutils literal notranslate"><span class="pre">Analyzer.is_z3_enabled</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.get_smtlib2"><code class="docutils literal notranslate"><span class="pre">Analyzer.get_smtlib2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.set_z3_timeout_ms"><code class="docutils literal notranslate"><span class="pre">Analyzer.set_z3_timeout_ms()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.set_z3_rlimit"><code class="docutils literal notranslate"><span class="pre">Analyzer.set_z3_rlimit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.get_z3_stats"><code class="docutils literal notranslate"><span class="pre">Analyzer.get_z3_stats()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.const_int_bound"><code class="docutils literal notranslate"><span class="pre">Analyzer.const_int_bound()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.const_int_bound_is_bound"><code class="docutils literal notranslate"><span class="pre">Analyzer.const_int_bound_is_bound()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.modular_set"><code class="docutils literal notranslate"><span class="pre">Analyzer.modular_set()</span></code></a></li>
@@ -572,6 +577,77 @@ constraints are reused; otherwise a fresh analyzer is created.</p></li>
 <p>This is a stateful analyzer class that can be used to perform
 various symbolic integer analysis. The same analyzer instance can
 be passed to FFI APIs to share accumulated facts across calls.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="tvm.arith.Analyzer.is_z3_enabled">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_z3_enabled</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></em><a class="headerlink" href="#tvm.arith.Analyzer.is_z3_enabled" title="Link to this definition"></a></dt>
+<dd><p>Whether this build includes the Z3 backend (<code class="docutils literal notranslate"><span class="pre">USE_Z3=ON</span></code>).</p>
+<p>The Z3-specific methods (<a class="reference internal" href="#tvm.arith.Analyzer.get_smtlib2" title="tvm.arith.Analyzer.get_smtlib2"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_smtlib2()</span></code></a>, <a class="reference internal" href="#tvm.arith.Analyzer.get_z3_stats" title="tvm.arith.Analyzer.get_z3_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_z3_stats()</span></code></a>,
+<a class="reference internal" href="#tvm.arith.Analyzer.set_z3_timeout_ms" title="tvm.arith.Analyzer.set_z3_timeout_ms"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_z3_timeout_ms()</span></code></a>, <a class="reference internal" href="#tvm.arith.Analyzer.set_z3_rlimit" title="tvm.arith.Analyzer.set_z3_rlimit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_z3_rlimit()</span></code></a>) only work when
+this is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tvm.arith.Analyzer.get_smtlib2">
+<span class="sig-name descname"><span class="pre">get_smtlib2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.expr.PrimExpr"><span class="pre">PrimExpr</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#tvm.arith.Analyzer.get_smtlib2" title="Link to this definition"></a></dt>
+<dd><p>Get the current Z3 problem in SMT-LIB2 format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.14)"><strong>RuntimeError</strong></a> – If TVM was built without Z3 (<code class="docutils literal notranslate"><span class="pre">USE_Z3=OFF</span></code>), since there is no
+    solver state to export. Use <a class="reference internal" href="#tvm.arith.Analyzer.is_z3_enabled" title="tvm.arith.Analyzer.is_z3_enabled"><code class="xref py py-attr docutils literal notranslate"><span class="pre">is_z3_enabled</span></code></a> to check first.</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>expr</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a><em>]</em>) – The expression to prove. If provided, its negation is added to the problem.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tvm.arith.Analyzer.set_z3_timeout_ms">
+<span class="sig-name descname"><span class="pre">set_z3_timeout_ms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#tvm.arith.Analyzer.set_z3_timeout_ms" title="Link to this definition"></a></dt>
+<dd><p>Set Z3 timeout in milliseconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.14)"><strong>RuntimeError</strong></a> – If TVM was built without Z3 (<code class="docutils literal notranslate"><span class="pre">USE_Z3=OFF</span></code>).</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>timeout_ms</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The timeout in milliseconds.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tvm.arith.Analyzer.set_z3_rlimit">
+<span class="sig-name descname"><span class="pre">set_z3_rlimit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rlimit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#tvm.arith.Analyzer.set_z3_rlimit" title="Link to this definition"></a></dt>
+<dd><p>Set Z3 resource limit.</p>
+<p>The resource limit gives deterministic solver budgeting (unlike a wall
+clock timeout). A value of <code class="docutils literal notranslate"><span class="pre">0</span></code> disables the limit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.14)"><strong>RuntimeError</strong></a> – If TVM was built without Z3 (<code class="docutils literal notranslate"><span class="pre">USE_Z3=OFF</span></code>).</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>rlimit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The resource limit.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tvm.arith.Analyzer.get_z3_stats">
+<span class="sig-name descname"><span class="pre">get_z3_stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#tvm.arith.Analyzer.get_z3_stats" title="Link to this definition"></a></dt>
+<dd><p>Get Z3 solver statistics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.14)"><strong>RuntimeError</strong></a> – If TVM was built without Z3 (<code class="docutils literal notranslate"><span class="pre">USE_Z3=OFF</span></code>).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>stats</strong> – The Z3 statistics.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.arith.Analyzer.const_int_bound">
 <span class="sig-name descname"><span class="pre">const_int_bound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.expr.PrimExpr"><span class="pre">PrimExpr</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#tvm.arith.ConstIntBound" title="tvm.arith.analyzer.ConstIntBound"><span class="pre">ConstIntBound</span></a></span></span><a class="headerlink" href="#tvm.arith.Analyzer.const_int_bound" title="Link to this definition"></a></dt>
@@ -709,7 +785,9 @@ uses the domains of the variables already bound to it.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<a class="reference internal" href="ir.html#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><em>PrimExpr</em></a>) – The expression.</p></li>
-<li><p><strong>strength</strong> (<a class="reference internal" href="#tvm.arith.ProofStrength" title="tvm.arith.ProofStrength"><em>ProofStrength</em></a>) – The proof strength</p></li>
+<li><p><strong>strength</strong> (<a class="reference internal" href="#tvm.arith.ProofStrength" title="tvm.arith.ProofStrength"><em>ProofStrength</em></a>) – The proof strength. When TVM is built with Z3 (<code class="docutils literal notranslate"><span class="pre">USE_Z3=ON</span></code>), the
+optional Z3 fallback is only consulted at <code class="docutils literal notranslate"><span class="pre">SYMBOLIC_BOUND</span></code> or
+higher, after the native analyzers fail to prove the predicate.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

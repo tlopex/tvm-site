@@ -354,68 +354,60 @@ runtime.</p></li>
 </section>
 <section id="unit-test-file-contents">
 <h3>Unit-Test File Contents<a class="headerlink" href="#unit-test-file-contents" title="Link to this heading"></a></h3>
-<p>The recommended method to run a test on multiple targets is by
-parametrizing the test.  This can be done explicitly for a fixed list
-of targets by decorating with
-<code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.parametrize_targets('target_1',</span> <span class="pre">'target_2',</span> <span class="pre">...)</span></code>, and
-accepting <code class="docutils literal notranslate"><span class="pre">target</span></code> or <code class="docutils literal notranslate"><span class="pre">dev</span></code> as function arguments.  The function
-will be run once for each target listed, and the success/failure of
-each target is reported separately.  If a target cannot be run because
-it is disabled in the <cite>config.cmake</cite>, or because no appropriate
-hardware is present, then that target will be reported as skipped.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Explicit listing of targets to use.</span>
-<span class="nd">@tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">parametrize_targets</span><span class="p">(</span><span class="s1">&#39;llvm&#39;</span><span class="p">,</span> <span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_function</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dev</span><span class="p">):</span>
+<p>The recommended way to run a test on multiple targets is to parametrize
+over <code class="docutils literal notranslate"><span class="pre">target</span></code> with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.parametrize</span></code>.  Tag each GPU target
+with <code class="docutils literal notranslate"><span class="pre">pytest.mark.gpu</span></code> so the CI routes it to a GPU node, skip a target
+that cannot run on the current machine with
+<a class="reference internal" href="../reference/api/python/testing.html#tvm.testing.device_enabled" title="tvm.testing.device_enabled"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.device_enabled()</span></code></a>, and obtain its device with
+<code class="docutils literal notranslate"><span class="pre">tvm.device(target)</span></code>.  The function is run once per target, the
+success/failure of each is reported separately, and a target whose device
+is disabled in <code class="docutils literal notranslate"><span class="pre">config.cmake</span></code> or absent from the machine is reported as
+skipped.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span>
+    <span class="s2">&quot;target&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s2">&quot;llvm&quot;</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">param</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span> <span class="n">marks</span><span class="o">=</span><span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">gpu</span><span class="p">)],</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_function</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">device_enabled</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2"> not enabled&quot;</span><span class="p">)</span>
+    <span class="n">dev</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
     <span class="c1"># Test code goes here</span>
 </pre></div>
 </div>
-<p>For tests that should run correctly on all targets, the decorator can
-be omitted.  Any test that accepts a <code class="docutils literal notranslate"><span class="pre">target</span></code> or <code class="docutils literal notranslate"><span class="pre">dev</span></code> argument
-will automatically be parametrized over all targets specified in
-<code class="docutils literal notranslate"><span class="pre">TVM_TEST_TARGETS</span></code>.  The parametrization provides the same
-pass/fail/skipped report for each target, while allowing the test
-suite to be easily extended to cover additional targets.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implicitly parametrized to run on all targets</span>
-<span class="c1"># in environment variable TVM_TEST_TARGETS</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_function</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dev</span><span class="p">):</span>
+<p>For a test that only applies to a single target, omit the parametrization
+and gate the test with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.skipif</span></code> (plus <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.gpu</span></code>
+for a GPU target):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">gpu</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span>
+    <span class="ow">not</span> <span class="n">tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">device_enabled</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;cuda not enabled&quot;</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_function</span><span class="p">():</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span>
+    <span class="n">dev</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
     <span class="c1"># Test code goes here</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.parametrize_targets</span></code> can also be used as a bare
-decorator to explicitly draw attention to the parametrization, but has
-no additional effect.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Explicitly parametrized to run on all targets</span>
-<span class="c1"># in environment variable TVM_TEST_TARGETS</span>
-<span class="nd">@tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">parametrize_targets</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_function</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dev</span><span class="p">):</span>
-    <span class="c1"># Test code goes here</span>
-</pre></div>
-</div>
-<p>Specific targets can be excluded or marked as expected to fail using
-the <code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.exclude_targets</span></code> or
-<code class="docutils literal notranslate"><span class="pre">&#64;tvm.testing.known_failing_targets</span></code> decorators.  For more
-information on their intended use cases, please see their docstrings.</p>
-<p>In some cases it may be necessary to parametrize across multiple
-parameters.  For instance, there may be target-specific
-implementations that should be tested, where some targets have more
-than one implementation.  These can be done by explicitly
-parametrizing over tuples of arguments, such as shown below.  In these
-cases, only the explicitly listed targets will run, and each target is
-automatically gated on whether it can run on the current machine (a GPU
-target gets <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.gpu</span></code> plus a skip when no device is present).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;target,impl&#39;</span><span class="p">,</span> <span class="p">[</span>
-     <span class="p">(</span><span class="s1">&#39;llvm&#39;</span><span class="p">,</span> <span class="n">cpu_implementation</span><span class="p">),</span>
-     <span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">,</span> <span class="n">gpu_implementation_small_batch</span><span class="p">),</span>
-     <span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">,</span> <span class="n">gpu_implementation_large_batch</span><span class="p">),</span>
+<p>To exclude a target, leave it out of the parametrize list.  To mark a
+target as expected to fail, wrap it with
+<code class="docutils literal notranslate"><span class="pre">pytest.param(&quot;target&quot;,</span> <span class="pre">marks=pytest.mark.xfail(reason=...))</span></code>.</p>
+<p>Additional parameters can be combined with the target parametrization by
+stacking <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.parametrize</span></code> decorators, or by listing tuples of
+arguments.  Tag the GPU rows with <code class="docutils literal notranslate"><span class="pre">pytest.mark.gpu</span></code> and skip in the body
+as above:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;target,impl&quot;</span><span class="p">,</span> <span class="p">[</span>
+     <span class="p">(</span><span class="s2">&quot;llvm&quot;</span><span class="p">,</span> <span class="n">cpu_implementation</span><span class="p">),</span>
+     <span class="n">pytest</span><span class="o">.</span><span class="n">param</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span> <span class="n">gpu_implementation_small_batch</span><span class="p">,</span> <span class="n">marks</span><span class="o">=</span><span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">gpu</span><span class="p">),</span>
+     <span class="n">pytest</span><span class="o">.</span><span class="n">param</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span> <span class="n">gpu_implementation_large_batch</span><span class="p">,</span> <span class="n">marks</span><span class="o">=</span><span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">gpu</span><span class="p">),</span>
  <span class="p">])</span>
- <span class="k">def</span><span class="w"> </span><span class="nf">test_function</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dev</span><span class="p">,</span> <span class="n">impl</span><span class="p">):</span>
+ <span class="k">def</span><span class="w"> </span><span class="nf">test_function</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">impl</span><span class="p">):</span>
+     <span class="k">if</span> <span class="ow">not</span> <span class="n">tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">device_enabled</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+         <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2"> not enabled&quot;</span><span class="p">)</span>
+     <span class="n">dev</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
      <span class="c1"># Test code goes here</span>
 </pre></div>
 </div>
-<p>The parametrization functionality is implemented
-on top of pytest marks.  Each test function can
-be decorated with <a class="reference external" href="pytest-marks">pytest marks</a>
-to include metadata.  The most frequently applied
+<p>Tests gate on hardware and carry metadata using
+<a class="reference external" href="pytest-marks">pytest marks</a>.  The most frequently applied
 marks are as follows.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.gpu</span></code> - Tags a function as using GPU
@@ -443,11 +435,6 @@ module, when called at import time) if an optional Python package is
 not installed.  Use this instead of a <code class="docutils literal notranslate"><span class="pre">skipif</span></code> for package
 dependencies.</p></li>
 </ul>
-<p>When using <code class="docutils literal notranslate"><span class="pre">tvm.testing.parametrize_targets()</span></code>, each parametrized run
-is gated automatically on whether its target can run on the current
-machine.  As a result, if a target is disabled in <code class="docutils literal notranslate"><span class="pre">config.cmake</span></code> or
-does not have appropriate hardware to run, it will be explicitly listed
-as skipped, and GPU targets are tagged with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.gpu</span></code> for you.</p>
 <p>There also exists a <code class="docutils literal notranslate"><span class="pre">tvm.testing.enabled_targets()</span></code> that returns
 all targets that are enabled and runnable on the current machine,
 based on the environment variable <code class="docutils literal notranslate"><span class="pre">TVM_TEST_TARGETS</span></code>, the build

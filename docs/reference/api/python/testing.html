@@ -262,17 +262,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.check_numerical_grads"><code class="docutils literal notranslate"><span class="pre">check_numerical_grads()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.device_enabled"><code class="docutils literal notranslate"><span class="pre">device_enabled()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.enabled_targets"><code class="docutils literal notranslate"><span class="pre">enabled_targets()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.testing.exclude_targets"><code class="docutils literal notranslate"><span class="pre">exclude_targets()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.fixture"><code class="docutils literal notranslate"><span class="pre">fixture()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.generate_random_array"><code class="docutils literal notranslate"><span class="pre">generate_random_array()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.get_dtype_range"><code class="docutils literal notranslate"><span class="pre">get_dtype_range()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.identity_after"><code class="docutils literal notranslate"><span class="pre">identity_after()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.install_request_hook"><code class="docutils literal notranslate"><span class="pre">install_request_hook()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.is_ampere_or_newer"><code class="docutils literal notranslate"><span class="pre">is_ampere_or_newer()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.testing.known_failing_targets"><code class="docutils literal notranslate"><span class="pre">known_failing_targets()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.np_dtype_from_str"><code class="docutils literal notranslate"><span class="pre">np_dtype_from_str()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.parameter"><code class="docutils literal notranslate"><span class="pre">parameter()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.testing.parametrize_targets"><code class="docutils literal notranslate"><span class="pre">parametrize_targets()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.strtobool"><code class="docutils literal notranslate"><span class="pre">strtobool()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.testing.terminate_self"><code class="docutils literal notranslate"><span class="pre">terminate_self()</span></code></a></li>
 </ul>
@@ -856,8 +853,8 @@ gradient.</p></li>
 <dt class="sig sig-object py" id="tvm.testing.device_enabled">
 <span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">device_enabled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.device_enabled" title="Link to this definition"></a></dt>
 <dd><p>Check if a target should be used when testing.</p>
-<p>It is recommended that you use <a class="reference internal" href="#tvm.testing.parametrize_targets" title="tvm.testing.parametrize_targets"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.parametrize_targets()</span></code></a>
-instead of manually checking if a target is enabled.</p>
+<p>Gate a device-specific test on this with
+<code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.skipif(not</span> <span class="pre">tvm.testing.device_enabled(target))</span></code>.</p>
 <p>This allows the user to control which devices they are testing against. In
 tests, this should be used to check if a device should be used when said
 device is an optional part of the test.</p>
@@ -888,8 +885,8 @@ nodes and <cite>target=”llvm”</cite> on cpu test nodes.</p>
 <dt class="sig sig-object py" id="tvm.testing.enabled_targets">
 <span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">enabled_targets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.enabled_targets" title="Link to this definition"></a></dt>
 <dd><p>Get all enabled targets with associated devices.</p>
-<p>In most cases, you should use <a class="reference internal" href="#tvm.testing.parametrize_targets" title="tvm.testing.parametrize_targets"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.parametrize_targets()</span></code></a> instead of
-this function.</p>
+<p>In most cases, parametrize over the specific targets you need with
+<code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.parametrize</span></code> instead of iterating this function.</p>
 <p>In this context, enabled means that TVM was built with support for
 this target, the target name appears in the TVM_TEST_TARGETS
 environment variable, and a suitable device for running this
@@ -905,40 +902,6 @@ variable DEFAULT_TEST_TARGETS in this module.</p>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tvm.testing.exclude_targets">
-<span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">exclude_targets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.exclude_targets" title="Link to this definition"></a></dt>
-<dd><p>Exclude a test from running on a particular target.</p>
-<p>Use this decorator when you want your test to be run over a
-variety of targets and devices (including cpu and gpu devices),
-but want to exclude some particular target or targets.  For
-example, a test may wish to be run against all targets in
-tvm.testing.enabled_targets(), except for a particular target that
-does not support the capabilities.</p>
-<p>Applies pytest.mark.skipif to the targets given.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<em>function</em>) – Function to parametrize. Must be of the form <cite>def test_xxxxxxxxx(target, dev)</cite>:,
-where <cite>xxxxxxxxx</cite> is any name.</p></li>
-<li><p><strong>targets</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Set of targets to exclude.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">exclude_targets</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_mytest</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dev</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>  <span class="c1"># do something</span>
-</pre></div>
-</div>
-<p>Or</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">exclude_targets</span><span class="p">(</span><span class="s2">&quot;llvm&quot;</span><span class="p">,</span> <span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_mytest</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dev</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>  <span class="c1"># do something</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1055,39 +1018,6 @@ will disable this feature and no caching will be performed.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="tvm.testing.known_failing_targets">
-<span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">known_failing_targets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.known_failing_targets" title="Link to this definition"></a></dt>
-<dd><p>Skip a test that is known to fail on a particular target.</p>
-<p>Use this decorator when you want your test to be run over a
-variety of targets and devices (including cpu and gpu devices),
-but know that it fails for some targets.  For example, a newly
-implemented runtime may not support all features being tested, and
-should be excluded.</p>
-<p>Applies pytest.mark.xfail to the targets given.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<em>function</em>) – Function to parametrize. Must be of the form <cite>def test_xxxxxxxxx(target, dev)</cite>:,
-where <cite>xxxxxxxxx</cite> is any name.</p></li>
-<li><p><strong>targets</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Set of targets to skip.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">known_failing_targets</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_mytest</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dev</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>  <span class="c1"># do something</span>
-</pre></div>
-</div>
-<p>Or</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">known_failing_targets</span><span class="p">(</span><span class="s2">&quot;llvm&quot;</span><span class="p">,</span> <span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_mytest</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dev</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>  <span class="c1"># do something</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="tvm.testing.np_dtype_from_str">
 <span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">np_dtype_from_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dtype</span></span></span><a class="headerlink" href="#tvm.testing.np_dtype_from_str" title="Link to this definition"></a></dt>
 <dd><p>Convert a string dtype to a numpy dtype.</p>
@@ -1145,43 +1075,6 @@ values and ids.</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">parameter</span><span class="p">(</span><span class="n">by_dict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;small&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;large&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">1024</span><span class="p">)})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_using_size</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span> <span class="c1"># Test code here</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tvm.testing.parametrize_targets">
-<span class="sig-prename descclassname"><span class="pre">tvm.testing.</span></span><span class="sig-name descname"><span class="pre">parametrize_targets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.testing.parametrize_targets" title="Link to this definition"></a></dt>
-<dd><p>Parametrize a test over a specific set of targets.</p>
-<p>Use this decorator when you want your test to be run over a
-specific set of targets and devices.  It is intended for use where
-a test is applicable only to a specific target, and is
-inapplicable to any others (e.g. verifying target-specific
-assembly code matches known assembly code).  In most
-circumstances, <a class="reference internal" href="#tvm.testing.exclude_targets" title="tvm.testing.exclude_targets"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.exclude_targets()</span></code></a> or
-<a class="reference internal" href="#tvm.testing.known_failing_targets" title="tvm.testing.known_failing_targets"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.known_failing_targets()</span></code></a> should be used
-instead.</p>
-<p>If used as a decorator without arguments, the test will be
-parametrized over all targets in
-<a class="reference internal" href="#tvm.testing.enabled_targets" title="tvm.testing.enabled_targets"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.enabled_targets()</span></code></a>.  This behavior is
-automatically enabled for any target that accepts arguments of
-<code class="docutils literal notranslate"><span class="pre">target</span></code> or <code class="docutils literal notranslate"><span class="pre">dev</span></code>, so the explicit use of the bare decorator
-is no longer needed, and is maintained for backwards
-compatibility.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<em>function</em>) – Function to parametrize. Must be of the form <cite>def test_xxxxxxxxx(target, dev)</cite>:,
-where <cite>xxxxxxxxx</cite> is any name.</p></li>
-<li><p><strong>targets</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – Set of targets to run against. If not supplied,
-<a class="reference internal" href="#tvm.testing.enabled_targets" title="tvm.testing.enabled_targets"><code class="xref py py-func docutils literal notranslate"><span class="pre">tvm.testing.enabled_targets()</span></code></a> will be used.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@tvm</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">parametrize_targets</span><span class="p">(</span><span class="s2">&quot;llvm&quot;</span><span class="p">,</span> <span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_mytest</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dev</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>  <span class="c1"># do something</span>
 </pre></div>
 </div>
 </dd></dl>

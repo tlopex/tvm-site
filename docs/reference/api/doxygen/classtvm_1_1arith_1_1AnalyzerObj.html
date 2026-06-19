@@ -82,13 +82,13 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for tvm::arith::AnalyzerObj:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classtvm_1_1arith_1_1AnalyzerObj__inherit__graph.svg" width="267" height="507"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classtvm_1_1arith_1_1AnalyzerObj__inherit__graph.svg" width="267" height="522"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <div class="dynheader">
 Collaboration diagram for tvm::arith::AnalyzerObj:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classtvm_1_1arith_1_1AnalyzerObj__coll__graph.svg" width="1738" height="566"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classtvm_1_1arith_1_1AnalyzerObj__coll__graph.svg" width="1738" height="580"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <table class="memberdecls">
@@ -127,6 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a19f9b83800c85ab898a23220fbf000b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1PrimExpr.html">PrimExpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1arith_1_1AnalyzerObj.html#a19f9b83800c85ab898a23220fbf000b1">Simplify</a> (const <a class="el" href="classtvm_1_1PrimExpr.html">PrimExpr</a> &amp;expr, int steps=2)</td></tr>
 <tr class="memdesc:a19f9b83800c85ab898a23220fbf000b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplify expr.  <a href="classtvm_1_1arith_1_1AnalyzerObj.html#a19f9b83800c85ab898a23220fbf000b1">More...</a><br /></td></tr>
 <tr class="separator:a19f9b83800c85ab898a23220fbf000b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55ea30504104fa309e0b5e0785086d0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1arith_1_1Analyzer.html">Analyzer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1arith_1_1AnalyzerObj.html#a55ea30504104fa309e0b5e0785086d0b">Clone</a> () const</td></tr>
+<tr class="memdesc:a55ea30504104fa309e0b5e0785086d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deep-copy this analyzer into a new, independent <a class="el" href="classtvm_1_1arith_1_1Analyzer.html" title="Managed reference to AnalyzerObj.">Analyzer</a>.  <a href="classtvm_1_1arith_1_1AnalyzerObj.html#a55ea30504104fa309e0b5e0785086d0b">More...</a><br /></td></tr>
+<tr class="separator:a55ea30504104fa309e0b5e0785086d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7f9b32e8df29a1230396bee65ca42c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1arith_1_1AnalyzerObj.html#ae7f9b32e8df29a1230396bee65ca42c1">TVM_FFI_DECLARE_OBJECT_INFO_FINAL</a> (&quot;arith.Analyzer&quot;, AnalyzerObj, ffi::Object)</td></tr>
 <tr class="separator:ae7f9b32e8df29a1230396bee65ca42c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -508,6 +511,28 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Whether we can prove lhs &lt;= shape. </dd></dl>
+
+</div>
+</div>
+<a id="a55ea30504104fa309e0b5e0785086d0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55ea30504104fa309e0b5e0785086d0b">&#9670;&nbsp;</a></span>Clone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtvm_1_1arith_1_1Analyzer.html">Analyzer</a> tvm::arith::AnalyzerObj::Clone </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deep-copy this analyzer into a new, independent <a class="el" href="classtvm_1_1arith_1_1Analyzer.html" title="Managed reference to AnalyzerObj.">Analyzer</a>. </p>
+<p>The returned analyzer carries the same accumulated facts (variable bounds, modular sets, rewrite/canonical bindings, integer-set domains, literal constraints and transitive comparisons) as this one, but owns its own state: binding or simplifying on either analyzer afterwards does not affect the other. This is the deep copy that handle-copying an <a class="el" href="classtvm_1_1arith_1_1Analyzer.html" title="Managed reference to AnalyzerObj.">Analyzer</a> does not provide.</p>
+<dl class="section note"><dt>Note</dt><dd>Do not call this while a <code><a class="el" href="classtvm_1_1With.html" title="RAII wrapper function to enter and exit a context object similar to python&#39;s with syntax.">With</a>&lt;<a class="el" href="classtvm_1_1arith_1_1ConstraintContext.html" title="Constraint context.">ConstraintContext</a>&gt;</code> scope is active on this analyzer. The clone would inherit the scoped constraints but not the recovery functions that pop them on scope exit, so the constraints would leak as if they were global facts. Clone at a point where no constraint scope is in effect.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A new <a class="el" href="classtvm_1_1arith_1_1Analyzer.html" title="Managed reference to AnalyzerObj.">Analyzer</a> holding an independent copy of the facts. </dd></dl>
 
 </div>
 </div>

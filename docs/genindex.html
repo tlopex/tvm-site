@@ -189,7 +189,7 @@
 <li class="toctree-l1"><a class="reference internal" href="how_to/tutorials/cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how_to/tutorials/export_and_load_executable.html">Export and Load Relax Executables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
-<li class="toctree-l1"><a class="reference internal" href="how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen: NPU Backend Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
 <ul>
@@ -1073,9 +1073,11 @@
 </li>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.clip">clip() (in module tvm.relax.op)</a>
 </li>
-      <li><a href="reference/api/python/meta_schedule.html#tvm.s_tir.meta_schedule.Mutator.clone">clone() (tvm.s_tir.meta_schedule.Mutator method)</a>
+      <li><a href="reference/api/python/arith.html#tvm.arith.Analyzer.clone">clone() (tvm.arith.Analyzer method)</a>
 
       <ul>
+        <li><a href="reference/api/python/meta_schedule.html#tvm.s_tir.meta_schedule.Mutator.clone">(tvm.s_tir.meta_schedule.Mutator method)</a>
+</li>
         <li><a href="reference/api/python/meta_schedule.html#tvm.s_tir.meta_schedule.Postproc.clone">(tvm.s_tir.meta_schedule.Postproc method)</a>
 </li>
         <li><a href="reference/api/python/meta_schedule.html#tvm.s_tir.meta_schedule.ScheduleRule.clone">(tvm.s_tir.meta_schedule.ScheduleRule method)</a>
@@ -1177,14 +1179,14 @@
 </li>
       <li><a href="reference/api/python/topi.html#tvm.topi.nn.conv">conv() (in module tvm.topi.nn)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.nn.conv1d">conv1d() (in module tvm.relax.op.nn)</a>
 
       <ul>
         <li><a href="reference/api/python/topi.html#tvm.topi.nn.conv1d">(in module tvm.topi.nn)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/api/python/topi.html#tvm.topi.nn.conv1d_ncw">conv1d_ncw() (in module tvm.topi.nn)</a>
 </li>
       <li><a href="reference/api/python/topi.html#tvm.topi.testing.conv1d_ncw_python">conv1d_ncw_python() (in module tvm.topi.testing)</a>

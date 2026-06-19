@@ -13,7 +13,7 @@ HOW TO
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This tutorial shows how to integrate a custom hardware backend with TVM&#x27;s BYOC framework, using the bundled example NPU backend (CPU emulation, no real hardware required) as the worked example.  You will see the key concepts needed to offload operations to a custom accelerator: pattern registration, graph partitioning, codegen, and runtime dispatch.">
+    <div class="sphx-glr-thumbcontainer" tooltip="TVM&#x27;s Bring Your Own Codegen (BYOC) framework lets you offload parts of a model to a custom backend -- a hardware accelerator, an inference library, or your own kernels -- while TVM compiles the rest.  This tutorial has two parts:">
 
 .. only:: html
 
@@ -24,7 +24,7 @@ HOW TO
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Bring Your Own Codegen: NPU Backend Example</div>
+      <div class="sphx-glr-thumbnail-title">Bring Your Own Codegen</div>
     </div>
 
 

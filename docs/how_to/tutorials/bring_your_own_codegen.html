@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Bring Your Own Codegen: NPU Backend Example &mdash; tvm 0.25.dev0 documentation</title>
+  <title>Bring Your Own Codegen &mdash; tvm 0.25.dev0 documentation</title>
   
 
   
@@ -192,13 +192,16 @@
 <li class="toctree-l1"><a class="reference internal" href="cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="export_and_load_executable.html">Export and Load Relax Executables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Bring Your Own Codegen: NPU Backend Example</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview-of-the-byoc-flow">Overview of the BYOC Flow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-1-import-the-backend-to-register-its-patterns">Step 1: Import the backend to register its patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-2-define-a-model">Step 2: Define a model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-3-partition-the-graph">Step 3: Partition the graph</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-4-run-codegen">Step 4: Run codegen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-6-conv2d-relu">Step 6: Conv2D + ReLU</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bring Your Own Codegen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-the-byoc-flow">Overview of the BYOC flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-import-the-backends-to-register-their-patterns">Step 1: Import the backends to register their patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-define-the-model">Step 2: Define the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-partition-for-the-example-npu">Step 3: Partition for the example NPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-codegen-build-and-run-on-the-example-npu">Step 4: Codegen, build and run on the example NPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-same-flow-on-a-real-backend-tensorrt">The same flow on a real backend: TensorRT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-npu-vs-tensorrt-at-a-glance">Example NPU vs TensorRT at a glance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deploying-a-pytorch-model-with-tensorrt">Deploying a PyTorch model with TensorRT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes-for-real-deployments">Notes for real deployments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#next-steps">Next steps</a></li>
 </ul>
 </li>
@@ -279,7 +282,7 @@
     
       <li><a href="../../index.html">Docs</a> <span class="br-arrow">></span></li>
         
-      <li>Bring Your Own Codegen: NPU Backend Example</li>
+      <li>Bring Your Own Codegen</li>
     
     
       
@@ -310,46 +313,63 @@
 <p class="admonition-title">Note</p>
 <p>You can click <a class="reference internal" href="#sphx-glr-download-how-to-tutorials-bring-your-own-codegen-py"><span class="std std-ref">here</span></a> to run the Jupyter notebook locally.</p>
 </div>
-<section class="sphx-glr-example-title" id="bring-your-own-codegen-npu-backend-example">
-<span id="tutorial-bring-your-own-codegen"></span><span id="sphx-glr-how-to-tutorials-bring-your-own-codegen-py"></span><h1>Bring Your Own Codegen: NPU Backend Example<a class="headerlink" href="#bring-your-own-codegen-npu-backend-example" title="Link to this heading"></a></h1>
-<p>This tutorial shows how to integrate a custom hardware backend with TVM’s
-BYOC framework, using the bundled example NPU backend (CPU emulation, no
-real hardware required) as the worked example.  You will see the key
-concepts needed to offload operations to a custom accelerator: pattern
-registration, graph partitioning, codegen, and runtime dispatch.</p>
-<p>NPUs are purpose-built accelerators designed around a fixed set of operations
-common in neural network inference, such as matrix multiplication, convolution,
-and activation functions.
-The example backend’s runtime is a <em>stub</em>: it logs the dispatch decisions an
+<section class="sphx-glr-example-title" id="bring-your-own-codegen">
+<span id="tutorial-bring-your-own-codegen"></span><span id="sphx-glr-how-to-tutorials-bring-your-own-codegen-py"></span><h1>Bring Your Own Codegen<a class="headerlink" href="#bring-your-own-codegen" title="Link to this heading"></a></h1>
+<p>TVM’s Bring Your Own Codegen (BYOC) framework lets you offload parts of a model
+to a custom backend – a hardware accelerator, an inference library, or your own
+kernels – while TVM compiles the rest.  This tutorial has two parts:</p>
+<ul class="simple">
+<li><p><strong>How BYOC works</strong> – we teach the flow with a bundled, hardware-free <em>example
+NPU</em> backend and then drive the <strong>same flow</strong> on a real production backend,
+NVIDIA TensorRT.  Both run a small, hand-written model so every step is
+visible; the only thing that changes between them is the backend, and that
+contrast is the lesson.</p></li>
+<li><p><strong>Deploying a real model</strong> – we then put it to work, taking an actual PyTorch
+<code class="docutils literal notranslate"><span class="pre">nn.Module</span></code> from export through TensorRT and running it on the GPU.</p></li>
+</ul>
+<p>The example NPU is a teaching stub: its runtime logs the dispatch decisions an
 NPU would make (memory tier, execution engine, fusion) but performs no real
-computation, so output buffers are uninitialized.  Assertions in this tutorial
-therefore check shapes, not values.  When you replace the runtime with your
-hardware SDK calls, the same flow produces real results.</p>
-<p><strong>Prerequisites</strong>: Build TVM with <code class="docutils literal notranslate"><span class="pre">USE_EXAMPLE_NPU_CODEGEN=ON</span></code> and
-<code class="docutils literal notranslate"><span class="pre">USE_EXAMPLE_NPU_RUNTIME=ON</span></code>.</p>
+computation, so its output buffers are left uninitialized.  We therefore check
+<em>shapes</em>, not values, in the NPU sections – its job is to make every BYOC step
+visible with nothing hidden.  TensorRT then runs the identical flow for real, so
+we cross-check its result against a reference.</p>
+<p><strong>Prerequisites</strong>: the example NPU sections need TVM built with
+<code class="docutils literal notranslate"><span class="pre">USE_EXAMPLE_NPU_CODEGEN=ON</span></code> and <code class="docutils literal notranslate"><span class="pre">USE_EXAMPLE_NPU_RUNTIME=ON</span></code>; the TensorRT
+sections need <code class="docutils literal notranslate"><span class="pre">USE_TENSORRT_CODEGEN=ON</span></code>, <code class="docutils literal notranslate"><span class="pre">USE_TENSORRT_RUNTIME=ON</span></code> and
+<code class="docutils literal notranslate"><span class="pre">USE_CUDA=ON</span></code> plus a CUDA GPU and a matching TensorRT install (from NVIDIA’s
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorrt</span></code> packages or the TensorRT archive); the final deployment
+section also needs PyTorch.  Each section degrades gracefully when its backend is
+unavailable.</p>
 <section id="overview-of-the-byoc-flow">
-<h2>Overview of the BYOC Flow<a class="headerlink" href="#overview-of-the-byoc-flow" title="Link to this heading"></a></h2>
-<p>The BYOC framework lets you plug a custom backend into TVM’s compilation
-pipeline in four steps:</p>
+<h2>Overview of the BYOC flow<a class="headerlink" href="#overview-of-the-byoc-flow" title="Link to this heading"></a></h2>
+<p>BYOC plugs a custom backend into TVM’s compilation pipeline in four steps:</p>
 <ol class="arabic simple">
-<li><p><strong>Register patterns</strong> - describe which sequences of Relax ops the
-backend can handle.</p></li>
+<li><p><strong>Register patterns</strong> - describe which sequences of Relax ops the backend
+can handle.</p></li>
 <li><p><strong>Partition the graph</strong> - group matched ops into composite functions.</p></li>
-<li><p><strong>Run codegen</strong> - lower composite functions to backend-specific
-representation (JSON graph for the example NPU).</p></li>
-<li><p><strong>Execute</strong> - the runtime dispatches composite functions to the
-registered backend runtime.</p></li>
+<li><p><strong>Run codegen</strong> - lower each composite to the backend’s representation
+(a JSON graph for both backends in this tutorial).</p></li>
+<li><p><strong>Execute</strong> - the runtime dispatches each composite to the backend.</p></li>
 </ol>
+<p>Steps 1 and 2 are pure Python and run anywhere; steps 3 and 4 need the
+backend’s codegen and runtime compiled into TVM, which is why the
+build-and-run cells below are guarded.</p>
 </section>
-<section id="step-1-import-the-backend-to-register-its-patterns">
-<h2>Step 1: Import the backend to register its patterns<a class="headerlink" href="#step-1-import-the-backend-to-register-its-patterns" title="Link to this heading"></a></h2>
-<p>Importing the module is enough to register all supported patterns with
-TVM’s pattern registry.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<section id="step-1-import-the-backends-to-register-their-patterns">
+<h2>Step 1: Import the backends to register their patterns<a class="headerlink" href="#step-1-import-the-backends-to-register-their-patterns" title="Link to this heading"></a></h2>
+<p>Importing a backend module registers its patterns with TVM’s global registry.
+Pattern registration is independent of the C++ build – only codegen and the
+runtime require the backend to be compiled in – so we probe each backend and
+guard the build-and-run cells accordingly.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">tvm</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">tvm.relax.backend.contrib.example_npu</span>  <span class="c1"># registers patterns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tvm.relax.backend.contrib.example_npu</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tvm</span><span class="w"> </span><span class="kn">import</span> <span class="n">relax</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tvm.relax.backend.contrib.tensorrt</span><span class="w"> </span><span class="kn">import</span> <span class="n">partition_for_tensorrt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tvm.relax.backend.pattern_registry</span><span class="w"> </span><span class="kn">import</span> <a href="../../reference/api/python/relax/backend.html#tvm.relax.backend.get_patterns_with_prefix" title="tvm.relax.backend.get_patterns_with_prefix" class="sphx-glr-backref-module-tvm-relax-backend sphx-glr-backref-type-py-function"><span class="n">get_patterns_with_prefix</span></a>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tvm.relax.transform</span><span class="w"> </span><span class="kn">import</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.FuseOpsByPattern" title="tvm.relax.transform.FuseOpsByPattern" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">FuseOpsByPattern</span></a><span class="p">,</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.MergeCompositeFunctions" title="tvm.relax.transform.MergeCompositeFunctions" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">MergeCompositeFunctions</span></a><span class="p">,</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.RunCodegen" title="tvm.relax.transform.RunCodegen" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">RunCodegen</span></a>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tvm.script</span><span class="w"> </span><span class="kn">import</span> <span class="n">relax</span> <span class="k">as</span> <span class="n">R</span>
@@ -358,177 +378,386 @@ TVM’s pattern registry.</p>
 <span class="n">has_example_npu_runtime</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">get_global_func</span><span class="p">(</span><span class="s2">&quot;runtime.ExampleNPUJSONRuntimeCreate&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">has_example_npu</span> <span class="o">=</span> <span class="n">has_example_npu_codegen</span> <span class="ow">and</span> <span class="n">has_example_npu_runtime</span>
 
-<a href="../../reference/api/python/target.html#tvm.target.Target" title="tvm.target.Target" class="sphx-glr-backref-module-tvm-target sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">target</span></a> <span class="o">=</span> <a href="../../reference/api/python/target.html#tvm.target.Target" title="tvm.target.Target" class="sphx-glr-backref-module-tvm-target sphx-glr-backref-type-py-class"><span class="n">tvm</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">Target</span></a><span class="p">(</span><span class="s2">&quot;llvm&quot;</span><span class="p">)</span>
-
-<span class="n">patterns</span> <span class="o">=</span> <a href="../../reference/api/python/relax/backend.html#tvm.relax.backend.get_patterns_with_prefix" title="tvm.relax.backend.get_patterns_with_prefix" class="sphx-glr-backref-module-tvm-relax-backend sphx-glr-backref-type-py-function"><span class="n">get_patterns_with_prefix</span></a><span class="p">(</span><span class="s2">&quot;example_npu&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Registered patterns:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">])</span>
-</pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Registered patterns: [&#39;example_npu.conv2d_relu_fused&#39;, &#39;example_npu.matmul_relu_fused&#39;, &#39;example_npu.depthwise_conv2d&#39;, &#39;example_npu.conv2d&#39;, &#39;example_npu.conv1d&#39;, &#39;example_npu.matmul&#39;, &#39;example_npu.dense&#39;, &#39;example_npu.avg_pool2d&#39;, &#39;example_npu.max_pool2d&#39;, &#39;example_npu.batch_norm&#39;, &#39;example_npu.softmax&#39;, &#39;example_npu.gelu&#39;, &#39;example_npu.relu&#39;, &#39;example_npu.divide&#39;, &#39;example_npu.subtract&#39;, &#39;example_npu.multiply&#39;, &#39;example_npu.add&#39;, &#39;example_npu.dequantize&#39;, &#39;example_npu.quantize&#39;]
+<a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_tensorrt_codegen</span></a> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">get_global_func</span><span class="p">(</span><span class="s2">&quot;relax.ext.tensorrt&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="n">_is_trt_runtime_enabled</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">get_global_func</span><span class="p">(</span><span class="s2">&quot;relax.is_tensorrt_runtime_enabled&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_tensorrt</span></a> <span class="o">=</span> <span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_tensorrt_codegen</span></a> <span class="ow">and</span> <span class="n">_is_trt_runtime_enabled</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">_is_trt_runtime_enabled</span><span class="p">()</span>
+<span class="p">)</span>
+<a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_cuda</span></a> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">exist</span>
 </pre></div>
 </div>
 </section>
-<section id="step-2-define-a-model">
-<h2>Step 2: Define a model<a class="headerlink" href="#step-2-define-a-model" title="Link to this heading"></a></h2>
-<p>We use a simple MatMul + ReLU module to illustrate the flow.</p>
+<section id="step-2-define-the-model">
+<h2>Step 2: Define the model<a class="headerlink" href="#step-2-define-the-model" title="Link to this heading"></a></h2>
+<p>A single convolution followed by a ReLU.  This one model is used for both
+backends.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@tvm</span><span class="o">.</span><span class="n">script</span><span class="o">.</span><span class="n">ir_module</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">MatmulReLU</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConvReLU</span><span class="p">:</span>
     <span class="nd">@R</span><span class="o">.</span><span class="n">function</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span>
-        <span class="n">x</span><span class="p">:</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
-        <span class="n">w</span><span class="p">:</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">):</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
+        <span class="n">weight</span><span class="p">:</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">R</span><span class="o">.</span><span class="n">dataflow</span><span class="p">():</span>
-            <span class="n">y</span> <span class="o">=</span> <a href="../../reference/api/python/relax/op.html#tvm.relax.op.matmul" title="tvm.relax.op.matmul" class="sphx-glr-backref-module-tvm-relax-op sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">matmul</span></a><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-            <span class="n">z</span> <span class="o">=</span> <a href="../../reference/api/python/relax/op.html#tvm.relax.op.nn.relu" title="tvm.relax.op.nn.relu" class="sphx-glr-backref-module-tvm-relax-op-nn sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span></a><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-            <span class="n">R</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">z</span>
+            <span class="n">conv</span> <span class="o">=</span> <a href="../../reference/api/python/relax/op.html#tvm.relax.op.nn.conv2d" title="tvm.relax.op.nn.conv2d" class="sphx-glr-backref-module-tvm-relax-op-nn sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">conv2d</span></a><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
+            <span class="n">out</span> <span class="o">=</span> <a href="../../reference/api/python/relax/op.html#tvm.relax.op.nn.relu" title="tvm.relax.op.nn.relu" class="sphx-glr-backref-module-tvm-relax-op-nn sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span></a><span class="p">(</span><span class="n">conv</span><span class="p">)</span>
+            <span class="n">R</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
 </pre></div>
 </div>
 </section>
-<section id="step-3-partition-the-graph">
-<h2>Step 3: Partition the graph<a class="headerlink" href="#step-3-partition-the-graph" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">FuseOpsByPattern</span></code> groups ops that match a registered pattern into
-composite functions, controlled by two flags:</p>
+<section id="step-3-partition-for-the-example-npu">
+<h2>Step 3: Partition for the example NPU<a class="headerlink" href="#step-3-partition-for-the-example-npu" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">FuseOpsByPattern</span></code> groups ops matching a registered pattern into composite
+functions; <code class="docutils literal notranslate"><span class="pre">MergeCompositeFunctions</span></code> then consolidates adjacent composites
+bound for the same backend into a single external call.  Two flags steer
+partitioning:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">bind_constants=False</span></code> keeps weights as function arguments instead
-of baking them in, so the host stays in charge of parameter
-ownership.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">annotate_codegen=True</span></code> tags each composite with its backend name
-(<code class="docutils literal notranslate"><span class="pre">example_npu</span></code>); without this tag, <code class="docutils literal notranslate"><span class="pre">RunCodegen</span></code> has no way to
-route the composite to a backend.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bind_constants=False</span></code> keeps weights as function arguments, so the host
+stays in charge of the parameters.  (TensorRT below makes the opposite
+choice: it binds weights as constants because it bakes them into its engine.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">annotate_codegen=True</span></code> wraps each matched composite in a function tagged
+with the backend name – the tag <code class="docutils literal notranslate"><span class="pre">RunCodegen</span></code> routes on.  (The follow-up
+<code class="docutils literal notranslate"><span class="pre">MergeCompositeFunctions</span></code> also attaches this tag when it groups composites,
+which is why <code class="docutils literal notranslate"><span class="pre">partition_for_tensorrt</span></code> below can leave the flag off.)</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">MergeCompositeFunctions</span></code> then consolidates adjacent composites
-that target the same backend so each group becomes a single external
-call.  Note that consolidation depends on the patterns themselves: an
-<code class="docutils literal notranslate"><span class="pre">op_a</span> <span class="pre">+</span> <span class="pre">op_b</span></code> chain only collapses into one composite if a fused
-pattern (e.g. <code class="docutils literal notranslate"><span class="pre">matmul_relu_fused</span></code>) was registered for it; otherwise
-each op stays as its own composite even when both target the same
-backend.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mod</span> <span class="o">=</span> <span class="n">MatmulReLU</span>
-<span class="n">mod</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.FuseOpsByPattern" title="tvm.relax.transform.FuseOpsByPattern" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">FuseOpsByPattern</span></a><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">bind_constants</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">annotate_codegen</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">mod</span><span class="p">)</span>
-<span class="n">mod</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.MergeCompositeFunctions" title="tvm.relax.transform.MergeCompositeFunctions" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">MergeCompositeFunctions</span></a><span class="p">()(</span><span class="n">mod</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After partitioning:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+<p>The example NPU registers a fused <code class="docutils literal notranslate"><span class="pre">conv2d</span> <span class="pre">+</span> <span class="pre">relu</span></code> pattern with higher
+priority than the standalone <code class="docutils literal notranslate"><span class="pre">conv2d</span></code> pattern, so the two ops collapse into a
+single <code class="docutils literal notranslate"><span class="pre">example_npu.conv2d_relu_fused</span></code> composite – look for it in the
+printed module.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">npu_patterns</span> <span class="o">=</span> <a href="../../reference/api/python/relax/backend.html#tvm.relax.backend.get_patterns_with_prefix" title="tvm.relax.backend.get_patterns_with_prefix" class="sphx-glr-backref-module-tvm-relax-backend sphx-glr-backref-type-py-function"><span class="n">get_patterns_with_prefix</span></a><span class="p">(</span><span class="s2">&quot;example_npu&quot;</span><span class="p">)</span>
+<span class="n">npu_mod</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.FuseOpsByPattern" title="tvm.relax.transform.FuseOpsByPattern" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">FuseOpsByPattern</span></a><span class="p">(</span><span class="n">npu_patterns</span><span class="p">,</span> <span class="n">bind_constants</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">annotate_codegen</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">ConvReLU</span><span class="p">)</span>
+<span class="n">npu_mod</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.MergeCompositeFunctions" title="tvm.relax.transform.MergeCompositeFunctions" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">MergeCompositeFunctions</span></a><span class="p">()(</span><span class="n">npu_mod</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After partitioning for the example NPU:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">npu_mod</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>After partitioning:
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>After partitioning for the example NPU:
 # from tvm.script import ir as I
 # from tvm.script import relax as R
 
 @I.ir_module
 class Module:
     @R.function
-    def fused_relax_matmul_relax_nn_relu_example_npu_example_npu(x: R.Tensor((2, 4), dtype=&quot;float32&quot;), w: R.Tensor((4, 8), dtype=&quot;float32&quot;)) -&gt; R.Tensor((2, 8), dtype=&quot;float32&quot;):
+    def fused_relax_nn_conv2d_relax_nn_relu_example_npu_example_npu(data: R.Tensor((1, 3, 32, 32), dtype=&quot;float32&quot;), weight: R.Tensor((16, 3, 3, 3), dtype=&quot;float32&quot;)) -&gt; R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;):
         R.func_attr({&quot;Codegen&quot;: &quot;example_npu&quot;})
         # from tvm.script import relax as R
 
         @R.function
-        def local_func(x_1: R.Tensor((2, 4), dtype=&quot;float32&quot;), w_1: R.Tensor((4, 8), dtype=&quot;float32&quot;)) -&gt; R.Tensor((2, 8), dtype=&quot;float32&quot;):
-            R.func_attr({&quot;Composite&quot;: &quot;example_npu.matmul_relu_fused&quot;})
-            y: R.Tensor((2, 8), dtype=&quot;float32&quot;) = R.matmul(x_1, w_1, out_dtype=&quot;void&quot;)
-            gv: R.Tensor((2, 8), dtype=&quot;float32&quot;) = R.nn.relu(y)
+        def local_func(data_1: R.Tensor((1, 3, 32, 32), dtype=&quot;float32&quot;), weight_1: R.Tensor((16, 3, 3, 3), dtype=&quot;float32&quot;)) -&gt; R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;):
+            R.func_attr({&quot;Composite&quot;: &quot;example_npu.conv2d_relu_fused&quot;})
+            conv: R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;) = R.nn.conv2d(data_1, weight_1, strides=[1, 1], padding=[0, 0, 0, 0], dilation=[1, 1], groups=1, data_layout=&quot;NCHW&quot;, kernel_layout=&quot;OIHW&quot;, out_layout=&quot;NCHW&quot;, out_dtype=&quot;void&quot;)
+            gv: R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;) = R.nn.relu(conv)
             return gv
 
-        output: R.Tensor((2, 8), dtype=&quot;float32&quot;) = local_func(x, w)
+        output: R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;) = local_func(data, weight)
         return output
 
     @R.function
-    def main(x: R.Tensor((2, 4), dtype=&quot;float32&quot;), w: R.Tensor((4, 8), dtype=&quot;float32&quot;)) -&gt; R.Tensor((2, 8), dtype=&quot;float32&quot;):
+    def main(data: R.Tensor((1, 3, 32, 32), dtype=&quot;float32&quot;), weight: R.Tensor((16, 3, 3, 3), dtype=&quot;float32&quot;)) -&gt; R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;):
         cls = Module
         with R.dataflow():
-            gv: R.Tensor((2, 8), dtype=&quot;float32&quot;) = cls.fused_relax_matmul_relax_nn_relu_example_npu_example_npu(x, w)
+            gv: R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;) = cls.fused_relax_nn_conv2d_relax_nn_relu_example_npu_example_npu(data, weight)
             R.output(gv)
         return gv
 </pre></div>
 </div>
 </section>
-<section id="step-4-run-codegen">
-<h2>Step 4: Run codegen<a class="headerlink" href="#step-4-run-codegen" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">RunCodegen</span></code> lowers each annotated composite function to the backend’s
-serialization format.  For the example NPU this produces a JSON graph
-that the C++ runtime can execute.</p>
-<p>Steps 4 and 5 require TVM to be built with <code class="docutils literal notranslate"><span class="pre">USE_EXAMPLE_NPU_CODEGEN=ON</span></code>
-and <code class="docutils literal notranslate"><span class="pre">USE_EXAMPLE_NPU_RUNTIME=ON</span></code>.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">has_example_npu</span><span class="p">:</span>
-    <span class="n">mod</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.RunCodegen" title="tvm.relax.transform.RunCodegen" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">RunCodegen</span></a><span class="p">()(</span><span class="n">mod</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After codegen:&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+<section id="step-4-codegen-build-and-run-on-the-example-npu">
+<h2>Step 4: Codegen, build and run on the example NPU<a class="headerlink" href="#step-4-codegen-build-and-run-on-the-example-npu" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">RunCodegen</span></code> invokes each annotated composite’s backend codegen, replacing it
+with the backend runtime module (here, the NPU’s JSON graph); <code class="docutils literal notranslate"><span class="pre">relax.build</span></code>
+then compiles the remaining host-side program and links everything.  Because
+the runtime is a stub that computes nothing, we assert on the output <em>shape</em>
+only – the values are uninitialized.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">data_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+<span class="n">weight_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
 
-    <span class="c1">######################################################################</span>
-    <span class="c1"># Step 5: Build and run</span>
-    <span class="c1"># ---------------------</span>
-    <span class="c1">#</span>
-    <span class="c1"># Build the module for the host target, create a virtual machine, and</span>
-    <span class="c1"># execute the compiled function.</span>
-
-    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">x_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
-    <span class="n">w_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">has_example_npu</span><span class="p">:</span>
+    <span class="n">npu_mod</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.RunCodegen" title="tvm.relax.transform.RunCodegen" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">RunCodegen</span></a><span class="p">()(</span><span class="n">npu_mod</span><span class="p">)</span>
 
     <span class="k">with</span> <a href="../../reference/api/python/transform.html#tvm.ir.transform.PassContext" title="tvm.ir.transform.PassContext" class="sphx-glr-backref-module-tvm-ir-transform sphx-glr-backref-type-py-class"><span class="n">tvm</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">PassContext</span></a><span class="p">(</span><span class="n">opt_level</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">built</span> <span class="o">=</span> <a href="../../reference/api/python/relax/relax.html#tvm.relax.build" title="tvm.relax.build" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">build</span></a><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <a href="../../reference/api/python/target.html#tvm.target.Target" title="tvm.target.Target" class="sphx-glr-backref-module-tvm-target sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">target</span></a><span class="p">)</span>
+        <span class="n">npu_exec</span> <span class="o">=</span> <a href="../../reference/api/python/relax/relax.html#tvm.relax.build" title="tvm.relax.build" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">build</span></a><span class="p">(</span><span class="n">npu_mod</span><span class="p">,</span> <a href="../../reference/api/python/target.html#tvm.target.Target" title="tvm.target.Target" class="sphx-glr-backref-module-tvm-target sphx-glr-backref-type-py-class"><span class="n">tvm</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">Target</span></a><span class="p">(</span><span class="s2">&quot;llvm&quot;</span><span class="p">))</span>
 
-    <span class="n">vm</span> <span class="o">=</span> <a href="../../reference/api/python/relax/relax.html#tvm.relax.VirtualMachine" title="tvm.relax.VirtualMachine" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">relax</span><span class="o">.</span><span class="n">VirtualMachine</span></a><span class="p">(</span><span class="n">built</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">vm</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">](</span><span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">x_np</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">()),</span> <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">w_np</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">()))</span>
-
-    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Execution completed. Output shape:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">npu_vm</span> <span class="o">=</span> <a href="../../reference/api/python/runtime/vm.html#tvm.runtime.vm.VirtualMachine" title="tvm.runtime.vm.VirtualMachine" class="sphx-glr-backref-module-tvm-runtime-vm sphx-glr-backref-type-py-class"><span class="n">relax</span><span class="o">.</span><span class="n">VirtualMachine</span></a><span class="p">(</span><span class="n">npu_exec</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+    <span class="n">npu_out</span> <span class="o">=</span> <span class="n">npu_vm</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">](</span>
+        <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_np</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">()),</span> <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">weight_np</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">npu_out</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example NPU run completed. Output shape:&quot;</span><span class="p">,</span> <span class="n">npu_out</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example NPU backend unavailable; skipping its build and run.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Example NPU backend unavailable; skipping its build and run.
 </pre></div>
 </div>
 </section>
-<section id="step-6-conv2d-relu">
-<h2>Step 6: Conv2D + ReLU<a class="headerlink" href="#step-6-conv2d-relu" title="Link to this heading"></a></h2>
-<p>The same flow applies to convolution workloads.  Because the fused
-<code class="docutils literal notranslate"><span class="pre">conv2d</span> <span class="pre">+</span> <span class="pre">relu</span></code> pattern is registered after the standalone
-<code class="docutils literal notranslate"><span class="pre">conv2d</span></code> pattern in <code class="docutils literal notranslate"><span class="pre">patterns.py</span></code> (later entries have higher
-priority), both ops are offloaded as a single composite function.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@tvm</span><span class="o">.</span><span class="n">script</span><span class="o">.</span><span class="n">ir_module</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Conv2dReLU</span><span class="p">:</span>
-    <span class="nd">@R</span><span class="o">.</span><span class="n">function</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span>
-        <span class="n">x</span><span class="p">:</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
-        <span class="n">w</span><span class="p">:</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">):</span>
-        <span class="k">with</span> <span class="n">R</span><span class="o">.</span><span class="n">dataflow</span><span class="p">():</span>
-            <span class="n">y</span> <span class="o">=</span> <a href="../../reference/api/python/relax/op.html#tvm.relax.op.nn.conv2d" title="tvm.relax.op.nn.conv2d" class="sphx-glr-backref-module-tvm-relax-op-nn sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">conv2d</span></a><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-            <span class="n">z</span> <span class="o">=</span> <a href="../../reference/api/python/relax/op.html#tvm.relax.op.nn.relu" title="tvm.relax.op.nn.relu" class="sphx-glr-backref-module-tvm-relax-op-nn sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span></a><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-            <span class="n">R</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">z</span>
-
-
-<span class="k">if</span> <span class="n">has_example_npu</span><span class="p">:</span>
-    <span class="n">mod2</span> <span class="o">=</span> <span class="n">Conv2dReLU</span>
-    <span class="n">mod2</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.FuseOpsByPattern" title="tvm.relax.transform.FuseOpsByPattern" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">FuseOpsByPattern</span></a><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">bind_constants</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">annotate_codegen</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">mod2</span><span class="p">)</span>
-    <span class="n">mod2</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.MergeCompositeFunctions" title="tvm.relax.transform.MergeCompositeFunctions" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">MergeCompositeFunctions</span></a><span class="p">()(</span><span class="n">mod2</span><span class="p">)</span>
-    <span class="n">mod2</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.RunCodegen" title="tvm.relax.transform.RunCodegen" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">RunCodegen</span></a><span class="p">()(</span><span class="n">mod2</span><span class="p">)</span>
-
-    <span class="k">with</span> <a href="../../reference/api/python/transform.html#tvm.ir.transform.PassContext" title="tvm.ir.transform.PassContext" class="sphx-glr-backref-module-tvm-ir-transform sphx-glr-backref-type-py-class"><span class="n">tvm</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">PassContext</span></a><span class="p">(</span><span class="n">opt_level</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">built2</span> <span class="o">=</span> <a href="../../reference/api/python/relax/relax.html#tvm.relax.build" title="tvm.relax.build" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">build</span></a><span class="p">(</span><span class="n">mod2</span><span class="p">,</span> <a href="../../reference/api/python/target.html#tvm.target.Target" title="tvm.target.Target" class="sphx-glr-backref-module-tvm-target sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">target</span></a><span class="p">)</span>
-
-    <span class="n">x2_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
-    <span class="n">w2_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
-
-    <span class="n">vm2</span> <span class="o">=</span> <a href="../../reference/api/python/relax/relax.html#tvm.relax.VirtualMachine" title="tvm.relax.VirtualMachine" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">relax</span><span class="o">.</span><span class="n">VirtualMachine</span></a><span class="p">(</span><span class="n">built2</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
-    <span class="n">result2</span> <span class="o">=</span> <span class="n">vm2</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">](</span>
-        <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">x2_np</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">()),</span> <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">w2_np</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
-    <span class="p">)</span>
-    <span class="k">assert</span> <span class="n">result2</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Conv2dReLU output shape:&quot;</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<section id="the-same-flow-on-a-real-backend-tensorrt">
+<h2>The same flow on a real backend: TensorRT<a class="headerlink" href="#the-same-flow-on-a-real-backend-tensorrt" title="Link to this heading"></a></h2>
+<p>Steps 1-4 above are the whole mechanism.  Aiming them at a real backend
+changes very little, so rather than repeat the walkthrough, here is only what
+differs for NVIDIA TensorRT:</p>
+<ul class="simple">
+<li><p><strong>Partition in one call.</strong> <code class="docutils literal notranslate"><span class="pre">partition_for_tensorrt</span></code> bundles the
+<code class="docutils literal notranslate"><span class="pre">FuseOpsByPattern</span></code> + <code class="docutils literal notranslate"><span class="pre">MergeCompositeFunctions</span></code> you ran by hand, using
+TensorRT’s own pattern table.</p></li>
+<li><p><strong>Weights become constants</strong> (<code class="docutils literal notranslate"><span class="pre">bind_constants=True</span></code>): TensorRT bakes them
+into the engine it builds, so bind the parameters before partitioning.</p></li>
+<li><p><strong>Real values.</strong> TensorRT actually computes, so we build for CUDA, run on
+the GPU, and cross-check against a plain CPU build – not just the shape.</p></li>
+</ul>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">trt_mod</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.BindParams" title="tvm.relax.transform.BindParams" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">BindParams</span></a><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="n">weight_np</span><span class="p">})(</span><span class="n">ConvReLU</span><span class="p">)</span>
+<span class="n">trt_mod</span> <span class="o">=</span> <span class="n">partition_for_tensorrt</span><span class="p">(</span><span class="n">trt_mod</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After partition_for_tensorrt:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trt_mod</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>After partition_for_tensorrt:
+# from tvm.script import ir as I
+# from tvm.script import relax as R
+
+@I.ir_module
+class Module:
+    @R.function
+    def fused_relax_nn_conv2d_relax_nn_relu_tensorrt(data: R.Tensor((1, 3, 32, 32), dtype=&quot;float32&quot;)) -&gt; R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;):
+        R.func_attr({&quot;Codegen&quot;: &quot;tensorrt&quot;})
+        # from tvm.script import relax as R
+
+        @R.function
+        def gv(data_1: R.Tensor((1, 3, 32, 32), dtype=&quot;float32&quot;)) -&gt; R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;):
+            R.func_attr({&quot;Composite&quot;: &quot;tensorrt.nn.conv2d&quot;})
+            with R.dataflow():
+                gv_1: R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;) = R.nn.conv2d(data_1, metadata[&quot;relax.expr.Constant&quot;][0], strides=[1, 1], padding=[0, 0, 0, 0], dilation=[1, 1], groups=1, data_layout=&quot;NCHW&quot;, kernel_layout=&quot;OIHW&quot;, out_layout=&quot;NCHW&quot;, out_dtype=&quot;void&quot;)
+                R.output(gv_1)
+            return gv_1
+
+        lv: R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;) = gv(data)
+        # from tvm.script import relax as R
+
+        @R.function
+        def gv1(lv_1: R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;)) -&gt; R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;):
+            R.func_attr({&quot;Composite&quot;: &quot;tensorrt.nn.relu&quot;})
+            with R.dataflow():
+                gv_1: R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;) = R.nn.relu(lv_1)
+                R.output(gv_1)
+            return gv_1
+
+        gv_1: R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;) = gv1(lv)
+        return gv_1
+
+    @R.function
+    def main(data: R.Tensor((1, 3, 32, 32), dtype=&quot;float32&quot;)) -&gt; R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;):
+        cls = Module
+        with R.dataflow():
+            gv: R.Tensor((1, 16, 30, 30), dtype=&quot;float32&quot;) = cls.fused_relax_nn_conv2d_relax_nn_relu_tensorrt(data)
+            R.output(gv)
+        return gv
+
+# Metadata omitted. Use show_meta=True in script() method to show it.
+</pre></div>
+</div>
+<p>Build for CUDA, run on the GPU, and compare against the CPU reference.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_tensorrt</span></a> <span class="ow">and</span> <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_cuda</span></a><span class="p">:</span>
+    <span class="n">dev</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">with</span> <a href="../../reference/api/python/transform.html#tvm.ir.transform.PassContext" title="tvm.ir.transform.PassContext" class="sphx-glr-backref-module-tvm-ir-transform sphx-glr-backref-type-py-class"><span class="n">tvm</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">PassContext</span></a><span class="p">(</span><span class="n">opt_level</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">trt_exec</span> <span class="o">=</span> <a href="../../reference/api/python/relax/relax.html#tvm.relax.build" title="tvm.relax.build" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">build</span></a><span class="p">(</span><a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.RunCodegen" title="tvm.relax.transform.RunCodegen" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">RunCodegen</span></a><span class="p">()(</span><span class="n">trt_mod</span><span class="p">),</span> <span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+    <span class="n">trt_out</span> <span class="o">=</span> <a href="../../reference/api/python/runtime/vm.html#tvm.runtime.vm.VirtualMachine" title="tvm.runtime.vm.VirtualMachine" class="sphx-glr-backref-module-tvm-runtime-vm sphx-glr-backref-type-py-class"><span class="n">relax</span><span class="o">.</span><span class="n">VirtualMachine</span></a><span class="p">(</span><span class="n">trt_exec</span><span class="p">,</span> <span class="n">dev</span><span class="p">)[</span><span class="s2">&quot;main&quot;</span><span class="p">](</span><span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_np</span><span class="p">,</span> <span class="n">dev</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="n">cpu_mod</span> <span class="o">=</span> <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.LegalizeOps" title="tvm.relax.transform.LegalizeOps" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">LegalizeOps</span></a><span class="p">()(</span>
+        <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.BindParams" title="tvm.relax.transform.BindParams" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">BindParams</span></a><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="n">weight_np</span><span class="p">})(</span><span class="n">ConvReLU</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">cpu_exec</span> <span class="o">=</span> <a href="../../reference/api/python/relax/relax.html#tvm.relax.build" title="tvm.relax.build" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">build</span></a><span class="p">(</span><span class="n">cpu_mod</span><span class="p">,</span> <span class="s2">&quot;llvm&quot;</span><span class="p">)</span>
+    <span class="n">cpu_out</span> <span class="o">=</span> <a href="../../reference/api/python/runtime/vm.html#tvm.runtime.vm.VirtualMachine" title="tvm.runtime.vm.VirtualMachine" class="sphx-glr-backref-module-tvm-runtime-vm sphx-glr-backref-type-py-class"><span class="n">relax</span><span class="o">.</span><span class="n">VirtualMachine</span></a><span class="p">(</span><span class="n">cpu_exec</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">())[</span><span class="s2">&quot;main&quot;</span><span class="p">](</span>
+        <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_np</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">trt_out</span><span class="p">,</span> <span class="n">cpu_out</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TensorRT output shape:&quot;</span><span class="p">,</span> <span class="n">trt_out</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot;- matches the CPU reference.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TensorRT/CUDA unavailable; skipping the GPU build and run.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>TensorRT/CUDA unavailable; skipping the GPU build and run.
+</pre></div>
+</div>
+<p>A real backend also exposes knobs the stub does not.  Setting <code class="docutils literal notranslate"><span class="pre">use_fp16</span></code>
+through the <code class="docutils literal notranslate"><span class="pre">relax.ext.tensorrt.options</span></code> config lets TensorRT pick FP16
+kernels, trading a little accuracy for speed; nothing else about the flow
+changes.  (Other options are environment-driven: <code class="docutils literal notranslate"><span class="pre">TVM_TENSORRT_USE_INT8</span></code>
+enables INT8 with calibration, <code class="docutils literal notranslate"><span class="pre">TVM_TENSORRT_MAX_WORKSPACE_SIZE</span></code> caps the
+build workspace, and <code class="docutils literal notranslate"><span class="pre">TVM_TENSORRT_CACHE_DIR</span></code> caches built engines to disk
+for reuse across runs.)</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_tensorrt</span></a> <span class="ow">and</span> <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_cuda</span></a><span class="p">:</span>
+    <span class="n">fp16_mod</span> <span class="o">=</span> <span class="n">partition_for_tensorrt</span><span class="p">(</span>
+        <a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.BindParams" title="tvm.relax.transform.BindParams" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">BindParams</span></a><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="n">weight_np</span><span class="p">})(</span><span class="n">ConvReLU</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <a href="../../reference/api/python/transform.html#tvm.ir.transform.PassContext" title="tvm.ir.transform.PassContext" class="sphx-glr-backref-module-tvm-ir-transform sphx-glr-backref-type-py-class"><span class="n">tvm</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">PassContext</span></a><span class="p">(</span>
+        <span class="n">opt_level</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;relax.ext.tensorrt.options&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;use_fp16&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}}</span>
+    <span class="p">):</span>
+        <span class="n">fp16_exec</span> <span class="o">=</span> <a href="../../reference/api/python/relax/relax.html#tvm.relax.build" title="tvm.relax.build" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">build</span></a><span class="p">(</span><a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.RunCodegen" title="tvm.relax.transform.RunCodegen" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">RunCodegen</span></a><span class="p">()(</span><span class="n">fp16_mod</span><span class="p">),</span> <span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+    <span class="n">fp16_out</span> <span class="o">=</span> <a href="../../reference/api/python/runtime/vm.html#tvm.runtime.vm.VirtualMachine" title="tvm.runtime.vm.VirtualMachine" class="sphx-glr-backref-module-tvm-runtime-vm sphx-glr-backref-type-py-class"><span class="n">relax</span><span class="o">.</span><span class="n">VirtualMachine</span></a><span class="p">(</span><span class="n">fp16_exec</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="mi">0</span><span class="p">))[</span><span class="s2">&quot;main&quot;</span><span class="p">](</span>
+        <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_np</span><span class="p">,</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">fp16_out</span><span class="p">,</span> <span class="n">cpu_out</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TensorRT FP16 output shape:&quot;</span><span class="p">,</span> <span class="n">fp16_out</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot;- matches within FP16 tolerance.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TensorRT/CUDA unavailable; skipping the FP16 build.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>TensorRT/CUDA unavailable; skipping the FP16 build.
+</pre></div>
+</div>
+</section>
+<section id="example-npu-vs-tensorrt-at-a-glance">
+<h2>Example NPU vs TensorRT at a glance<a class="headerlink" href="#example-npu-vs-tensorrt-at-a-glance" title="Link to this heading"></a></h2>
+<p>The same four-step flow, two backends:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Example NPU (teaching stub)</p></th>
+<th class="head"><p>TensorRT (real backend)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Runtime</p></td>
+<td><p>logs decisions, no compute</p></td>
+<td><p>builds and runs an nvinfer engine</p></td>
+</tr>
+<tr class="row-odd"><td><p>Output</p></td>
+<td><p>uninitialized (check shape)</p></td>
+<td><p>real values (cross-checked vs CPU)</p></td>
+</tr>
+<tr class="row-even"><td><p>Weights</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bind_constants=False</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bind_constants=True</span></code> (baked in)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Partition</p></td>
+<td><p>two passes, by hand</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">partition_for_tensorrt</span></code> one call</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="deploying-a-pytorch-model-with-tensorrt">
+<h2>Deploying a PyTorch model with TensorRT<a class="headerlink" href="#deploying-a-pytorch-model-with-tensorrt" title="Link to this heading"></a></h2>
+<p>Everything above used a hand-written <code class="docutils literal notranslate"><span class="pre">IRModule</span></code> so each op was visible.  In
+practice you start from a trained model.  This final section runs the <em>same</em>
+<code class="docutils literal notranslate"><span class="pre">partition_for_tensorrt</span></code> flow on a real PyTorch <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>, end to end:
+export it, import it into Relax with the PyTorch frontend (the weights come in
+as constants – exactly what TensorRT bakes into its engine), partition, build
+for CUDA, and check the GPU result against PyTorch’s own output.  Beyond the
+frontend import, the only difference is that the imported program returns its
+outputs as a tuple, so we index <code class="docutils literal notranslate"><span class="pre">[0]</span></code> for the single result tensor; the
+partition-build-run flow is otherwise unchanged.</p>
+<p>This section additionally requires PyTorch.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">nn</span>
+
+    <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_torch</span></a> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_torch</span></a> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_torch</span></a> <span class="ow">and</span> <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_tensorrt</span></a> <span class="ow">and</span> <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_cuda</span></a><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">tvm.relax.frontend.torch</span><span class="w"> </span><span class="kn">import</span> <a href="../../reference/api/python/relax/frontend.html#tvm.relax.frontend.torch.from_exported_program" title="tvm.relax.frontend.torch.from_exported_program" class="sphx-glr-backref-module-tvm-relax-frontend-torch sphx-glr-backref-type-py-function"><span class="n">from_exported_program</span></a>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">SmallConvNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">x</span>
+
+    <span class="n">torch_model</span> <span class="o">=</span> <span class="n">SmallConvNet</span><span class="p">()</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">example_input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">torch_ref</span> <span class="o">=</span> <span class="n">torch_model</span><span class="p">(</span><span class="n">example_input</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">exported</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">torch_model</span><span class="p">,</span> <span class="p">(</span><span class="n">example_input</span><span class="p">,))</span>
+
+    <span class="n">torch_mod</span> <span class="o">=</span> <a href="../../reference/api/python/relax/frontend.html#tvm.relax.frontend.torch.from_exported_program" title="tvm.relax.frontend.torch.from_exported_program" class="sphx-glr-backref-module-tvm-relax-frontend-torch sphx-glr-backref-type-py-function"><span class="n">from_exported_program</span></a><span class="p">(</span><span class="n">exported</span><span class="p">)</span>
+    <span class="n">torch_mod</span> <span class="o">=</span> <span class="n">partition_for_tensorrt</span><span class="p">(</span><span class="n">torch_mod</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After importing and partitioning the PyTorch model:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">torch_mod</span><span class="p">)</span>
+
+    <span class="n">torch_dev</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">with</span> <a href="../../reference/api/python/transform.html#tvm.ir.transform.PassContext" title="tvm.ir.transform.PassContext" class="sphx-glr-backref-module-tvm-ir-transform sphx-glr-backref-type-py-class"><span class="n">tvm</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">PassContext</span></a><span class="p">(</span><span class="n">opt_level</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">torch_exec</span> <span class="o">=</span> <a href="../../reference/api/python/relax/relax.html#tvm.relax.build" title="tvm.relax.build" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">build</span></a><span class="p">(</span><a href="../../reference/api/python/relax/transform.html#tvm.relax.transform.RunCodegen" title="tvm.relax.transform.RunCodegen" class="sphx-glr-backref-module-tvm-relax-transform sphx-glr-backref-type-py-function"><span class="n">RunCodegen</span></a><span class="p">()(</span><span class="n">torch_mod</span><span class="p">),</span> <span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+    <span class="n">deployed</span> <span class="o">=</span> <a href="../../reference/api/python/runtime/vm.html#tvm.runtime.vm.VirtualMachine" title="tvm.runtime.vm.VirtualMachine" class="sphx-glr-backref-module-tvm-runtime-vm sphx-glr-backref-type-py-class"><span class="n">relax</span><span class="o">.</span><span class="n">VirtualMachine</span></a><span class="p">(</span><span class="n">torch_exec</span><span class="p">,</span> <span class="n">torch_dev</span><span class="p">)[</span><span class="s2">&quot;main&quot;</span><span class="p">](</span>
+        <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">example_input</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">torch_dev</span><span class="p">)</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">deployed</span><span class="p">,</span> <span class="n">torch_ref</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Deployed PyTorch model on TensorRT; output&quot;</span><span class="p">,</span> <span class="n">deployed</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot;matches PyTorch.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PyTorch / TensorRT / CUDA unavailable; skipping the deployment example.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PyTorch / TensorRT / CUDA unavailable; skipping the deployment example.
+</pre></div>
+</div>
+<p>Real deployment builds once and reuses the artifact.  Export the compiled
+module to a shared library, then load and run it later – in a fresh process,
+with no PyTorch and no rebuild needed.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_torch</span></a> <span class="ow">and</span> <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_tensorrt</span></a> <span class="ow">and</span> <a href="https://docs.python.org/3/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">has_cuda</span></a><span class="p">:</span>
+    <span class="k">with</span> <a href="https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class"><span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span></a><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
+        <span class="n">lib_path</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="s2">&quot;deployed_trt.so&quot;</span><span class="p">)</span>
+        <span class="n">torch_exec</span><span class="o">.</span><span class="n">export_library</span><span class="p">(</span><span class="n">lib_path</span><span class="p">)</span>
+        <span class="n">loaded</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">load_module</span><span class="p">(</span><span class="n">lib_path</span><span class="p">)</span>
+        <span class="n">reran</span> <span class="o">=</span> <a href="../../reference/api/python/runtime/vm.html#tvm.runtime.vm.VirtualMachine" title="tvm.runtime.vm.VirtualMachine" class="sphx-glr-backref-module-tvm-runtime-vm sphx-glr-backref-type-py-class"><span class="n">relax</span><span class="o">.</span><span class="n">VirtualMachine</span></a><span class="p">(</span><span class="n">loaded</span><span class="p">,</span> <span class="n">torch_dev</span><span class="p">)[</span><span class="s2">&quot;main&quot;</span><span class="p">](</span>
+            <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">example_input</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">torch_dev</span><span class="p">)</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">reran</span><span class="p">,</span> <span class="n">torch_ref</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reloaded the exported library and reran; output&quot;</span><span class="p">,</span> <span class="n">reran</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot;still matches.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PyTorch / TensorRT / CUDA unavailable; skipping the export/reload step.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PyTorch / TensorRT / CUDA unavailable; skipping the export/reload step.
+</pre></div>
+</div>
+</section>
+<section id="notes-for-real-deployments">
+<h2>Notes for real deployments<a class="headerlink" href="#notes-for-real-deployments" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Operator coverage and fallback.</strong> TensorRT offloads only the ops in its
+pattern table (see <code class="docutils literal notranslate"><span class="pre">python/tvm/relax/backend/contrib/tensorrt.py</span></code>);
+anything unsupported simply stays on the host.  Print the partitioned module
+and look for the <code class="docutils literal notranslate"><span class="pre">Codegen:</span> <span class="pre">&quot;tensorrt&quot;</span></code> functions to see what was offloaded.</p></li>
+<li><p><strong>Dynamic shapes.</strong> The builder sets up an optimization profile for a dynamic
+leading (batch) dimension, so the integration can serve a model exported with
+a symbolic batch size.</p></li>
+<li><p><strong>Engine build cost.</strong> Building a TensorRT engine is slow the first time (it
+is not a hang).  Set <code class="docutils literal notranslate"><span class="pre">TVM_TENSORRT_CACHE_DIR</span></code> to cache built engines to
+disk and skip the rebuild on later runs.</p></li>
+</ul>
 </section>
 <section id="next-steps">
 <h2>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
-<p>To build a real NPU backend using this example as a starting point:</p>
+<p>To build your own backend using the example NPU as a starting point:</p>
 <ul class="simple">
-<li><p>Replace <code class="docutils literal notranslate"><span class="pre">example_npu_runtime.cc</span></code> with your hardware SDK calls.</p></li>
+<li><p>Replace the stub runtime in
+<code class="docutils literal notranslate"><span class="pre">src/runtime/extra/contrib/example_npu/example_npu_runtime.cc</span></code> with your
+hardware SDK calls.</p></li>
 <li><p>Extend <code class="docutils literal notranslate"><span class="pre">patterns.py</span></code> with the ops your hardware supports.</p></li>
-<li><p>Add a C++ codegen under <code class="docutils literal notranslate"><span class="pre">src/relax/backend/contrib/</span></code> if your
-hardware requires a non-JSON serialization format.</p></li>
-<li><p>Add your cmake module under <code class="docutils literal notranslate"><span class="pre">cmake/modules/contrib/</span></code> following
-the pattern in <code class="docutils literal notranslate"><span class="pre">cmake/modules/contrib/ExampleNPU.cmake</span></code>.</p></li>
+<li><p>Add a C++ codegen under <code class="docutils literal notranslate"><span class="pre">src/relax/backend/contrib/</span></code> if your backend needs
+a non-JSON serialization format.</p></li>
+<li><p>Add a CMake module under <code class="docutils literal notranslate"><span class="pre">cmake/modules/contrib/</span></code> following
+<code class="docutils literal notranslate"><span class="pre">ExampleNPU.cmake</span></code>.</p></li>
 </ul>
+<p>For a complete real-backend implementation to study, see the TensorRT
+integration: the pattern table and <code class="docutils literal notranslate"><span class="pre">partition_for_tensorrt</span></code> in
+<code class="docutils literal notranslate"><span class="pre">python/tvm/relax/backend/contrib/tensorrt.py</span></code>, the codegen in
+<code class="docutils literal notranslate"><span class="pre">src/relax/backend/contrib/tensorrt/</span></code>, and the runtime in
+<code class="docutils literal notranslate"><span class="pre">src/runtime/extra/contrib/tensorrt/</span></code>.</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-how-to-tutorials-bring-your-own-codegen-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/2729a585e9deb6295e6d7badc73087d7/bring_your_own_codegen.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">bring_your_own_codegen.ipynb</span></code></a></p>

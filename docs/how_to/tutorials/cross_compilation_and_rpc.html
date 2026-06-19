@@ -198,7 +198,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="export_and_load_executable.html">Export and Load Relax Executables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bring_your_own_codegen.html">Bring Your Own Codegen: NPU Backend Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
 <ul>
@@ -474,7 +474,7 @@ device and returns the measured cost. Network overhead is excluded.</p>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cost</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2"> secs/op&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1.13e-07 secs/op
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1.05e-07 secs/op
 </pre></div>
 </div>
 <dl>
@@ -990,8 +990,8 @@ for ONNX models. Simply replace <code class="docutils literal notranslate"><span
 Converted PyTorch model to Relax:
   - Number of parameters: 4
 Using local target for demonstration
-Exported library to: /tmp/tmp4lmyjg3g/model_deployed.so
-Saved parameters to: /tmp/tmp4lmyjg3g/model_params.npz
+Exported library to: /tmp/tmpvnfep_p3/model_deployed.so
+Saved parameters to: /tmp/tmpvnfep_p3/model_params.npz
 
 RPC workflow (works for any remote device):
 ==================================================

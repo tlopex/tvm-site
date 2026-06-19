@@ -192,7 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/export_and_load_executable.html">Export and Load Relax Executables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen: NPU Backend Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
 <ul>
@@ -230,6 +230,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.const_int_bound_is_bound"><code class="docutils literal notranslate"><span class="pre">Analyzer.const_int_bound_is_bound()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.modular_set"><code class="docutils literal notranslate"><span class="pre">Analyzer.modular_set()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.simplify"><code class="docutils literal notranslate"><span class="pre">Analyzer.simplify()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.clone"><code class="docutils literal notranslate"><span class="pre">Analyzer.clone()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.rewrite_simplify"><code class="docutils literal notranslate"><span class="pre">Analyzer.rewrite_simplify()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.canonical_simplify"><code class="docutils literal notranslate"><span class="pre">Analyzer.canonical_simplify()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.arith.Analyzer.int_set"><code class="docutils literal notranslate"><span class="pre">Analyzer.int_set()</span></code></a></li>
@@ -718,6 +719,26 @@ Default is 2, i.e., rewrite_simplify + canonical_simplify.</p></li>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Expr</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tvm.arith.Analyzer.clone">
+<span class="sig-name descname"><span class="pre">clone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#tvm.arith.Analyzer" title="tvm.arith.analyzer.Analyzer"><span class="pre">Analyzer</span></a></span></span><a class="headerlink" href="#tvm.arith.Analyzer.clone" title="Link to this definition"></a></dt>
+<dd><p>Return a deep copy of this analyzer with independent state.</p>
+<p>The returned analyzer carries the same accumulated facts (variable
+bounds, modular sets, bindings, integer-set domains, literal
+constraints and transitive comparisons) as this one, but owns its own
+state: binding or simplifying on either analyzer afterwards does not
+affect the other. Unlike copying the handle, this is a true deep copy.</p>
+<p>Do not call this while a constraint scope is active on this analyzer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> – A new analyzer holding an independent copy of the facts.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#tvm.arith.Analyzer" title="tvm.arith.Analyzer">Analyzer</a></p>
 </dd>
 </dl>
 </dd></dl>

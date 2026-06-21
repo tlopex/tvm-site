@@ -608,8 +608,8 @@ accepts and returns PyTorch tensors.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.relax.frontend.nn.</span></span><span class="sig-name descname"><span class="pre">Object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../ir.html#tvm.ir.RelaxExpr" title="tvm.ir.expr.RelaxExpr"><span class="pre">RelaxExpr</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span></dt>
-<dd><p>A wrapper on top of relax.Expr whose struct_info is the base
-ObjectStructInfo (rather than any its subclass). Object effectively
+<dd><p>A wrapper on top of relax.Expr whose ty is the base
+ObjectType (rather than any its subclass). Object effectively
 represents non-tensor frontend components such as KV caches.</p>
 </dd></dl>
 
@@ -673,7 +673,7 @@ otherwise returns None. The returned value is a tvm.runtime.Tensor.</p>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.relax.frontend.nn.</span></span><span class="sig-name descname"><span class="pre">Tensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../ir.html#tvm.ir.RelaxExpr" title="tvm.ir.expr.RelaxExpr"><span class="pre">RelaxExpr</span></a></span></em><span class="sig-paren">)</span></dt>
-<dd><p>A wrapper on top of relax.Expr whose struct_info is a TensorStructInfo, providing more
+<dd><p>A wrapper on top of relax.Expr whose ty is a TensorType, providing more
 convenient access shape and dtype information. Tensor is always symbolc and not bound to any
 concrete values. Shape and dtype inference is done eagerly upon tensor creation, i.e. when
 operators are applied on tensors, the shape and dtype information is already available.</p>
@@ -691,20 +691,20 @@ operators are applied on tensors, the shape and dtype information is already ava
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_struct_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="relax.html#tvm.relax.TensorStructInfo" title="tvm.relax.struct_info.TensorStructInfo"><span class="pre">TensorStructInfo</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tensor'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span></dt>
-<dd><p>Construct a nn.Tensor from a Relax TensorStructInfo.</p>
-<p>TensorStructInfo is the Relax type-level description of a tensor, carrying its shape
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_ty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="relax.html#tvm.relax.TensorType" title="tvm.relax.type.TensorType"><span class="pre">TensorType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tensor'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span></dt>
+<dd><p>Construct a nn.Tensor from a Relax TensorType.</p>
+<p>TensorType is the Relax type-level description of a tensor, carrying its shape
 and dtype without holding actual data. This factory creates an unbound placeholder
 <code class="docutils literal notranslate"><span class="pre">nn.Tensor</span></code> that can be used as a symbolic input when tracing an <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>struct_info</strong> (<em>rx.TensorStructInfo</em>) – The struct info describing the tensor’s shape and dtype.</p></li>
+<li><p><strong>ty</strong> (<em>rx.TensorType</em>) – The type describing the tensor’s shape and dtype.</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Name hint for the underlying Relax variable.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>tensor</strong> – A symbolic <code class="docutils literal notranslate"><span class="pre">nn.Tensor</span></code> backed by a <code class="docutils literal notranslate"><span class="pre">relax.Var</span></code> with the given struct info.</p>
+<dd class="field-even"><p><strong>tensor</strong> – A symbolic <code class="docutils literal notranslate"><span class="pre">nn.Tensor</span></code> backed by a <code class="docutils literal notranslate"><span class="pre">relax.Var</span></code> with the given type.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../te.html#tvm.te.Tensor" title="tvm.te.Tensor">Tensor</a></p>

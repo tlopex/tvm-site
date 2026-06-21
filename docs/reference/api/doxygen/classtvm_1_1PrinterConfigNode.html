@@ -222,7 +222,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Look up a value in extra_config with type cast and fallback. </p>
-<p>Keys are conventionally namespaced as "&lt;dialect&gt;.&lt;knob&gt;" (e.g. "tirx.prefix", "relax.show_all_struct_info"). </p>
+<p>Keys are conventionally namespaced as "&lt;dialect&gt;.&lt;knob&gt;" (e.g. "tirx.prefix", "relax.show_all_ty"). </p>
 
 </div>
 </div>
@@ -353,7 +353,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Generic extension map for dialect-specific config knobs. </p>
-<p>Keys are conventionally namespaced as "&lt;dialect&gt;.&lt;knob&gt;", e.g.: "tirx.prefix" — the TIR prefix (default "T") "relax.prefix" — the Relax prefix (default "R") "relax.show_all_struct_info" — whether to show all struct info (default true)</p>
+<p>Keys are conventionally namespaced as "&lt;dialect&gt;.&lt;knob&gt;", e.g.: "tirx.prefix" — the TIR prefix (default "T") "relax.prefix" — the Relax prefix (default "R") "relax.show_all_ty" — whether to show all Relax type annotations (default true)</p>
 <p>Use GetExtraConfig&lt;T&gt;(key, fallback) to read values with a typed fallback. </p>
 
 </div>

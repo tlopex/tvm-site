@@ -177,9 +177,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a75a19a22e62e1383dbdc3f66ddbe04ca"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1ExprVisitor.html#a75a19a22e62e1383dbdc3f66ddbe04ca">VisitVarDef</a> (const <a class="el" href="classtvm_1_1relax_1_1Var.html">Var</a> &amp;var)</td></tr>
 <tr class="memdesc:a75a19a22e62e1383dbdc3f66ddbe04ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic dispatcher for visiting the var definition site.  <a href="classtvm_1_1relax_1_1ExprVisitor.html#a75a19a22e62e1383dbdc3f66ddbe04ca">More...</a><br /></td></tr>
 <tr class="separator:a75a19a22e62e1383dbdc3f66ddbe04ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af336e1bf71249d8ae059ffbb96bee9a4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1ExprVisitor.html#af336e1bf71249d8ae059ffbb96bee9a4">VisitExprDepStructInfoField</a> (const <a class="el" href="classtvm_1_1relax_1_1StructInfo.html">StructInfo</a> &amp;struct_info)</td></tr>
-<tr class="memdesc:af336e1bf71249d8ae059ffbb96bee9a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit struct_info may recursively contain Expr/PrimExpr.  <a href="classtvm_1_1relax_1_1ExprVisitor.html#af336e1bf71249d8ae059ffbb96bee9a4">More...</a><br /></td></tr>
-<tr class="separator:af336e1bf71249d8ae059ffbb96bee9a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca8044710cd91d8c92ac9fe0ce0f5958"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1ExprVisitor.html#aca8044710cd91d8c92ac9fe0ce0f5958">VisitExprDepTypeField</a> (const <a class="el" href="classtvm_1_1Type.html">Type</a> &amp;ty)</td></tr>
+<tr class="memdesc:aca8044710cd91d8c92ac9fe0ce0f5958"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit ty may recursively contain Expr/PrimExpr.  <a href="classtvm_1_1relax_1_1ExprVisitor.html#aca8044710cd91d8c92ac9fe0ce0f5958">More...</a><br /></td></tr>
+<tr class="separator:aca8044710cd91d8c92ac9fe0ce0f5958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4c15a65c7a028269e4c44b3373938ea"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1ExprVisitor.html#ac4c15a65c7a028269e4c44b3373938ea">VisitVarDef_</a> (const <a class="el" href="classtvm_1_1relax_1_1VarNode.html">VarNode</a> *var)</td></tr>
 <tr class="separator:ac4c15a65c7a028269e4c44b3373938ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab252b2b8d82c6e4f300775ca4d308f4a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1ExprVisitor.html#ab252b2b8d82c6e4f300775ca4d308f4a">VisitVarDef_</a> (const <a class="el" href="classtvm_1_1relax_1_1DataflowVarNode.html">DataflowVarNode</a> *var)</td></tr>
@@ -1390,8 +1390,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af336e1bf71249d8ae059ffbb96bee9a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af336e1bf71249d8ae059ffbb96bee9a4">&#9670;&nbsp;</a></span>VisitExprDepStructInfoField()</h2>
+<a id="aca8044710cd91d8c92ac9fe0ce0f5958"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca8044710cd91d8c92ac9fe0ce0f5958">&#9670;&nbsp;</a></span>VisitExprDepTypeField()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1400,10 +1400,10 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void tvm::relax::ExprVisitor::VisitExprDepStructInfoField </td>
+          <td class="memname">virtual void tvm::relax::ExprVisitor::VisitExprDepTypeField </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classtvm_1_1relax_1_1StructInfo.html">StructInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>struct_info</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classtvm_1_1Type.html">Type</a> &amp;&#160;</td>
+          <td class="paramname"><em>ty</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1414,12 +1414,12 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Visit struct_info may recursively contain Expr/PrimExpr. </p>
-<p>By default, this function recurse into struct info such as <a class="el" href="classtvm_1_1relax_1_1TensorStructInfo.html" title="Managed reference to TensorStructInfoNode.">TensorStructInfo</a> and <a class="el" href="classtvm_1_1relax_1_1ShapeStructInfo.html" title="Managed reference to ShapeStructInfoNode.">ShapeStructInfo</a> and call VisitExpr/VisitPrimExpr accordingly. It does not recurse into FunctionStructInfo as it does not contain Expr defined in the current scope.</p>
-<p>Pass writers can overload this function to change to other behaviors. For example, if we are not interested in Expr in <a class="el" href="classtvm_1_1relax_1_1StructInfo.html" title="Managed reference to StructInfoNode.">StructInfo</a>, we can override this function by a no-op.</p>
+<p>Visit ty may recursively contain Expr/PrimExpr. </p>
+<p>By default, this function recurse into type such as <a class="el" href="classtvm_1_1relax_1_1TensorType.html" title="Managed reference to TensorTypeNode.">TensorType</a> and <a class="el" href="classtvm_1_1relax_1_1ShapeType.html" title="Managed reference to ShapeTypeNode.">ShapeType</a> and call VisitExpr/VisitPrimExpr accordingly. It does not recurse into FunctionType as it does not contain Expr defined in the current scope.</p>
+<p>Pass writers can overload this function to change to other behaviors. For example, if we are not interested in Expr in <a class="el" href="classtvm_1_1Type.html" title="Managed reference to TypeNode.">Type</a>, we can override this function by a no-op.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">struct_info</td><td>Input struct info field. </td></tr>
+    <tr><td class="paramname">ty</td><td>Input type field. </td></tr>
   </table>
   </dd>
 </dl>

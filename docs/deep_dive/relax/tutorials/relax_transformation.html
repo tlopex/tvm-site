@@ -478,13 +478,13 @@ class Module:
         R.func_attr({&quot;num_input&quot;: 1})
         cls = Module
         with R.dataflow():
-            permute_dims = R.call_tir(cls.transpose, (fc1_weight,), out_sinfo=R.Tensor((784, 128), dtype=&quot;float32&quot;))
-            matmul = R.call_tir(cls.matmul, (x, permute_dims), out_sinfo=R.Tensor((n, 128), dtype=&quot;float32&quot;))
-            add = R.call_tir(cls.add, (matmul, fc1_bias), out_sinfo=R.Tensor((n, 128), dtype=&quot;float32&quot;))
-            relu = R.call_tir(cls.relu, (add,), out_sinfo=R.Tensor((n, 128), dtype=&quot;float32&quot;))
-            permute_dims1 = R.call_tir(cls.transpose1, (fc2_weight,), out_sinfo=R.Tensor((128, 10), dtype=&quot;float32&quot;))
-            matmul1 = R.call_tir(cls.matmul1, (relu, permute_dims1), out_sinfo=R.Tensor((n, 10), dtype=&quot;float32&quot;))
-            add1 = R.call_tir(cls.add1, (matmul1, fc2_bias), out_sinfo=R.Tensor((n, 10), dtype=&quot;float32&quot;))
+            permute_dims = R.call_tir(cls.transpose, (fc1_weight,), out_ty=R.Tensor((784, 128), dtype=&quot;float32&quot;))
+            matmul = R.call_tir(cls.matmul, (x, permute_dims), out_ty=R.Tensor((n, 128), dtype=&quot;float32&quot;))
+            add = R.call_tir(cls.add, (matmul, fc1_bias), out_ty=R.Tensor((n, 128), dtype=&quot;float32&quot;))
+            relu = R.call_tir(cls.relu, (add,), out_ty=R.Tensor((n, 128), dtype=&quot;float32&quot;))
+            permute_dims1 = R.call_tir(cls.transpose1, (fc2_weight,), out_ty=R.Tensor((128, 10), dtype=&quot;float32&quot;))
+            matmul1 = R.call_tir(cls.matmul1, (relu, permute_dims1), out_ty=R.Tensor((n, 10), dtype=&quot;float32&quot;))
+            add1 = R.call_tir(cls.add1, (matmul1, fc2_bias), out_ty=R.Tensor((n, 10), dtype=&quot;float32&quot;))
             gv: R.Tensor((n, 10), dtype=&quot;float32&quot;) = add1
             R.output(gv)
         return gv
@@ -593,10 +593,10 @@ class Module:
         R.func_attr({&quot;num_input&quot;: 1})
         cls = Module
         with R.dataflow():
-            permute_dims = R.call_tir(cls.transpose, (fc1_weight,), out_sinfo=R.Tensor((784, 128), dtype=&quot;float32&quot;))
-            lv = R.call_tir(cls.fused_matmul_add_relu, (x, permute_dims, fc1_bias), out_sinfo=R.Tensor((n, 128), dtype=&quot;float32&quot;))
-            permute_dims1 = R.call_tir(cls.transpose1, (fc2_weight,), out_sinfo=R.Tensor((128, 10), dtype=&quot;float32&quot;))
-            gv = R.call_tir(cls.fused_matmul1_add1, (lv, permute_dims1, fc2_bias), out_sinfo=R.Tensor((n, 10), dtype=&quot;float32&quot;))
+            permute_dims = R.call_tir(cls.transpose, (fc1_weight,), out_ty=R.Tensor((784, 128), dtype=&quot;float32&quot;))
+            lv = R.call_tir(cls.fused_matmul_add_relu, (x, permute_dims, fc1_bias), out_ty=R.Tensor((n, 128), dtype=&quot;float32&quot;))
+            permute_dims1 = R.call_tir(cls.transpose1, (fc2_weight,), out_ty=R.Tensor((128, 10), dtype=&quot;float32&quot;))
+            gv = R.call_tir(cls.fused_matmul1_add1, (lv, permute_dims1, fc2_bias), out_ty=R.Tensor((n, 10), dtype=&quot;float32&quot;))
             R.output(gv)
         return gv
 </pre></div>

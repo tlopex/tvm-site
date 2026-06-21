@@ -138,9 +138,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a19459f84c0c74b3ce95a71f1707f6afb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtvm_1_1relax_1_1Var.html">Var</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BlockBuilderNode.html#a19459f84c0c74b3ce95a71f1707f6afb">Emit</a> (<a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a> expr, ffi::String name_hint=&quot;&quot;)=0</td></tr>
 <tr class="memdesc:a19459f84c0c74b3ce95a71f1707f6afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits an Expr, and returns the variable it is bound to.  <a href="classtvm_1_1relax_1_1BlockBuilderNode.html#a19459f84c0c74b3ce95a71f1707f6afb">More...</a><br /></td></tr>
 <tr class="separator:a19459f84c0c74b3ce95a71f1707f6afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a977bc6516c91e096854340997bf2a2c3"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtvm_1_1relax_1_1Var.html">Var</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BlockBuilderNode.html#a977bc6516c91e096854340997bf2a2c3">EmitMatchCast</a> (<a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a> value, <a class="el" href="classtvm_1_1relax_1_1StructInfo.html">StructInfo</a> struct_info, ffi::String name_hint=&quot;&quot;)=0</td></tr>
-<tr class="memdesc:a977bc6516c91e096854340997bf2a2c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emit a <a class="el" href="classtvm_1_1relax_1_1MatchCast.html" title="Managed reference to MatchCastNode.">MatchCast</a>.  <a href="classtvm_1_1relax_1_1BlockBuilderNode.html#a977bc6516c91e096854340997bf2a2c3">More...</a><br /></td></tr>
-<tr class="separator:a977bc6516c91e096854340997bf2a2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91154939dffdc09c5d86569de7283d3d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtvm_1_1relax_1_1Var.html">Var</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BlockBuilderNode.html#a91154939dffdc09c5d86569de7283d3d">EmitMatchCast</a> (<a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a> value, <a class="el" href="classtvm_1_1Type.html">Type</a> ty, ffi::String name_hint=&quot;&quot;)=0</td></tr>
+<tr class="memdesc:a91154939dffdc09c5d86569de7283d3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emit a <a class="el" href="classtvm_1_1relax_1_1MatchCast.html" title="Managed reference to MatchCastNode.">MatchCast</a>.  <a href="classtvm_1_1relax_1_1BlockBuilderNode.html#a91154939dffdc09c5d86569de7283d3d">More...</a><br /></td></tr>
+<tr class="separator:a91154939dffdc09c5d86569de7283d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa5d41a949606f96e497f1c87e205c4f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtvm_1_1relax_1_1Var.html">Var</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BlockBuilderNode.html#aaa5d41a949606f96e497f1c87e205c4f">EmitOutput</a> (<a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a> output, ffi::String name_hint=&quot;&quot;)=0</td></tr>
 <tr class="memdesc:aaa5d41a949606f96e497f1c87e205c4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an output for the current dataflow block.  <a href="classtvm_1_1relax_1_1BlockBuilderNode.html#aaa5d41a949606f96e497f1c87e205c4f">More...</a><br /></td></tr>
 <tr class="separator:aaa5d41a949606f96e497f1c87e205c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -460,8 +460,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a977bc6516c91e096854340997bf2a2c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a977bc6516c91e096854340997bf2a2c3">&#9670;&nbsp;</a></span>EmitMatchCast()</h2>
+<a id="a91154939dffdc09c5d86569de7283d3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91154939dffdc09c5d86569de7283d3d">&#9670;&nbsp;</a></span>EmitMatchCast()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -478,8 +478,8 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtvm_1_1relax_1_1StructInfo.html">StructInfo</a>&#160;</td>
-          <td class="paramname"><em>struct_info</em>, </td>
+          <td class="paramtype"><a class="el" href="classtvm_1_1Type.html">Type</a>&#160;</td>
+          <td class="paramname"><em>ty</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -504,7 +504,7 @@ Static Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The input value. </td></tr>
-    <tr><td class="paramname">struct_info</td><td>The struct info to be matched. </td></tr>
+    <tr><td class="paramname">ty</td><td>The type to be matched. </td></tr>
     <tr><td class="paramname">name_hint</td><td>Name hint for the bound variable. </td></tr>
   </table>
   </dd>
@@ -831,7 +831,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The normalized expression.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Invariant: <a class="el" href="classtvm_1_1relax_1_1If.html">If</a> any of the sub expr have struct_info field. they must have already been normalized. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Invariant: <a class="el" href="classtvm_1_1relax_1_1If.html">If</a> any of the sub expr have ty field. they must have already been normalized. </dd></dl>
 
 </div>
 </div>

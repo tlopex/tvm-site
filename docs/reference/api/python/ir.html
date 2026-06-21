@@ -236,10 +236,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#tvm.ir.Range.from_min_extent"><code class="docutils literal notranslate"><span class="pre">Range.from_min_extent()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.ir.RelaxExpr"><code class="docutils literal notranslate"><span class="pre">RelaxExpr</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.ir.RelaxExpr.struct_info"><code class="docutils literal notranslate"><span class="pre">RelaxExpr.struct_info</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#tvm.ir.RelaxExpr"><code class="docutils literal notranslate"><span class="pre">RelaxExpr</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.ir.BaseFunc"><code class="docutils literal notranslate"><span class="pre">BaseFunc</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.ir.BaseFunc.attrs"><code class="docutils literal notranslate"><span class="pre">BaseFunc.attrs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.ir.BaseFunc.with_attr"><code class="docutils literal notranslate"><span class="pre">BaseFunc.with_attr()</span></code></a></li>
@@ -289,6 +286,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#tvm.ir.TupleType"><code class="docutils literal notranslate"><span class="pre">TupleType</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.ir.Type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tvm.ir.Type.same_as"><code class="docutils literal notranslate"><span class="pre">Type.same_as()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tvm.ir.Type.is_base_of"><code class="docutils literal notranslate"><span class="pre">Type.is_base_of()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#tvm.ir.Array"><code class="docutils literal notranslate"><span class="pre">Array</span></code></a></li>
@@ -468,22 +466,22 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.SequentialSpan" title="tvm.ir.SequentialSpan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SequentialSpan</span></code></a>(spans)</p></td>
 <td><p>A sequence of source spans</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.BaseExpr" title="tvm.ir.BaseExpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseExpr</span></code></a>([span])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.BaseExpr" title="tvm.ir.BaseExpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseExpr</span></code></a>([span, ty])</p></td>
 <td><p>Base class of all the expressions.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.GlobalVar" title="tvm.ir.GlobalVar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GlobalVar</span></code></a>(name_hint)</p></td>
 <td><p>A global variable in the IR.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PrimExpr</span></code></a>(dtype[, span])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.PrimExpr" title="tvm.ir.PrimExpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PrimExpr</span></code></a>(dtype[, span, ty])</p></td>
 <td><p>Base class of all primitive expressions.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.Range" title="tvm.ir.Range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Range</span></code></a>(begin[, end, span])</p></td>
 <td><p>Represent a range in TVM.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.RelaxExpr" title="tvm.ir.RelaxExpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RelaxExpr</span></code></a>(struct_info_[, span])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.RelaxExpr" title="tvm.ir.RelaxExpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RelaxExpr</span></code></a>([span, ty])</p></td>
 <td><p>Base class of all non-primitive expressions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.BaseFunc" title="tvm.ir.BaseFunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseFunc</span></code></a>(struct_info_, attrs[, span])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.BaseFunc" title="tvm.ir.BaseFunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseFunc</span></code></a>(attrs[, span, ty])</p></td>
 <td><p>Base class of all functions.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.CallingConv" title="tvm.ir.CallingConv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CallingConv</span></code></a>(value)</p></td>
@@ -513,7 +511,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.PrimType" title="tvm.ir.PrimType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PrimType</span></code></a>(dtype)</p></td>
 <td><p>Primitive data type in the low level IR</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.TupleType" title="tvm.ir.TupleType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TupleType</span></code></a>(fields)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.TupleType" title="tvm.ir.TupleType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TupleType</span></code></a>(fields[, span])</p></td>
 <td><p>The type of tuple values.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.Type" title="tvm.ir.Type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Type</span></code></a>([span])</p></td>
@@ -830,7 +828,7 @@ not bound to any definitions as equal to each other.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.ir.BaseExpr">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">BaseExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">span=&lt;MISSING&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.BaseExpr" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">BaseExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">span=&lt;MISSING&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ty=&lt;MISSING&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.BaseExpr" title="Link to this definition"></a></dt>
 <dd><p>Base class of all the expressions.</p>
 </dd></dl>
 
@@ -849,7 +847,7 @@ stored in the IRModule.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.ir.PrimExpr">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">PrimExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span=&lt;MISSING&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.PrimExpr" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">PrimExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span=&lt;MISSING&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ty=&lt;MISSING&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.PrimExpr" title="Link to this definition"></a></dt>
 <dd><p>Base class of all primitive expressions.</p>
 <p>PrimExpr is used in the low-level code
 optimizations and integer analysis.</p>
@@ -910,35 +908,13 @@ if the end argument is not None. Otherwise, it creates <cite>[0, begin)</cite>.<
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.ir.RelaxExpr">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">RelaxExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct_info_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span=&lt;MISSING&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.RelaxExpr" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">RelaxExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">span=&lt;MISSING&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ty=&lt;MISSING&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.RelaxExpr" title="Link to this definition"></a></dt>
 <dd><p>Base class of all non-primitive expressions.</p>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.RelaxExpr.struct_info" title="tvm.ir.RelaxExpr.struct_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">struct_info</span></code></a></p></td>
-<td><p>Get the struct info field</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="tvm.ir.RelaxExpr.struct_info">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">struct_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="relax/relax.html#tvm.relax.StructInfo" title="tvm.relax.expr.StructInfo"><span class="pre">StructInfo</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#tvm.ir.RelaxExpr.struct_info" title="Link to this definition"></a></dt>
-<dd><p>Get the struct info field</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>struct_info</strong> – The struct info if available.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="relax/relax.html#tvm.relax.StructInfo" title="tvm.relax.StructInfo">tvm.relax.StructInfo</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.ir.BaseFunc">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">BaseFunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct_info_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span=&lt;MISSING&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.BaseFunc" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">BaseFunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span=&lt;MISSING&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ty=&lt;MISSING&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.BaseFunc" title="Link to this definition"></a></dt>
 <dd><p>Base class of all functions.</p>
 <p><strong>Attributes:</strong></p>
 <table class="autosummary longtable docutils align-default">
@@ -1557,7 +1533,7 @@ a sequence of argument types, and a return type.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.ir.TupleType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">TupleType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.TupleType" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.ir.</span></span><span class="sig-name descname"><span class="pre">TupleType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.TupleType" title="Link to this definition"></a></dt>
 <dd><p>The type of tuple values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1576,12 +1552,21 @@ a sequence of argument types, and a return type.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tvm.ir.Type.same_as" title="tvm.ir.Type.same_as"><code class="xref py py-obj docutils literal notranslate"><span class="pre">same_as</span></code></a>(other)</p></td>
 <td><p>Compares two TVM types by referential equality.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tvm.ir.Type.is_base_of" title="tvm.ir.Type.is_base_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_base_of</span></code></a>(derived)</p></td>
+<td><p>Check if this Relax type is a base of another Relax type.</p></td>
+</tr>
 </tbody>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.ir.Type.same_as">
 <span class="sig-name descname"><span class="pre">same_as</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.ir.Type.same_as" title="Link to this definition"></a></dt>
 <dd><p>Compares two TVM types by referential equality.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tvm.ir.Type.is_base_of">
+<span class="sig-name descname"><span class="pre">is_base_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">derived</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#tvm.ir.Type" title="tvm.ir.type.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#tvm.ir.Type.is_base_of" title="Link to this definition"></a></dt>
+<dd><p>Check if this Relax type is a base of another Relax type.</p>
 </dd></dl>
 
 </dd></dl>

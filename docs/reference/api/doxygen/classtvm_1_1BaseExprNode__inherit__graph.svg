@@ -13,16 +13,17 @@
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title="Base type of all the expressions.">
-<polygon fill="#bfbfbf" stroke="black" points="5142,-618.5 5142,-719.5 5304,-719.5 5304,-618.5 5142,-618.5"/>
+<polygon fill="#bfbfbf" stroke="black" points="5142,-607.5 5142,-719.5 5304,-719.5 5304,-607.5 5142,-607.5"/>
 <text text-anchor="middle" x="5223" y="-707.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::BaseExprNode</text>
 <polyline fill="none" stroke="black" points="5142,-700.5 5304,-700.5 "/>
 <text text-anchor="start" x="5150" y="-688.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ span</text>
-<text text-anchor="start" x="5150" y="-677.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
-<text text-anchor="start" x="5150" y="-666.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<polyline fill="none" stroke="black" points="5142,-659.5 5304,-659.5 "/>
-<text text-anchor="start" x="5150" y="-647.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="5150" y="-636.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
-<text text-anchor="start" x="5150" y="-625.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<text text-anchor="start" x="5150" y="-677.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ ty</text>
+<text text-anchor="start" x="5150" y="-666.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
+<text text-anchor="start" x="5150" y="-655.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<polyline fill="none" stroke="black" points="5142,-648.5 5304,-648.5 "/>
+<text text-anchor="start" x="5150" y="-636.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="5150" y="-625.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
+<text text-anchor="start" x="5150" y="-614.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
@@ -30,45 +31,44 @@
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="classtvm_1_1PrimExprNode.html" target="_top" xlink:title="Base node of all primitive expressions.">
-<polygon fill="white" stroke="black" points="3330,-491.5 3330,-581.5 3492,-581.5 3492,-491.5 3330,-491.5"/>
-<text text-anchor="middle" x="3411" y="-569.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::PrimExprNode</text>
-<polyline fill="none" stroke="black" points="3330,-562.5 3492,-562.5 "/>
-<text text-anchor="start" x="3338" y="-550.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ dtype</text>
-<text text-anchor="start" x="3338" y="-539.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<polyline fill="none" stroke="black" points="3330,-532.5 3492,-532.5 "/>
-<text text-anchor="start" x="3338" y="-520.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="3338" y="-509.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
-<text text-anchor="start" x="3338" y="-498.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="3330,-480.5 3330,-570.5 3492,-570.5 3492,-480.5 3330,-480.5"/>
+<text text-anchor="middle" x="3411" y="-558.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::PrimExprNode</text>
+<polyline fill="none" stroke="black" points="3330,-551.5 3492,-551.5 "/>
+<text text-anchor="start" x="3338" y="-539.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ dtype</text>
+<text text-anchor="start" x="3338" y="-528.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<polyline fill="none" stroke="black" points="3330,-521.5 3492,-521.5 "/>
+<text text-anchor="start" x="3338" y="-509.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="3338" y="-498.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
+<text text-anchor="start" x="3338" y="-487.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node1&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M5131.51,-661.41C4817.93,-638.83 3789.54,-564.76 3492.2,-543.35"/>
-<polygon fill="none" stroke="midnightblue" points="5131.69,-664.93 5141.92,-662.16 5132.2,-657.95 5131.69,-664.93"/>
+<path fill="none" stroke="midnightblue" d="M5131.51,-655.63C4817.93,-632.1 3789.54,-554.91 3492.2,-532.59"/>
+<polygon fill="none" stroke="midnightblue" points="5131.68,-659.16 5141.92,-656.41 5132.21,-652.18 5131.68,-659.16"/>
 </g>
 <!-- Node57 -->
 <g id="node57" class="node">
 <title>Node57</title>
 <g id="a_node57"><a xlink:href="classtvm_1_1RelaxExprNode.html" target="_top" xlink:title="Base node of all non&#45;primitive expressions.">
-<polygon fill="white" stroke="black" points="7224,-491.5 7224,-581.5 7386,-581.5 7386,-491.5 7224,-491.5"/>
-<text text-anchor="middle" x="7305" y="-569.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::RelaxExprNode</text>
-<polyline fill="none" stroke="black" points="7224,-562.5 7386,-562.5 "/>
-<text text-anchor="start" x="7232" y="-550.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ struct_info_</text>
-<text text-anchor="start" x="7232" y="-539.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<polyline fill="none" stroke="black" points="7224,-532.5 7386,-532.5 "/>
-<text text-anchor="start" x="7232" y="-520.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="7232" y="-509.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
-<text text-anchor="start" x="7232" y="-498.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="7224,-486 7224,-565 7386,-565 7386,-486 7224,-486"/>
+<text text-anchor="middle" x="7305" y="-553" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::RelaxExprNode</text>
+<polyline fill="none" stroke="black" points="7224,-546 7386,-546 "/>
+<text text-anchor="start" x="7232" y="-534" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<polyline fill="none" stroke="black" points="7224,-527 7386,-527 "/>
+<text text-anchor="start" x="7232" y="-515" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="7232" y="-504" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
+<text text-anchor="start" x="7232" y="-493" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node57 -->
 <g id="edge56" class="edge">
 <title>Node1&#45;&gt;Node57</title>
-<path fill="none" stroke="midnightblue" d="M5314.3,-662.28C5661.28,-640.53 6894.96,-563.2 7223.9,-542.58"/>
-<polygon fill="none" stroke="midnightblue" points="5314.06,-658.79 5304.3,-662.9 5314.5,-665.77 5314.06,-658.79"/>
+<path fill="none" stroke="midnightblue" d="M5314.3,-656.54C5661.28,-633.87 6894.96,-553.28 7223.9,-531.8"/>
+<polygon fill="none" stroke="midnightblue" points="5314.05,-653.05 5304.3,-657.19 5314.5,-660.03 5314.05,-653.05"/>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node">
@@ -86,831 +86,831 @@
 <!-- Node2&#45;&gt;Node1 -->
 <g id="edge1" class="edge">
 <title>Node2&#45;&gt;Node1</title>
-<path fill="none" stroke="midnightblue" d="M5223,-746.35C5223,-737.8 5223,-728.58 5223,-719.61"/>
-<polygon fill="none" stroke="midnightblue" points="5219.5,-746.4 5223,-756.4 5226.5,-746.4 5219.5,-746.4"/>
+<path fill="none" stroke="midnightblue" d="M5223,-746.11C5223,-737.75 5223,-728.73 5223,-719.83"/>
+<polygon fill="none" stroke="midnightblue" points="5219.5,-746.28 5223,-756.28 5226.5,-746.28 5219.5,-746.28"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="classtvm_1_1tirx_1_1BinaryOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="0,-309.5 0,-432.5 174,-432.5 174,-309.5 0,-309.5"/>
-<text text-anchor="start" x="8" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
-<text text-anchor="middle" x="87" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; AddNode &gt;</text>
-<polyline fill="none" stroke="black" points="0,-402.5 174,-402.5 "/>
-<text text-anchor="start" x="8" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="8" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="8" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="8" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="0,-350.5 174,-350.5 "/>
-<text text-anchor="start" x="8" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="8" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="8" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="0,-304 0,-427 174,-427 174,-304 0,-304"/>
+<text text-anchor="start" x="8" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
+<text text-anchor="middle" x="87" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; AddNode &gt;</text>
+<polyline fill="none" stroke="black" points="0,-397 174,-397 "/>
+<text text-anchor="start" x="8" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="8" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="8" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="8" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="0,-345 174,-345 "/>
+<text text-anchor="start" x="8" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="8" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="8" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node3&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M3319.51,-534.96C2809.32,-531.71 333.03,-513 183,-455 169.44,-449.76 156.49,-441.7 144.73,-432.63"/>
-<polygon fill="none" stroke="midnightblue" points="3319.75,-538.46 3329.77,-535.02 3319.79,-531.46 3319.75,-538.46"/>
+<path fill="none" stroke="midnightblue" d="M3319.55,-523.88C2809.52,-520.19 333.99,-499.47 183,-444 171.84,-439.9 161.01,-433.94 150.89,-427.11"/>
+<polygon fill="none" stroke="midnightblue" points="3319.77,-527.38 3329.8,-523.95 3319.82,-520.38 3319.77,-527.38"/>
 </g>
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="classtvm_1_1tirx_1_1BinaryOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="192,-309.5 192,-432.5 366,-432.5 366,-309.5 192,-309.5"/>
-<text text-anchor="start" x="200" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
-<text text-anchor="middle" x="279" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; MinNode &gt;</text>
-<polyline fill="none" stroke="black" points="192,-402.5 366,-402.5 "/>
-<text text-anchor="start" x="200" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="200" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="200" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="200" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="192,-350.5 366,-350.5 "/>
-<text text-anchor="start" x="200" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="200" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="200" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="192,-304 192,-427 366,-427 366,-304 192,-304"/>
+<text text-anchor="start" x="200" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
+<text text-anchor="middle" x="279" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; MinNode &gt;</text>
+<polyline fill="none" stroke="black" points="192,-397 366,-397 "/>
+<text text-anchor="start" x="200" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="200" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="200" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="200" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="192,-345 366,-345 "/>
+<text text-anchor="start" x="200" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="200" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="200" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node6 -->
 <g id="edge5" class="edge">
 <title>Node3&#45;&gt;Node6</title>
-<path fill="none" stroke="midnightblue" d="M3319.46,-534.81C2827.61,-530.86 515.54,-509.46 375,-455 361.44,-449.75 348.49,-441.68 336.74,-432.61"/>
-<polygon fill="none" stroke="midnightblue" points="3319.68,-538.31 3329.71,-534.89 3319.73,-531.31 3319.68,-538.31"/>
+<path fill="none" stroke="midnightblue" d="M3319.49,-523.72C2827.81,-519.35 516.44,-496.08 375,-444 363.84,-439.89 353.01,-433.92 342.89,-427.09"/>
+<polygon fill="none" stroke="midnightblue" points="3319.7,-527.23 3329.73,-523.82 3319.76,-520.23 3319.7,-527.23"/>
 </g>
 <!-- Node8 -->
 <g id="node8" class="node">
 <title>Node8</title>
 <g id="a_node8"><a xlink:href="classtvm_1_1tirx_1_1BinaryOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="384,-309.5 384,-432.5 558,-432.5 558,-309.5 384,-309.5"/>
-<text text-anchor="start" x="392" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
-<text text-anchor="middle" x="471" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; DivNode &gt;</text>
-<polyline fill="none" stroke="black" points="384,-402.5 558,-402.5 "/>
-<text text-anchor="start" x="392" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="392" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="392" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="392" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="384,-350.5 558,-350.5 "/>
-<text text-anchor="start" x="392" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="392" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="392" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="384,-304 384,-427 558,-427 558,-304 384,-304"/>
+<text text-anchor="start" x="392" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
+<text text-anchor="middle" x="471" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; DivNode &gt;</text>
+<polyline fill="none" stroke="black" points="384,-397 558,-397 "/>
+<text text-anchor="start" x="392" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="392" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="392" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="392" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="384,-345 558,-345 "/>
+<text text-anchor="start" x="392" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="392" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="392" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node8 -->
 <g id="edge7" class="edge">
 <title>Node3&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M3319.58,-534.64C2847.01,-529.96 698.08,-505.93 567,-455 553.45,-449.73 540.5,-441.67 528.75,-432.59"/>
-<polygon fill="none" stroke="midnightblue" points="3319.73,-538.14 3329.76,-534.74 3319.8,-531.14 3319.73,-538.14"/>
+<path fill="none" stroke="midnightblue" d="M3319.61,-523.56C2847.2,-518.47 698.92,-492.71 567,-444 555.85,-439.88 545.02,-433.91 534.9,-427.07"/>
+<polygon fill="none" stroke="midnightblue" points="3319.75,-527.06 3329.79,-523.66 3319.83,-520.06 3319.75,-527.06"/>
 </g>
 <!-- Node10 -->
 <g id="node10" class="node">
 <title>Node10</title>
 <g id="a_node10"><a xlink:href="classtvm_1_1tirx_1_1BinaryOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="576,-309.5 576,-432.5 750,-432.5 750,-309.5 576,-309.5"/>
-<text text-anchor="start" x="584" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
-<text text-anchor="middle" x="663" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; FloorModNode &gt;</text>
-<polyline fill="none" stroke="black" points="576,-402.5 750,-402.5 "/>
-<text text-anchor="start" x="584" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="584" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="584" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="584" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="576,-350.5 750,-350.5 "/>
-<text text-anchor="start" x="584" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="584" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="584" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="576,-304 576,-427 750,-427 750,-304 576,-304"/>
+<text text-anchor="start" x="584" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
+<text text-anchor="middle" x="663" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; FloorModNode &gt;</text>
+<polyline fill="none" stroke="black" points="576,-397 750,-397 "/>
+<text text-anchor="start" x="584" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="584" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="584" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="584" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="576,-345 750,-345 "/>
+<text text-anchor="start" x="584" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="584" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="584" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node10 -->
 <g id="edge9" class="edge">
 <title>Node3&#45;&gt;Node10</title>
-<path fill="none" stroke="midnightblue" d="M3319.56,-534.44C2866.67,-528.98 880.63,-502.4 759,-455 745.45,-449.72 732.51,-441.65 720.76,-432.57"/>
-<polygon fill="none" stroke="midnightblue" points="3319.61,-537.94 3329.66,-534.56 3319.7,-530.94 3319.61,-537.94"/>
+<path fill="none" stroke="midnightblue" d="M3319.59,-523.36C2866.85,-517.51 881.41,-489.34 759,-444 747.85,-439.87 737.03,-433.89 726.91,-427.05"/>
+<polygon fill="none" stroke="midnightblue" points="3319.64,-526.86 3329.68,-523.49 3319.73,-519.86 3319.64,-526.86"/>
 </g>
 <!-- Node12 -->
 <g id="node12" class="node">
 <title>Node12</title>
 <g id="a_node12"><a xlink:href="classtvm_1_1tirx_1_1BinaryOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="768,-309.5 768,-432.5 942,-432.5 942,-309.5 768,-309.5"/>
-<text text-anchor="start" x="776" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
-<text text-anchor="middle" x="855" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; MulNode &gt;</text>
-<polyline fill="none" stroke="black" points="768,-402.5 942,-402.5 "/>
-<text text-anchor="start" x="776" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="776" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="776" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="776" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="768,-350.5 942,-350.5 "/>
-<text text-anchor="start" x="776" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="776" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="776" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="768,-304 768,-427 942,-427 942,-304 768,-304"/>
+<text text-anchor="start" x="776" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
+<text text-anchor="middle" x="855" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; MulNode &gt;</text>
+<polyline fill="none" stroke="black" points="768,-397 942,-397 "/>
+<text text-anchor="start" x="776" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="776" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="776" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="776" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="768,-345 942,-345 "/>
+<text text-anchor="start" x="776" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="776" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="776" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node12 -->
 <g id="edge11" class="edge">
 <title>Node3&#45;&gt;Node12</title>
-<path fill="none" stroke="midnightblue" d="M3319.59,-534.22C2887.17,-527.93 1063.2,-498.88 951,-455 937.46,-449.7 924.52,-441.62 912.77,-432.54"/>
-<polygon fill="none" stroke="midnightblue" points="3319.8,-537.72 3329.85,-534.36 3319.9,-530.72 3319.8,-537.72"/>
+<path fill="none" stroke="midnightblue" d="M3319.66,-524.94C2900.97,-526.47 1175.98,-527.64 951,-444 939.86,-439.86 929.03,-433.87 918.91,-427.03"/>
+<polygon fill="none" stroke="midnightblue" points="3319.91,-528.44 3329.9,-524.9 3319.88,-521.44 3319.91,-528.44"/>
 </g>
 <!-- Node14 -->
 <g id="node14" class="node">
 <title>Node14</title>
 <g id="a_node14"><a xlink:href="classtvm_1_1tirx_1_1BinaryOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="960,-309.5 960,-432.5 1134,-432.5 1134,-309.5 960,-309.5"/>
-<text text-anchor="start" x="968" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
-<text text-anchor="middle" x="1047" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; ModNode &gt;</text>
-<polyline fill="none" stroke="black" points="960,-402.5 1134,-402.5 "/>
-<text text-anchor="start" x="968" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="968" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="968" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="968" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="960,-350.5 1134,-350.5 "/>
-<text text-anchor="start" x="968" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="968" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="968" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="960,-304 960,-427 1134,-427 1134,-304 960,-304"/>
+<text text-anchor="start" x="968" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
+<text text-anchor="middle" x="1047" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; ModNode &gt;</text>
+<polyline fill="none" stroke="black" points="960,-397 1134,-397 "/>
+<text text-anchor="start" x="968" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="968" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="968" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="968" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="960,-345 1134,-345 "/>
+<text text-anchor="start" x="968" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="968" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="968" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node14 -->
 <g id="edge13" class="edge">
 <title>Node3&#45;&gt;Node14</title>
-<path fill="none" stroke="midnightblue" d="M3319.93,-535.83C2922.13,-536.79 1347.81,-535.43 1143,-455 1129.46,-449.68 1116.53,-441.59 1104.78,-432.51"/>
-<polygon fill="none" stroke="midnightblue" points="3319.96,-539.33 3329.95,-535.8 3319.94,-532.33 3319.96,-539.33"/>
+<path fill="none" stroke="midnightblue" d="M3319.66,-524.66C2921.6,-524.9 1349.08,-520.94 1143,-444 1131.96,-439.88 1121.24,-433.95 1111.2,-427.18"/>
+<polygon fill="none" stroke="midnightblue" points="3319.69,-528.16 3329.69,-524.65 3319.69,-521.16 3319.69,-528.16"/>
 </g>
 <!-- Node16 -->
 <g id="node16" class="node">
 <title>Node16</title>
 <g id="a_node16"><a xlink:href="classtvm_1_1tirx_1_1BinaryOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="1152,-309.5 1152,-432.5 1326,-432.5 1326,-309.5 1152,-309.5"/>
-<text text-anchor="start" x="1160" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
-<text text-anchor="middle" x="1239" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; MaxNode &gt;</text>
-<polyline fill="none" stroke="black" points="1152,-402.5 1326,-402.5 "/>
-<text text-anchor="start" x="1160" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="1160" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="1160" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="1160" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="1152,-350.5 1326,-350.5 "/>
-<text text-anchor="start" x="1160" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="1160" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="1160" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="1152,-304 1152,-427 1326,-427 1326,-304 1152,-304"/>
+<text text-anchor="start" x="1160" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
+<text text-anchor="middle" x="1239" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; MaxNode &gt;</text>
+<polyline fill="none" stroke="black" points="1152,-397 1326,-397 "/>
+<text text-anchor="start" x="1160" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="1160" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="1160" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="1160" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="1152,-345 1326,-345 "/>
+<text text-anchor="start" x="1160" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="1160" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="1160" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node16 -->
 <g id="edge15" class="edge">
 <title>Node3&#45;&gt;Node16</title>
-<path fill="none" stroke="midnightblue" d="M3319.66,-535.5C2942.96,-535.04 1521.03,-528.41 1335,-455 1321.58,-449.7 1308.74,-441.68 1297.06,-432.68"/>
-<polygon fill="none" stroke="midnightblue" points="3319.7,-539 3329.7,-535.52 3319.7,-532 3319.7,-539"/>
+<path fill="none" stroke="midnightblue" d="M3319.73,-524.34C2943.28,-523.2 1522.25,-514.26 1335,-444 1323.97,-439.86 1313.25,-433.92 1303.21,-427.15"/>
+<polygon fill="none" stroke="midnightblue" points="3319.75,-527.84 3329.76,-524.36 3319.77,-520.84 3319.75,-527.84"/>
 </g>
 <!-- Node18 -->
 <g id="node18" class="node">
 <title>Node18</title>
 <g id="a_node18"><a xlink:href="classtvm_1_1tirx_1_1BinaryOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="1344,-309.5 1344,-432.5 1518,-432.5 1518,-309.5 1344,-309.5"/>
-<text text-anchor="start" x="1352" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
-<text text-anchor="middle" x="1431" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; FloorDivNode &gt;</text>
-<polyline fill="none" stroke="black" points="1344,-402.5 1518,-402.5 "/>
-<text text-anchor="start" x="1352" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="1352" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="1352" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="1352" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="1344,-350.5 1518,-350.5 "/>
-<text text-anchor="start" x="1352" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="1352" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="1352" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="1344,-304 1344,-427 1518,-427 1518,-304 1344,-304"/>
+<text text-anchor="start" x="1352" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
+<text text-anchor="middle" x="1431" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; FloorDivNode &gt;</text>
+<polyline fill="none" stroke="black" points="1344,-397 1518,-397 "/>
+<text text-anchor="start" x="1352" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="1352" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="1352" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="1352" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="1344,-345 1518,-345 "/>
+<text text-anchor="start" x="1352" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="1352" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="1352" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node18 -->
 <g id="edge17" class="edge">
 <title>Node3&#45;&gt;Node18</title>
-<path fill="none" stroke="midnightblue" d="M3319.72,-535.11C2965.66,-533.13 1694.38,-521.43 1527,-455 1513.59,-449.68 1500.75,-441.64 1489.08,-432.64"/>
-<polygon fill="none" stroke="midnightblue" points="3319.91,-538.61 3329.93,-535.17 3319.95,-531.61 3319.91,-538.61"/>
+<path fill="none" stroke="midnightblue" d="M3319.79,-523.95C2965.97,-521.34 1695.47,-507.59 1527,-444 1515.98,-439.84 1505.26,-433.89 1495.23,-427.11"/>
+<polygon fill="none" stroke="midnightblue" points="3319.96,-527.45 3329.99,-524.02 3320.01,-520.45 3319.96,-527.45"/>
 </g>
 <!-- Node20 -->
 <g id="node20" class="node">
 <title>Node20</title>
 <g id="a_node20"><a xlink:href="classtvm_1_1tirx_1_1BinaryOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="1536,-309.5 1536,-432.5 1710,-432.5 1710,-309.5 1536,-309.5"/>
-<text text-anchor="start" x="1544" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
-<text text-anchor="middle" x="1623" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; SubNode &gt;</text>
-<polyline fill="none" stroke="black" points="1536,-402.5 1710,-402.5 "/>
-<text text-anchor="start" x="1544" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="1544" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="1544" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="1544" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="1536,-350.5 1710,-350.5 "/>
-<text text-anchor="start" x="1544" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="1544" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="1544" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="1536,-304 1536,-427 1710,-427 1710,-304 1536,-304"/>
+<text text-anchor="start" x="1544" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode</text>
+<text text-anchor="middle" x="1623" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; SubNode &gt;</text>
+<polyline fill="none" stroke="black" points="1536,-397 1710,-397 "/>
+<text text-anchor="start" x="1544" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="1544" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="1544" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="1544" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="1536,-345 1710,-345 "/>
+<text text-anchor="start" x="1544" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="1544" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="1544" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node20 -->
 <g id="edge19" class="edge">
 <title>Node3&#45;&gt;Node20</title>
-<path fill="none" stroke="midnightblue" d="M3319.74,-534.63C2989.43,-531.02 1867.78,-514.46 1719,-455 1705.6,-449.64 1692.77,-441.6 1681.1,-432.58"/>
-<polygon fill="none" stroke="midnightblue" points="3319.72,-538.13 3329.75,-534.74 3319.79,-531.13 3319.72,-538.13"/>
+<path fill="none" stroke="midnightblue" d="M3319.81,-523.47C2989.72,-519.27 1868.76,-500.95 1719,-444 1707.99,-439.81 1697.28,-433.85 1687.25,-427.06"/>
+<polygon fill="none" stroke="midnightblue" points="3319.77,-526.97 3329.81,-523.59 3319.86,-519.97 3319.77,-526.97"/>
 </g>
 <!-- Node22 -->
 <g id="node22" class="node">
 <title>Node22</title>
 <g id="a_node22"><a xlink:href="classtvm_1_1tirx_1_1CmpOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="1728,-309.5 1728,-432.5 1902,-432.5 1902,-309.5 1728,-309.5"/>
-<text text-anchor="start" x="1736" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
-<text text-anchor="middle" x="1815" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; LTNode &gt;</text>
-<polyline fill="none" stroke="black" points="1728,-402.5 1902,-402.5 "/>
-<text text-anchor="start" x="1736" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="1736" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="1736" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="1736" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="1728,-350.5 1902,-350.5 "/>
-<text text-anchor="start" x="1736" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="1736" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="1736" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="1728,-304 1728,-427 1902,-427 1902,-304 1728,-304"/>
+<text text-anchor="start" x="1736" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
+<text text-anchor="middle" x="1815" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; LTNode &gt;</text>
+<polyline fill="none" stroke="black" points="1728,-397 1902,-397 "/>
+<text text-anchor="start" x="1736" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="1736" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="1736" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="1736" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="1728,-345 1902,-345 "/>
+<text text-anchor="start" x="1736" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="1736" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="1736" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node22 -->
 <g id="edge21" class="edge">
 <title>Node3&#45;&gt;Node22</title>
-<path fill="none" stroke="midnightblue" d="M3319.73,-534.03C3014.51,-528.65 2041.26,-507.52 1911,-455 1897.62,-449.6 1884.8,-441.54 1873.13,-432.52"/>
-<polygon fill="none" stroke="midnightblue" points="3319.81,-537.53 3329.87,-534.21 3319.93,-530.54 3319.81,-537.53"/>
+<path fill="none" stroke="midnightblue" d="M3319.8,-522.87C3014.79,-516.96 2042.13,-494.32 1911,-444 1900.1,-439.82 1889.49,-433.9 1879.54,-427.19"/>
+<polygon fill="none" stroke="midnightblue" points="3319.86,-526.37 3329.93,-523.06 3320,-519.37 3319.86,-526.37"/>
 </g>
 <!-- Node24 -->
 <g id="node24" class="node">
 <title>Node24</title>
 <g id="a_node24"><a xlink:href="classtvm_1_1tirx_1_1CmpOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="1920,-309.5 1920,-432.5 2094,-432.5 2094,-309.5 1920,-309.5"/>
-<text text-anchor="start" x="1928" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
-<text text-anchor="middle" x="2007" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; LENode &gt;</text>
-<polyline fill="none" stroke="black" points="1920,-402.5 2094,-402.5 "/>
-<text text-anchor="start" x="1928" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="1928" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="1928" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="1928" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="1920,-350.5 2094,-350.5 "/>
-<text text-anchor="start" x="1928" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="1928" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="1928" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="1920,-304 1920,-427 2094,-427 2094,-304 1920,-304"/>
+<text text-anchor="start" x="1928" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
+<text text-anchor="middle" x="2007" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; LENode &gt;</text>
+<polyline fill="none" stroke="black" points="1920,-397 2094,-397 "/>
+<text text-anchor="start" x="1928" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="1928" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="1928" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="1928" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="1920,-345 2094,-345 "/>
+<text text-anchor="start" x="1928" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="1928" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="1928" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node24 -->
 <g id="edge23" class="edge">
 <title>Node3&#45;&gt;Node24</title>
-<path fill="none" stroke="midnightblue" d="M3319.74,-533.26C3041.32,-525.95 2214.85,-500.61 2103,-455 2089.74,-449.59 2077.02,-441.58 2065.43,-432.63"/>
-<polygon fill="none" stroke="midnightblue" points="3319.72,-536.76 3329.81,-533.52 3319.9,-529.76 3319.72,-536.76"/>
+<path fill="none" stroke="midnightblue" d="M3319.81,-522.09C3041.57,-514.3 2215.61,-487.72 2103,-444 2092.12,-439.78 2081.52,-433.84 2071.57,-427.11"/>
+<polygon fill="none" stroke="midnightblue" points="3319.77,-525.59 3329.87,-522.37 3319.97,-518.6 3319.77,-525.59"/>
 </g>
 <!-- Node26 -->
 <g id="node26" class="node">
 <title>Node26</title>
 <g id="a_node26"><a xlink:href="classtvm_1_1tirx_1_1CmpOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="2112,-309.5 2112,-432.5 2286,-432.5 2286,-309.5 2112,-309.5"/>
-<text text-anchor="start" x="2120" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
-<text text-anchor="middle" x="2199" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; NENode &gt;</text>
-<polyline fill="none" stroke="black" points="2112,-402.5 2286,-402.5 "/>
-<text text-anchor="start" x="2120" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="2120" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="2120" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="2120" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="2112,-350.5 2286,-350.5 "/>
-<text text-anchor="start" x="2120" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="2120" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="2120" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="2112,-304 2112,-427 2286,-427 2286,-304 2112,-304"/>
+<text text-anchor="start" x="2120" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
+<text text-anchor="middle" x="2199" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; NENode &gt;</text>
+<polyline fill="none" stroke="black" points="2112,-397 2286,-397 "/>
+<text text-anchor="start" x="2120" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="2120" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="2120" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="2120" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="2112,-345 2286,-345 "/>
+<text text-anchor="start" x="2120" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="2120" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="2120" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node26 -->
 <g id="edge25" class="edge">
 <title>Node3&#45;&gt;Node26</title>
-<path fill="none" stroke="midnightblue" d="M3319.61,-536.25C3087.3,-536.99 2479.48,-531.36 2295,-455 2281.77,-449.52 2269.07,-441.48 2257.48,-432.52"/>
-<polygon fill="none" stroke="midnightblue" points="3319.74,-539.75 3329.72,-536.21 3319.71,-532.75 3319.74,-539.75"/>
+<path fill="none" stroke="midnightblue" d="M3319.76,-524.89C3087.8,-524.76 2480.74,-517.24 2295,-444 2284.24,-439.76 2273.75,-433.86 2263.89,-427.18"/>
+<polygon fill="none" stroke="midnightblue" points="3319.85,-528.39 3329.85,-524.89 3319.86,-521.39 3319.85,-528.39"/>
 </g>
 <!-- Node28 -->
 <g id="node28" class="node">
 <title>Node28</title>
 <g id="a_node28"><a xlink:href="classtvm_1_1tirx_1_1CmpOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="2304,-309.5 2304,-432.5 2478,-432.5 2478,-309.5 2304,-309.5"/>
-<text text-anchor="start" x="2312" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
-<text text-anchor="middle" x="2391" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; GTNode &gt;</text>
-<polyline fill="none" stroke="black" points="2304,-402.5 2478,-402.5 "/>
-<text text-anchor="start" x="2312" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="2312" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="2312" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="2312" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="2304,-350.5 2478,-350.5 "/>
-<text text-anchor="start" x="2312" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="2312" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="2312" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="2304,-304 2304,-427 2478,-427 2478,-304 2304,-304"/>
+<text text-anchor="start" x="2312" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
+<text text-anchor="middle" x="2391" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; GTNode &gt;</text>
+<polyline fill="none" stroke="black" points="2304,-397 2478,-397 "/>
+<text text-anchor="start" x="2312" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="2312" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="2312" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="2312" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="2304,-345 2478,-345 "/>
+<text text-anchor="start" x="2312" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="2312" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="2312" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node28 -->
 <g id="edge27" class="edge">
 <title>Node3&#45;&gt;Node28</title>
-<path fill="none" stroke="midnightblue" d="M3319.74,-534.64C3117.03,-531.59 2635.5,-517.77 2487,-455 2473.91,-449.47 2461.32,-441.45 2449.81,-432.56"/>
-<polygon fill="none" stroke="midnightblue" points="3319.71,-538.14 3329.76,-534.79 3319.81,-531.14 3319.71,-538.14"/>
+<path fill="none" stroke="midnightblue" d="M3319.88,-523.28C3117.48,-519.5 2636.54,-504.25 2487,-444 2476.27,-439.68 2465.8,-433.73 2455.95,-427.04"/>
+<polygon fill="none" stroke="midnightblue" points="3319.83,-526.78 3329.89,-523.46 3319.96,-519.78 3319.83,-526.78"/>
 </g>
 <!-- Node30 -->
 <g id="node30" class="node">
 <title>Node30</title>
 <g id="a_node30"><a xlink:href="classtvm_1_1tirx_1_1CmpOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="2496,-309.5 2496,-432.5 2670,-432.5 2670,-309.5 2496,-309.5"/>
-<text text-anchor="start" x="2504" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
-<text text-anchor="middle" x="2583" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; EQNode &gt;</text>
-<polyline fill="none" stroke="black" points="2496,-402.5 2670,-402.5 "/>
-<text text-anchor="start" x="2504" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="2504" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="2504" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="2504" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="2496,-350.5 2670,-350.5 "/>
-<text text-anchor="start" x="2504" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="2504" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="2504" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="2496,-304 2496,-427 2670,-427 2670,-304 2496,-304"/>
+<text text-anchor="start" x="2504" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
+<text text-anchor="middle" x="2583" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; EQNode &gt;</text>
+<polyline fill="none" stroke="black" points="2496,-397 2670,-397 "/>
+<text text-anchor="start" x="2504" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="2504" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="2504" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="2504" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="2496,-345 2670,-345 "/>
+<text text-anchor="start" x="2504" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="2504" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="2504" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node30 -->
 <g id="edge29" class="edge">
 <title>Node3&#45;&gt;Node30</title>
-<path fill="none" stroke="midnightblue" d="M3319.55,-532.2C3149.56,-524.96 2791.91,-504.24 2679,-455 2666.07,-449.36 2653.61,-441.36 2642.19,-432.52"/>
-<polygon fill="none" stroke="midnightblue" points="3319.59,-535.7 3329.73,-532.63 3319.88,-528.71 3319.59,-535.7"/>
+<path fill="none" stroke="midnightblue" d="M3319.7,-520.85C3149.96,-513.01 2792.72,-491.33 2679,-444 2668.52,-439.64 2658.26,-433.76 2648.59,-427.18"/>
+<polygon fill="none" stroke="midnightblue" points="3319.71,-524.35 3329.86,-521.31 3320.03,-517.36 3319.71,-524.35"/>
 </g>
 <!-- Node32 -->
 <g id="node32" class="node">
 <title>Node32</title>
 <g id="a_node32"><a xlink:href="classtvm_1_1tirx_1_1CmpOpNode.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="2688,-309.5 2688,-432.5 2862,-432.5 2862,-309.5 2688,-309.5"/>
-<text text-anchor="start" x="2696" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
-<text text-anchor="middle" x="2775" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; GENode &gt;</text>
-<polyline fill="none" stroke="black" points="2688,-402.5 2862,-402.5 "/>
-<text text-anchor="start" x="2696" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="2696" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="2696" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="2696" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="2688,-350.5 2862,-350.5 "/>
-<text text-anchor="start" x="2696" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="2696" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="2696" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="2688,-304 2688,-427 2862,-427 2862,-304 2688,-304"/>
+<text text-anchor="start" x="2696" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode</text>
+<text text-anchor="middle" x="2775" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; GENode &gt;</text>
+<polyline fill="none" stroke="black" points="2688,-397 2862,-397 "/>
+<text text-anchor="start" x="2696" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="2696" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="2696" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="2696" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="2688,-345 2862,-345 "/>
+<text text-anchor="start" x="2696" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="2696" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="2696" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node32 -->
 <g id="edge31" class="edge">
 <title>Node3&#45;&gt;Node32</title>
-<path fill="none" stroke="midnightblue" d="M3319.79,-528.09C3187.35,-516.29 2949.08,-490.85 2871,-455 2858.39,-449.21 2846.17,-441.24 2834.91,-432.52"/>
-<polygon fill="none" stroke="midnightblue" points="3319.66,-531.59 3329.92,-528.99 3320.27,-524.62 3319.66,-531.59"/>
+<path fill="none" stroke="midnightblue" d="M3319.68,-516.73C3187.38,-504.49 2949.62,-478.5 2871,-444 2860.8,-439.52 2850.78,-433.67 2841.3,-427.18"/>
+<polygon fill="none" stroke="midnightblue" points="3319.52,-520.23 3329.8,-517.66 3320.16,-513.26 3319.52,-520.23"/>
 </g>
 <!-- Node34 -->
 <g id="node34" class="node">
 <title>Node34</title>
 <g id="a_node34"><a xlink:href="classtvm_1_1FloatImmNode.html" target="_top" xlink:title="Constant floating point literals in the program.">
-<polygon fill="white" stroke="black" points="2880,-331.5 2880,-410.5 3042,-410.5 3042,-331.5 2880,-331.5"/>
-<text text-anchor="middle" x="2961" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::FloatImmNode</text>
-<polyline fill="none" stroke="black" points="2880,-391.5 3042,-391.5 "/>
-<text text-anchor="start" x="2888" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
-<polyline fill="none" stroke="black" points="2880,-372.5 3042,-372.5 "/>
-<text text-anchor="start" x="2888" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="2888" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="2888" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="2880,-326 2880,-405 3042,-405 3042,-326 2880,-326"/>
+<text text-anchor="middle" x="2961" y="-393" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::FloatImmNode</text>
+<polyline fill="none" stroke="black" points="2880,-386 3042,-386 "/>
+<text text-anchor="start" x="2888" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
+<polyline fill="none" stroke="black" points="2880,-367 3042,-367 "/>
+<text text-anchor="start" x="2888" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="2888" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="2888" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node34 -->
 <g id="edge33" class="edge">
 <title>Node3&#45;&gt;Node34</title>
-<path fill="none" stroke="midnightblue" d="M3320.02,-528.37C3244.4,-519.42 3135.84,-499.43 3051,-455 3029.91,-443.95 3010.05,-426.69 2994.38,-410.76"/>
-<polygon fill="none" stroke="midnightblue" points="3319.67,-531.85 3330,-529.51 3320.46,-524.89 3319.67,-531.85"/>
+<path fill="none" stroke="midnightblue" d="M3320.04,-516.57C3244.67,-507.15 3136.44,-486.91 3051,-444 3031.47,-434.19 3012.68,-419.22 2997.37,-405.04"/>
+<polygon fill="none" stroke="midnightblue" points="3319.64,-520.05 3329.99,-517.77 3320.48,-513.1 3319.64,-520.05"/>
 </g>
 <!-- Node35 -->
 <g id="node35" class="node">
 <title>Node35</title>
 <g id="a_node35"><a xlink:href="classtvm_1_1IntImmNode.html" target="_top" xlink:title="Constant integer literals in the program.">
-<polygon fill="white" stroke="black" points="3060,-331.5 3060,-410.5 3222,-410.5 3222,-331.5 3060,-331.5"/>
-<text text-anchor="middle" x="3141" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::IntImmNode</text>
-<polyline fill="none" stroke="black" points="3060,-391.5 3222,-391.5 "/>
-<text text-anchor="start" x="3068" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
-<polyline fill="none" stroke="black" points="3060,-372.5 3222,-372.5 "/>
-<text text-anchor="start" x="3068" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="3068" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="3068" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="3060,-326 3060,-405 3222,-405 3222,-326 3060,-326"/>
+<text text-anchor="middle" x="3141" y="-393" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::IntImmNode</text>
+<polyline fill="none" stroke="black" points="3060,-386 3222,-386 "/>
+<text text-anchor="start" x="3068" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
+<polyline fill="none" stroke="black" points="3060,-367 3222,-367 "/>
+<text text-anchor="start" x="3068" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="3068" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="3068" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node35 -->
 <g id="edge34" class="edge">
 <title>Node3&#45;&gt;Node35</title>
-<path fill="none" stroke="midnightblue" d="M3320.2,-501.7C3290.68,-488.96 3258.47,-473.1 3231,-455 3212.01,-442.48 3193.17,-425.93 3177.68,-410.9"/>
-<polygon fill="none" stroke="midnightblue" points="3319.11,-505.04 3329.68,-505.73 3321.85,-498.6 3319.11,-505.04"/>
+<path fill="none" stroke="midnightblue" d="M3320.14,-489.97C3290.76,-477.22 3258.64,-461.55 3231,-444 3213.42,-432.84 3195.7,-418.42 3180.69,-405.05"/>
+<polygon fill="none" stroke="midnightblue" points="3319.01,-493.29 3329.58,-494.01 3321.76,-486.86 3319.01,-493.29"/>
 </g>
 <!-- Node36 -->
 <g id="node36" class="node">
 <title>Node36</title>
 <g id="a_node36"><a xlink:href="classtvm_1_1arith_1_1IterMapExprNode.html" target="_top" xlink:title="Base class of all iter map expressions.">
-<polygon fill="white" stroke="black" points="3240,-337 3240,-405 3402,-405 3402,-337 3240,-337"/>
-<text text-anchor="middle" x="3321" y="-393" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::arith::IterMapExprNode</text>
-<polyline fill="none" stroke="black" points="3240,-386 3402,-386 "/>
-<text text-anchor="start" x="3248" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<polyline fill="none" stroke="black" points="3240,-367 3402,-367 "/>
-<text text-anchor="start" x="3248" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="3248" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
+<polygon fill="white" stroke="black" points="3240,-331.5 3240,-399.5 3402,-399.5 3402,-331.5 3240,-331.5"/>
+<text text-anchor="middle" x="3321" y="-387.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::arith::IterMapExprNode</text>
+<polyline fill="none" stroke="black" points="3240,-380.5 3402,-380.5 "/>
+<text text-anchor="start" x="3248" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<polyline fill="none" stroke="black" points="3240,-361.5 3402,-361.5 "/>
+<text text-anchor="start" x="3248" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="3248" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node36 -->
 <g id="edge35" class="edge">
 <title>Node3&#45;&gt;Node36</title>
-<path fill="none" stroke="midnightblue" d="M3381.8,-482.45C3367.79,-457.01 3351.45,-427.31 3339.23,-405.12"/>
-<polygon fill="none" stroke="midnightblue" points="3378.76,-484.18 3386.64,-491.25 3384.89,-480.81 3378.76,-484.18"/>
+<path fill="none" stroke="midnightblue" d="M3380.86,-471.58C3367.34,-447.85 3351.8,-420.57 3339.94,-399.75"/>
+<polygon fill="none" stroke="midnightblue" points="3377.94,-473.53 3385.93,-480.49 3384.02,-470.07 3377.94,-473.53"/>
 </g>
 <!-- Node39 -->
 <g id="node39" class="node">
 <title>Node39</title>
 <g id="a_node39"><a xlink:href="classtvm_1_1tirx_1_1AndNode.html" target="_top" xlink:title="a &amp;&amp; b">
-<polygon fill="white" stroke="black" points="3420,-326 3420,-416 3582,-416 3582,-326 3420,-326"/>
-<text text-anchor="middle" x="3501" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::AndNode</text>
-<polyline fill="none" stroke="black" points="3420,-397 3582,-397 "/>
-<text text-anchor="start" x="3428" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="3428" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<polyline fill="none" stroke="black" points="3420,-367 3582,-367 "/>
-<text text-anchor="start" x="3428" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="3428" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="3428" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="3420,-320.5 3420,-410.5 3582,-410.5 3582,-320.5 3420,-320.5"/>
+<text text-anchor="middle" x="3501" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::AndNode</text>
+<polyline fill="none" stroke="black" points="3420,-391.5 3582,-391.5 "/>
+<text text-anchor="start" x="3428" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="3428" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<polyline fill="none" stroke="black" points="3420,-361.5 3582,-361.5 "/>
+<text text-anchor="start" x="3428" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="3428" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="3428" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node39 -->
 <g id="edge38" class="edge">
 <title>Node3&#45;&gt;Node39</title>
-<path fill="none" stroke="midnightblue" d="M3440.28,-482.31C3452.03,-460.96 3465.42,-436.64 3476.63,-416.28"/>
-<polygon fill="none" stroke="midnightblue" points="3437.11,-480.81 3435.36,-491.25 3443.24,-484.18 3437.11,-480.81"/>
+<path fill="none" stroke="midnightblue" d="M3441.15,-471.58C3452.43,-451.76 3465.13,-429.48 3475.91,-410.55"/>
+<polygon fill="none" stroke="midnightblue" points="3437.98,-470.07 3436.07,-480.49 3444.06,-473.53 3437.98,-470.07"/>
 </g>
 <!-- Node40 -->
 <g id="node40" class="node">
 <title>Node40</title>
 <g id="a_node40"><a xlink:href="classtvm_1_1tirx_1_1BinaryOpNode.html" target="_top" xlink:title="Base template to implement binary ops.">
-<polygon fill="white" stroke="black" points="3600,-315 3600,-427 3774,-427 3774,-315 3600,-315"/>
-<text text-anchor="middle" x="3687" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode&lt; T &gt;</text>
-<polyline fill="none" stroke="black" points="3600,-408 3774,-408 "/>
-<text text-anchor="start" x="3608" y="-396" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="3608" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="3608" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="3608" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="3600,-356 3774,-356 "/>
-<text text-anchor="start" x="3608" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="3608" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="3608" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="3600,-309.5 3600,-421.5 3774,-421.5 3774,-309.5 3600,-309.5"/>
+<text text-anchor="middle" x="3687" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BinaryOpNode&lt; T &gt;</text>
+<polyline fill="none" stroke="black" points="3600,-402.5 3774,-402.5 "/>
+<text text-anchor="start" x="3608" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="3608" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="3608" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="3608" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="3600,-350.5 3774,-350.5 "/>
+<text text-anchor="start" x="3608" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="3608" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="3608" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node40 -->
 <g id="edge39" class="edge">
 <title>Node3&#45;&gt;Node40</title>
-<path fill="none" stroke="midnightblue" d="M3501.88,-501.01C3531.27,-488.26 3563.38,-472.58 3591,-455 3603.83,-446.84 3616.71,-437.05 3628.69,-427.1"/>
-<polygon fill="none" stroke="midnightblue" points="3500.26,-497.89 3492.44,-505.04 3503.01,-504.33 3500.26,-497.89"/>
+<path fill="none" stroke="midnightblue" d="M3501.54,-489.45C3530.9,-476.67 3563.08,-461.11 3591,-444 3601.87,-437.34 3612.87,-429.59 3623.35,-421.61"/>
+<polygon fill="none" stroke="midnightblue" points="3499.91,-486.34 3492.11,-493.51 3502.68,-492.77 3499.91,-486.34"/>
 </g>
 <!-- Node41 -->
 <g id="node41" class="node">
 <title>Node41</title>
 <g id="a_node41"><a xlink:href="classtvm_1_1tirx_1_1BroadcastNode.html" target="_top" xlink:title="Create a vector where all the elements are value.">
-<polygon fill="white" stroke="black" points="3792,-326 3792,-416 3954,-416 3954,-326 3792,-326"/>
-<text text-anchor="middle" x="3873" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BroadcastNode</text>
-<polyline fill="none" stroke="black" points="3792,-397 3954,-397 "/>
-<text text-anchor="start" x="3800" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
-<text text-anchor="start" x="3800" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ lanes</text>
-<polyline fill="none" stroke="black" points="3792,-367 3954,-367 "/>
-<text text-anchor="start" x="3800" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="3800" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="3800" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="3792,-320.5 3792,-410.5 3954,-410.5 3954,-320.5 3792,-320.5"/>
+<text text-anchor="middle" x="3873" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BroadcastNode</text>
+<polyline fill="none" stroke="black" points="3792,-391.5 3954,-391.5 "/>
+<text text-anchor="start" x="3800" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
+<text text-anchor="start" x="3800" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ lanes</text>
+<polyline fill="none" stroke="black" points="3792,-361.5 3954,-361.5 "/>
+<text text-anchor="start" x="3800" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="3800" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="3800" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node41 -->
 <g id="edge40" class="edge">
 <title>Node3&#45;&gt;Node41</title>
-<path fill="none" stroke="midnightblue" d="M3502.39,-529.23C3580.62,-520.79 3694.33,-501.05 3783,-455 3801.67,-445.3 3819.36,-430.69 3834.04,-416.42"/>
-<polygon fill="none" stroke="midnightblue" points="3501.66,-525.78 3492.07,-530.3 3502.38,-532.75 3501.66,-525.78"/>
+<path fill="none" stroke="midnightblue" d="M3502.37,-517.42C3580.35,-508.48 3693.7,-488.47 3783,-444 3799.98,-435.54 3816.38,-423.16 3830.42,-410.76"/>
+<polygon fill="none" stroke="midnightblue" points="3501.64,-513.98 3492.09,-518.56 3502.41,-520.94 3501.64,-513.98"/>
 </g>
 <!-- Node42 -->
 <g id="node42" class="node">
 <title>Node42</title>
 <g id="a_node42"><a xlink:href="classtvm_1_1tirx_1_1BufferLoadNode.html" target="_top" xlink:title="Load value from the high dimension buffer.">
-<polygon fill="white" stroke="black" points="3972,-320.5 3972,-421.5 4134,-421.5 4134,-320.5 3972,-320.5"/>
-<text text-anchor="middle" x="4053" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BufferLoadNode</text>
-<polyline fill="none" stroke="black" points="3972,-402.5 4134,-402.5 "/>
-<text text-anchor="start" x="3980" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ buffer</text>
-<text text-anchor="start" x="3980" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ indices</text>
-<text text-anchor="start" x="3980" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ predicate</text>
-<polyline fill="none" stroke="black" points="3972,-361.5 4134,-361.5 "/>
-<text text-anchor="start" x="3980" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="3980" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="3980" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="3972,-315 3972,-416 4134,-416 4134,-315 3972,-315"/>
+<text text-anchor="middle" x="4053" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::BufferLoadNode</text>
+<polyline fill="none" stroke="black" points="3972,-397 4134,-397 "/>
+<text text-anchor="start" x="3980" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ buffer</text>
+<text text-anchor="start" x="3980" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ indices</text>
+<text text-anchor="start" x="3980" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ predicate</text>
+<polyline fill="none" stroke="black" points="3972,-356 4134,-356 "/>
+<text text-anchor="start" x="3980" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="3980" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="3980" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node42 -->
 <g id="edge41" class="edge">
 <title>Node3&#45;&gt;Node42</title>
-<path fill="none" stroke="midnightblue" d="M3502.47,-528.74C3637.66,-517.65 3883.39,-492.95 3963,-455 3979.88,-446.95 3995.79,-434.63 4009.41,-421.92"/>
-<polygon fill="none" stroke="midnightblue" points="3501.82,-525.28 3492.14,-529.58 3502.39,-532.26 3501.82,-525.28"/>
+<path fill="none" stroke="midnightblue" d="M3502.59,-517.38C3637.62,-505.83 3882.81,-480.57 3963,-444 3978.01,-437.16 3992.43,-427.02 4005.16,-416.32"/>
+<polygon fill="none" stroke="midnightblue" points="3501.93,-513.92 3492.26,-518.25 3502.52,-520.9 3501.93,-513.92"/>
 </g>
 <!-- Node43 -->
 <g id="node43" class="node">
 <title>Node43</title>
 <g id="a_node43"><a xlink:href="classtvm_1_1tirx_1_1CallNode.html" target="_top" xlink:title="Call node.">
-<polygon fill="white" stroke="black" points="4152,-320.5 4152,-421.5 4314,-421.5 4314,-320.5 4152,-320.5"/>
-<text text-anchor="middle" x="4233" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CallNode</text>
-<polyline fill="none" stroke="black" points="4152,-402.5 4314,-402.5 "/>
-<text text-anchor="start" x="4160" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ op</text>
-<text text-anchor="start" x="4160" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ args</text>
-<text text-anchor="start" x="4160" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ attrs</text>
-<polyline fill="none" stroke="black" points="4152,-361.5 4314,-361.5 "/>
-<text text-anchor="start" x="4160" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="4160" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="4160" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="4152,-315 4152,-416 4314,-416 4314,-315 4152,-315"/>
+<text text-anchor="middle" x="4233" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CallNode</text>
+<polyline fill="none" stroke="black" points="4152,-397 4314,-397 "/>
+<text text-anchor="start" x="4160" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ op</text>
+<text text-anchor="start" x="4160" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ args</text>
+<text text-anchor="start" x="4160" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ attrs</text>
+<polyline fill="none" stroke="black" points="4152,-356 4314,-356 "/>
+<text text-anchor="start" x="4160" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="4160" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="4160" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node43 -->
 <g id="edge42" class="edge">
 <title>Node3&#45;&gt;Node43</title>
-<path fill="none" stroke="midnightblue" d="M3502.27,-532.54C3672.39,-525.88 4030.83,-506.07 4143,-455 4160.22,-447.16 4176.34,-434.74 4190.05,-421.87"/>
-<polygon fill="none" stroke="midnightblue" points="3501.95,-529.05 3492.09,-532.93 3502.22,-536.05 3501.95,-529.05"/>
+<path fill="none" stroke="midnightblue" d="M3502.44,-521.18C3672.42,-513.9 4030.04,-493.12 4143,-444 4158.32,-437.34 4172.95,-427.13 4185.8,-416.3"/>
+<polygon fill="none" stroke="midnightblue" points="3502.11,-517.69 3492.26,-521.61 3502.4,-524.68 3502.11,-517.69"/>
 </g>
 <!-- Node44 -->
 <g id="node44" class="node">
 <title>Node44</title>
 <g id="a_node44"><a xlink:href="classtvm_1_1tirx_1_1CastNode.html" target="_top" xlink:title="Cast value from one data type to another.">
-<polygon fill="white" stroke="black" points="4332,-331.5 4332,-410.5 4494,-410.5 4494,-331.5 4332,-331.5"/>
-<text text-anchor="middle" x="4413" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CastNode</text>
-<polyline fill="none" stroke="black" points="4332,-391.5 4494,-391.5 "/>
-<text text-anchor="start" x="4340" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
-<polyline fill="none" stroke="black" points="4332,-372.5 4494,-372.5 "/>
-<text text-anchor="start" x="4340" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="4340" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="4340" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="4332,-326 4332,-405 4494,-405 4494,-326 4332,-326"/>
+<text text-anchor="middle" x="4413" y="-393" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CastNode</text>
+<polyline fill="none" stroke="black" points="4332,-386 4494,-386 "/>
+<text text-anchor="start" x="4340" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
+<polyline fill="none" stroke="black" points="4332,-367 4494,-367 "/>
+<text text-anchor="start" x="4340" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="4340" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="4340" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node44 -->
 <g id="edge43" class="edge">
 <title>Node3&#45;&gt;Node44</title>
-<path fill="none" stroke="midnightblue" d="M3502.27,-534.86C3703.24,-532.25 4177.71,-519.27 4323,-455 4345.35,-445.11 4365.79,-427.36 4381.51,-410.8"/>
-<polygon fill="none" stroke="midnightblue" points="3501.99,-531.36 3492.03,-534.98 3502.08,-538.36 3501.99,-531.36"/>
+<path fill="none" stroke="midnightblue" d="M3502.48,-523.49C3703.35,-520.15 4176.73,-505.75 4323,-444 4343.71,-435.26 4363.1,-419.91 4378.54,-405.17"/>
+<polygon fill="none" stroke="midnightblue" points="3502.2,-520 3492.25,-523.66 3502.31,-527 3502.2,-520"/>
 </g>
 <!-- Node45 -->
 <g id="node45" class="node">
 <title>Node45</title>
 <g id="a_node45"><a xlink:href="classtvm_1_1tirx_1_1CmpOpNode.html" target="_top" xlink:title="Base template to implement comparison ops.">
-<polygon fill="white" stroke="black" points="4512,-315 4512,-427 4686,-427 4686,-315 4512,-315"/>
-<text text-anchor="middle" x="4599" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode&lt; T &gt;</text>
-<polyline fill="none" stroke="black" points="4512,-408 4686,-408 "/>
-<text text-anchor="start" x="4520" y="-396" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="4520" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<text text-anchor="start" x="4520" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<text text-anchor="start" x="4520" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
-<polyline fill="none" stroke="black" points="4512,-356 4686,-356 "/>
-<text text-anchor="start" x="4520" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="4520" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
-<text text-anchor="start" x="4520" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="4512,-309.5 4512,-421.5 4686,-421.5 4686,-309.5 4512,-309.5"/>
+<text text-anchor="middle" x="4599" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::CmpOpNode&lt; T &gt;</text>
+<polyline fill="none" stroke="black" points="4512,-402.5 4686,-402.5 "/>
+<text text-anchor="start" x="4520" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="4520" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<text text-anchor="start" x="4520" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<text text-anchor="start" x="4520" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_final</text>
+<polyline fill="none" stroke="black" points="4512,-350.5 4686,-350.5 "/>
+<text text-anchor="start" x="4520" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="4520" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_PREDEFINED_TYPE_KEY()</text>
+<text text-anchor="start" x="4520" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node45 -->
 <g id="edge44" class="edge">
 <title>Node3&#45;&gt;Node45</title>
-<path fill="none" stroke="midnightblue" d="M3502.41,-536.08C3731.19,-536.37 4323.04,-529.65 4503,-455 4518.87,-448.41 4533.99,-438.14 4547.33,-427.03"/>
-<polygon fill="none" stroke="midnightblue" points="3502.12,-532.58 3492.12,-536.06 3502.11,-539.58 3502.12,-532.58"/>
+<path fill="none" stroke="midnightblue" d="M3502.67,-524.71C3731.41,-524.14 4321.92,-515.57 4503,-444 4516.65,-438.61 4529.86,-430.55 4541.9,-421.64"/>
+<polygon fill="none" stroke="midnightblue" points="3502.38,-521.21 3492.38,-524.74 3502.39,-528.21 3502.38,-521.21"/>
 </g>
 <!-- Node46 -->
 <g id="node46" class="node">
 <title>Node46</title>
 <g id="a_node46"><a xlink:href="classtvm_1_1tirx_1_1LetNode.html" target="_top" xlink:title="Let binding. Bind var to value then evaluate body.">
-<polygon fill="white" stroke="black" points="4704,-320.5 4704,-421.5 4866,-421.5 4866,-320.5 4704,-320.5"/>
-<text text-anchor="middle" x="4785" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::LetNode</text>
-<polyline fill="none" stroke="black" points="4704,-402.5 4866,-402.5 "/>
-<text text-anchor="start" x="4712" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ var</text>
-<text text-anchor="start" x="4712" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
-<text text-anchor="start" x="4712" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ body</text>
-<polyline fill="none" stroke="black" points="4704,-361.5 4866,-361.5 "/>
-<text text-anchor="start" x="4712" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="4712" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="4712" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="4704,-315 4704,-416 4866,-416 4866,-315 4704,-315"/>
+<text text-anchor="middle" x="4785" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::LetNode</text>
+<polyline fill="none" stroke="black" points="4704,-397 4866,-397 "/>
+<text text-anchor="start" x="4712" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ var</text>
+<text text-anchor="start" x="4712" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
+<text text-anchor="start" x="4712" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ body</text>
+<polyline fill="none" stroke="black" points="4704,-356 4866,-356 "/>
+<text text-anchor="start" x="4712" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="4712" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="4712" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node46 -->
 <g id="edge45" class="edge">
 <title>Node3&#45;&gt;Node46</title>
-<path fill="none" stroke="midnightblue" d="M3502.49,-533.3C3777.79,-526.17 4586.19,-501.49 4695,-455 4712.79,-447.4 4729.3,-434.72 4743.2,-421.52"/>
-<polygon fill="none" stroke="midnightblue" points="3502.05,-529.81 3492.14,-533.56 3502.23,-536.8 3502.05,-529.81"/>
+<path fill="none" stroke="midnightblue" d="M3502.43,-522.13C3777.52,-514.53 4585.42,-488.63 4695,-444 4710.66,-437.62 4725.52,-427.38 4738.49,-416.4"/>
+<polygon fill="none" stroke="midnightblue" points="3501.98,-518.64 3492.08,-522.41 3502.17,-525.64 3501.98,-518.64"/>
 </g>
 <!-- Node47 -->
 <g id="node47" class="node">
 <title>Node47</title>
 <g id="a_node47"><a xlink:href="classtvm_1_1tirx_1_1NotNode.html" target="_top" xlink:title="!a">
-<polygon fill="white" stroke="black" points="4884,-331.5 4884,-410.5 5046,-410.5 5046,-331.5 4884,-331.5"/>
-<text text-anchor="middle" x="4965" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::NotNode</text>
-<polyline fill="none" stroke="black" points="4884,-391.5 5046,-391.5 "/>
-<text text-anchor="start" x="4892" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<polyline fill="none" stroke="black" points="4884,-372.5 5046,-372.5 "/>
-<text text-anchor="start" x="4892" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="4892" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="4892" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="4884,-326 4884,-405 5046,-405 5046,-326 4884,-326"/>
+<text text-anchor="middle" x="4965" y="-393" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::NotNode</text>
+<polyline fill="none" stroke="black" points="4884,-386 5046,-386 "/>
+<text text-anchor="start" x="4892" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<polyline fill="none" stroke="black" points="4884,-367 5046,-367 "/>
+<text text-anchor="start" x="4892" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="4892" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="4892" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node47 -->
 <g id="edge46" class="edge">
 <title>Node3&#45;&gt;Node47</title>
-<path fill="none" stroke="midnightblue" d="M3502.65,-534.05C3803.54,-528.81 4749.08,-508.23 4875,-455 4897.71,-445.4 4918.32,-427.46 4934.07,-410.71"/>
-<polygon fill="none" stroke="midnightblue" points="3502.16,-530.56 3492.22,-534.23 3502.28,-537.56 3502.16,-530.56"/>
+<path fill="none" stroke="midnightblue" d="M3502.58,-522.89C3803.25,-517.12 4748.19,-495.08 4875,-444 4896.04,-435.53 4915.61,-420.02 4931.1,-405.1"/>
+<polygon fill="none" stroke="midnightblue" points="3502.09,-519.4 3492.16,-523.09 3502.23,-526.39 3502.09,-519.4"/>
 </g>
 <!-- Node48 -->
 <g id="node48" class="node">
 <title>Node48</title>
 <g id="a_node48"><a xlink:href="classtvm_1_1tirx_1_1OrNode.html" target="_top" xlink:title="a || b">
-<polygon fill="white" stroke="black" points="5064,-326 5064,-416 5226,-416 5226,-326 5064,-326"/>
-<text text-anchor="middle" x="5145" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::OrNode</text>
-<polyline fill="none" stroke="black" points="5064,-397 5226,-397 "/>
-<text text-anchor="start" x="5072" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
-<text text-anchor="start" x="5072" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
-<polyline fill="none" stroke="black" points="5064,-367 5226,-367 "/>
-<text text-anchor="start" x="5072" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="5072" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="5072" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="5064,-320.5 5064,-410.5 5226,-410.5 5226,-320.5 5064,-320.5"/>
+<text text-anchor="middle" x="5145" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::OrNode</text>
+<polyline fill="none" stroke="black" points="5064,-391.5 5226,-391.5 "/>
+<text text-anchor="start" x="5072" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ a</text>
+<text text-anchor="start" x="5072" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ b</text>
+<polyline fill="none" stroke="black" points="5064,-361.5 5226,-361.5 "/>
+<text text-anchor="start" x="5072" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="5072" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="5072" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node48 -->
 <g id="edge47" class="edge">
 <title>Node3&#45;&gt;Node48</title>
-<path fill="none" stroke="midnightblue" d="M3502.41,-534.65C3826.92,-531.15 4911.81,-515.02 5055,-455 5075.19,-446.54 5093.7,-431.45 5108.62,-416.43"/>
-<polygon fill="none" stroke="midnightblue" points="3502.07,-531.16 3492.11,-534.76 3502.15,-538.16 3502.07,-531.16"/>
+<path fill="none" stroke="midnightblue" d="M3502.34,-523.49C3826.62,-519.41 4910.81,-501.58 5055,-444 5073.38,-436.66 5090.64,-423.93 5105.02,-410.88"/>
+<polygon fill="none" stroke="midnightblue" points="3502.01,-519.99 3492.05,-523.61 3502.09,-526.99 3502.01,-519.99"/>
 </g>
 <!-- Node49 -->
 <g id="node49" class="node">
 <title>Node49</title>
 <g id="a_node49"><a xlink:href="classtvm_1_1tirx_1_1ProducerLoadNode.html" target="_top" xlink:title="Load value from the result produced by the producer.">
-<polygon fill="white" stroke="black" points="5244,-326 5244,-416 5406,-416 5406,-326 5244,-326"/>
-<text text-anchor="middle" x="5325" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::ProducerLoadNode</text>
-<polyline fill="none" stroke="black" points="5244,-397 5406,-397 "/>
-<text text-anchor="start" x="5252" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ producer</text>
-<text text-anchor="start" x="5252" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ indices</text>
-<polyline fill="none" stroke="black" points="5244,-367 5406,-367 "/>
-<text text-anchor="start" x="5252" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="5252" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="5252" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="5244,-320.5 5244,-410.5 5406,-410.5 5406,-320.5 5244,-320.5"/>
+<text text-anchor="middle" x="5325" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::ProducerLoadNode</text>
+<polyline fill="none" stroke="black" points="5244,-391.5 5406,-391.5 "/>
+<text text-anchor="start" x="5252" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ producer</text>
+<text text-anchor="start" x="5252" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ indices</text>
+<polyline fill="none" stroke="black" points="5244,-361.5 5406,-361.5 "/>
+<text text-anchor="start" x="5252" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="5252" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="5252" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node49 -->
 <g id="edge48" class="edge">
 <title>Node3&#45;&gt;Node49</title>
-<path fill="none" stroke="midnightblue" d="M3502.31,-535.13C3849.3,-533.24 5074.49,-521.83 5235,-455 5255.41,-446.5 5274.09,-431.21 5289.08,-416.05"/>
-<polygon fill="none" stroke="midnightblue" points="3502.04,-531.63 3492.06,-535.19 3502.08,-538.63 3502.04,-531.63"/>
+<path fill="none" stroke="midnightblue" d="M3502.28,-523.96C3849.07,-521.45 5073.38,-508.09 5235,-444 5253.59,-436.63 5271.02,-423.72 5285.49,-410.52"/>
+<polygon fill="none" stroke="midnightblue" points="3502.26,-520.46 3492.28,-524.04 3502.31,-527.46 3502.26,-520.46"/>
 </g>
 <!-- Node50 -->
 <g id="node50" class="node">
 <title>Node50</title>
 <g id="a_node50"><a xlink:href="classtvm_1_1tirx_1_1RampNode.html" target="_top" xlink:title="Construct a vector with lanes elements where its i&#45;th element equals base + i * stride....">
-<polygon fill="white" stroke="black" points="5424,-320.5 5424,-421.5 5586,-421.5 5586,-320.5 5424,-320.5"/>
-<text text-anchor="middle" x="5505" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::RampNode</text>
-<polyline fill="none" stroke="black" points="5424,-402.5 5586,-402.5 "/>
-<text text-anchor="start" x="5432" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ base</text>
-<text text-anchor="start" x="5432" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ stride</text>
-<text text-anchor="start" x="5432" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ lanes</text>
-<polyline fill="none" stroke="black" points="5424,-361.5 5586,-361.5 "/>
-<text text-anchor="start" x="5432" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="5432" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="5432" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="5424,-315 5424,-416 5586,-416 5586,-315 5424,-315"/>
+<text text-anchor="middle" x="5505" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::RampNode</text>
+<polyline fill="none" stroke="black" points="5424,-397 5586,-397 "/>
+<text text-anchor="start" x="5432" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ base</text>
+<text text-anchor="start" x="5432" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ stride</text>
+<text text-anchor="start" x="5432" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ lanes</text>
+<polyline fill="none" stroke="black" points="5424,-356 5586,-356 "/>
+<text text-anchor="start" x="5432" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="5432" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="5432" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node50 -->
 <g id="edge49" class="edge">
 <title>Node3&#45;&gt;Node50</title>
-<path fill="none" stroke="midnightblue" d="M3502.27,-535.53C3870.7,-535.13 5237.11,-528.65 5415,-455 5432.87,-447.6 5449.41,-434.97 5463.3,-421.77"/>
-<polygon fill="none" stroke="midnightblue" points="3502.18,-532.03 3492.19,-535.53 3502.19,-539.03 3502.18,-532.03"/>
+<path fill="none" stroke="midnightblue" d="M3502.2,-524.36C3870.36,-523.3 5235.88,-514.61 5415,-444 5430.92,-437.72 5445.98,-427.37 5459.06,-416.24"/>
+<polygon fill="none" stroke="midnightblue" points="3502.11,-520.86 3492.12,-524.38 3502.13,-527.86 3502.11,-520.86"/>
 </g>
 <!-- Node51 -->
 <g id="node51" class="node">
 <title>Node51</title>
 <g id="a_node51"><a xlink:href="classtvm_1_1tirx_1_1ReduceNode.html" target="_top" xlink:title="Reduction operator.">
-<polygon fill="white" stroke="black" points="5604,-304 5604,-438 5766,-438 5766,-304 5604,-304"/>
-<text text-anchor="middle" x="5685" y="-426" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::ReduceNode</text>
-<polyline fill="none" stroke="black" points="5604,-419 5766,-419 "/>
-<text text-anchor="start" x="5612" y="-407" font-family="Helvetica,sans-Serif" font-size="10.00">+ combiner</text>
-<text text-anchor="start" x="5612" y="-396" font-family="Helvetica,sans-Serif" font-size="10.00">+ source</text>
-<text text-anchor="start" x="5612" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ init</text>
-<text text-anchor="start" x="5612" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ axis</text>
-<text text-anchor="start" x="5612" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ condition</text>
-<text text-anchor="start" x="5612" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">+ value_index</text>
-<polyline fill="none" stroke="black" points="5604,-345 5766,-345 "/>
-<text text-anchor="start" x="5612" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="5612" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="5612" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="5604,-298.5 5604,-432.5 5766,-432.5 5766,-298.5 5604,-298.5"/>
+<text text-anchor="middle" x="5685" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::ReduceNode</text>
+<polyline fill="none" stroke="black" points="5604,-413.5 5766,-413.5 "/>
+<text text-anchor="start" x="5612" y="-401.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ combiner</text>
+<text text-anchor="start" x="5612" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ source</text>
+<text text-anchor="start" x="5612" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ init</text>
+<text text-anchor="start" x="5612" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ axis</text>
+<text text-anchor="start" x="5612" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ condition</text>
+<text text-anchor="start" x="5612" y="-346.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ value_index</text>
+<polyline fill="none" stroke="black" points="5604,-339.5 5766,-339.5 "/>
+<text text-anchor="start" x="5612" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="5612" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="5612" y="-305.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node51 -->
 <g id="edge50" class="edge">
 <title>Node3&#45;&gt;Node51</title>
-<path fill="none" stroke="midnightblue" d="M3502.27,-535.85C3891.24,-536.86 5399.68,-535.49 5595,-455 5605.22,-450.79 5615,-444.86 5624.1,-438.09"/>
-<polygon fill="none" stroke="midnightblue" points="3502.2,-532.35 3492.19,-535.83 3502.18,-539.35 3502.2,-532.35"/>
+<path fill="none" stroke="midnightblue" d="M3502.2,-524.68C3890.9,-524.99 5398.34,-521.16 5595,-444 5602.58,-441.03 5609.97,-437.12 5617.04,-432.65"/>
+<polygon fill="none" stroke="midnightblue" points="3502.13,-521.18 3492.13,-524.68 3502.12,-528.18 3502.13,-521.18"/>
 </g>
 <!-- Node52 -->
 <g id="node52" class="node">
 <title>Node52</title>
 <g id="a_node52"><a xlink:href="classtvm_1_1tirx_1_1SelectNode.html" target="_top" xlink:title="return true_value if condition is true, otherwise return false_value.">
-<polygon fill="white" stroke="black" points="5784,-320.5 5784,-421.5 5946,-421.5 5946,-320.5 5784,-320.5"/>
-<text text-anchor="middle" x="5865" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::SelectNode</text>
-<polyline fill="none" stroke="black" points="5784,-402.5 5946,-402.5 "/>
-<text text-anchor="start" x="5792" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ condition</text>
-<text text-anchor="start" x="5792" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ true_value</text>
-<text text-anchor="start" x="5792" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ false_value</text>
-<polyline fill="none" stroke="black" points="5784,-361.5 5946,-361.5 "/>
-<text text-anchor="start" x="5792" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="5792" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="5792" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="5784,-315 5784,-416 5946,-416 5946,-315 5784,-315"/>
+<text text-anchor="middle" x="5865" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::SelectNode</text>
+<polyline fill="none" stroke="black" points="5784,-397 5946,-397 "/>
+<text text-anchor="start" x="5792" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ condition</text>
+<text text-anchor="start" x="5792" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ true_value</text>
+<text text-anchor="start" x="5792" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ false_value</text>
+<polyline fill="none" stroke="black" points="5784,-356 5946,-356 "/>
+<text text-anchor="start" x="5792" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="5792" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="5792" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node52 -->
 <g id="edge51" class="edge">
 <title>Node3&#45;&gt;Node52</title>
-<path fill="none" stroke="midnightblue" d="M3502.33,-534.17C3924.18,-527.79 5668.19,-498.84 5775,-455 5792.89,-447.66 5809.44,-435.04 5823.33,-421.84"/>
-<polygon fill="none" stroke="midnightblue" points="3502.26,-530.67 3492.32,-534.32 3502.37,-537.67 3502.26,-530.67"/>
+<path fill="none" stroke="midnightblue" d="M3502.5,-524.96C3911.41,-526.56 5560.8,-527.69 5775,-444 5790.94,-437.77 5806.01,-427.44 5819.09,-416.31"/>
+<polygon fill="none" stroke="midnightblue" points="3502.22,-521.46 3492.21,-524.92 3502.19,-528.46 3502.22,-521.46"/>
 </g>
 <!-- Node53 -->
 <g id="node53" class="node">
 <title>Node53</title>
 <g id="a_node53"><a xlink:href="classtvm_1_1tirx_1_1ShuffleNode.html" target="_top" xlink:title="Shuffle instruction. vec = concat(vectors) result = (vec[indices[0]], vec[indices[1]] ....">
-<polygon fill="white" stroke="black" points="5964,-326 5964,-416 6126,-416 6126,-326 5964,-326"/>
-<text text-anchor="middle" x="6045" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::ShuffleNode</text>
-<polyline fill="none" stroke="black" points="5964,-397 6126,-397 "/>
-<text text-anchor="start" x="5972" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ vectors</text>
-<text text-anchor="start" x="5972" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ indices</text>
-<polyline fill="none" stroke="black" points="5964,-367 6126,-367 "/>
-<text text-anchor="start" x="5972" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="5972" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="5972" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="5964,-320.5 5964,-410.5 6126,-410.5 6126,-320.5 5964,-320.5"/>
+<text text-anchor="middle" x="6045" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::ShuffleNode</text>
+<polyline fill="none" stroke="black" points="5964,-391.5 6126,-391.5 "/>
+<text text-anchor="start" x="5972" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ vectors</text>
+<text text-anchor="start" x="5972" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ indices</text>
+<polyline fill="none" stroke="black" points="5964,-361.5 6126,-361.5 "/>
+<text text-anchor="start" x="5972" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="5972" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="5972" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node53 -->
 <g id="edge52" class="edge">
 <title>Node3&#45;&gt;Node53</title>
-<path fill="none" stroke="midnightblue" d="M3502.31,-534.4C3943.65,-528.84 5839.41,-502.28 5955,-455 5975.46,-446.63 5994.15,-431.36 6009.13,-416.18"/>
-<polygon fill="none" stroke="midnightblue" points="3502.11,-530.9 3492.15,-534.52 3502.2,-537.9 3502.11,-530.9"/>
+<path fill="none" stroke="midnightblue" d="M3502.27,-523.32C3943.46,-517.38 5838.62,-489.31 5955,-444 5973.64,-436.74 5991.07,-423.86 6005.54,-410.65"/>
+<polygon fill="none" stroke="midnightblue" points="3502.08,-519.82 3492.12,-523.45 3502.17,-526.82 3502.08,-519.82"/>
 </g>
 <!-- Node54 -->
 <g id="node54" class="node">
 <title>Node54</title>
 <g id="a_node54"><a xlink:href="classtvm_1_1tirx_1_1StringImmNode.html" target="_top" xlink:title="ffi::String constants, only used in asserts.">
-<polygon fill="white" stroke="black" points="6144,-331.5 6144,-410.5 6306,-410.5 6306,-331.5 6144,-331.5"/>
-<text text-anchor="middle" x="6225" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::StringImmNode</text>
-<polyline fill="none" stroke="black" points="6144,-391.5 6306,-391.5 "/>
-<text text-anchor="start" x="6152" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
-<polyline fill="none" stroke="black" points="6144,-372.5 6306,-372.5 "/>
-<text text-anchor="start" x="6152" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="6152" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="6152" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="6144,-326 6144,-405 6306,-405 6306,-326 6144,-326"/>
+<text text-anchor="middle" x="6225" y="-393" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::StringImmNode</text>
+<polyline fill="none" stroke="black" points="6144,-386 6306,-386 "/>
+<text text-anchor="start" x="6152" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
+<polyline fill="none" stroke="black" points="6144,-367 6306,-367 "/>
+<text text-anchor="start" x="6152" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="6152" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="6152" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node54 -->
 <g id="edge53" class="edge">
 <title>Node3&#45;&gt;Node54</title>
-<path fill="none" stroke="midnightblue" d="M3502.29,-534.6C3962.46,-529.81 6010.61,-505.73 6135,-455 6158.03,-445.61 6178.8,-427.46 6194.58,-410.53"/>
-<polygon fill="none" stroke="midnightblue" points="3502.01,-531.1 3492.04,-534.7 3502.08,-538.1 3502.01,-531.1"/>
+<path fill="none" stroke="midnightblue" d="M3502.26,-523.51C3962.27,-518.33 6009.77,-492.61 6135,-444 6156.14,-435.79 6175.74,-420.33 6191.2,-405.36"/>
+<polygon fill="none" stroke="midnightblue" points="3501.98,-520.02 3492.02,-523.63 3502.05,-527.02 3501.98,-520.02"/>
 </g>
 <!-- Node55 -->
 <g id="node55" class="node">
 <title>Node55</title>
 <g id="a_node55"><a xlink:href="classtvm_1_1tirx_1_1VarNode.html" target="_top" xlink:title="A variable node in the IR.">
-<polygon fill="white" stroke="black" points="6324,-315 6324,-427 6486,-427 6486,-315 6324,-315"/>
-<text text-anchor="middle" x="6405" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::VarNode</text>
-<polyline fill="none" stroke="black" points="6324,-408 6486,-408 "/>
-<text text-anchor="start" x="6332" y="-396" font-family="Helvetica,sans-Serif" font-size="10.00">+ name_hint</text>
-<text text-anchor="start" x="6332" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ type_annotation</text>
-<text text-anchor="start" x="6332" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
-<text text-anchor="start" x="6332" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<polyline fill="none" stroke="black" points="6324,-356 6486,-356 "/>
-<text text-anchor="start" x="6332" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="6332" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
-<text text-anchor="start" x="6332" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="6324,-309.5 6324,-421.5 6486,-421.5 6486,-309.5 6324,-309.5"/>
+<text text-anchor="middle" x="6405" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::tirx::VarNode</text>
+<polyline fill="none" stroke="black" points="6324,-402.5 6486,-402.5 "/>
+<text text-anchor="start" x="6332" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ name_hint</text>
+<text text-anchor="start" x="6332" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ type_annotation</text>
+<text text-anchor="start" x="6332" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
+<text text-anchor="start" x="6332" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<polyline fill="none" stroke="black" points="6324,-350.5 6486,-350.5 "/>
+<text text-anchor="start" x="6332" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="6332" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
+<text text-anchor="start" x="6332" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node55 -->
 <g id="edge54" class="edge">
 <title>Node3&#45;&gt;Node55</title>
-<path fill="none" stroke="midnightblue" d="M3502.42,-534.77C3981.09,-530.71 6181.81,-509.18 6315,-455 6330.55,-448.67 6345.08,-438.35 6357.73,-427.09"/>
-<polygon fill="none" stroke="midnightblue" points="3502.08,-531.27 3492.11,-534.86 3502.14,-538.27 3502.08,-531.27"/>
+<path fill="none" stroke="midnightblue" d="M3502.39,-523.69C3980.89,-519.22 6180.91,-495.9 6315,-444 6328.46,-438.79 6341.29,-430.63 6352.82,-421.53"/>
+<polygon fill="none" stroke="midnightblue" points="3502.04,-520.19 3492.08,-523.78 3502.11,-527.19 3502.04,-520.19"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
@@ -928,8 +928,8 @@
 <!-- Node4&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
 <title>Node4&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M87,-299.11C87,-268.76 87,-235.08 87,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="83.5,-299.26 87,-309.26 90.5,-299.26 83.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M87,-293.47C87,-265 87,-233.88 87,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="83.5,-293.81 87,-303.81 90.5,-293.81 83.5,-293.81"/>
 </g>
 <!-- Node7 -->
 <g id="node7" class="node">
@@ -947,8 +947,8 @@
 <!-- Node6&#45;&gt;Node7 -->
 <g id="edge6" class="edge">
 <title>Node6&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M279,-299.11C279,-268.76 279,-235.08 279,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="275.5,-299.26 279,-309.26 282.5,-299.26 275.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M279,-293.47C279,-265 279,-233.88 279,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="275.5,-293.81 279,-303.81 282.5,-293.81 275.5,-293.81"/>
 </g>
 <!-- Node9 -->
 <g id="node9" class="node">
@@ -966,8 +966,8 @@
 <!-- Node8&#45;&gt;Node9 -->
 <g id="edge8" class="edge">
 <title>Node8&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M471,-299.11C471,-268.76 471,-235.08 471,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="467.5,-299.26 471,-309.26 474.5,-299.26 467.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M471,-293.47C471,-265 471,-233.88 471,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="467.5,-293.81 471,-303.81 474.5,-293.81 467.5,-293.81"/>
 </g>
 <!-- Node11 -->
 <g id="node11" class="node">
@@ -985,8 +985,8 @@
 <!-- Node10&#45;&gt;Node11 -->
 <g id="edge10" class="edge">
 <title>Node10&#45;&gt;Node11</title>
-<path fill="none" stroke="midnightblue" d="M663,-299.11C663,-268.76 663,-235.08 663,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="659.5,-299.26 663,-309.26 666.5,-299.26 659.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M663,-293.47C663,-265 663,-233.88 663,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="659.5,-293.81 663,-303.81 666.5,-293.81 659.5,-293.81"/>
 </g>
 <!-- Node13 -->
 <g id="node13" class="node">
@@ -1004,8 +1004,8 @@
 <!-- Node12&#45;&gt;Node13 -->
 <g id="edge12" class="edge">
 <title>Node12&#45;&gt;Node13</title>
-<path fill="none" stroke="midnightblue" d="M855,-299.11C855,-268.76 855,-235.08 855,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="851.5,-299.26 855,-309.26 858.5,-299.26 851.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M855,-293.47C855,-265 855,-233.88 855,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="851.5,-293.81 855,-303.81 858.5,-293.81 851.5,-293.81"/>
 </g>
 <!-- Node15 -->
 <g id="node15" class="node">
@@ -1023,8 +1023,8 @@
 <!-- Node14&#45;&gt;Node15 -->
 <g id="edge14" class="edge">
 <title>Node14&#45;&gt;Node15</title>
-<path fill="none" stroke="midnightblue" d="M1047,-299.11C1047,-268.76 1047,-235.08 1047,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="1043.5,-299.26 1047,-309.26 1050.5,-299.26 1043.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M1047,-293.47C1047,-265 1047,-233.88 1047,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="1043.5,-293.81 1047,-303.81 1050.5,-293.81 1043.5,-293.81"/>
 </g>
 <!-- Node17 -->
 <g id="node17" class="node">
@@ -1042,8 +1042,8 @@
 <!-- Node16&#45;&gt;Node17 -->
 <g id="edge16" class="edge">
 <title>Node16&#45;&gt;Node17</title>
-<path fill="none" stroke="midnightblue" d="M1239,-299.11C1239,-268.76 1239,-235.08 1239,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="1235.5,-299.26 1239,-309.26 1242.5,-299.26 1235.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M1239,-293.47C1239,-265 1239,-233.88 1239,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="1235.5,-293.81 1239,-303.81 1242.5,-293.81 1235.5,-293.81"/>
 </g>
 <!-- Node19 -->
 <g id="node19" class="node">
@@ -1061,8 +1061,8 @@
 <!-- Node18&#45;&gt;Node19 -->
 <g id="edge18" class="edge">
 <title>Node18&#45;&gt;Node19</title>
-<path fill="none" stroke="midnightblue" d="M1431,-299.11C1431,-268.76 1431,-235.08 1431,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="1427.5,-299.26 1431,-309.26 1434.5,-299.26 1427.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M1431,-293.47C1431,-265 1431,-233.88 1431,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="1427.5,-293.81 1431,-303.81 1434.5,-293.81 1427.5,-293.81"/>
 </g>
 <!-- Node21 -->
 <g id="node21" class="node">
@@ -1080,8 +1080,8 @@
 <!-- Node20&#45;&gt;Node21 -->
 <g id="edge20" class="edge">
 <title>Node20&#45;&gt;Node21</title>
-<path fill="none" stroke="midnightblue" d="M1623,-299.11C1623,-268.76 1623,-235.08 1623,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="1619.5,-299.26 1623,-309.26 1626.5,-299.26 1619.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M1623,-293.47C1623,-265 1623,-233.88 1623,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="1619.5,-293.81 1623,-303.81 1626.5,-293.81 1619.5,-293.81"/>
 </g>
 <!-- Node23 -->
 <g id="node23" class="node">
@@ -1099,8 +1099,8 @@
 <!-- Node22&#45;&gt;Node23 -->
 <g id="edge22" class="edge">
 <title>Node22&#45;&gt;Node23</title>
-<path fill="none" stroke="midnightblue" d="M1815,-299.11C1815,-268.76 1815,-235.08 1815,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="1811.5,-299.26 1815,-309.26 1818.5,-299.26 1811.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M1815,-293.47C1815,-265 1815,-233.88 1815,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="1811.5,-293.81 1815,-303.81 1818.5,-293.81 1811.5,-293.81"/>
 </g>
 <!-- Node25 -->
 <g id="node25" class="node">
@@ -1118,8 +1118,8 @@
 <!-- Node24&#45;&gt;Node25 -->
 <g id="edge24" class="edge">
 <title>Node24&#45;&gt;Node25</title>
-<path fill="none" stroke="midnightblue" d="M2007,-299.11C2007,-268.76 2007,-235.08 2007,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="2003.5,-299.26 2007,-309.26 2010.5,-299.26 2003.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M2007,-293.47C2007,-265 2007,-233.88 2007,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="2003.5,-293.81 2007,-303.81 2010.5,-293.81 2003.5,-293.81"/>
 </g>
 <!-- Node27 -->
 <g id="node27" class="node">
@@ -1137,8 +1137,8 @@
 <!-- Node26&#45;&gt;Node27 -->
 <g id="edge26" class="edge">
 <title>Node26&#45;&gt;Node27</title>
-<path fill="none" stroke="midnightblue" d="M2199,-299.11C2199,-268.76 2199,-235.08 2199,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="2195.5,-299.26 2199,-309.26 2202.5,-299.26 2195.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M2199,-293.47C2199,-265 2199,-233.88 2199,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="2195.5,-293.81 2199,-303.81 2202.5,-293.81 2195.5,-293.81"/>
 </g>
 <!-- Node29 -->
 <g id="node29" class="node">
@@ -1156,8 +1156,8 @@
 <!-- Node28&#45;&gt;Node29 -->
 <g id="edge28" class="edge">
 <title>Node28&#45;&gt;Node29</title>
-<path fill="none" stroke="midnightblue" d="M2391,-299.11C2391,-268.76 2391,-235.08 2391,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="2387.5,-299.26 2391,-309.26 2394.5,-299.26 2387.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M2391,-293.47C2391,-265 2391,-233.88 2391,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="2387.5,-293.81 2391,-303.81 2394.5,-293.81 2387.5,-293.81"/>
 </g>
 <!-- Node31 -->
 <g id="node31" class="node">
@@ -1175,8 +1175,8 @@
 <!-- Node30&#45;&gt;Node31 -->
 <g id="edge30" class="edge">
 <title>Node30&#45;&gt;Node31</title>
-<path fill="none" stroke="midnightblue" d="M2583,-299.11C2583,-268.76 2583,-235.08 2583,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="2579.5,-299.26 2583,-309.26 2586.5,-299.26 2579.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M2583,-293.47C2583,-265 2583,-233.88 2583,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="2579.5,-293.81 2583,-303.81 2586.5,-293.81 2579.5,-293.81"/>
 </g>
 <!-- Node33 -->
 <g id="node33" class="node">
@@ -1194,8 +1194,8 @@
 <!-- Node32&#45;&gt;Node33 -->
 <g id="edge32" class="edge">
 <title>Node32&#45;&gt;Node33</title>
-<path fill="none" stroke="midnightblue" d="M2775,-299.11C2775,-268.76 2775,-235.08 2775,-212.14"/>
-<polygon fill="none" stroke="midnightblue" points="2771.5,-299.26 2775,-309.26 2778.5,-299.26 2771.5,-299.26"/>
+<path fill="none" stroke="midnightblue" d="M2775,-293.47C2775,-265 2775,-233.88 2775,-212.21"/>
+<polygon fill="none" stroke="midnightblue" points="2771.5,-293.81 2775,-303.81 2778.5,-293.81 2771.5,-293.81"/>
 </g>
 <!-- Node37 -->
 <g id="node37" class="node">
@@ -1219,8 +1219,8 @@
 <!-- Node36&#45;&gt;Node37 -->
 <g id="edge36" class="edge">
 <title>Node36&#45;&gt;Node37</title>
-<path fill="none" stroke="midnightblue" d="M3300.53,-327.82C3288.67,-303.37 3273.53,-272.16 3260.41,-245.12"/>
-<polygon fill="none" stroke="midnightblue" points="3297.4,-329.37 3304.91,-336.84 3303.69,-326.31 3297.4,-329.37"/>
+<path fill="none" stroke="midnightblue" d="M3299.93,-322.37C3288.47,-299.44 3274.08,-270.66 3261.42,-245.34"/>
+<polygon fill="none" stroke="midnightblue" points="3296.89,-324.11 3304.49,-331.49 3303.15,-320.98 3296.89,-324.11"/>
 </g>
 <!-- Node38 -->
 <g id="node38" class="node">
@@ -1242,8 +1242,8 @@
 <!-- Node36&#45;&gt;Node38 -->
 <g id="edge37" class="edge">
 <title>Node36&#45;&gt;Node38</title>
-<path fill="none" stroke="midnightblue" d="M3341.5,-327.76C3355,-299.92 3372.74,-263.36 3386.92,-234.14"/>
-<polygon fill="none" stroke="midnightblue" points="3338.31,-326.31 3337.09,-336.84 3344.6,-329.37 3338.31,-326.31"/>
+<path fill="none" stroke="midnightblue" d="M3342,-322.51C3355.18,-296.15 3372.24,-262.02 3386.1,-234.3"/>
+<polygon fill="none" stroke="midnightblue" points="3338.85,-320.98 3337.51,-331.49 3345.11,-324.11 3338.85,-320.98"/>
 </g>
 <!-- Node56 -->
 <g id="node56" class="node">
@@ -1263,68 +1263,67 @@
 <!-- Node55&#45;&gt;Node56 -->
 <g id="edge55" class="edge">
 <title>Node55&#45;&gt;Node56</title>
-<path fill="none" stroke="midnightblue" d="M6388.52,-304.98C6381.61,-277.7 6373.81,-246.89 6367.82,-223.26"/>
-<polygon fill="none" stroke="midnightblue" points="6385.18,-306.01 6391.03,-314.85 6391.96,-304.29 6385.18,-306.01"/>
+<path fill="none" stroke="midnightblue" d="M6387.91,-299.06C6381.27,-273.62 6373.89,-245.34 6368.12,-223.25"/>
+<polygon fill="none" stroke="midnightblue" points="6384.6,-300.23 6390.51,-309.03 6391.37,-298.47 6384.6,-300.23"/>
 </g>
 <!-- Node58 -->
 <g id="node58" class="node">
 <title>Node58</title>
 <g id="a_node58"><a xlink:href="classtvm_1_1BaseFuncNode.html" target="_top" xlink:title="Base node of all functions.">
-<polygon fill="white" stroke="black" points="6594,-304 6594,-438 6756,-438 6756,-304 6594,-304"/>
-<text text-anchor="middle" x="6675" y="-426" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::BaseFuncNode</text>
-<polyline fill="none" stroke="black" points="6594,-419 6756,-419 "/>
-<text text-anchor="start" x="6602" y="-407" font-family="Helvetica,sans-Serif" font-size="10.00">+ attrs</text>
-<text text-anchor="start" x="6602" y="-396" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<polyline fill="none" stroke="black" points="6594,-389 6756,-389 "/>
-<text text-anchor="start" x="6602" y="-377" font-family="Helvetica,sans-Serif" font-size="10.00">+ GetAttr()</text>
-<text text-anchor="start" x="6602" y="-366" font-family="Helvetica,sans-Serif" font-size="10.00">+ GetAttr()</text>
-<text text-anchor="start" x="6602" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasNonzeroAttr()</text>
-<text text-anchor="start" x="6602" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ GetLinkageType()</text>
-<text text-anchor="start" x="6602" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="6602" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
-<text text-anchor="start" x="6602" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="6594,-298.5 6594,-432.5 6756,-432.5 6756,-298.5 6594,-298.5"/>
+<text text-anchor="middle" x="6675" y="-420.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::BaseFuncNode</text>
+<polyline fill="none" stroke="black" points="6594,-413.5 6756,-413.5 "/>
+<text text-anchor="start" x="6602" y="-401.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ attrs</text>
+<text text-anchor="start" x="6602" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<polyline fill="none" stroke="black" points="6594,-383.5 6756,-383.5 "/>
+<text text-anchor="start" x="6602" y="-371.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ GetAttr()</text>
+<text text-anchor="start" x="6602" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ GetAttr()</text>
+<text text-anchor="start" x="6602" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasNonzeroAttr()</text>
+<text text-anchor="start" x="6602" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ GetLinkageType()</text>
+<text text-anchor="start" x="6602" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="6602" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
+<text text-anchor="start" x="6602" y="-305.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node57&#45;&gt;Node58 -->
 <g id="edge57" class="edge">
 <title>Node57&#45;&gt;Node58</title>
-<path fill="none" stroke="midnightblue" d="M7213.64,-528.41C7081.01,-517.02 6842.49,-492.1 6765,-455 6755.51,-450.46 6746.33,-444.57 6737.68,-438.02"/>
-<polygon fill="none" stroke="midnightblue" points="7213.53,-531.91 7223.79,-529.27 7214.12,-524.94 7213.53,-531.91"/>
+<path fill="none" stroke="midnightblue" d="M7213.8,-517.07C7081.37,-505.25 6843.11,-479.77 6765,-444 6758.06,-440.82 6751.25,-436.95 6744.67,-432.64"/>
+<polygon fill="none" stroke="midnightblue" points="7213.66,-520.57 7223.93,-517.97 7214.28,-513.6 7213.66,-520.57"/>
 </g>
 <!-- Node62 -->
 <g id="node62" class="node">
 <title>Node62</title>
 <g id="a_node62"><a xlink:href="classtvm_1_1GlobalVarNode.html" target="_top" xlink:title="Global variable that lives in the top&#45;level module.">
-<polygon fill="white" stroke="black" points="6774,-315 6774,-427 6936,-427 6936,-315 6774,-315"/>
-<text text-anchor="middle" x="6855" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::GlobalVarNode</text>
-<polyline fill="none" stroke="black" points="6774,-408 6936,-408 "/>
-<text text-anchor="start" x="6782" y="-396" font-family="Helvetica,sans-Serif" font-size="10.00">+ name_hint</text>
-<text text-anchor="start" x="6782" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
-<polyline fill="none" stroke="black" points="6774,-378 6936,-378 "/>
-<text text-anchor="start" x="6782" y="-366" font-family="Helvetica,sans-Serif" font-size="10.00">+ SEqual()</text>
-<text text-anchor="start" x="6782" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ SHash()</text>
-<text text-anchor="start" x="6782" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="6782" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="6782" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="6774,-309.5 6774,-421.5 6936,-421.5 6936,-309.5 6774,-309.5"/>
+<text text-anchor="middle" x="6855" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::GlobalVarNode</text>
+<polyline fill="none" stroke="black" points="6774,-402.5 6936,-402.5 "/>
+<text text-anchor="start" x="6782" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ name_hint</text>
+<text text-anchor="start" x="6782" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
+<polyline fill="none" stroke="black" points="6774,-372.5 6936,-372.5 "/>
+<text text-anchor="start" x="6782" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ SEqual()</text>
+<text text-anchor="start" x="6782" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ SHash()</text>
+<text text-anchor="start" x="6782" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="6782" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="6782" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node57&#45;&gt;Node62 -->
 <g id="edge61" class="edge">
 <title>Node57&#45;&gt;Node62</title>
-<path fill="none" stroke="midnightblue" d="M7214.02,-528.37C7138.4,-519.42 7029.84,-499.43 6945,-455 6931.07,-447.7 6917.67,-437.69 6905.66,-427.14"/>
-<polygon fill="none" stroke="midnightblue" points="7213.67,-531.85 7224,-529.51 7214.46,-524.89 7213.67,-531.85"/>
+<path fill="none" stroke="midnightblue" d="M7214.04,-516.57C7138.67,-507.15 7030.44,-486.91 6945,-444 6933.02,-437.98 6921.33,-430.03 6910.54,-421.5"/>
+<polygon fill="none" stroke="midnightblue" points="7213.64,-520.05 7223.99,-517.77 7214.48,-513.1 7213.64,-520.05"/>
 </g>
 <!-- Node63 -->
 <g id="node63" class="node">
 <title>Node63</title>
 <g id="a_node63"><a xlink:href="classtvm_1_1OpNode.html" target="_top" xlink:title="Primitive Op(builtin intrinsics)">
-<polygon fill="white" stroke="black" points="6954,-287.5 6954,-454.5 7116,-454.5 7116,-287.5 6954,-287.5"/>
-<text text-anchor="middle" x="7035" y="-442.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::OpNode</text>
-<polyline fill="none" stroke="black" points="6954,-435.5 7116,-435.5 "/>
-<text text-anchor="start" x="6962" y="-423.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ name</text>
-<text text-anchor="start" x="6962" y="-412.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ op_type</text>
+<polygon fill="white" stroke="black" points="6954,-287.5 6954,-443.5 7116,-443.5 7116,-287.5 6954,-287.5"/>
+<text text-anchor="middle" x="7035" y="-431.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::OpNode</text>
+<polyline fill="none" stroke="black" points="6954,-424.5 7116,-424.5 "/>
+<text text-anchor="start" x="6962" y="-412.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ name</text>
 <text text-anchor="start" x="6962" y="-401.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ description</text>
 <text text-anchor="start" x="6962" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ arguments</text>
 <text text-anchor="start" x="6962" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ attrs_type_key</text>
@@ -1342,141 +1341,141 @@
 <!-- Node57&#45;&gt;Node63 -->
 <g id="edge62" class="edge">
 <title>Node57&#45;&gt;Node63</title>
-<path fill="none" stroke="midnightblue" d="M7214.2,-501.7C7184.68,-488.96 7152.47,-473.1 7125,-455 7122.07,-453.07 7119.15,-451.04 7116.24,-448.94"/>
-<polygon fill="none" stroke="midnightblue" points="7213.11,-505.04 7223.68,-505.73 7215.85,-498.6 7213.11,-505.04"/>
+<path fill="none" stroke="midnightblue" d="M7214.14,-489.97C7184.76,-477.22 7152.64,-461.55 7125,-444 7122.04,-442.12 7119.08,-440.15 7116.12,-438.11"/>
+<polygon fill="none" stroke="midnightblue" points="7213.01,-493.29 7223.58,-494.01 7215.76,-486.86 7213.01,-493.29"/>
 </g>
 <!-- Node64 -->
 <g id="node64" class="node">
 <title>Node64</title>
 <g id="a_node64"><a xlink:href="classtvm_1_1relax_1_1CallNode.html" target="_top" xlink:title="Call corresponds to callable invocation. Corresponds to operation in computational graph terminology.">
-<polygon fill="white" stroke="black" points="7134,-315 7134,-427 7296,-427 7296,-315 7134,-315"/>
-<text text-anchor="middle" x="7215" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::CallNode</text>
-<polyline fill="none" stroke="black" points="7134,-408 7296,-408 "/>
-<text text-anchor="start" x="7142" y="-396" font-family="Helvetica,sans-Serif" font-size="10.00">+ op</text>
-<text text-anchor="start" x="7142" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ args</text>
-<text text-anchor="start" x="7142" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ attrs</text>
-<text text-anchor="start" x="7142" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ sinfo_args</text>
-<polyline fill="none" stroke="black" points="7134,-356 7296,-356 "/>
-<text text-anchor="start" x="7142" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="7142" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="7142" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="7134,-309.5 7134,-421.5 7296,-421.5 7296,-309.5 7134,-309.5"/>
+<text text-anchor="middle" x="7215" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::CallNode</text>
+<polyline fill="none" stroke="black" points="7134,-402.5 7296,-402.5 "/>
+<text text-anchor="start" x="7142" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ op</text>
+<text text-anchor="start" x="7142" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ args</text>
+<text text-anchor="start" x="7142" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ attrs</text>
+<text text-anchor="start" x="7142" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ ty_args</text>
+<polyline fill="none" stroke="black" points="7134,-350.5 7296,-350.5 "/>
+<text text-anchor="start" x="7142" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="7142" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="7142" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node57&#45;&gt;Node64 -->
 <g id="edge63" class="edge">
 <title>Node57&#45;&gt;Node64</title>
-<path fill="none" stroke="midnightblue" d="M7275.68,-482.23C7265.96,-464.57 7255.12,-444.89 7245.33,-427.1"/>
-<polygon fill="none" stroke="midnightblue" points="7272.76,-484.18 7280.64,-491.25 7278.89,-480.81 7272.76,-484.18"/>
+<path fill="none" stroke="midnightblue" d="M7277.94,-477C7268.03,-459.6 7256.74,-439.77 7246.48,-421.76"/>
+<polygon fill="none" stroke="midnightblue" points="7274.99,-478.89 7282.98,-485.85 7281.08,-475.43 7274.99,-478.89"/>
 </g>
 <!-- Node65 -->
 <g id="node65" class="node">
 <title>Node65</title>
 <g id="a_node65"><a xlink:href="classtvm_1_1relax_1_1IfNode.html" target="_top" xlink:title="Condition expression.">
-<polygon fill="white" stroke="black" points="7314,-315 7314,-427 7476,-427 7476,-315 7314,-315"/>
-<text text-anchor="middle" x="7395" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::IfNode</text>
-<polyline fill="none" stroke="black" points="7314,-408 7476,-408 "/>
-<text text-anchor="start" x="7322" y="-396" font-family="Helvetica,sans-Serif" font-size="10.00">+ cond</text>
-<text text-anchor="start" x="7322" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ true_branch</text>
-<text text-anchor="start" x="7322" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ false_branch</text>
-<text text-anchor="start" x="7322" y="-363" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
-<polyline fill="none" stroke="black" points="7314,-356 7476,-356 "/>
-<text text-anchor="start" x="7322" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="7322" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="7322" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="7314,-309.5 7314,-421.5 7476,-421.5 7476,-309.5 7314,-309.5"/>
+<text text-anchor="middle" x="7395" y="-409.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::IfNode</text>
+<polyline fill="none" stroke="black" points="7314,-402.5 7476,-402.5 "/>
+<text text-anchor="start" x="7322" y="-390.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ cond</text>
+<text text-anchor="start" x="7322" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ true_branch</text>
+<text text-anchor="start" x="7322" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ false_branch</text>
+<text text-anchor="start" x="7322" y="-357.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
+<polyline fill="none" stroke="black" points="7314,-350.5 7476,-350.5 "/>
+<text text-anchor="start" x="7322" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="7322" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="7322" y="-316.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node57&#45;&gt;Node65 -->
 <g id="edge64" class="edge">
 <title>Node57&#45;&gt;Node65</title>
-<path fill="none" stroke="midnightblue" d="M7334.32,-482.23C7344.04,-464.57 7354.88,-444.89 7364.67,-427.1"/>
-<polygon fill="none" stroke="midnightblue" points="7331.11,-480.81 7329.36,-491.25 7337.24,-484.18 7331.11,-480.81"/>
+<path fill="none" stroke="midnightblue" d="M7332.06,-477C7341.97,-459.6 7353.26,-439.77 7363.52,-421.76"/>
+<polygon fill="none" stroke="midnightblue" points="7328.92,-475.43 7327.02,-485.85 7335.01,-478.89 7328.92,-475.43"/>
 </g>
 <!-- Node66 -->
 <g id="node66" class="node">
 <title>Node66</title>
 <g id="a_node66"><a xlink:href="classtvm_1_1relax_1_1LeafExprNode.html" target="_top" xlink:title="Base type of all (non&#45;function) leaf Exprs.">
-<polygon fill="white" stroke="black" points="7494,-337 7494,-405 7656,-405 7656,-337 7494,-337"/>
-<text text-anchor="middle" x="7575" y="-393" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::LeafExprNode</text>
-<polyline fill="none" stroke="black" points="7494,-386 7656,-386 "/>
-<text text-anchor="start" x="7502" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<polyline fill="none" stroke="black" points="7494,-367 7656,-367 "/>
-<text text-anchor="start" x="7502" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="7502" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
+<polygon fill="white" stroke="black" points="7494,-331.5 7494,-399.5 7656,-399.5 7656,-331.5 7494,-331.5"/>
+<text text-anchor="middle" x="7575" y="-387.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::LeafExprNode</text>
+<polyline fill="none" stroke="black" points="7494,-380.5 7656,-380.5 "/>
+<text text-anchor="start" x="7502" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<polyline fill="none" stroke="black" points="7494,-361.5 7656,-361.5 "/>
+<text text-anchor="start" x="7502" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="7502" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
 </a>
 </g>
 </g>
 <!-- Node57&#45;&gt;Node66 -->
 <g id="edge65" class="edge">
 <title>Node57&#45;&gt;Node66</title>
-<path fill="none" stroke="midnightblue" d="M7395.8,-501.7C7425.32,-488.96 7457.53,-473.1 7485,-455 7506.47,-440.85 7527.75,-421.53 7544.23,-405.09"/>
-<polygon fill="none" stroke="midnightblue" points="7394.15,-498.6 7386.32,-505.73 7396.89,-505.04 7394.15,-498.6"/>
+<path fill="none" stroke="midnightblue" d="M7395.86,-489.97C7425.24,-477.22 7457.36,-461.55 7485,-444 7505.02,-431.29 7525.21,-414.36 7541.39,-399.57"/>
+<polygon fill="none" stroke="midnightblue" points="7394.24,-486.86 7386.42,-494.01 7396.99,-493.29 7394.24,-486.86"/>
 </g>
 <!-- Node74 -->
 <g id="node74" class="node">
 <title>Node74</title>
 <g id="a_node74"><a xlink:href="classtvm_1_1relax_1_1SeqExprNode.html" target="_top" xlink:title="A sequence of blocks followed by an expression.">
-<polygon fill="white" stroke="black" points="7674,-326 7674,-416 7836,-416 7836,-326 7674,-326"/>
-<text text-anchor="middle" x="7755" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::SeqExprNode</text>
-<polyline fill="none" stroke="black" points="7674,-397 7836,-397 "/>
-<text text-anchor="start" x="7682" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ blocks</text>
-<text text-anchor="start" x="7682" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ body</text>
-<polyline fill="none" stroke="black" points="7674,-367 7836,-367 "/>
-<text text-anchor="start" x="7682" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="7682" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="7682" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="7674,-320.5 7674,-410.5 7836,-410.5 7836,-320.5 7674,-320.5"/>
+<text text-anchor="middle" x="7755" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::SeqExprNode</text>
+<polyline fill="none" stroke="black" points="7674,-391.5 7836,-391.5 "/>
+<text text-anchor="start" x="7682" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ blocks</text>
+<text text-anchor="start" x="7682" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ body</text>
+<polyline fill="none" stroke="black" points="7674,-361.5 7836,-361.5 "/>
+<text text-anchor="start" x="7682" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="7682" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="7682" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node57&#45;&gt;Node74 -->
 <g id="edge73" class="edge">
 <title>Node57&#45;&gt;Node74</title>
-<path fill="none" stroke="midnightblue" d="M7395.98,-528.37C7471.6,-519.42 7580.16,-499.43 7665,-455 7683.64,-445.24 7701.32,-430.61 7716,-416.35"/>
-<polygon fill="none" stroke="midnightblue" points="7395.54,-524.89 7386,-529.51 7396.33,-531.85 7395.54,-524.89"/>
+<path fill="none" stroke="midnightblue" d="M7395.96,-516.57C7471.33,-507.15 7579.56,-486.91 7665,-444 7681.95,-435.49 7698.34,-423.08 7712.39,-410.68"/>
+<polygon fill="none" stroke="midnightblue" points="7395.52,-513.1 7386.01,-517.77 7396.36,-520.05 7395.52,-513.1"/>
 </g>
 <!-- Node75 -->
 <g id="node75" class="node">
 <title>Node75</title>
 <g id="a_node75"><a xlink:href="classtvm_1_1relax_1_1TupleGetItemNode.html" target="_top" xlink:title="Get index&#45;th field out of a tuple.">
-<polygon fill="white" stroke="black" points="7854,-326 7854,-416 8018,-416 8018,-326 7854,-326"/>
-<text text-anchor="middle" x="7936" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::TupleGetItemNode</text>
-<polyline fill="none" stroke="black" points="7854,-397 8018,-397 "/>
-<text text-anchor="start" x="7862" y="-385" font-family="Helvetica,sans-Serif" font-size="10.00">+ tuple</text>
-<text text-anchor="start" x="7862" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ index</text>
-<polyline fill="none" stroke="black" points="7854,-367 8018,-367 "/>
-<text text-anchor="start" x="7862" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="7862" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="7862" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="7854,-320.5 7854,-410.5 8018,-410.5 8018,-320.5 7854,-320.5"/>
+<text text-anchor="middle" x="7936" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::TupleGetItemNode</text>
+<polyline fill="none" stroke="black" points="7854,-391.5 8018,-391.5 "/>
+<text text-anchor="start" x="7862" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ tuple</text>
+<text text-anchor="start" x="7862" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ index</text>
+<polyline fill="none" stroke="black" points="7854,-361.5 8018,-361.5 "/>
+<text text-anchor="start" x="7862" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="7862" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="7862" y="-327.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node57&#45;&gt;Node75 -->
 <g id="edge74" class="edge">
 <title>Node57&#45;&gt;Node75</title>
-<path fill="none" stroke="midnightblue" d="M7396.33,-528.36C7528.93,-516.9 7767.41,-491.88 7845,-455 7864.51,-445.73 7882.78,-430.85 7897.77,-416.24"/>
-<polygon fill="none" stroke="midnightblue" points="7395.85,-524.88 7386.19,-529.22 7396.45,-531.86 7395.85,-524.88"/>
+<path fill="none" stroke="midnightblue" d="M7396.17,-517.02C7528.57,-505.12 7766.79,-479.56 7845,-444 7862.76,-435.93 7879.74,-423.33 7894.13,-410.63"/>
+<polygon fill="none" stroke="midnightblue" points="7395.69,-513.55 7386.04,-517.92 7396.32,-520.52 7395.69,-513.55"/>
 </g>
 <!-- Node76 -->
 <g id="node76" class="node">
 <title>Node76</title>
 <g id="a_node76"><a xlink:href="classtvm_1_1relax_1_1TupleNode.html" target="_top" xlink:title="Tuple container.">
-<polygon fill="white" stroke="black" points="8036,-331.5 8036,-410.5 8198,-410.5 8198,-331.5 8036,-331.5"/>
-<text text-anchor="middle" x="8117" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::TupleNode</text>
-<polyline fill="none" stroke="black" points="8036,-391.5 8198,-391.5 "/>
-<text text-anchor="start" x="8044" y="-379.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ fields</text>
-<polyline fill="none" stroke="black" points="8036,-372.5 8198,-372.5 "/>
-<text text-anchor="start" x="8044" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="8044" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
-<text text-anchor="start" x="8044" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<polygon fill="white" stroke="black" points="8036,-326 8036,-405 8198,-405 8198,-326 8036,-326"/>
+<text text-anchor="middle" x="8117" y="-393" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::TupleNode</text>
+<polyline fill="none" stroke="black" points="8036,-386 8198,-386 "/>
+<text text-anchor="start" x="8044" y="-374" font-family="Helvetica,sans-Serif" font-size="10.00">+ fields</text>
+<polyline fill="none" stroke="black" points="8036,-367 8198,-367 "/>
+<text text-anchor="start" x="8044" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="8044" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>
+<text text-anchor="start" x="8044" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node57&#45;&gt;Node76 -->
 <g id="edge75" class="edge">
 <title>Node57&#45;&gt;Node76</title>
-<path fill="none" stroke="midnightblue" d="M7396.31,-532.38C7564.62,-525.48 7916.66,-505.34 8027,-455 8049.24,-444.85 8069.66,-427.08 8085.41,-410.57"/>
-<polygon fill="none" stroke="midnightblue" points="7396.08,-528.89 7386.23,-532.79 7396.37,-535.88 7396.08,-528.89"/>
+<path fill="none" stroke="midnightblue" d="M7396.16,-521.03C7564.2,-513.54 7915.82,-492.45 8027,-444 8047.42,-435.1 8066.62,-419.92 8082.01,-405.34"/>
+<polygon fill="none" stroke="midnightblue" points="7395.93,-517.54 7386.09,-521.47 7396.24,-524.53 7395.93,-517.54"/>
 </g>
 <!-- Node59 -->
 <g id="node59" class="node">
@@ -1496,8 +1495,8 @@
 <!-- Node58&#45;&gt;Node59 -->
 <g id="edge58" class="edge">
 <title>Node58&#45;&gt;Node59</title>
-<path fill="none" stroke="midnightblue" d="M6619.97,-295.48C6601.64,-270.67 6581.98,-244.05 6566.51,-223.1"/>
-<polygon fill="none" stroke="midnightblue" points="6617.36,-297.85 6626.12,-303.82 6622.99,-293.69 6617.36,-297.85"/>
+<path fill="none" stroke="midnightblue" d="M6618.59,-290.38C6600.98,-267.25 6582.27,-242.66 6567.31,-223.01"/>
+<polygon fill="none" stroke="midnightblue" points="6615.92,-292.66 6624.76,-298.5 6621.49,-288.42 6615.92,-292.66"/>
 </g>
 <!-- Node60 -->
 <g id="node60" class="node">
@@ -1508,7 +1507,7 @@
 <polyline fill="none" stroke="black" points="6637,-226 6799,-226 "/>
 <text text-anchor="start" x="6645" y="-214" font-family="Helvetica,sans-Serif" font-size="10.00">+ params</text>
 <text text-anchor="start" x="6645" y="-203" font-family="Helvetica,sans-Serif" font-size="10.00">+ body</text>
-<text text-anchor="start" x="6645" y="-192" font-family="Helvetica,sans-Serif" font-size="10.00">+ ret_struct_info</text>
+<text text-anchor="start" x="6645" y="-192" font-family="Helvetica,sans-Serif" font-size="10.00">+ ret_ty</text>
 <text text-anchor="start" x="6645" y="-181" font-family="Helvetica,sans-Serif" font-size="10.00">+ is_pure</text>
 <text text-anchor="start" x="6645" y="-170" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
 <polyline fill="none" stroke="black" points="6637,-163 6799,-163 "/>
@@ -1521,8 +1520,8 @@
 <!-- Node58&#45;&gt;Node60 -->
 <g id="edge59" class="edge">
 <title>Node58&#45;&gt;Node60</title>
-<path fill="none" stroke="midnightblue" d="M6692.66,-293.82C6696.42,-277.58 6700.35,-260.65 6703.95,-245.09"/>
-<polygon fill="none" stroke="midnightblue" points="6689.19,-293.28 6690.34,-303.82 6696.01,-294.86 6689.19,-293.28"/>
+<path fill="none" stroke="midnightblue" d="M6693.14,-288.56C6696.61,-274.06 6700.19,-259.06 6703.52,-245.12"/>
+<polygon fill="none" stroke="midnightblue" points="6689.69,-287.96 6690.77,-298.5 6696.5,-289.58 6689.69,-287.96"/>
 </g>
 <!-- Node61 -->
 <g id="node61" class="node">
@@ -1546,8 +1545,8 @@
 <!-- Node58&#45;&gt;Node61 -->
 <g id="edge60" class="edge">
 <title>Node58&#45;&gt;Node61</title>
-<path fill="none" stroke="midnightblue" d="M6753.28,-297.05C6757.22,-293.63 6761.14,-290.26 6765,-287 6781.49,-273.09 6799.56,-258.66 6816.92,-245.17"/>
-<polygon fill="none" stroke="midnightblue" points="6750.91,-294.48 6745.71,-303.71 6755.53,-299.74 6750.91,-294.48"/>
+<path fill="none" stroke="midnightblue" d="M6759.08,-291.86C6761.07,-290.22 6763.04,-288.6 6765,-287 6781.95,-273.19 6800.38,-258.67 6817.98,-245.05"/>
+<polygon fill="none" stroke="midnightblue" points="6756.82,-289.18 6751.36,-298.26 6761.29,-294.57 6756.82,-289.18"/>
 </g>
 <!-- Node67 -->
 <g id="node67" class="node">
@@ -1569,8 +1568,8 @@
 <!-- Node66&#45;&gt;Node67 -->
 <g id="edge66" class="edge">
 <title>Node66&#45;&gt;Node67</title>
-<path fill="none" stroke="midnightblue" d="M7540.75,-329.36C7525.32,-313.67 7505.89,-297.09 7485,-287 7391.84,-241.99 7350.47,-290.89 7255,-251 7244.33,-246.54 7233.76,-240.57 7223.82,-234.02"/>
-<polygon fill="none" stroke="midnightblue" points="7538.56,-332.13 7547.99,-336.96 7543.63,-327.3 7538.56,-332.13"/>
+<path fill="none" stroke="midnightblue" d="M7537.66,-324.11C7522.63,-310.21 7504.28,-295.92 7485,-287 7391.09,-243.58 7350.47,-290.89 7255,-251 7244.33,-246.54 7233.76,-240.57 7223.82,-234.02"/>
+<polygon fill="none" stroke="midnightblue" points="7535.55,-326.94 7545.21,-331.31 7540.39,-321.87 7535.55,-326.94"/>
 </g>
 <!-- Node68 -->
 <g id="node68" class="node">
@@ -1590,8 +1589,8 @@
 <!-- Node66&#45;&gt;Node68 -->
 <g id="edge67" class="edge">
 <title>Node66&#45;&gt;Node68</title>
-<path fill="none" stroke="midnightblue" d="M7533.13,-329.73C7518.23,-315.85 7501.14,-300.42 7485,-287 7458.5,-264.97 7427.89,-241.86 7402.33,-223.17"/>
-<polygon fill="none" stroke="midnightblue" points="7531.01,-332.54 7540.7,-336.82 7535.8,-327.43 7531.01,-332.54"/>
+<path fill="none" stroke="midnightblue" d="M7530.1,-324.78C7515.85,-312.46 7499.92,-298.98 7485,-287 7457.9,-265.24 7426.96,-241.96 7401.34,-223.09"/>
+<polygon fill="none" stroke="midnightblue" points="7527.98,-327.58 7537.83,-331.49 7532.57,-322.29 7527.98,-327.58"/>
 </g>
 <!-- Node69 -->
 <g id="node69" class="node">
@@ -1611,8 +1610,8 @@
 <!-- Node66&#45;&gt;Node69 -->
 <g id="edge68" class="edge">
 <title>Node66&#45;&gt;Node69</title>
-<path fill="none" stroke="midnightblue" d="M7564.81,-327.06C7557.37,-295.68 7547.36,-253.48 7540.17,-223.15"/>
-<polygon fill="none" stroke="midnightblue" points="7561.42,-327.91 7567.13,-336.84 7568.23,-326.3 7561.42,-327.91"/>
+<path fill="none" stroke="midnightblue" d="M7564.55,-321.75C7557.24,-291.84 7547.56,-252.23 7540.47,-223.25"/>
+<polygon fill="none" stroke="midnightblue" points="7561.16,-322.6 7566.93,-331.49 7567.96,-320.94 7561.16,-322.6"/>
 </g>
 <!-- Node70 -->
 <g id="node70" class="node">
@@ -1632,8 +1631,8 @@
 <!-- Node66&#45;&gt;Node70 -->
 <g id="edge69" class="edge">
 <title>Node66&#45;&gt;Node70</title>
-<path fill="none" stroke="midnightblue" d="M7605.3,-328.68C7628.42,-297.14 7660.04,-254.01 7682.66,-223.15"/>
-<polygon fill="none" stroke="midnightblue" points="7602.4,-326.7 7599.31,-336.84 7608.05,-330.84 7602.4,-326.7"/>
+<path fill="none" stroke="midnightblue" d="M7606.13,-323.3C7628.85,-293.22 7659.45,-252.73 7681.72,-223.25"/>
+<polygon fill="none" stroke="midnightblue" points="7603.18,-321.4 7599.94,-331.49 7608.77,-325.62 7603.18,-321.4"/>
 </g>
 <!-- Node71 -->
 <g id="node71" class="node">
@@ -1653,8 +1652,8 @@
 <!-- Node66&#45;&gt;Node71 -->
 <g id="edge70" class="edge">
 <title>Node66&#45;&gt;Node71</title>
-<path fill="none" stroke="midnightblue" d="M7610.9,-329.31C7626.22,-314.1 7645.14,-297.9 7665,-287 7719.82,-256.92 7744.63,-278.06 7801,-251 7816.41,-243.6 7831.86,-233.43 7845.51,-223.27"/>
-<polygon fill="none" stroke="midnightblue" points="7608.19,-327.08 7603.68,-336.67 7613.18,-331.98 7608.19,-327.08"/>
+<path fill="none" stroke="midnightblue" d="M7613.61,-324.48C7628.56,-310.91 7646.51,-296.74 7665,-287 7720.32,-257.86 7744.63,-278.06 7801,-251 7816.41,-243.6 7831.86,-233.43 7845.51,-223.27"/>
+<polygon fill="none" stroke="midnightblue" points="7611.02,-322.12 7606.09,-331.5 7615.79,-327.24 7611.02,-322.12"/>
 </g>
 <!-- Node72 -->
 <g id="node72" class="node">
@@ -1679,8 +1678,8 @@
 <!-- Node66&#45;&gt;Node72 -->
 <g id="edge71" class="edge">
 <title>Node66&#45;&gt;Node72</title>
-<path fill="none" stroke="midnightblue" d="M7608.68,-329.3C7624.13,-313.42 7643.74,-296.73 7665,-287 7793.53,-228.18 7849.46,-302.76 7981,-251 7983.98,-249.83 7986.96,-248.53 7989.91,-247.12"/>
-<polygon fill="none" stroke="midnightblue" points="7605.75,-327.31 7601.45,-336.99 7610.85,-332.11 7605.75,-327.31"/>
+<path fill="none" stroke="midnightblue" d="M7611.77,-324.02C7626.85,-309.96 7645.37,-295.58 7665,-287 7794.51,-230.37 7849.46,-302.76 7981,-251 7983.98,-249.83 7986.96,-248.53 7989.91,-247.12"/>
+<polygon fill="none" stroke="midnightblue" points="7608.98,-321.85 7604.22,-331.31 7613.84,-326.89 7608.98,-321.85"/>
 </g>
 <!-- Node73 -->
 <g id="node73" class="node">

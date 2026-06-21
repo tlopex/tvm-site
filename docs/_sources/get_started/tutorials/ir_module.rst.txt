@@ -488,13 +488,13 @@ within the same module. Meanwhile, the Relax operators will be converted into ``
             R.func_attr({"num_input": 1})
             cls = Module
             with R.dataflow():
-                lv = R.call_tir(cls.transpose, (p_fc1_weight,), out_sinfo=R.Tensor((784, 256), dtype="float32"))
-                lv1 = R.call_tir(cls.matmul, (x, lv), out_sinfo=R.Tensor((1, 256), dtype="float32"))
-                lv2 = R.call_tir(cls.add, (p_fc1_bias, lv1), out_sinfo=R.Tensor((1, 256), dtype="float32"))
-                lv3 = R.call_tir(cls.relu, (lv2,), out_sinfo=R.Tensor((1, 256), dtype="float32"))
-                lv4 = R.call_tir(cls.transpose1, (p_fc2_weight,), out_sinfo=R.Tensor((256, 10), dtype="float32"))
-                lv5 = R.call_tir(cls.matmul1, (lv3, lv4), out_sinfo=R.Tensor((1, 10), dtype="float32"))
-                lv6 = R.call_tir(cls.add1, (p_fc2_bias, lv5), out_sinfo=R.Tensor((1, 10), dtype="float32"))
+                lv = R.call_tir(cls.transpose, (p_fc1_weight,), out_ty=R.Tensor((784, 256), dtype="float32"))
+                lv1 = R.call_tir(cls.matmul, (x, lv), out_ty=R.Tensor((1, 256), dtype="float32"))
+                lv2 = R.call_tir(cls.add, (p_fc1_bias, lv1), out_ty=R.Tensor((1, 256), dtype="float32"))
+                lv3 = R.call_tir(cls.relu, (lv2,), out_ty=R.Tensor((1, 256), dtype="float32"))
+                lv4 = R.call_tir(cls.transpose1, (p_fc2_weight,), out_ty=R.Tensor((256, 10), dtype="float32"))
+                lv5 = R.call_tir(cls.matmul1, (lv3, lv4), out_ty=R.Tensor((1, 10), dtype="float32"))
+                lv6 = R.call_tir(cls.add1, (p_fc2_bias, lv5), out_ty=R.Tensor((1, 10), dtype="float32"))
                 gv: R.Tensor((1, 10), dtype="float32") = lv6
                 R.output(gv)
             return gv
@@ -650,10 +650,10 @@ The default **zero** pipeline contains very fundamental transformations, includi
             R.func_attr({"num_input": 1})
             cls = Module
             with R.dataflow():
-                lv = R.call_tir(cls.transpose, (p_fc1_weight,), out_sinfo=R.Tensor((784, 256), dtype="float32"))
-                lv_1 = R.call_tir(cls.fused_matmul_add_relu, (x, lv, p_fc1_bias), out_sinfo=R.Tensor((1, 256), dtype="float32"))
-                lv4 = R.call_tir(cls.transpose1, (p_fc2_weight,), out_sinfo=R.Tensor((256, 10), dtype="float32"))
-                gv = R.call_tir(cls.fused_matmul1_add1, (lv_1, lv4, p_fc2_bias), out_sinfo=R.Tensor((1, 10), dtype="float32"))
+                lv = R.call_tir(cls.transpose, (p_fc1_weight,), out_ty=R.Tensor((784, 256), dtype="float32"))
+                lv_1 = R.call_tir(cls.fused_matmul_add_relu, (x, lv, p_fc1_bias), out_ty=R.Tensor((1, 256), dtype="float32"))
+                lv4 = R.call_tir(cls.transpose1, (p_fc2_weight,), out_ty=R.Tensor((256, 10), dtype="float32"))
+                gv = R.call_tir(cls.fused_matmul1_add1, (lv_1, lv4, p_fc2_bias), out_ty=R.Tensor((1, 10), dtype="float32"))
                 R.output(gv)
             return gv
 
@@ -696,8 +696,8 @@ We can deploy the IRModule on CPU by specifying the target as ``llvm``.
 
  .. code-block:: none
 
-    [[ 0.0554229   0.23845601  0.09304772 -0.06065176 -0.05397692  0.0438191
-      -0.07065581 -0.21995586  0.21473469 -0.07441344]]
+    [[-0.01538962  0.3851107   0.03527965  0.13098207 -0.16662857  0.00333789
+      -0.09144688 -0.0468705   0.06863248  0.2076945 ]]
 
 
 
@@ -763,8 +763,8 @@ Now we can compile the IRModule on GPU, the similar way as we did on CPU.
 
  .. code-block:: none
 
-    [[ 0.055423    0.23845601  0.09304775 -0.06065176 -0.05397696  0.04381915
-      -0.0706558  -0.21995583  0.21473472 -0.07441349]]
+    [[-0.01538961  0.38511077  0.03527965  0.1309821  -0.16662858  0.00333788
+      -0.09144685 -0.04687053  0.06863243  0.2076945 ]]
 
 
 

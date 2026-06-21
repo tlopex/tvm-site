@@ -336,7 +336,7 @@ It is recommended to use them under trusted networking environment or encrypted 
 <h3>Subroutine Cache Hash Collision<a class="headerlink" href="#subroutine-cache-hash-collision" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">SubroutineMixin._get_subroutine()</span></code> in <code class="docutils literal notranslate"><span class="pre">python/tvm/relax/frontend/nn/subroutine.py</span></code>
 used <code class="docutils literal notranslate"><span class="pre">tvm_ffi.structural_hash</span></code> as the sole cache lookup key without a subsequent
-<code class="docutils literal notranslate"><span class="pre">structural_equal</span></code> verification. If two different <code class="docutils literal notranslate"><span class="pre">arg_sinfo</span></code> values produced the
+<code class="docutils literal notranslate"><span class="pre">structural_equal</span></code> verification. If two different <code class="docutils literal notranslate"><span class="pre">arg_ty</span></code> values produced the
 same 64-bit hash, the cache would return a previously compiled function with
 mismatched parameter shapes, leading to silently incorrect compiled output.</p>
 <p><strong>Severity</strong>: Low. The <code class="docutils literal notranslate"><span class="pre">structural_hash</span></code> function returns a 64-bit integer.
@@ -345,10 +345,10 @@ making accidental collision extremely unlikely in normal compilation workflows.
 The issue is primarily a correctness defect rather than a practically exploitable
 security vulnerability.</p>
 <p><strong>Root Cause</strong>: The subroutine cache (<code class="docutils literal notranslate"><span class="pre">cls._gvar</span></code>) was keyed by
-<code class="docutils literal notranslate"><span class="pre">(structural_hash(arg_sinfo,</span> <span class="pre">map_free_vars=True),</span> <span class="pre">is_dataflow)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">(structural_hash(arg_ty,</span> <span class="pre">map_free_vars=True),</span> <span class="pre">is_dataflow)</span></code>.
 A hash match was treated as proof of structural equality, skipping the necessary
 <code class="docutils literal notranslate"><span class="pre">structural_equal</span></code> check.</p>
-<p><strong>Fix</strong>: The cache now stores a list of <code class="docutils literal notranslate"><span class="pre">(arg_sinfo,</span> <span class="pre">result)</span></code> pairs per hash bucket.
+<p><strong>Fix</strong>: The cache now stores a list of <code class="docutils literal notranslate"><span class="pre">(arg_ty,</span> <span class="pre">result)</span></code> pairs per hash bucket.
 On lookup, each candidate is verified with <code class="docutils literal notranslate"><span class="pre">structural_equal</span></code> before returning.
 This follows the standard hash-table pattern: hash for bucket selection, equality
 for final verification.</p>

@@ -29,12 +29,12 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="classtvm_1_1relax_1_1MatchCastNode.html" target="_top" xlink:title="Runtime&#45;match the value to the struct info.">
+<g id="a_node3"><a xlink:href="classtvm_1_1relax_1_1MatchCastNode.html" target="_top" xlink:title="Runtime&#45;match the value to the type.">
 <polygon fill="white" stroke="black" points="0,-6 0,-96 162,-96 162,-6 0,-6"/>
 <text text-anchor="middle" x="81" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::MatchCastNode</text>
 <polyline fill="none" stroke="black" points="0,-77 162,-77 "/>
 <text text-anchor="start" x="8" y="-65" font-family="Helvetica,sans-Serif" font-size="10.00">+ value</text>
-<text text-anchor="start" x="8" y="-54" font-family="Helvetica,sans-Serif" font-size="10.00">+ struct_info</text>
+<text text-anchor="start" x="8" y="-54" font-family="Helvetica,sans-Serif" font-size="10.00">+ ty</text>
 <polyline fill="none" stroke="black" points="0,-47 162,-47 "/>
 <text text-anchor="start" x="8" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
 <text text-anchor="start" x="8" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO_FINAL()</text>

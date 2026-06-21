@@ -429,7 +429,7 @@ class Module:
             lv: R.Tensor((784, 128), dtype=&quot;float32&quot;) = R.permute_dims(w0, axes=None)
             lv1: R.Tensor((n, 128), dtype=&quot;float32&quot;) = R.matmul(data, lv, out_dtype=&quot;void&quot;)
             lv0: R.Tensor((n, 128), dtype=&quot;float32&quot;) = R.add(lv1, b0)
-            lv1_1 = R.call_tir(cls.relu, (lv0,), out_sinfo=R.Tensor((n, 128), dtype=&quot;float32&quot;))
+            lv1_1 = R.call_tir(cls.relu, (lv0,), out_ty=R.Tensor((n, 128), dtype=&quot;float32&quot;))
             lv4: R.Tensor((128, 10), dtype=&quot;float32&quot;) = R.permute_dims(w1, axes=None)
             lv5: R.Tensor((n, 10), dtype=&quot;float32&quot;) = R.matmul(lv1_1, lv4, out_dtype=&quot;void&quot;)
             lv2: R.Tensor((n, 10), dtype=&quot;float32&quot;) = R.add(lv5, b1)
@@ -615,9 +615,9 @@ class Module:
         R.func_attr({&quot;num_input&quot;: 1})
         cls = Module
         with R.dataflow():
-            env_linear = R.call_dps_packed(&quot;env.linear&quot;, (x, fc1_weight, fc1_bias), out_sinfo=R.Tensor((n, 128), dtype=&quot;float32&quot;))
-            lv = R.call_tir(cls.relu, (env_linear,), out_sinfo=R.Tensor((n, 128), dtype=&quot;float32&quot;))
-            lv1 = R.call_tir(cls.tir_linear, (lv, fc2_weight, fc2_bias), out_sinfo=R.Tensor((n, 10), dtype=&quot;float32&quot;))
+            env_linear = R.call_dps_packed(&quot;env.linear&quot;, (x, fc1_weight, fc1_bias), out_ty=R.Tensor((n, 128), dtype=&quot;float32&quot;))
+            lv = R.call_tir(cls.relu, (env_linear,), out_ty=R.Tensor((n, 128), dtype=&quot;float32&quot;))
+            lv1 = R.call_tir(cls.tir_linear, (lv, fc2_weight, fc2_bias), out_ty=R.Tensor((n, 10), dtype=&quot;float32&quot;))
             gv: R.Tensor((n, 10), dtype=&quot;float32&quot;) = lv1
             R.output(gv)
         return gv
@@ -681,7 +681,7 @@ Relax functions, TensorIR functions and other TVM packed functions.</p>
             <a href="../../../reference/api/python/relax/relax.html#tvm.relax.call_dps_packed" title="tvm.relax.call_dps_packed" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">call_dps_packed</span></a><span class="p">(</span>
                 <span class="s2">&quot;env.linear&quot;</span><span class="p">,</span>
                 <span class="p">[</span><a href="../../../reference/api/python/relax/relax.html#tvm.relax.Var" title="tvm.relax.Var" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a><span class="p">,</span> <a href="../../../reference/api/python/relax/relax.html#tvm.relax.Var" title="tvm.relax.Var" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fc1_weight</span></a><span class="p">,</span> <a href="../../../reference/api/python/relax/relax.html#tvm.relax.Var" title="tvm.relax.Var" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fc1_bias</span></a><span class="p">],</span>
-                <span class="n">out_sinfo</span><span class="o">=</span><a href="../../../reference/api/python/relax/relax.html#tvm.relax.TensorStructInfo" title="tvm.relax.TensorStructInfo" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class"><span class="n">relax</span><span class="o">.</span><span class="n">TensorStructInfo</span></a><span class="p">((</span><a href="../../../reference/api/python/tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.Var" class="sphx-glr-backref-module-tvm-tirx sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
+                <span class="n">out_ty</span><span class="o">=</span><a href="../../../reference/api/python/relax/relax.html#tvm.relax.TensorType" title="tvm.relax.TensorType" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class"><span class="n">relax</span><span class="o">.</span><span class="n">TensorType</span></a><span class="p">((</span><a href="../../../reference/api/python/tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.Var" class="sphx-glr-backref-module-tvm-tirx sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
             <span class="p">)</span>
         <span class="p">)</span>
         <a href="../../../reference/api/python/relax/relax.html#tvm.relax.DataflowVar" title="tvm.relax.DataflowVar" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">lv1</span></a> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">emit_te</span><span class="p">(</span><a href="../../../reference/api/python/topi.html#tvm.topi.nn.relu" title="tvm.topi.nn.relu" class="sphx-glr-backref-module-tvm-topi-nn sphx-glr-backref-type-py-function"><span class="n">topi</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span></a><span class="p">,</span> <a href="../../../reference/api/python/relax/relax.html#tvm.relax.DataflowVar" title="tvm.relax.DataflowVar" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">lv0</span></a><span class="p">)</span>
@@ -690,7 +690,7 @@ Relax functions, TensorIR functions and other TVM packed functions.</p>
             <a href="../../../reference/api/python/relax/relax.html#tvm.relax.call_tir" title="tvm.relax.call_tir" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-function"><span class="n">relax</span><span class="o">.</span><span class="n">call_tir</span></a><span class="p">(</span>
                 <a href="../../../reference/api/python/ir.html#tvm.ir.GlobalVar" title="tvm.ir.GlobalVar" class="sphx-glr-backref-module-tvm-ir sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tir_gv</span></a><span class="p">,</span>
                 <span class="p">[</span><a href="../../../reference/api/python/relax/relax.html#tvm.relax.DataflowVar" title="tvm.relax.DataflowVar" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">lv1</span></a><span class="p">,</span> <a href="../../../reference/api/python/relax/relax.html#tvm.relax.Var" title="tvm.relax.Var" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fc2_weight</span></a><span class="p">,</span> <a href="../../../reference/api/python/relax/relax.html#tvm.relax.Var" title="tvm.relax.Var" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fc2_bias</span></a><span class="p">],</span>
-                <span class="n">out_sinfo</span><span class="o">=</span><a href="../../../reference/api/python/relax/relax.html#tvm.relax.TensorStructInfo" title="tvm.relax.TensorStructInfo" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class"><span class="n">relax</span><span class="o">.</span><span class="n">TensorStructInfo</span></a><span class="p">((</span><a href="../../../reference/api/python/tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.Var" class="sphx-glr-backref-module-tvm-tirx sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
+                <span class="n">out_ty</span><span class="o">=</span><a href="../../../reference/api/python/relax/relax.html#tvm.relax.TensorType" title="tvm.relax.TensorType" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class"><span class="n">relax</span><span class="o">.</span><span class="n">TensorType</span></a><span class="p">((</span><a href="../../../reference/api/python/tirx/tirx.html#tvm.tirx.Var" title="tvm.tirx.Var" class="sphx-glr-backref-module-tvm-tirx sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
             <span class="p">)</span>
         <span class="p">)</span>
         <span class="n">bb</span><span class="o">.</span><span class="n">emit_output</span><span class="p">(</span><a href="../../../reference/api/python/relax/relax.html#tvm.relax.DataflowVar" title="tvm.relax.DataflowVar" class="sphx-glr-backref-module-tvm-relax sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">gv</span></a><span class="p">)</span>
@@ -749,9 +749,9 @@ class Module:
         v = T.int64()
         cls = Module
         with R.dataflow():
-            lv = R.call_dps_packed(&quot;env.linear&quot;, (x, fc1_weight, fc1_bias), out_sinfo=R.Tensor((v, 128), dtype=&quot;float32&quot;))
-            lv1 = R.call_tir(cls.relu, (lv,), out_sinfo=R.Tensor((v, 128), dtype=&quot;float32&quot;))
-            lv2 = R.call_tir(cls.tir_linear, (lv1, fc2_weight, fc2_bias), out_sinfo=R.Tensor((v, 10), dtype=&quot;float32&quot;))
+            lv = R.call_dps_packed(&quot;env.linear&quot;, (x, fc1_weight, fc1_bias), out_ty=R.Tensor((v, 128), dtype=&quot;float32&quot;))
+            lv1 = R.call_tir(cls.relu, (lv,), out_ty=R.Tensor((v, 128), dtype=&quot;float32&quot;))
+            lv2 = R.call_tir(cls.tir_linear, (lv1, fc2_weight, fc2_bias), out_ty=R.Tensor((v, 10), dtype=&quot;float32&quot;))
             gv: R.Tensor((v, 10), dtype=&quot;float32&quot;) = lv2
             R.output(gv)
         return lv2

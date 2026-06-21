@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title="Runtime&#45;match the value to the struct info.">
+<g id="a_node1"><a xlink:title="Runtime&#45;match the value to the type.">
 <polygon fill="#bfbfbf" stroke="black" points="251,-0.5 251,-79.5 413,-79.5 413,-0.5 251,-0.5"/>
 <text text-anchor="middle" x="332" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::MatchCastNode</text>
 <polyline fill="none" stroke="black" points="251,-60.5 413,-60.5 "/>
@@ -212,9 +212,9 @@
 <!-- Node11 -->
 <g id="node11" class="node">
 <title>Node11</title>
-<g id="a_node11"><a xlink:href="classtvm_1_1relax_1_1StructInfo.html" target="_top" xlink:title="Managed reference to StructInfoNode.">
+<g id="a_node11"><a xlink:href="classtvm_1_1Type.html" target="_top" xlink:title="Managed reference to TypeNode.">
 <polygon fill="white" stroke="black" points="346.5,-538.5 346.5,-606.5 505.5,-606.5 505.5,-538.5 346.5,-538.5"/>
-<text text-anchor="middle" x="426" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::StructInfo</text>
+<text text-anchor="middle" x="426" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::Type</text>
 <polyline fill="none" stroke="black" points="346.5,-587.5 505.5,-587.5 "/>
 <text text-anchor="middle" x="426" y="-575.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
 <polyline fill="none" stroke="black" points="346.5,-568.5 505.5,-568.5 "/>
@@ -248,7 +248,7 @@
 <title>Node11&#45;&gt;Node1</title>
 <path fill="none" stroke="#404040" d="M426,-538.21C426,-503.56 426,-447.73 426,-399.5 426,-399.5 426,-399.5 426,-156 426,-130.18 411.62,-106.96 394.1,-88.26"/>
 <polygon fill="none" stroke="#404040" points="394.06,-88.22 386.99,-86.8 385.59,-79.72 392.66,-81.15 394.06,-88.22"/>
-<text text-anchor="middle" x="458" y="-292.5" font-family="Helvetica,sans-Serif" font-size="10.00"> +struct_info</text>
+<text text-anchor="middle" x="437" y="-292.5" font-family="Helvetica,sans-Serif" font-size="10.00"> +ty</text>
 </g>
 </g>
 </svg>

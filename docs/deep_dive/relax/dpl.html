@@ -430,7 +430,7 @@ It supports indexing with <code class="docutils literal notranslate"><span class
 <li><p><code class="docutils literal notranslate"><span class="pre">.has_dtype(dtype)</span></code> – the matched expression must have the given data type.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.has_shape(shape)</span></code> – the matched expression must have the given shape.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.has_attr(attrs)</span></code> – the matched call must carry the given attributes.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.has_struct_info(struct_info)</span></code> – the matched expression must have the given struct info.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.has_ty(ty)</span></code> – the matched expression must have the given type.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Match a float16 matmul</span>
 <span class="n">fp16_matmul</span> <span class="o">=</span> <span class="n">is_op</span><span class="p">(</span><span class="s2">&quot;relax.matmul&quot;</span><span class="p">)(</span><span class="n">wildcard</span><span class="p">(),</span> <span class="n">wildcard</span><span class="p">())</span><span class="o">.</span><span class="n">has_dtype</span><span class="p">(</span><span class="s2">&quot;float16&quot;</span><span class="p">)</span>
@@ -576,7 +576,7 @@ dataflow block rather than on individual expressions.</p>
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">matchings[pat]</span></code> returns the <strong>bound variable</strong> (<code class="docutils literal notranslate"><span class="pre">Var</span></code>) whose right-hand
-side matched <code class="docutils literal notranslate"><span class="pre">pat</span></code>.  The <code class="docutils literal notranslate"><span class="pre">Var</span></code> itself carries <code class="docutils literal notranslate"><span class="pre">struct_info</span></code> and can be
+side matched <code class="docutils literal notranslate"><span class="pre">pat</span></code>.  The <code class="docutils literal notranslate"><span class="pre">Var</span></code> itself carries <code class="docutils literal notranslate"><span class="pre">ty</span></code> and can be
 used directly in new expressions.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">bindings</span></code> maps each <code class="docutils literal notranslate"><span class="pre">Var</span></code> to its bound <code class="docutils literal notranslate"><span class="pre">Expr</span></code> (the right-hand side),
 useful when you need to inspect the original expression.</p></li>
@@ -598,7 +598,7 @@ useful when you need to inspect the original expression.</p></li>
         <span class="n">W1</span> <span class="o">=</span> <span class="n">matchings</span><span class="p">[</span><span class="n">w1</span><span class="p">]</span>
         <span class="n">W2</span> <span class="o">=</span> <span class="n">matchings</span><span class="p">[</span><span class="n">w2</span><span class="p">]</span>
         <span class="n">W3</span> <span class="o">=</span> <span class="n">matchings</span><span class="p">[</span><span class="n">w3</span><span class="p">]</span>
-        <span class="n">width</span> <span class="o">=</span> <span class="n">W1</span><span class="o">.</span><span class="n">struct_info</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="n">W1</span><span class="o">.</span><span class="n">ty</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
         <span class="n">concat_w</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">W3</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">merged</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">concat_w</span><span class="p">)</span>
@@ -646,7 +646,7 @@ object that can be applied directly.</p>
             <span class="s2">&quot;my_fast_add&quot;</span><span class="p">,</span>
             <span class="n">A</span><span class="p">,</span>
             <span class="n">B</span><span class="p">,</span>
-            <span class="n">sinfo_args</span><span class="o">=</span><span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">16</span><span class="p">],</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
+            <span class="n">ty_args</span><span class="o">=</span><span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">16</span><span class="p">],</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">C</span>
 
@@ -721,7 +721,7 @@ structurally (dtype restrictions, shape compatibility, attribute values, etc.):<
 <span class="k">def</span><span class="w"> </span><span class="nf">my_check_fn</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">PatternCheckContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="n">matmul_expr</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">annotated_expr</span><span class="p">[</span><span class="s2">&quot;matmul&quot;</span><span class="p">]</span>
     <span class="c1"># Only accept float16 output</span>
-    <span class="k">if</span> <span class="n">matmul_expr</span><span class="o">.</span><span class="n">struct_info</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="s2">&quot;float16&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">matmul_expr</span><span class="o">.</span><span class="n">ty</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="s2">&quot;float16&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
@@ -744,7 +744,7 @@ sub-function.</p>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
     <span class="n">transpose_call</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">annotated_expr</span><span class="p">[</span><span class="s2">&quot;wT&quot;</span><span class="p">]</span>
-    <span class="n">ndim</span> <span class="o">=</span> <span class="n">transpose_call</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">struct_info</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">ndim</span> <span class="o">=</span> <span class="n">transpose_call</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ty</span><span class="o">.</span><span class="n">ndim</span>
     <span class="k">if</span> <span class="n">ndim</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">transpose_call</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">axes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -806,7 +806,7 @@ CUTLASS and cuBLAS register themselves for external code generation.</p>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make_fused_bias_activation_pattern(...)</span></code></p></td>
 <td><p>Build <code class="docutils literal notranslate"><span class="pre">op</span> <span class="pre">+</span> <span class="pre">bias</span> <span class="pre">+</span> <span class="pre">activation</span></code> chain</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.has_dtype()</span></code> / <code class="docutils literal notranslate"><span class="pre">.has_shape()</span></code> / <code class="docutils literal notranslate"><span class="pre">.has_attr()</span></code> / <code class="docutils literal notranslate"><span class="pre">.has_struct_info()</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.has_dtype()</span></code> / <code class="docutils literal notranslate"><span class="pre">.has_shape()</span></code> / <code class="docutils literal notranslate"><span class="pre">.has_attr()</span></code> / <code class="docutils literal notranslate"><span class="pre">.has_ty()</span></code></p></td>
 <td><p>Attach constraints</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">|</span></code> / <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> / <code class="docutils literal notranslate"><span class="pre">~</span></code></p></td>

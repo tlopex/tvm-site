@@ -79,14 +79,14 @@ $(function() {
 <div class="textblock"><code>#include &lt;tvm/ffi/container/array.h&gt;</code><br />
 <code>#include &lt;tvm/ffi/optional.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="relax_2expr_8h_source.html">tvm/relax/expr.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="struct__info_8h_source.html">tvm/relax/struct_info.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="relax_2type_8h_source.html">tvm/relax/type.h</a>&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for nested_msg.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="nested__msg_8h__incl.svg" width="7768" height="1604"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="nested__msg_8h__incl.svg" width="7132" height="1291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -124,14 +124,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a411130ea776624757d25953c0afd23e4"><td class="memTemplItemLeft" align="right" valign="top">NestedMsg&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#a411130ea776624757d25953c0afd23e4">tvm::relax::MapToNestedMsg</a> (Expr expr, FType fmapleaf)</td></tr>
 <tr class="memdesc:a411130ea776624757d25953c0afd23e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map expr with possible nested-tuple to nested message.  <a href="namespacetvm_1_1relax.html#a411130ea776624757d25953c0afd23e4">More...</a><br /></td></tr>
 <tr class="separator:a411130ea776624757d25953c0afd23e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad13ac0cb404c219dc00406a5cc62687b"><td class="memTemplParams" colspan="2">template&lt;typename T , typename FType &gt; </td></tr>
-<tr class="memitem:ad13ac0cb404c219dc00406a5cc62687b"><td class="memTemplItemLeft" align="right" valign="top">NestedMsg&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#ad13ac0cb404c219dc00406a5cc62687b">tvm::relax::MapToNestedMsg</a> (StructInfo sinfo, FType fmapleaf)</td></tr>
-<tr class="memdesc:ad13ac0cb404c219dc00406a5cc62687b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map structinfo with possible nested-sinfo to nested message.  <a href="namespacetvm_1_1relax.html#ad13ac0cb404c219dc00406a5cc62687b">More...</a><br /></td></tr>
-<tr class="separator:ad13ac0cb404c219dc00406a5cc62687b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acca8353ff150a403bc950cc945776d51"><td class="memTemplParams" colspan="2">template&lt;typename T , typename FType &gt; </td></tr>
-<tr class="memitem:acca8353ff150a403bc950cc945776d51"><td class="memTemplItemLeft" align="right" valign="top">NestedMsg&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#acca8353ff150a403bc950cc945776d51">tvm::relax::MapToNestedMsgBySInfo</a> (Expr expr, FType fmapleaf)</td></tr>
-<tr class="memdesc:acca8353ff150a403bc950cc945776d51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map expr with possible nested-tuple to nested message.  <a href="namespacetvm_1_1relax.html#acca8353ff150a403bc950cc945776d51">More...</a><br /></td></tr>
-<tr class="separator:acca8353ff150a403bc950cc945776d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d86aa773335f7c604fbbcac9dcf0c74"><td class="memTemplParams" colspan="2">template&lt;typename T , typename FType &gt; </td></tr>
+<tr class="memitem:a0d86aa773335f7c604fbbcac9dcf0c74"><td class="memTemplItemLeft" align="right" valign="top">NestedMsg&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#a0d86aa773335f7c604fbbcac9dcf0c74">tvm::relax::MapToNestedMsg</a> (Type ty, FType fmapleaf)</td></tr>
+<tr class="memdesc:a0d86aa773335f7c604fbbcac9dcf0c74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map structinfo with possible nested-ty to nested message.  <a href="namespacetvm_1_1relax.html#a0d86aa773335f7c604fbbcac9dcf0c74">More...</a><br /></td></tr>
+<tr class="separator:a0d86aa773335f7c604fbbcac9dcf0c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79b05c2ff315556b1d43f9706b065bc8"><td class="memTemplParams" colspan="2">template&lt;typename T , typename FType &gt; </td></tr>
+<tr class="memitem:a79b05c2ff315556b1d43f9706b065bc8"><td class="memTemplItemLeft" align="right" valign="top">NestedMsg&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#a79b05c2ff315556b1d43f9706b065bc8">tvm::relax::MapToNestedMsgByType</a> (Expr expr, FType fmapleaf)</td></tr>
+<tr class="memdesc:a79b05c2ff315556b1d43f9706b065bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map expr with possible nested-tuple to nested message.  <a href="namespacetvm_1_1relax.html#a79b05c2ff315556b1d43f9706b065bc8">More...</a><br /></td></tr>
+<tr class="separator:a79b05c2ff315556b1d43f9706b065bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e390702bd71ff0ce2e0a8f1cb07b7d2"><td class="memTemplParams" colspan="2">template&lt;typename TargetType , typename T , typename FMapLeaf , typename FCombine &gt; </td></tr>
 <tr class="memitem:a6e390702bd71ff0ce2e0a8f1cb07b7d2"><td class="memTemplItemLeft" align="right" valign="top">TargetType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#a6e390702bd71ff0ce2e0a8f1cb07b7d2">tvm::relax::NestedMsgTo</a> (NestedMsg&lt; T &gt; msg, FMapLeaf fmapleaf, FCombine fcombine)</td></tr>
 <tr class="memdesc:a6e390702bd71ff0ce2e0a8f1cb07b7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map nested message back to TargetType.  <a href="namespacetvm_1_1relax.html#a6e390702bd71ff0ce2e0a8f1cb07b7d2">More...</a><br /></td></tr>
@@ -156,10 +156,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a58d3028c04ea455bd0ae3643978fd69d"><td class="memTemplItemLeft" align="right" valign="top">Expr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#a58d3028c04ea455bd0ae3643978fd69d">tvm::relax::TransformTupleLeaf</a> (Expr expr, std::array&lt; NestedMsg&lt; T &gt;, N &gt; msgs, FType ftransleaf)</td></tr>
 <tr class="memdesc:a58d3028c04ea455bd0ae3643978fd69d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively transform the tuple structure in expr and msgs along with it.  <a href="namespacetvm_1_1relax.html#a58d3028c04ea455bd0ae3643978fd69d">More...</a><br /></td></tr>
 <tr class="separator:a58d3028c04ea455bd0ae3643978fd69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22c79f0abeaed5e66b76febd08a3fcb7"><td class="memTemplParams" colspan="2">template&lt;typename T , std::size_t N, typename FType &gt; </td></tr>
-<tr class="memitem:a22c79f0abeaed5e66b76febd08a3fcb7"><td class="memTemplItemLeft" align="right" valign="top">StructInfo&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#a22c79f0abeaed5e66b76febd08a3fcb7">tvm::relax::TransformTupleLeaf</a> (StructInfo sinfo, std::array&lt; NestedMsg&lt; T &gt;, N &gt; msgs, FType ftransleaf)</td></tr>
-<tr class="memdesc:a22c79f0abeaed5e66b76febd08a3fcb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively transform the tuple structure in sinfo and msgs along with it.  <a href="namespacetvm_1_1relax.html#a22c79f0abeaed5e66b76febd08a3fcb7">More...</a><br /></td></tr>
-<tr class="separator:a22c79f0abeaed5e66b76febd08a3fcb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aade56fd4d7db9ab9a218dd0fc579f24f"><td class="memTemplParams" colspan="2">template&lt;typename T , std::size_t N, typename FType &gt; </td></tr>
+<tr class="memitem:aade56fd4d7db9ab9a218dd0fc579f24f"><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacetvm_1_1relax.html#aade56fd4d7db9ab9a218dd0fc579f24f">tvm::relax::TransformTupleLeaf</a> (Type ty, std::array&lt; NestedMsg&lt; T &gt;, N &gt; msgs, FType ftransleaf)</td></tr>
+<tr class="memdesc:aade56fd4d7db9ab9a218dd0fc579f24f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively transform the tuple structure in ty and msgs along with it.  <a href="namespacetvm_1_1relax.html#aade56fd4d7db9ab9a218dd0fc579f24f">More...</a><br /></td></tr>
+<tr class="separator:aade56fd4d7db9ab9a218dd0fc579f24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Helper container to store nested message for robust tuple-aware analysis. </p>

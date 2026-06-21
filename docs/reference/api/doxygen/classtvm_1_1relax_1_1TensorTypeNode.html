@@ -75,20 +75,20 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Dynamic version of <a class="el" href="classtvm_1_1relax_1_1TensorType.html" title="Managed reference to TensorTypeNode.">TensorType</a>.  
+<p><a class="el" href="classtvm_1_1Type.html" title="Managed reference to TypeNode.">Type</a> of Tensor.  
  <a href="classtvm_1_1relax_1_1TensorTypeNode.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="relax_2type_8h_source.html">type.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for tvm::relax::TensorTypeNode:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classtvm_1_1relax_1_1TensorTypeNode__inherit__graph.svg" width="227" height="471"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classtvm_1_1relax_1_1TensorTypeNode__inherit__graph.svg" width="227" height="515"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <div class="dynheader">
 Collaboration diagram for tvm::relax::TensorTypeNode:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classtvm_1_1relax_1_1TensorTypeNode__coll__graph.svg" width="438" height="920"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classtvm_1_1relax_1_1TensorTypeNode__coll__graph.svg" width="438" height="964"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <table class="memberdecls">
@@ -98,8 +98,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adaece7200a4417a7c6da03c84e77b3a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4eb0299269de2a93b6e1f8d21cd279d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1TensorTypeNode.html#a4eb0299269de2a93b6e1f8d21cd279d7">IsUnknownDtype</a> () const</td></tr>
 <tr class="separator:a4eb0299269de2a93b6e1f8d21cd279d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72a23b2bed8da6bc1722315b623a1932"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1TensorTypeNode.html#a72a23b2bed8da6bc1722315b623a1932">TVM_FFI_DECLARE_OBJECT_INFO_FINAL</a> (&quot;relax.DynTensorType&quot;, TensorTypeNode, <a class="el" href="classtvm_1_1TypeNode.html">TypeNode</a>)</td></tr>
-<tr class="separator:a72a23b2bed8da6bc1722315b623a1932"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f5e1bc6734b8e98b1cf12d3b151de4f"><td class="memItemLeft" align="right" valign="top">ffi::Optional&lt; ffi::Array&lt; <a class="el" href="classtvm_1_1PrimExpr.html">PrimExpr</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1TensorTypeNode.html#a6f5e1bc6734b8e98b1cf12d3b151de4f">GetShape</a> () const</td></tr>
+<tr class="separator:a6f5e1bc6734b8e98b1cf12d3b151de4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a143df44cb4cc5d76285b14286ac3a181"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1TensorTypeNode.html#a143df44cb4cc5d76285b14286ac3a181">TVM_FFI_DECLARE_OBJECT_INFO_FINAL</a> (&quot;relax.TensorType&quot;, TensorTypeNode, <a class="el" href="classtvm_1_1TypeNode.html">TypeNode</a>)</td></tr>
+<tr class="separator:a143df44cb4cc5d76285b14286ac3a181"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classtvm_1_1TypeNode"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classtvm_1_1TypeNode')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classtvm_1_1TypeNode.html">tvm::TypeNode</a></td></tr>
 <tr class="memitem:a5a07ff7b7fc5146f257ffa17391215a8 inherit pub_methods_classtvm_1_1TypeNode"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1TypeNode.html#a5a07ff7b7fc5146f257ffa17391215a8">TVM_FFI_DECLARE_OBJECT_INFO</a> (&quot;ir.Type&quot;, TypeNode, ffi::Object)</td></tr>
 <tr class="separator:a5a07ff7b7fc5146f257ffa17391215a8 inherit pub_methods_classtvm_1_1TypeNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,12 +116,18 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ae889a7f7d8949d13d6ab571df5ddeaf6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1TensorTypeNode.html#ae889a7f7d8949d13d6ab571df5ddeaf6">ndim</a></td></tr>
-<tr class="memdesc:ae889a7f7d8949d13d6ab571df5ddeaf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of dimensions of the tensor, use -1 to denote tensor with unknown number of dimensions.  <a href="classtvm_1_1relax_1_1TensorTypeNode.html#ae889a7f7d8949d13d6ab571df5ddeaf6">More...</a><br /></td></tr>
-<tr class="separator:ae889a7f7d8949d13d6ab571df5ddeaf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adca4d8c9c80328aae4267b0c0ea0f496"><td class="memItemLeft" align="right" valign="top">ffi::Optional&lt; <a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1TensorTypeNode.html#adca4d8c9c80328aae4267b0c0ea0f496">shape</a></td></tr>
+<tr class="memdesc:adca4d8c9c80328aae4267b0c0ea0f496"><td class="mdescLeft">&#160;</td><td class="mdescRight">optionally store the shape expression of the tensor.  <a href="classtvm_1_1relax_1_1TensorTypeNode.html#adca4d8c9c80328aae4267b0c0ea0f496">More...</a><br /></td></tr>
+<tr class="separator:adca4d8c9c80328aae4267b0c0ea0f496"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67c8791525c1523c77126c50826aab9e"><td class="memItemLeft" align="right" valign="top">ffi::Optional&lt; <a class="el" href="classtvm_1_1VDevice.html">VDevice</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1TensorTypeNode.html#a67c8791525c1523c77126c50826aab9e">vdevice</a></td></tr>
+<tr class="memdesc:a67c8791525c1523c77126c50826aab9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The virtual device, indicates where the tensor is expected to be executed.  <a href="classtvm_1_1relax_1_1TensorTypeNode.html#a67c8791525c1523c77126c50826aab9e">More...</a><br /></td></tr>
+<tr class="separator:a67c8791525c1523c77126c50826aab9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9faf3dc2cf8618ac1f304ecb9749059"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetvm.html#a41918af1a1dc386388639a9d3ad06c5d">DataType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1TensorTypeNode.html#af9faf3dc2cf8618ac1f304ecb9749059">dtype</a></td></tr>
 <tr class="memdesc:af9faf3dc2cf8618ac1f304ecb9749059"><td class="mdescLeft">&#160;</td><td class="mdescRight">The content data type, use void to denote the dtype is unknown.  <a href="classtvm_1_1relax_1_1TensorTypeNode.html#af9faf3dc2cf8618ac1f304ecb9749059">More...</a><br /></td></tr>
 <tr class="separator:af9faf3dc2cf8618ac1f304ecb9749059"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae889a7f7d8949d13d6ab571df5ddeaf6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1TensorTypeNode.html#ae889a7f7d8949d13d6ab571df5ddeaf6">ndim</a></td></tr>
+<tr class="memdesc:ae889a7f7d8949d13d6ab571df5ddeaf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of dimension of the tensor, can be unknown.  <a href="classtvm_1_1relax_1_1TensorTypeNode.html#ae889a7f7d8949d13d6ab571df5ddeaf6">More...</a><br /></td></tr>
+<tr class="separator:ae889a7f7d8949d13d6ab571df5ddeaf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classtvm_1_1TypeNode"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classtvm_1_1TypeNode')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classtvm_1_1TypeNode.html">tvm::TypeNode</a></td></tr>
 <tr class="memitem:a7b06d502a5162d51bb205691bbb95bb5 inherit pub_attribs_classtvm_1_1TypeNode"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1Span.html">Span</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1TypeNode.html#a7b06d502a5162d51bb205691bbb95bb5">span</a></td></tr>
 <tr class="memdesc:a7b06d502a5162d51bb205691bbb95bb5 inherit pub_attribs_classtvm_1_1TypeNode"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtvm_1_1Span.html">Span</a> that points to the original source code. Reserved debug information.  <a href="classtvm_1_1TypeNode.html#a7b06d502a5162d51bb205691bbb95bb5">More...</a><br /></td></tr>
@@ -134,9 +142,34 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a3b89ba3edb5418e9369f3440ca1485a1 inherit pub_static_attribs_classtvm_1_1TypeNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Dynamic version of <a class="el" href="classtvm_1_1relax_1_1TensorType.html" title="Managed reference to TensorTypeNode.">TensorType</a>. </p>
-<p>Use <a class="el" href="classtvm_1_1relax_1_1TensorStructInfo.html" title="Managed reference to TensorStructInfoNode.">relax::TensorStructInfo</a> for more detailed (possibly dynamic) shape constrains </p>
+<div class="textblock"><p><a class="el" href="classtvm_1_1Type.html" title="Managed reference to TypeNode.">Type</a> of Tensor. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6f5e1bc6734b8e98b1cf12d3b151de4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f5e1bc6734b8e98b1cf12d3b151de4f">&#9670;&nbsp;</a></span>GetShape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ffi::Optional&lt;ffi::Array&lt;<a class="el" href="classtvm_1_1PrimExpr.html">PrimExpr</a>&gt; &gt; tvm::relax::TensorTypeNode::GetShape </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Shape if it is known. </dd></dl>
+
+</div>
+</div>
 <a id="a4eb0299269de2a93b6e1f8d21cd279d7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4eb0299269de2a93b6e1f8d21cd279d7">&#9670;&nbsp;</a></span>IsUnknownDtype()</h2>
 
@@ -159,6 +192,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Whether the type contains unknown dtype. </dd></dl>
 
 </div>
 </div>
@@ -184,6 +218,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Whether the type contains unknown ndim. </dd></dl>
 
 </div>
 </div>
@@ -212,8 +247,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a72a23b2bed8da6bc1722315b623a1932"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72a23b2bed8da6bc1722315b623a1932">&#9670;&nbsp;</a></span>TVM_FFI_DECLARE_OBJECT_INFO_FINAL()</h2>
+<a id="a143df44cb4cc5d76285b14286ac3a181"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a143df44cb4cc5d76285b14286ac3a181">&#9670;&nbsp;</a></span>TVM_FFI_DECLARE_OBJECT_INFO_FINAL()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,7 +256,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">tvm::relax::TensorTypeNode::TVM_FFI_DECLARE_OBJECT_INFO_FINAL </td>
           <td>(</td>
-          <td class="paramtype">&quot;relax.DynTensorType&quot;&#160;</td>
+          <td class="paramtype">&quot;relax.TensorType&quot;&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -275,7 +310,41 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The number of dimensions of the tensor, use -1 to denote tensor with unknown number of dimensions. </p>
+<p>The number of dimension of the tensor, can be unknown. </p>
+<dl class="section see"><dt>See also</dt><dd>kUnknownNDim </dd></dl>
+
+</div>
+</div>
+<a id="adca4d8c9c80328aae4267b0c0ea0f496"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adca4d8c9c80328aae4267b0c0ea0f496">&#9670;&nbsp;</a></span>shape</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ffi::Optional&lt;<a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a>&gt; tvm::relax::TensorTypeNode::shape</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>optionally store the shape expression of the tensor. </p>
+<dl class="section note"><dt>Note</dt><dd>shape must be normalized: it can only be std::nullopt or <a class="el" href="classtvm_1_1relax_1_1ShapeExpr.html">ShapeExpr</a> or <a class="el" href="classtvm_1_1relax_1_1Var.html">Var</a>. </dd></dl>
+
+</div>
+</div>
+<a id="a67c8791525c1523c77126c50826aab9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67c8791525c1523c77126c50826aab9e">&#9670;&nbsp;</a></span>vdevice</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ffi::Optional&lt;<a class="el" href="classtvm_1_1VDevice.html">VDevice</a>&gt; tvm::relax::TensorTypeNode::vdevice</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The virtual device, indicates where the tensor is expected to be executed. </p>
 
 </div>
 </div>

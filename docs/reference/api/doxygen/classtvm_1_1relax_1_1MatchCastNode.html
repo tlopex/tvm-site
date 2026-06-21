@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Runtime-match the value to the struct info.  
+<p>Runtime-match the value to the type.  
  <a href="classtvm_1_1relax_1_1MatchCastNode.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="relax_2expr_8h_source.html">expr.h</a>&gt;</code></p>
@@ -113,9 +113,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a0c3b43603d5e3d7fb0ff5362e328de88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetvm_1_1relax.html#ac287c47b30d1126e4017da1b96957fa0">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1MatchCastNode.html#a0c3b43603d5e3d7fb0ff5362e328de88">value</a></td></tr>
 <tr class="memdesc:a0c3b43603d5e3d7fb0ff5362e328de88"><td class="mdescLeft">&#160;</td><td class="mdescRight">The input value to match cast.  <a href="classtvm_1_1relax_1_1MatchCastNode.html#a0c3b43603d5e3d7fb0ff5362e328de88">More...</a><br /></td></tr>
 <tr class="separator:a0c3b43603d5e3d7fb0ff5362e328de88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6c75e505599ab3151fd97127f9d8587"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1relax_1_1StructInfo.html">StructInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1MatchCastNode.html#aa6c75e505599ab3151fd97127f9d8587">struct_info</a></td></tr>
-<tr class="memdesc:aa6c75e505599ab3151fd97127f9d8587"><td class="mdescLeft">&#160;</td><td class="mdescRight">The struct info pattern to match to.  <a href="classtvm_1_1relax_1_1MatchCastNode.html#aa6c75e505599ab3151fd97127f9d8587">More...</a><br /></td></tr>
-<tr class="separator:aa6c75e505599ab3151fd97127f9d8587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93a4d080db242436bdee1ae702536324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1Type.html">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1MatchCastNode.html#a93a4d080db242436bdee1ae702536324">ty</a></td></tr>
+<tr class="memdesc:a93a4d080db242436bdee1ae702536324"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type pattern to match to.  <a href="classtvm_1_1relax_1_1MatchCastNode.html#a93a4d080db242436bdee1ae702536324">More...</a><br /></td></tr>
+<tr class="separator:a93a4d080db242436bdee1ae702536324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classtvm_1_1relax_1_1BindingNode"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classtvm_1_1relax_1_1BindingNode')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classtvm_1_1relax_1_1BindingNode.html">tvm::relax::BindingNode</a></td></tr>
 <tr class="memitem:a753a435981df98a5247656887c327fec inherit pub_attribs_classtvm_1_1relax_1_1BindingNode"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1Span.html">Span</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1BindingNode.html#a753a435981df98a5247656887c327fec">span</a></td></tr>
 <tr class="separator:a753a435981df98a5247656887c327fec inherit pub_attribs_classtvm_1_1relax_1_1BindingNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,8 +130,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac095b1114aafde192ad0eee4b84d1a22 inherit pub_static_attribs_classtvm_1_1relax_1_1BindingNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Runtime-match the value to the struct info. </p>
-<p>This operation does runtime check, populates the un-defined symbolic shape vars and vars in struct_info in first occurance, and insert equality assertions in other cases. </p>
+<div class="textblock"><p>Runtime-match the value to the type. </p>
+<p>This operation does runtime check, populates the un-defined symbolic shape vars and vars in ty in first occurance, and insert equality assertions in other cases. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="add0413a5b70441c10dbac3e0c718ec4f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add0413a5b70441c10dbac3e0c718ec4f">&#9670;&nbsp;</a></span>RegisterReflection()</h2>
@@ -193,19 +193,19 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aa6c75e505599ab3151fd97127f9d8587"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6c75e505599ab3151fd97127f9d8587">&#9670;&nbsp;</a></span>struct_info</h2>
+<a id="a93a4d080db242436bdee1ae702536324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93a4d080db242436bdee1ae702536324">&#9670;&nbsp;</a></span>ty</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtvm_1_1relax_1_1StructInfo.html">StructInfo</a> tvm::relax::MatchCastNode::struct_info</td>
+          <td class="memname"><a class="el" href="classtvm_1_1Type.html">Type</a> tvm::relax::MatchCastNode::ty</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>The struct info pattern to match to. </p>
+<p>The type pattern to match to. </p>
 
 </div>
 </div>

@@ -24,7 +24,7 @@
 <text text-anchor="start" x="1699" y="-255.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator&amp;()</text>
 <text text-anchor="start" x="1699" y="-244.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator~()</text>
 <text text-anchor="start" x="1699" y="-233.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasAttr()</text>
-<text text-anchor="start" x="1699" y="-222.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasStructInfo()</text>
+<text text-anchor="start" x="1699" y="-222.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasType()</text>
 <text text-anchor="start" x="1699" y="-211.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasDtype()</text>
 <text text-anchor="start" x="1699" y="-200.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasDtype()</text>
 <text text-anchor="start" x="1699" y="-189.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasShape()</text>
@@ -332,56 +332,56 @@
 <!-- Node17 -->
 <g id="node17" class="node">
 <title>Node17</title>
-<g id="a_node17"><a xlink:href="classtvm_1_1relax_1_1StructInfoPattern.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="2488,-6 2488,-85 2647,-85 2647,-6 2488,-6"/>
-<text text-anchor="middle" x="2567.5" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::StructInfoPattern</text>
-<polyline fill="none" stroke="black" points="2488,-66 2647,-66 "/>
-<text text-anchor="middle" x="2567.5" y="-54" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="2488,-47 2647,-47 "/>
-<text text-anchor="start" x="2496" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">+ StructInfoPattern()</text>
-<text text-anchor="start" x="2496" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DEFINE_OBJECT</text>
-<text text-anchor="start" x="2496" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">_REF_METHODS_NULLABLE()</text>
+<g id="a_node17"><a xlink:href="classtvm_1_1relax_1_1TupleGetItemPattern.html" target="_top" xlink:title="Managed reference to TupleGetItemPatternNode.">
+<polygon fill="white" stroke="black" points="2488,-0.5 2488,-90.5 2647,-90.5 2647,-0.5 2488,-0.5"/>
+<text text-anchor="start" x="2496" y="-78.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::TupleGetItem</text>
+<text text-anchor="middle" x="2567.5" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">Pattern</text>
+<polyline fill="none" stroke="black" points="2488,-60.5 2647,-60.5 "/>
+<text text-anchor="middle" x="2567.5" y="-48.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polyline fill="none" stroke="black" points="2488,-41.5 2647,-41.5 "/>
+<text text-anchor="start" x="2496" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TupleGetItemPattern()</text>
+<text text-anchor="start" x="2496" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DEFINE_OBJECT</text>
+<text text-anchor="start" x="2496" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_REF_METHODS_NULLABLE()</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node17 -->
 <g id="edge16" class="edge">
 <title>Node1&#45;&gt;Node17</title>
-<path fill="none" stroke="midnightblue" d="M1860.25,-222.09C1996.83,-205.26 2263.79,-165.43 2479.5,-91 2484.52,-89.27 2489.61,-87.3 2494.69,-85.19"/>
+<path fill="none" stroke="midnightblue" d="M1860.25,-222.09C1996.83,-205.26 2263.79,-165.43 2479.5,-91 2482.25,-90.05 2485.03,-89.03 2487.81,-87.96"/>
 <polygon fill="none" stroke="midnightblue" points="1859.74,-218.63 1850.24,-223.31 1860.59,-225.58 1859.74,-218.63"/>
 </g>
 <!-- Node18 -->
 <g id="node18" class="node">
 <title>Node18</title>
-<g id="a_node18"><a xlink:href="classtvm_1_1relax_1_1TupleGetItemPattern.html" target="_top" xlink:title="Managed reference to TupleGetItemPatternNode.">
-<polygon fill="white" stroke="black" points="2665,-0.5 2665,-90.5 2824,-90.5 2824,-0.5 2665,-0.5"/>
-<text text-anchor="start" x="2673" y="-78.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::TupleGetItem</text>
-<text text-anchor="middle" x="2744.5" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">Pattern</text>
-<polyline fill="none" stroke="black" points="2665,-60.5 2824,-60.5 "/>
-<text text-anchor="middle" x="2744.5" y="-48.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="2665,-41.5 2824,-41.5 "/>
-<text text-anchor="start" x="2673" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TupleGetItemPattern()</text>
-<text text-anchor="start" x="2673" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DEFINE_OBJECT</text>
-<text text-anchor="start" x="2673" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_REF_METHODS_NULLABLE()</text>
+<g id="a_node18"><a xlink:href="classtvm_1_1relax_1_1TuplePattern.html" target="_top" xlink:title="Managed reference to TuplePatternNode.">
+<polygon fill="white" stroke="black" points="2665,-6 2665,-85 2824,-85 2824,-6 2665,-6"/>
+<text text-anchor="middle" x="2744.5" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::TuplePattern</text>
+<polyline fill="none" stroke="black" points="2665,-66 2824,-66 "/>
+<text text-anchor="middle" x="2744.5" y="-54" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polyline fill="none" stroke="black" points="2665,-47 2824,-47 "/>
+<text text-anchor="start" x="2673" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">+ TuplePattern()</text>
+<text text-anchor="start" x="2673" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DEFINE_OBJECT</text>
+<text text-anchor="start" x="2673" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">_REF_METHODS_NULLABLE()</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node18 -->
 <g id="edge17" class="edge">
 <title>Node1&#45;&gt;Node18</title>
-<path fill="none" stroke="midnightblue" d="M1860.47,-226.9C2022.99,-215.68 2374.83,-182.16 2656.5,-91 2659.27,-90.1 2662.06,-89.13 2664.85,-88.09"/>
+<path fill="none" stroke="midnightblue" d="M1860.47,-226.9C2022.99,-215.68 2374.83,-182.16 2656.5,-91 2661.88,-89.26 2667.33,-87.23 2672.75,-85.01"/>
 <polygon fill="none" stroke="midnightblue" points="1859.78,-223.44 1850.04,-227.61 1860.25,-230.42 1859.78,-223.44"/>
 </g>
 <!-- Node19 -->
 <g id="node19" class="node">
 <title>Node19</title>
-<g id="a_node19"><a xlink:href="classtvm_1_1relax_1_1TuplePattern.html" target="_top" xlink:title="Managed reference to TuplePatternNode.">
+<g id="a_node19"><a xlink:href="classtvm_1_1relax_1_1TypePattern.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="2842,-6 2842,-85 3001,-85 3001,-6 2842,-6"/>
-<text text-anchor="middle" x="2921.5" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::TuplePattern</text>
+<text text-anchor="middle" x="2921.5" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::relax::TypePattern</text>
 <polyline fill="none" stroke="black" points="2842,-66 3001,-66 "/>
 <text text-anchor="middle" x="2921.5" y="-54" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
 <polyline fill="none" stroke="black" points="2842,-47 3001,-47 "/>
-<text text-anchor="start" x="2850" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">+ TuplePattern()</text>
+<text text-anchor="start" x="2850" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">+ TypePattern()</text>
 <text text-anchor="start" x="2850" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DEFINE_OBJECT</text>
 <text text-anchor="start" x="2850" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">_REF_METHODS_NULLABLE()</text>
 </a>

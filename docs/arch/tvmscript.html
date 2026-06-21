@@ -415,7 +415,7 @@ function in the module.</p></li>
              <span class="n">y</span><span class="p">:</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">128</span><span class="p">,),</span> <span class="s2">&quot;float32&quot;</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">128</span><span class="p">,),</span> <span class="s2">&quot;float32&quot;</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">R</span><span class="o">.</span><span class="n">dataflow</span><span class="p">():</span>
             <span class="n">out</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">call_tir</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">add_kernel</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
-                             <span class="n">out_sinfo</span><span class="o">=</span><span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">128</span><span class="p">,),</span> <span class="s2">&quot;float32&quot;</span><span class="p">))</span>
+                             <span class="n">out_ty</span><span class="o">=</span><span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">128</span><span class="p">,),</span> <span class="s2">&quot;float32&quot;</span><span class="p">))</span>
             <span class="n">R</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">out</span>
 </pre></div>
@@ -545,18 +545,18 @@ syntax. Key categories:</p>
 <p><strong>Emit</strong>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">R.emit(value)</span></code> → emit a binding, returns a <code class="docutils literal notranslate"><span class="pre">Var</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">R.emit_match_cast(value,</span> <span class="pre">struct_info)</span></code> → emit with type assertion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R.emit_match_cast(value,</span> <span class="pre">ty)</span></code> → emit with type assertion</p></li>
 </ul>
 <p><strong>Type annotations</strong>:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">R.Tensor(shape,</span> <span class="pre">dtype)</span></code> — tensor struct info</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">R.Tuple(*fields)</span></code> — tuple struct info</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">R.Shape(values)</span></code> — shape struct info</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">R.Object()</span></code> — opaque object struct info</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R.Tensor(shape,</span> <span class="pre">dtype)</span></code> — tensor type</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R.Tuple(*fields)</span></code> — tuple type</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R.Shape(values)</span></code> — shape type</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R.Object()</span></code> — opaque object type</p></li>
 </ul>
 <p><strong>Calling conventions</strong>:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">R.call_tir(func,</span> <span class="pre">args,</span> <span class="pre">out_sinfo)</span></code> — call a TIR function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R.call_tir(func,</span> <span class="pre">args,</span> <span class="pre">out_ty)</span></code> — call a TIR function</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">R.call_packed(name,</span> <span class="pre">*args)</span></code> — call a PackedFunc</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">R.call_dps_packed(func,</span> <span class="pre">*args)</span></code> — call using destination-passing style</p></li>
 </ul>
@@ -598,7 +598,7 @@ It maintains:</p>
 <p>Each IR dialect registers its own converters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">src/script/printer/tirx/</span></code> — converts PrimFunc, Buffer, SBlock, loops, expressions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">src/script/printer/relax/</span></code> — converts relax.Function, bindings, struct info, operators.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/script/printer/relax/</span></code> — converts relax.Function, bindings, types, operators.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">src/script/printer/ir/</span></code> — converts IRModule, shared types.</p></li>
 </ul>
 <p>The final step calls <code class="docutils literal notranslate"><span class="pre">DocToPythonScript()</span></code> (<code class="docutils literal notranslate"><span class="pre">src/script/printer/doc_printer/python_doc_printer.cc</span></code>)
@@ -771,8 +771,8 @@ their iteration domain and binding to outer loop variables.</p></li>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">R.Tensor(shape,</span> <span class="pre">dtype)</span></code> — tensor type annotation (struct info).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">R.Tuple(...)</span></code>, <code class="docutils literal notranslate"><span class="pre">R.Shape(...)</span></code>, <code class="docutils literal notranslate"><span class="pre">R.Object()</span></code> — other struct info types.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R.Tensor(shape,</span> <span class="pre">dtype)</span></code> — tensor type annotation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R.Tuple(...)</span></code>, <code class="docutils literal notranslate"><span class="pre">R.Shape(...)</span></code>, <code class="docutils literal notranslate"><span class="pre">R.Object()</span></code> — other Relax type annotations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">R.function(private=True)</span></code> — marks the function as module-private.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">R.function(pure=False)</span></code> — marks the function as having side effects.</p></li>
 </ul>
@@ -790,12 +790,12 @@ variables to the outer scope.</p>
 </section>
 <section id="calling-tir-functions">
 <h3>Calling TIR functions<a class="headerlink" href="#calling-tir-functions" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">call_tir</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">my_kernel</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">out_sinfo</span><span class="o">=</span><span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">128</span><span class="p">,),</span> <span class="s2">&quot;float32&quot;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">call_tir</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">my_kernel</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">out_ty</span><span class="o">=</span><span class="n">R</span><span class="o">.</span><span class="n">Tensor</span><span class="p">((</span><span class="mi">128</span><span class="p">,),</span> <span class="s2">&quot;float32&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cls.my_kernel</span></code> — references a TIR <code class="docutils literal notranslate"><span class="pre">PrimFunc</span></code> in the same module.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">out_sinfo</span></code> — the struct info (shape and dtype) of the output tensor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">out_ty</span></code> — the type (shape and dtype) of the output tensor.</p></li>
 </ul>
 </section>
 <section id="control-flow">

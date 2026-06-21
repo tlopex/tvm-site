@@ -89,9 +89,9 @@ Collaboration diagram for tvm::relax::Constant:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a894b8d6acc11e217359ce89b7ba5fb1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1Constant.html#a894b8d6acc11e217359ce89b7ba5fb1a">Constant</a> (<a class="el" href="classtvm_1_1runtime_1_1Tensor.html">runtime::Tensor</a> data, ffi::Optional&lt; <a class="el" href="classtvm_1_1relax_1_1StructInfo.html">StructInfo</a> &gt; struct_info_annotation=std::nullopt, <a class="el" href="classtvm_1_1Span.html">Span</a> span=<a class="el" href="classtvm_1_1Span.html">Span</a>())</td></tr>
-<tr class="memdesc:a894b8d6acc11e217359ce89b7ba5fb1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor.  <a href="classtvm_1_1relax_1_1Constant.html#a894b8d6acc11e217359ce89b7ba5fb1a">More...</a><br /></td></tr>
-<tr class="separator:a894b8d6acc11e217359ce89b7ba5fb1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9471fee9f7c9b35794ae152dfdd6bccd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1Constant.html#a9471fee9f7c9b35794ae152dfdd6bccd">Constant</a> (<a class="el" href="classtvm_1_1runtime_1_1Tensor.html">runtime::Tensor</a> data, ffi::Optional&lt; <a class="el" href="classtvm_1_1Type.html">Type</a> &gt; ty_annotation=std::nullopt, <a class="el" href="classtvm_1_1Span.html">Span</a> span=<a class="el" href="classtvm_1_1Span.html">Span</a>())</td></tr>
+<tr class="memdesc:a9471fee9f7c9b35794ae152dfdd6bccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor.  <a href="classtvm_1_1relax_1_1Constant.html#a9471fee9f7c9b35794ae152dfdd6bccd">More...</a><br /></td></tr>
+<tr class="separator:a9471fee9f7c9b35794ae152dfdd6bccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5be2224bb334e4ba6e90ba6605614e15"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1Constant.html#a5be2224bb334e4ba6e90ba6605614e15">TVM_FFI_DEFINE_OBJECT_REF_METHODS_NULLABLE</a> (<a class="el" href="classtvm_1_1relax_1_1Constant.html">Constant</a>, <a class="el" href="classtvm_1_1relax_1_1LeafExpr.html">LeafExpr</a>, <a class="el" href="classtvm_1_1relax_1_1ConstantNode.html">ConstantNode</a>)</td></tr>
 <tr class="separator:a5be2224bb334e4ba6e90ba6605614e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7431945b31701a6b79ad58d85919f026"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1Constant.html#a7431945b31701a6b79ad58d85919f026">TVM_DEFINE_OBJECT_REF_COW_METHOD</a> (<a class="el" href="classtvm_1_1relax_1_1ConstantNode.html">ConstantNode</a>)</td></tr>
@@ -107,8 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5628ea013423670d5e68cdd026102833 inherit pub_methods_classtvm_1_1BaseExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a894b8d6acc11e217359ce89b7ba5fb1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a894b8d6acc11e217359ce89b7ba5fb1a">&#9670;&nbsp;</a></span>Constant()</h2>
+<a id="a9471fee9f7c9b35794ae152dfdd6bccd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9471fee9f7c9b35794ae152dfdd6bccd">&#9670;&nbsp;</a></span>Constant()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,8 +125,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ffi::Optional&lt; <a class="el" href="classtvm_1_1relax_1_1StructInfo.html">StructInfo</a> &gt;&#160;</td>
-          <td class="paramname"><em>struct_info_annotation</em> = <code>std::nullopt</code>, </td>
+          <td class="paramtype">ffi::Optional&lt; <a class="el" href="classtvm_1_1Type.html">Type</a> &gt;&#160;</td>
+          <td class="paramname"><em>ty_annotation</em> = <code>std::nullopt</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -151,7 +151,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The data of the constant tensor. </td></tr>
-    <tr><td class="paramname">struct_info_annotation</td><td>The struct info of the constant tensor. <a class="el" href="classtvm_1_1relax_1_1If.html">If</a> not specified, infer it from data. </td></tr>
+    <tr><td class="paramname">ty_annotation</td><td>The type of the constant tensor. <a class="el" href="classtvm_1_1relax_1_1If.html">If</a> not specified, infer it from data. </td></tr>
     <tr><td class="paramname">span</td><td>The source span of the expression. </td></tr>
   </table>
   </dd>

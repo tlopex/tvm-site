@@ -78,7 +78,7 @@
 <text text-anchor="start" x="128.5" y="-463.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator&amp;()</text>
 <text text-anchor="start" x="128.5" y="-452.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator~()</text>
 <text text-anchor="start" x="128.5" y="-441.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasAttr()</text>
-<text text-anchor="start" x="128.5" y="-430.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasStructInfo()</text>
+<text text-anchor="start" x="128.5" y="-430.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasType()</text>
 <text text-anchor="start" x="128.5" y="-419.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasDtype()</text>
 <text text-anchor="start" x="128.5" y="-408.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasDtype()</text>
 <text text-anchor="start" x="128.5" y="-397.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ HasShape()</text>

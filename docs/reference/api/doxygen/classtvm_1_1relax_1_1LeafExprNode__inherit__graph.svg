@@ -160,10 +160,9 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="classtvm_1_1RelaxExprNode.html" target="_top" xlink:title="Base node of all non&#45;primitive expressions.">
-<polygon fill="white" stroke="black" points="456,-392.5 456,-482.5 618,-482.5 618,-392.5 456,-392.5"/>
-<text text-anchor="middle" x="537" y="-470.5" font-family="Helvetica,sans-Serif" font-size="10.00">ExprNode</text>
-<polyline fill="none" stroke="black" points="456,-463.5 618,-463.5 "/>
-<text text-anchor="start" x="464" y="-451.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ struct_info_</text>
+<polygon fill="white" stroke="black" points="456,-392.5 456,-471.5 618,-471.5 618,-392.5 456,-392.5"/>
+<text text-anchor="middle" x="537" y="-459.5" font-family="Helvetica,sans-Serif" font-size="10.00">ExprNode</text>
+<polyline fill="none" stroke="black" points="456,-452.5 618,-452.5 "/>
 <text text-anchor="start" x="464" y="-440.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
 <polyline fill="none" stroke="black" points="456,-433.5 618,-433.5 "/>
 <text text-anchor="start" x="464" y="-421.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
@@ -175,31 +174,32 @@
 <!-- Node2&#45;&gt;Node1 -->
 <g id="edge1" class="edge">
 <title>Node2&#45;&gt;Node1</title>
-<path fill="none" stroke="midnightblue" d="M537,-382.32C537,-373.28 537,-364.16 537,-355.85"/>
-<polygon fill="none" stroke="midnightblue" points="533.5,-382.42 537,-392.42 540.5,-382.42 533.5,-382.42"/>
+<path fill="none" stroke="midnightblue" d="M537,-382.35C537,-373.28 537,-364 537,-355.54"/>
+<polygon fill="none" stroke="midnightblue" points="533.5,-382.44 537,-392.44 540.5,-382.44 533.5,-382.44"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="classtvm_1_1BaseExprNode.html" target="_top" xlink:title="Base type of all the expressions.">
-<polygon fill="white" stroke="black" points="456,-519.5 456,-620.5 618,-620.5 618,-519.5 456,-519.5"/>
+<polygon fill="white" stroke="black" points="456,-508.5 456,-620.5 618,-620.5 618,-508.5 456,-508.5"/>
 <text text-anchor="middle" x="537" y="-608.5" font-family="Helvetica,sans-Serif" font-size="10.00">tvm::BaseExprNode</text>
 <polyline fill="none" stroke="black" points="456,-601.5 618,-601.5 "/>
 <text text-anchor="start" x="464" y="-589.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ span</text>
-<text text-anchor="start" x="464" y="-578.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
-<text text-anchor="start" x="464" y="-567.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
-<polyline fill="none" stroke="black" points="456,-560.5 618,-560.5 "/>
-<text text-anchor="start" x="464" y="-548.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
-<text text-anchor="start" x="464" y="-537.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
-<text text-anchor="start" x="464" y="-526.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
+<text text-anchor="start" x="464" y="-578.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ ty</text>
+<text text-anchor="start" x="464" y="-567.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_s_eq_hash_kind</text>
+<text text-anchor="start" x="464" y="-556.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ _type_child_slots</text>
+<polyline fill="none" stroke="black" points="456,-549.5 618,-549.5 "/>
+<text text-anchor="start" x="464" y="-537.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ TVM_FFI_DECLARE_OBJECT</text>
+<text text-anchor="start" x="464" y="-526.5" font-family="Helvetica,sans-Serif" font-size="10.00">_INFO()</text>
+<text text-anchor="start" x="464" y="-515.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ RegisterReflection()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node2 -->
 <g id="edge2" class="edge">
 <title>Node3&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M537,-509.23C537,-500.24 537,-491.1 537,-482.52"/>
-<polygon fill="none" stroke="midnightblue" points="533.5,-509.29 537,-519.29 540.5,-509.29 533.5,-509.29"/>
+<path fill="none" stroke="midnightblue" d="M537,-498.06C537,-489.08 537,-480.11 537,-471.82"/>
+<polygon fill="none" stroke="midnightblue" points="533.5,-498.16 537,-508.16 540.5,-498.16 533.5,-498.16"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
@@ -217,8 +217,8 @@
 <!-- Node4&#45;&gt;Node3 -->
 <g id="edge3" class="edge">
 <title>Node4&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M537,-647.35C537,-638.8 537,-629.58 537,-620.61"/>
-<polygon fill="none" stroke="midnightblue" points="533.5,-647.4 537,-657.4 540.5,-647.4 533.5,-647.4"/>
+<path fill="none" stroke="midnightblue" d="M537,-647.11C537,-638.75 537,-629.73 537,-620.83"/>
+<polygon fill="none" stroke="midnightblue" points="533.5,-647.28 537,-657.28 540.5,-647.28 533.5,-647.28"/>
 </g>
 <!-- Node11 -->
 <g id="node11" class="node">

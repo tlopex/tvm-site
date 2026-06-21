@@ -326,11 +326,11 @@ Here we use a common subset of rules. The full catalog (including ``LowBatchGEMV
             R.func_attr({"num_input": 1})
             cls = Module
             with R.dataflow():
-                permute_dims = R.call_tir(cls.transpose, (fc1_weight,), out_sinfo=R.Tensor((768, 768), dtype="float32"))
-                lv = R.call_tir(cls.fused_matmul_add_relu, (x, permute_dims, fc1_bias), out_sinfo=R.Tensor((1, 768), dtype="float32"))
-                layer_norm = R.call_tir(cls.layer_norm, (lv, norm_weight, norm_bias), out_sinfo=R.Tensor((1, 768), dtype="float32"))
-                permute_dims1 = R.call_tir(cls.transpose1, (fc2_weight,), out_sinfo=R.Tensor((768, 256), dtype="float32"))
-                gv = R.call_tir(cls.fused_matmul1_add1, (layer_norm, permute_dims1, fc2_bias), out_sinfo=R.Tensor((1, 256), dtype="float32"))
+                permute_dims = R.call_tir(cls.transpose, (fc1_weight,), out_ty=R.Tensor((768, 768), dtype="float32"))
+                lv = R.call_tir(cls.fused_matmul_add_relu, (x, permute_dims, fc1_bias), out_ty=R.Tensor((1, 768), dtype="float32"))
+                layer_norm = R.call_tir(cls.layer_norm, (lv, norm_weight, norm_bias), out_ty=R.Tensor((1, 768), dtype="float32"))
+                permute_dims1 = R.call_tir(cls.transpose1, (fc2_weight,), out_ty=R.Tensor((768, 256), dtype="float32"))
+                gv = R.call_tir(cls.fused_matmul1_add1, (layer_norm, permute_dims1, fc2_bias), out_ty=R.Tensor((1, 256), dtype="float32"))
                 R.output(gv)
             return gv
 
@@ -758,11 +758,11 @@ Insert the custom rule into the rule chain. Note that ``from_callable`` returns 
             R.func_attr({"num_input": 1})
             cls = Module
             with R.dataflow():
-                permute_dims = R.call_tir(cls.transpose, (fc1_weight,), out_sinfo=R.Tensor((768, 768), dtype="float32"))
-                lv = R.call_tir(cls.fused_matmul_add_relu, (x, permute_dims, fc1_bias), out_sinfo=R.Tensor((1, 768), dtype="float32"))
-                layer_norm = R.call_tir(cls.layer_norm, (lv, norm_weight, norm_bias), out_sinfo=R.Tensor((1, 768), dtype="float32"))
-                permute_dims1 = R.call_tir(cls.transpose1, (fc2_weight,), out_sinfo=R.Tensor((768, 256), dtype="float32"))
-                gv = R.call_tir(cls.fused_matmul1_add1, (layer_norm, permute_dims1, fc2_bias), out_sinfo=R.Tensor((1, 256), dtype="float32"))
+                permute_dims = R.call_tir(cls.transpose, (fc1_weight,), out_ty=R.Tensor((768, 768), dtype="float32"))
+                lv = R.call_tir(cls.fused_matmul_add_relu, (x, permute_dims, fc1_bias), out_ty=R.Tensor((1, 768), dtype="float32"))
+                layer_norm = R.call_tir(cls.layer_norm, (lv, norm_weight, norm_bias), out_ty=R.Tensor((1, 768), dtype="float32"))
+                permute_dims1 = R.call_tir(cls.transpose1, (fc2_weight,), out_ty=R.Tensor((768, 256), dtype="float32"))
+                gv = R.call_tir(cls.fused_matmul1_add1, (layer_norm, permute_dims1, fc2_bias), out_ty=R.Tensor((1, 256), dtype="float32"))
                 R.output(gv)
             return gv
 

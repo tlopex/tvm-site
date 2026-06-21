@@ -74,6 +74,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Base type of all Relax type information.  
+ <a href="classtvm_1_1relax_1_1ObjectTypeNode.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="relax_2type_8h_source.html">type.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for tvm::relax::ObjectTypeNode:</div>
@@ -116,7 +119,16 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a3b89ba3edb5418e9369f3440ca1485a1 inherit pub_static_attribs_classtvm_1_1TypeNode"><td class="memItemLeft" align="right" valign="top">static constexpr const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1TypeNode.html#a3b89ba3edb5418e9369f3440ca1485a1">_type_child_slots</a> = 14</td></tr>
 <tr class="separator:a3b89ba3edb5418e9369f3440ca1485a1 inherit pub_static_attribs_classtvm_1_1TypeNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base type of all Relax type information. </p>
+<p><a class="el" href="classtvm_1_1Type.html" title="Managed reference to TypeNode.">Type</a> stores possible type information deduced during compile-time. It encapsulates both static type and runtime information such as shape.</p>
+<p><a class="el" href="classtvm_1_1Type.html" title="Managed reference to TypeNode.">Type</a> of each non-primitive Expr can be deduced during compilation in a "best-effort" manner.</p>
+<p>When ty appears in function parameter and return signatures, it implies a runtime check that matches the type information with the value.</p>
+<p>When it appears in Expr, it follows "assume-semantics", which means the compiler will take the deduced information as it is and only do best effort proofs and checks.</p>
+<p>Each type can be uniquely erased to a static-type. The compiler will still compile the code, with less information, when we erase to the static type.</p>
+<p><a class="el" href="classtvm_1_1relax_1_1If.html">If</a> a <a class="el" href="classtvm_1_1Type.html" title="Managed reference to TypeNode.">Type</a> contains an Expr field, then that field must already be normalized through NormalizeArg. This invariant is checked in constructors and simplifies assumptions during type deduction.</p>
+<p>Opaque object. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8d840701bc48696bbb21b1a5012a3a42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d840701bc48696bbb21b1a5012a3a42">&#9670;&nbsp;</a></span>RegisterReflection()</h2>
 

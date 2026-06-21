@@ -180,7 +180,7 @@ TensorIR functions in Relax function.
                 lv: R.Tensor((784, 128), dtype="float32") = R.permute_dims(w0, axes=None)
                 lv1: R.Tensor((n, 128), dtype="float32") = R.matmul(data, lv, out_dtype="void")
                 lv0: R.Tensor((n, 128), dtype="float32") = R.add(lv1, b0)
-                lv1_1 = R.call_tir(cls.relu, (lv0,), out_sinfo=R.Tensor((n, 128), dtype="float32"))
+                lv1_1 = R.call_tir(cls.relu, (lv0,), out_ty=R.Tensor((n, 128), dtype="float32"))
                 lv4: R.Tensor((128, 10), dtype="float32") = R.permute_dims(w1, axes=None)
                 lv5: R.Tensor((n, 10), dtype="float32") = R.matmul(lv1_1, lv4, out_dtype="void")
                 lv2: R.Tensor((n, 10), dtype="float32") = R.add(lv5, b1)
@@ -426,9 +426,9 @@ Tensor Expression(TE), TensorIR functions or other TVM packed functions.
             R.func_attr({"num_input": 1})
             cls = Module
             with R.dataflow():
-                env_linear = R.call_dps_packed("env.linear", (x, fc1_weight, fc1_bias), out_sinfo=R.Tensor((n, 128), dtype="float32"))
-                lv = R.call_tir(cls.relu, (env_linear,), out_sinfo=R.Tensor((n, 128), dtype="float32"))
-                lv1 = R.call_tir(cls.tir_linear, (lv, fc2_weight, fc2_bias), out_sinfo=R.Tensor((n, 10), dtype="float32"))
+                env_linear = R.call_dps_packed("env.linear", (x, fc1_weight, fc1_bias), out_ty=R.Tensor((n, 128), dtype="float32"))
+                lv = R.call_tir(cls.relu, (env_linear,), out_ty=R.Tensor((n, 128), dtype="float32"))
+                lv1 = R.call_tir(cls.tir_linear, (lv, fc2_weight, fc2_bias), out_ty=R.Tensor((n, 10), dtype="float32"))
                 gv: R.Tensor((n, 10), dtype="float32") = lv1
                 R.output(gv)
             return gv
@@ -520,7 +520,7 @@ Relax functions, TensorIR functions and other TVM packed functions.
                 relax.call_dps_packed(
                     "env.linear",
                     [x, fc1_weight, fc1_bias],
-                    out_sinfo=relax.TensorStructInfo((n, 128), "float32"),
+                    out_ty=relax.TensorType((n, 128), "float32"),
                 )
             )
             lv1 = bb.emit_te(topi.nn.relu, lv0)
@@ -529,7 +529,7 @@ Relax functions, TensorIR functions and other TVM packed functions.
                 relax.call_tir(
                     tir_gv,
                     [lv1, fc2_weight, fc2_bias],
-                    out_sinfo=relax.TensorStructInfo((n, 10), "float32"),
+                    out_ty=relax.TensorType((n, 10), "float32"),
                 )
             )
             bb.emit_output(gv)
@@ -595,9 +595,9 @@ Relax functions, TensorIR functions and other TVM packed functions.
             v = T.int64()
             cls = Module
             with R.dataflow():
-                lv = R.call_dps_packed("env.linear", (x, fc1_weight, fc1_bias), out_sinfo=R.Tensor((v, 128), dtype="float32"))
-                lv1 = R.call_tir(cls.relu, (lv,), out_sinfo=R.Tensor((v, 128), dtype="float32"))
-                lv2 = R.call_tir(cls.tir_linear, (lv1, fc2_weight, fc2_bias), out_sinfo=R.Tensor((v, 10), dtype="float32"))
+                lv = R.call_dps_packed("env.linear", (x, fc1_weight, fc1_bias), out_ty=R.Tensor((v, 128), dtype="float32"))
+                lv1 = R.call_tir(cls.relu, (lv,), out_ty=R.Tensor((v, 128), dtype="float32"))
+                lv2 = R.call_tir(cls.tir_linear, (lv1, fc2_weight, fc2_bias), out_ty=R.Tensor((v, 10), dtype="float32"))
                 gv: R.Tensor((v, 10), dtype="float32") = lv2
                 R.output(gv)
             return lv2

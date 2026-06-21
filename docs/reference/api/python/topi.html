@@ -581,7 +581,7 @@ specific workload.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">IRBuilder</span></code>()</p></td>
 <td><p>A dialect-agnostic IRBuilder that constructs any IR of TVM.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PrimExpr</span></code>(dtype[, span])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PrimExpr</span></code>(dtype[, span, ty])</p></td>
 <td><p>Base class of all primitive expressions.</p></td>
 </tr>
 </tbody>
@@ -1618,7 +1618,7 @@ call dialect-specific methods accordingly. Upon exiting the scope.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.topi.</span></span><span class="sig-name descname"><span class="pre">PrimExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span=&lt;MISSING&gt;</span></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.topi.</span></span><span class="sig-name descname"><span class="pre">PrimExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span=&lt;MISSING&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ty=&lt;MISSING&gt;</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Base class of all primitive expressions.</p>
 <p>PrimExpr is used in the low-level code
 optimizations and integer analysis.</p>

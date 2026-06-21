@@ -1529,7 +1529,7 @@
 </li>
       <li><a href="reference/api/python/s_tir/backend.html#tvm.s_tir.backend.adreno.pipeline.default_tir_pipeline">default_tir_pipeline() (in module tvm.s_tir.backend.adreno.pipeline)</a>
 </li>
-      <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.definable_tir_vars_in_struct_info">definable_tir_vars_in_struct_info() (in module tvm.relax.analysis)</a>
+      <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.definable_tir_vars_in_type">definable_tir_vars_in_type() (in module tvm.relax.analysis)</a>
 </li>
       <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.defined_symbolic_vars">defined_symbolic_vars() (in module tvm.relax.analysis)</a>
 </li>
@@ -1577,7 +1577,7 @@
 </li>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.dequantize">dequantize() (in module tvm.relax.op)</a>
 </li>
-      <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.derive_call_ret_struct_info">derive_call_ret_struct_info() (in module tvm.relax.analysis)</a>
+      <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.derive_call_ret_type">derive_call_ret_type() (in module tvm.relax.analysis)</a>
 </li>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.op_attrs.ArgsortAttrs.descending">descending (tvm.relax.op.op_attrs.ArgsortAttrs property)</a>
 
@@ -1699,7 +1699,7 @@
 </li>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.op_attrs.ToVDeviceAttrs.dst_vdevice">dst_vdevice (tvm.relax.op.op_attrs.ToVDeviceAttrs property)</a>
 </li>
-      <li><a href="reference/api/python/relax/distributed.html#tvm.relax.distributed.DTensorStructInfo">DTensorStructInfo (class in tvm.relax.distributed)</a>
+      <li><a href="reference/api/python/relax/distributed.html#tvm.relax.distributed.DTensorType">DTensorType (class in tvm.relax.distributed)</a>
 </li>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.op_attrs.ArgsortAttrs.dtype">dtype (tvm.relax.op.op_attrs.ArgsortAttrs property)</a>
 
@@ -2019,10 +2019,10 @@
 </li>
       <li><a href="reference/api/python/relax/transform.html#tvm.relax.transform.FoldConstant">FoldConstant() (in module tvm.relax.transform)</a>
 </li>
-      <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.For">For (class in tvm.tirx)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.For">For (class in tvm.tirx)</a>
+</li>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.op_attrs.NonMaximumSuppressionAttrs.force_suppress">force_suppress (tvm.relax.op.op_attrs.NonMaximumSuppressionAttrs property)</a>
 </li>
       <li><a href="reference/api/python/tirx/transform.html#tvm.tirx.transform.ForceNarrowIndexToInt32">ForceNarrowIndexToInt32() (in module tvm.tirx.transform)</a>
@@ -2072,8 +2072,6 @@
       <li><a href="reference/api/python/contrib.html#tvm.contrib.nnpack.fully_connected_inference">fully_connected_inference() (in module tvm.contrib.nnpack)</a>
 </li>
       <li><a href="reference/api/python/s_tir/schedule.html#tvm.s_tir.schedule.Schedule.func_working_on">func_working_on (tvm.s_tir.schedule.Schedule property)</a>
-</li>
-      <li><a href="reference/api/python/relax/relax.html#tvm.relax.FuncStructInfo">FuncStructInfo (class in tvm.relax)</a>
 </li>
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.Function">Function (class in tvm.relax)</a>
 </li>
@@ -2649,7 +2647,7 @@
 </li>
       <li><a href="reference/api/python/contrib.html#tvm.contrib.nnpack.is_available">is_available() (in module tvm.contrib.nnpack)</a>
 </li>
-      <li><a href="reference/api/python/relax/relax.html#tvm.relax.StructInfo.is_base_of">is_base_of() (tvm.relax.StructInfo method)</a>
+      <li><a href="reference/api/python/ir.html#tvm.ir.Type.is_base_of">is_base_of() (tvm.ir.Type method)</a>
 </li>
       <li><a href="reference/api/python/testing.html#tvm.testing.Path.is_block_device">is_block_device() (tvm.testing.Path method)</a>
 </li>
@@ -3608,8 +3606,6 @@
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/api/python/relax/relax.html#tvm.relax.ObjectStructInfo">ObjectStructInfo (class in tvm.relax)</a>
-</li>
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.ObjectType">ObjectType (class in tvm.relax)</a>
 </li>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.Buffer.offset_of">offset_of() (tvm.tirx.Buffer method)</a>
@@ -3633,8 +3629,6 @@
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.op_attrs.AllReduceAttrs.op_type">op_type (tvm.relax.op.op_attrs.AllReduceAttrs property)</a>
 </li>
       <li><a href="reference/api/python/s_tir/schedule.html#tvm.s_tir.schedule.DepKind.OPAQUE">OPAQUE (tvm.s_tir.schedule.DepKind attribute)</a>
-</li>
-      <li><a href="reference/api/python/relax/relax.html#tvm.relax.FuncStructInfo.opaque_func">opaque_func() (tvm.relax.FuncStructInfo static method)</a>
 </li>
       <li><a href="reference/api/python/error.html#tvm.error.OpAttributeInvalid">OpAttributeInvalid</a>
 </li>
@@ -3964,10 +3958,12 @@
 </li>
       <li><a href="reference/api/python/tirx/transform.html#tvm.tirx.transform.PrimFuncPass">PrimFuncPass (class in tvm.tirx.transform)</a>
 </li>
-      <li><a href="reference/api/python/relax/relax.html#tvm.relax.PrimStructInfo">PrimStructInfo (class in tvm.relax)</a>
-</li>
       <li><a href="reference/api/python/ir.html#tvm.ir.PrimType">PrimType (class in tvm.ir)</a>
+
+      <ul>
+        <li><a href="reference/api/python/relax/relax.html#tvm.relax.PrimType">(class in tvm.relax)</a>
 </li>
+      </ul></li>
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.PrimValue">PrimValue (class in tvm.relax)</a>
 </li>
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.print">print() (in module tvm.relax.op)</a>
@@ -4343,8 +4339,6 @@
       <ul>
         <li><a href="reference/api/python/ir.html#tvm.ir.Type.same_as">(tvm.ir.Type method)</a>
 </li>
-        <li><a href="reference/api/python/relax/relax.html#tvm.relax.StructInfo.same_as">(tvm.relax.StructInfo method)</a>
-</li>
       </ul></li>
       <li><a href="reference/api/python/testing.html#tvm.testing.Path.samefile">samefile() (tvm.testing.Path method)</a>
 </li>
@@ -4523,8 +4517,6 @@
       <li><a href="reference/api/python/relax/op.html#tvm.relax.op.shape_to_tensor">shape_to_tensor() (in module tvm.relax.op)</a>
 </li>
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.ShapeExpr">ShapeExpr (class in tvm.relax)</a>
-</li>
-      <li><a href="reference/api/python/relax/relax.html#tvm.relax.ShapeStructInfo">ShapeStructInfo (class in tvm.relax)</a>
 </li>
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.ShapeType">ShapeType (class in tvm.relax)</a>
 </li>
@@ -4802,14 +4794,6 @@
       </ul></li>
       <li><a href="reference/api/python/testing.html#tvm.testing.strtobool">strtobool() (in module tvm.testing)</a>
 </li>
-      <li><a href="reference/api/python/ir.html#tvm.ir.RelaxExpr.struct_info">struct_info (tvm.ir.RelaxExpr property)</a>
-</li>
-      <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.struct_info_base_check">struct_info_base_check() (in module tvm.relax.analysis)</a>
-</li>
-      <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.struct_info_lca">struct_info_lca() (in module tvm.relax.analysis)</a>
-</li>
-      <li><a href="reference/api/python/relax/relax.html#tvm.relax.StructInfo">StructInfo (class in tvm.relax)</a>
-</li>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.Sub">Sub (class in tvm.tirx)</a>
 </li>
       <li><a href="reference/api/python/support.html#tvm.support.popen_pool.PopenPoolExecutor.submit">submit() (tvm.support.popen_pool.PopenPoolExecutor method)</a>
@@ -4914,8 +4898,6 @@
 </li>
       <li><a href="reference/api/python/te.html#tvm.te.TensorSlice">TensorSlice (class in tvm.te)</a>
 </li>
-      <li><a href="reference/api/python/relax/relax.html#tvm.relax.TensorStructInfo">TensorStructInfo (class in tvm.relax)</a>
-</li>
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.TensorType">TensorType (class in tvm.relax)</a>
 </li>
       <li><a href="reference/api/python/rpc.html#tvm.rpc.Server.terminate">terminate() (tvm.rpc.Server method)</a>
@@ -4966,7 +4948,7 @@
       </ul></li>
       <li><a href="reference/api/python/meta_schedule.html#tvm.s_tir.meta_schedule.Profiler.timeit">timeit() (tvm.s_tir.meta_schedule.Profiler static method)</a>
 </li>
-      <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.tir_vars_in_struct_info">tir_vars_in_struct_info() (in module tvm.relax.analysis)</a>
+      <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.tir_vars_in_type">tir_vars_in_type() (in module tvm.relax.analysis)</a>
 </li>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.TileLayout.to_psum">to_psum() (tvm.tirx.TileLayout method)</a>
 </li>
@@ -5061,8 +5043,6 @@
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.Tuple">Tuple (class in tvm.relax)</a>
 </li>
       <li><a href="reference/api/python/relax/relax.html#tvm.relax.TupleGetItem">TupleGetItem (class in tvm.relax)</a>
-</li>
-      <li><a href="reference/api/python/relax/relax.html#tvm.relax.TupleStructInfo">TupleStructInfo (class in tvm.relax)</a>
 </li>
       <li><a href="reference/api/python/ir.html#tvm.ir.TupleType">TupleType (class in tvm.ir)</a>
 </li>
@@ -5283,8 +5263,6 @@
         <li><a href="reference/api/python/relax/dpl.html#module-tvm.relax.dpl">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     tvm.relax.frontend
 
@@ -5292,6 +5270,8 @@
         <li><a href="reference/api/python/relax/frontend.html#module-tvm.relax.frontend">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     tvm.relax.frontend.onnx
 
@@ -5804,6 +5784,10 @@
 </li>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.type_annotation">type_annotation() (in module tvm.tirx)</a>
 </li>
+      <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.type_base_check">type_base_check() (in module tvm.relax.analysis)</a>
+</li>
+      <li><a href="reference/api/python/relax/analysis.html#tvm.relax.analysis.type_lca">type_lca() (in module tvm.relax.analysis)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -5864,7 +5848,7 @@
 </li>
       <li><a href="reference/api/python/contrib.html#tvm.contrib.tvmjs.TensorCacheShardingManager.update_single_record">update_single_record() (tvm.contrib.tvmjs.TensorCacheShardingManager method)</a>
 </li>
-      <li><a href="reference/api/python/relax/transform.html#tvm.relax.transform.UpdateParamStructInfo">UpdateParamStructInfo() (in module tvm.relax.transform)</a>
+      <li><a href="reference/api/python/relax/transform.html#tvm.relax.transform.UpdateParamType">UpdateParamType() (in module tvm.relax.transform)</a>
 </li>
       <li><a href="reference/api/python/relax/transform.html#tvm.relax.transform.UpdateVDevice">UpdateVDevice() (in module tvm.relax.transform)</a>
 </li>
@@ -6726,7 +6710,7 @@
 </li>
       <li><a href="reference/api/python/rpc.html#tvm.rpc.with_minrpc">with_minrpc() (in module tvm.rpc)</a>
 </li>
-      <li><a href="reference/api/python/relax/relax.html#tvm.relax.PyExprMutator.with_struct_info">with_struct_info() (tvm.relax.PyExprMutator method)</a>
+      <li><a href="reference/api/python/relax/relax.html#tvm.relax.PyExprMutator.with_type">with_type() (tvm.relax.PyExprMutator method)</a>
 </li>
       <li><a href="reference/api/python/tirx/tirx.html#tvm.tirx.TilePrimitiveCall.with_workspace">with_workspace() (tvm.tirx.TilePrimitiveCall method)</a>
 </li>

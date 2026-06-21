@@ -88,7 +88,7 @@ Inheritance diagram for tvm::relax::CallNode:</div>
 <div class="dynheader">
 Collaboration diagram for tvm::relax::CallNode:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classtvm_1_1relax_1_1CallNode__coll__graph.svg" width="710" height="952"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classtvm_1_1relax_1_1CallNode__coll__graph.svg" width="946" height="938"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <table class="memberdecls">
@@ -125,17 +125,16 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:acc4abc68e40f495501818e0364ceeef7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1Attrs.html">Attrs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1CallNode.html#acc4abc68e40f495501818e0364ceeef7">attrs</a></td></tr>
 <tr class="memdesc:acc4abc68e40f495501818e0364ceeef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The additional attributes.  <a href="classtvm_1_1relax_1_1CallNode.html#acc4abc68e40f495501818e0364ceeef7">More...</a><br /></td></tr>
 <tr class="separator:acc4abc68e40f495501818e0364ceeef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3921fb61ae1151a76adca7b5345dc6f0"><td class="memItemLeft" align="right" valign="top">ffi::Array&lt; <a class="el" href="classtvm_1_1relax_1_1StructInfo.html">StructInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1CallNode.html#a3921fb61ae1151a76adca7b5345dc6f0">sinfo_args</a></td></tr>
-<tr class="memdesc:a3921fb61ae1151a76adca7b5345dc6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The structure info arguments of a <a class="el" href="classtvm_1_1relax_1_1CallNode.html" title="Call corresponds to callable invocation. Corresponds to operation in computational graph terminology.">CallNode</a>. sinfo_args is by default designed to be non-empty only for intrinsic op (e.g., call_tir, call_builtin_with_ctx, etc.) and calls to ExternFuncs, with the main usage of structure info inference.  <a href="classtvm_1_1relax_1_1CallNode.html#a3921fb61ae1151a76adca7b5345dc6f0">More...</a><br /></td></tr>
-<tr class="separator:a3921fb61ae1151a76adca7b5345dc6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classtvm_1_1RelaxExprNode"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classtvm_1_1RelaxExprNode')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classtvm_1_1RelaxExprNode.html">tvm::RelaxExprNode</a></td></tr>
-<tr class="memitem:aa8bd163a1b0b1e5660efd10c32ebcabe inherit pub_attribs_classtvm_1_1RelaxExprNode"><td class="memItemLeft" align="right" valign="top">ffi::Optional&lt; ffi::ObjectRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1RelaxExprNode.html#aa8bd163a1b0b1e5660efd10c32ebcabe">struct_info_</a> = ffi::Optional&lt;ffi::ObjectRef&gt;()</td></tr>
-<tr class="memdesc:aa8bd163a1b0b1e5660efd10c32ebcabe inherit pub_attribs_classtvm_1_1RelaxExprNode"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the result of structure information of the expression that encapsulate both static shape and runtime information such as shape.  <a href="classtvm_1_1RelaxExprNode.html#aa8bd163a1b0b1e5660efd10c32ebcabe">More...</a><br /></td></tr>
-<tr class="separator:aa8bd163a1b0b1e5660efd10c32ebcabe inherit pub_attribs_classtvm_1_1RelaxExprNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73e2f9ba688859881d8f240d9995fd75"><td class="memItemLeft" align="right" valign="top">ffi::Array&lt; <a class="el" href="classtvm_1_1Type.html">Type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1relax_1_1CallNode.html#a73e2f9ba688859881d8f240d9995fd75">ty_args</a></td></tr>
+<tr class="memdesc:a73e2f9ba688859881d8f240d9995fd75"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type information arguments of a <a class="el" href="classtvm_1_1relax_1_1CallNode.html" title="Call corresponds to callable invocation. Corresponds to operation in computational graph terminology.">CallNode</a>. ty_args is by default designed to be non-empty only for intrinsic op (e.g., call_tir, call_builtin_with_ctx, etc.) and calls to ExternFuncs, with the main usage of type information inference.  <a href="classtvm_1_1relax_1_1CallNode.html#a73e2f9ba688859881d8f240d9995fd75">More...</a><br /></td></tr>
+<tr class="separator:a73e2f9ba688859881d8f240d9995fd75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classtvm_1_1BaseExprNode"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classtvm_1_1BaseExprNode')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classtvm_1_1BaseExprNode.html">tvm::BaseExprNode</a></td></tr>
 <tr class="memitem:ae3a0760a9f8b1379bc86f13e8bb3a22e inherit pub_attribs_classtvm_1_1BaseExprNode"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1Span.html">Span</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1BaseExprNode.html#ae3a0760a9f8b1379bc86f13e8bb3a22e">span</a></td></tr>
 <tr class="memdesc:ae3a0760a9f8b1379bc86f13e8bb3a22e inherit pub_attribs_classtvm_1_1BaseExprNode"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtvm_1_1Span.html">Span</a> that points to the original source code. Reserved debug information.  <a href="classtvm_1_1BaseExprNode.html#ae3a0760a9f8b1379bc86f13e8bb3a22e">More...</a><br /></td></tr>
 <tr class="separator:ae3a0760a9f8b1379bc86f13e8bb3a22e inherit pub_attribs_classtvm_1_1BaseExprNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a766eea269eab2a9af61b4bb850672f61 inherit pub_attribs_classtvm_1_1BaseExprNode"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtvm_1_1Type.html">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtvm_1_1BaseExprNode.html#a766eea269eab2a9af61b4bb850672f61">ty</a></td></tr>
+<tr class="memdesc:a766eea269eab2a9af61b4bb850672f61 inherit pub_attribs_classtvm_1_1BaseExprNode"><td class="mdescLeft">&#160;</td><td class="mdescRight">The deduced or annotated type of the expression.  <a href="classtvm_1_1BaseExprNode.html#a766eea269eab2a9af61b4bb850672f61">More...</a><br /></td></tr>
+<tr class="separator:a766eea269eab2a9af61b4bb850672f61 inherit pub_attribs_classtvm_1_1BaseExprNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -263,20 +262,20 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a3921fb61ae1151a76adca7b5345dc6f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3921fb61ae1151a76adca7b5345dc6f0">&#9670;&nbsp;</a></span>sinfo_args</h2>
+<a id="a73e2f9ba688859881d8f240d9995fd75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73e2f9ba688859881d8f240d9995fd75">&#9670;&nbsp;</a></span>ty_args</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ffi::Array&lt;<a class="el" href="classtvm_1_1relax_1_1StructInfo.html">StructInfo</a>&gt; tvm::relax::CallNode::sinfo_args</td>
+          <td class="memname">ffi::Array&lt;<a class="el" href="classtvm_1_1Type.html">Type</a>&gt; tvm::relax::CallNode::ty_args</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>The structure info arguments of a <a class="el" href="classtvm_1_1relax_1_1CallNode.html" title="Call corresponds to callable invocation. Corresponds to operation in computational graph terminology.">CallNode</a>. sinfo_args is by default designed to be non-empty only for intrinsic op (e.g., call_tir, call_builtin_with_ctx, etc.) and calls to ExternFuncs, with the main usage of structure info inference. </p>
-<p>Regular ops also at times may have sinfo_args defined to specialize partial or complete structure info. Like <a class="el" href="classtvm_1_1VDevice.html" title="Managed reference to VDeviceNode.">VDevice</a> customization with mixed input memory_scopes. The customized pass can set this info and operator specific inference will respect it. </p>
+<p>The type information arguments of a <a class="el" href="classtvm_1_1relax_1_1CallNode.html" title="Call corresponds to callable invocation. Corresponds to operation in computational graph terminology.">CallNode</a>. ty_args is by default designed to be non-empty only for intrinsic op (e.g., call_tir, call_builtin_with_ctx, etc.) and calls to ExternFuncs, with the main usage of type information inference. </p>
+<p>Regular ops also at times may have ty_args defined to specialize partial or complete type information. Like <a class="el" href="classtvm_1_1VDevice.html" title="Managed reference to VDeviceNode.">VDevice</a> customization with mixed input memory_scopes. The customized pass can set this info and operator specific inference will respect it. </p>
 
 </div>
 </div>

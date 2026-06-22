@@ -5,10 +5,329 @@
         <description>TVM - </description>
         <link>https://tvm.apache.org</link>
         <atom:link href="https://tvm.apache.org" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Tue, 16 Jun 2026 17:17:47 +0000</lastBuildDate>
-        <pubDate>Tue, 16 Jun 2026 17:17:47 +0000</pubDate>
+        <lastBuildDate>Mon, 22 Jun 2026 03:36:47 +0000</lastBuildDate>
+        <pubDate>Mon, 22 Jun 2026 03:36:47 +0000</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>TIRx: An Open Compiler Stack for Evolving Frontier ML Kernels</title>
+                <description>&lt;style&gt;
+/* Theme has h3=38px but no h2 rule; size both down a notch and keep h2 &gt; h3. */
+.post-content h2 { font-size: 38px; line-height: 1.3; }
+.post-content h3 { font-size: 30px; line-height: 1.3; }
+@media (max-width: 768px) {
+  .post-content h2 { font-size: 30px; }
+  .post-content h3 { font-size: 25px; }
+}
+&lt;/style&gt;
+
+&lt;p&gt;Today we are introducing &lt;strong&gt;TIRx&lt;/strong&gt;, an open-source, hardware-native DSL and compiler for ML kernels, built on Apache TVM. It targets the part of the AI software stack where fast-moving kernels meet fast-moving hardware: TIRx compiles to GPUs and specialized AI accelerators today and is designed to grow with the generations that follow. The same design serves expert-written kernels, agent-generated kernels, and megakernel systems.&lt;/p&gt;
+
+&lt;p&gt;We have been working together with the broader community to provide the following materials at launch:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;PyPI wheel and Python frontend.&lt;/strong&gt; A Python-embedded hardware-native kernel DSL with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@T.jit&lt;/code&gt; / &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@T.prim_func&lt;/code&gt; style authoring, parser utilities, and Python APIs for constructing TIRx programs.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;TIRx kernel library and benchmarks.&lt;/strong&gt; End-to-end examples covering GEMM, attention-style kernels, and low-precision operators on Blackwell GPUs.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Open course on modern GPU programming.&lt;/strong&gt; This curated online course was taught as part of the machine learning systems course at Carnegie Mellon University, and uses TIRx to teach students &lt;a href=&quot;https://mlc.ai/modern-gpu-programming-for-mlsys/index.html&quot;&gt;modern GPU programming for machine learning systems&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can find the following resources:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GitHub: &lt;a href=&quot;https://github.com/apache/tvm&quot;&gt;https://github.com/apache/tvm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Documentation: &lt;a href=&quot;https://tvm.apache.org/docs/tirx/overview.html&quot;&gt;https://tvm.apache.org/docs/tirx/overview.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;PyPI wheel: &lt;a href=&quot;https://pypi.org/project/apache-tvm/0.25.0/&quot;&gt;https://pypi.org/project/apache-tvm/0.25.0/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Community TIRx kernel library: &lt;a href=&quot;https://github.com/mlc-ai/tirx-kernels&quot;&gt;https://github.com/mlc-ai/tirx-kernels&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Modern GPU programming for machine learning systems: &lt;a href=&quot;https://mlc.ai/modern-gpu-programming-for-mlsys/index.html&quot;&gt;https://mlc.ai/modern-gpu-programming-for-mlsys/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;motivation&quot;&gt;&lt;strong&gt;Motivation&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Kernel DSLs are most effective when they choose the right boundary between the programmer and the machine. For mature kernels and mature hardware, that boundary can be high-level: the compiler hides thread assignment, memory movement, layout details, and instruction selection behind compact tensor or tile abstractions. Triton is the canonical example, and its adoption shows how well this works for established kernel patterns. At the frontier, the same boundary is under more pressure. New instructions, memory spaces, cooperation patterns, and kernel algorithms often appear before a compiler has the built-in machinery to automate them well. When that happens, the parts a high-level compiler would normally hide are exactly the parts an expert still needs to control by hand.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/motivation.png&quot; alt=&quot;image&quot; style=&quot;width: 80%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;TIRx (pronounced “tier-ex”) responds by choosing a lower and more explicit boundary, organized around three decisions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Orchestration stays in the hardware-native source.&lt;/strong&gt; Pipeline structure, synchronization, role assignment, memory placement, and backend intrinsics are the parts that most often need expert control at the frontier, so TIRx keeps them in source rather than behind an abstraction that may not yet model a new feature.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Recurring tile primitives are exposed to the compiler.&lt;/strong&gt; Execution scope, tensor layout, and tile primitive dispatch let common operations stay reusable, analyzable, and portable across backends, without forcing the whole kernel through a fixed compiler pipeline. The cost of hardware-native control is engineering effort: writing every operation by hand for each kernel and backend is laborious. Exposing recurring operations as tile primitives alleviates this, so authors reuse a dispatched implementation instead of re-writing the same data movement or matrix multiply each time.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;New hardware enters as intrinsics first, tile primitives later.&lt;/strong&gt; A new feature can be used immediately as a native intrinsic — a thin, backend-specific wrapper over a single hardware operation. Once the usage pattern stabilizes across kernels, it can be promoted to a tile primitive: a layout-aware operation that dispatches across scopes, operands, and backends. The core abstraction stays small, and adding an intrinsic for a new feature never breaks existing ones.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The result is a DSL and compiler stack that can grow with the hardware. This is the core design philosophy behind TIRx: keep the foundation small and explicit, and let the backend library evolve as new accelerator generations arrive.&lt;/p&gt;
+
+&lt;p&gt;This places TIRx below systems like TileLang, which also lowers the boundary relative to Triton by exposing memory scopes and pipelining, while still leaving layout inference and thread binding to the compiler. TIRx deliberately leaves those higher-level concerns outside its core and provides a minimal foundation that such systems can build on; we are working with the TileLang community to bring TIRx as a new minimal foundation to support TileLang compilation.&lt;/p&gt;
+
+&lt;p&gt;The same small, explicit foundation is what lets one design serve several kinds of users who pursue peak performance while reducing engineering effort as much as possible: expert-written production kernels, agent-generated kernels, and megakernel systems, each of which needs both control at the native level and recurring operations the compiler can see.&lt;/p&gt;
+
+&lt;p&gt;The rest of this post walks through the programming model and then through each of these directions in turn.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-tirx-programming-model&quot;&gt;&lt;strong&gt;The TIRx Programming Model&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Here is what that boundary looks like in practice. A TIRx program reads as a structured native kernel: loops, branches, tensors, synchronization, pipeline state, and backend intrinsics are written directly. Tile primitives appear where a recurring hardware operation should become reusable and dispatchable. Three ingredients carry most of the model.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Execution scope&lt;/strong&gt; decides who runs an operation and at what granularity. Two things select it: control flow, which picks the hardware role entering a region, and the primitive namespace, which sets the granularity of the call.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/exec_scope.png&quot; alt=&quot;image&quot; style=&quot;width: 56%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;An unqualified &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Tx.*&lt;/code&gt; call runs at thread level; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Tx.wg.*&lt;/code&gt; runs at warpgroup level. A predicate such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;T.ptx.elect_sync()&lt;/code&gt; can narrow a thread-level call further, down to a single issuing thread.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tensor layout&lt;/strong&gt; describes where a logical tensor lives through a storage-first interface. A tile may sit in global memory, shared memory, registers, tensor memory, or accelerator SRAM. The user declares where each tile lives and how its elements are spread across lanes, warps, and registers; that declaration stays attached to the tile. When a primitive is called, the compiler reads those declarations to choose an implementation. A layout is a storage description, not a loop-transformation utility: the user may construct a tile’s layout, but never uses layouts to transform loops.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tile primitive dispatch&lt;/strong&gt; turns one call into native IR. From the operand layouts, the execution scope, and the target, or an explicit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dispatch=&lt;/code&gt; hint, it selects the matching implementation: a copy from global to shared resolves to TMA, shared to register to ldmatrix, and tensor memory to register to tcgen05.ld; a matrix multiply resolves to WGMMA, tcgen05, or a systolic-array instruction. Dispatch then generates the loops and addressing needed to apply that instruction across the whole tile.&lt;/p&gt;
+
+&lt;p&gt;These ingredients combine wherever scope matters. In the GEMM epilogue below, warpgroup-scoped and thread-scoped primitives sit in the same region: the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Tx.wg.*&lt;/code&gt; calls move and cast a tile across the warpgroup, while a final thread-scoped &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Tx.copy_async&lt;/code&gt;, guarded by an explicit issuing-thread predicate, performs the TMA store.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/gemm_epilogue.png&quot; alt=&quot;image&quot; style=&quot;width: 56%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The excerpts above are simplified. For the full picture, here are two roles from a complete FP16/BF16 GEMM kernel — a TMA producer and the tensor-memory writeback. You do not need to read them line by line. The point is that everything to do with orchestration (pipeline state, barrier protocol, role selection, low-level synchronization intrinsics like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tcgen05.wait&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cp_async.bulk&lt;/code&gt;) stays in ordinary source code, while the recurring data movement appears as tile primitives whose lowering is selected from scope, layout, and dispatch configuration.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/gemm_producer.png&quot; alt=&quot;image&quot; style=&quot;width: 56%; margin: auto; display: block;&quot; /&gt;
+&lt;img src=&quot;/images/tirx/gemm_writeback.png&quot; alt=&quot;image&quot; style=&quot;width: 56%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Of the three ingredients, layout involves the most design decisions, so it is worth a closer look.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-storage-first-interface-for-tensor-layouts&quot;&gt;&lt;strong&gt;A Storage-First Interface for Tensor Layouts&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;TIRx treats layout as a first-class representation of tensor storage. Readers familiar with CuTe will recognize the territory: both systems use layout to describe how tensor data maps onto hardware resources, but CuTe exposes layout as a programmable interface for deriving how tile work is partitioned across threads, while TIRx uses layout as a storage contract consumed by primitive dispatch.&lt;/p&gt;
+
+&lt;p&gt;A TIRx layout maps a logical tensor index to physical coordinates on named axes. The model generalizes shape-stride layout by attaching strides to semantic hardware axes and by adding explicit &lt;strong&gt;shard&lt;/strong&gt;, &lt;strong&gt;replica&lt;/strong&gt;, and &lt;strong&gt;offset&lt;/strong&gt; components. Shard describes how logical elements are partitioned across physical axes. Replica describes where the same logical element is replicated. Offset describes where physical placement begins. Specifically,&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;D (Shard).&lt;/strong&gt; A list of one or more iterators, each with an extent and a stride on some axis. D partitions the logical index across these iters and produces a base coordinate. This generalizes shape-stride to multiple axes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;R (Replica).&lt;/strong&gt; A set of replication iterators that enumerate offsets in hardware space, independent of the logical index. Adding each element of this set to the &lt;strong&gt;D&lt;/strong&gt; result yields replication or broadcasting.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;O (Offset).&lt;/strong&gt; A fixed coordinate offset (one integer per axis) is added to every result. This places data at a specific base position or reserves exclusive resources.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A concrete example of the TIRx layout Python API is:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/layout_api.png&quot; alt=&quot;image&quot; style=&quot;width: 56%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This represents a logical tile distributed over lanes and warps, replicated across another warpgroup, and placed at an offset on the warp axis. Given a logical coordinate (i, j) in (8, 16) shape space, it maps to the warp, lane, and reg axes, respectively, by computing&lt;/p&gt;
+
+\[\begin{aligned}
+L(i,j)_{(8,16)} &amp;amp;= L(i\cdot 16 + j) &amp;amp;&amp;amp; \text{(flatten)} \\
+&amp;amp;= L\bigl(i,\ \lfloor j/8\rfloor,\ \lfloor j/2\rfloor\,\%\,4,\ j\,\%\,2\bigr) &amp;amp;&amp;amp; \text{(unflatten)}
+\end{aligned}\]
+
+\[\begin{cases}
+@\mathrm{warp}:\ \{\,\lfloor j/8\rfloor + 5 + 4r \mid r \in [0,2)\,\} \\
+@\mathrm{lane}:\ 4i + \lfloor j/2\rfloor\,\%\,4 \\
+@\mathrm{reg}:\ \ j\,\%\,2
+\end{cases}\]
+
+&lt;p&gt;For example, element 57 at logical (3, 9) maps to:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;base location: 6@warpid, 12@laneid, 1@m&lt;/li&gt;
+  &lt;li&gt;owners (×2 via replica): { warpid=6 laneid=12 }, { warpid=10 laneid=12 }&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;(Click element 57 in the interactive demo below to see exactly these owners.)&lt;/em&gt;&lt;/p&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Unfold to see the interactive layout demo&lt;/summary&gt;
+&lt;iframe id=&quot;tirx-layout-demo&quot; data-src=&quot;https://mlc.ai/modern-gpu-programming-for-mlsys/_static/tirx-layout-demo/index.html?preset=tensor-core&amp;amp;notitle&amp;amp;lock&quot; style=&quot;width:100%; height:560px; border:1px solid #dfe1e6; border-radius:10px; margin:12px 0;&quot; title=&quot;TIRx interactive layout demo: tensor-core tile&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;script&gt;
+(function () { var f = document.getElementById(&apos;tirx-layout-demo&apos;); if (f &amp;&amp; !f.src) f.src = f.getAttribute(&apos;data-src&apos;); })();
+window.addEventListener(&apos;message&apos;, function (e) {
+  var h = e.data &amp;&amp; e.data.tirxLayoutDemoHeight;
+  if (!h) return;
+  var f = document.getElementById(&apos;tirx-layout-demo&apos;);
+  if (f) f.style.height = h + &apos;px&apos;;
+});
+&lt;/script&gt;
+&lt;/details&gt;
+
+&lt;p&gt;TIRx’s layout interface is built around four design choices.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Layout is a storage contract, not a work-partitioning interface.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In CuTe, layout is not only a representation of data placement; it is also part of the programming interface for deriving how tile operations are distributed across threads. Users compose, tile, and partition layouts to express data and work distribution for copy and compute operations. TIRx draws the boundary differently. Users describe the storage layout of each tile and call tile primitives over those tiles. The layout records how logical tensor coordinates map to physical hardware coordinates, including sharding, replication, and offset; it is not the surface used to construct the execution partitioning. When a primitive is lowered, dispatch uses the operand layouts, execution scope, and backend target to generate the thread partitioning, loop nest, addressing, and instruction sequence. In this sense, TIRx layout only needs to represent storage precisely; the transformation logic lives inside primitive dispatch rather than in user-written layout composition.&lt;/p&gt;
+
+&lt;!-- CuTe vs TIRx comparison figure (parked for now)
+&lt;style&gt;
+.tirx-paradigms{max-width:980px;margin:20px auto;font-size:14px;line-height:1.45;color:#1f2937}
+.tirx-paradigms .task{text-align:center;color:#6b7280;font-size:13px;margin-bottom:12px}
+.tirx-paradigms .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 14px;align-items:stretch}
+.tirx-paradigms .cell{border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.tirx-paradigms .head{text-align:center;background:#f4efe6;border:1px solid #e4dccb}
+.tirx-paradigms .head b{font-size:16px}
+.tirx-paradigms .head span{color:#8a8a8a;font-size:12px}
+.tirx-paradigms .role{text-align:center;color:#6b7280;font-size:12px}
+.tirx-paradigms .what{text-align:center;background:#fdf0db;border:1px solid #f0d7a3}
+.tirx-paradigms .what b{font-size:15px}
+.tirx-paradigms .what span{color:#b45309;font-weight:600;font-size:13px}
+.tirx-paradigms .code{display:flex;flex-direction:column;justify-content:center;overflow-x:auto;background:#f6f6f3;border:1px solid #e6e6df;font-family:&apos;SF Mono&apos;,ui-monospace,Menlo,monospace;font-size:12.5px;color:#1f2937}
+.tirx-paradigms .code .cb{display:block;white-space:pre}
+.tirx-paradigms .code .cm{color:#7d8590;font-style:italic}
+.tirx-paradigms .code .kw{color:#9333ea}
+.tirx-paradigms .code .fn{color:#2563eb}
+.tirx-paradigms .code .st{color:#15803d}
+.tirx-paradigms .layer{text-align:center;color:#6b7280;font-size:12px}
+.tirx-paradigms .result{text-align:center;background:#fdf0db;border:1px solid #f0d7a3;color:#b45309;font-weight:600}
+.tirx-paradigms .t.head{background:#d7f0eb;border-color:#a5d8cf}
+.tirx-paradigms .t.head b,.tirx-paradigms .t.head span{color:#0f766e}
+.tirx-paradigms .t.what{background:#e4f5f1;border-color:#a5d8cf}
+.tirx-paradigms .t.what span{color:#0f766e}
+.tirx-paradigms .t.code{background:#eefaf7;border-color:#c2e7e0}
+.tirx-paradigms .t.result{background:#d7f0eb;border-color:#a5d8cf;color:#0f766e}
+.tirx-paradigms .note{margin-top:14px;background:#f4efe6;border:1px solid #e4dccb;border-radius:10px;padding:12px 14px;color:#374151;font-size:13px}
+@media(max-width:760px){.tirx-paradigms .grid{grid-template-columns:1fr}}
+&lt;/style&gt;
+&lt;div class=&quot;tirx-paradigms&quot;&gt;
+&lt;div class=&quot;task&quot;&gt;Task: load a tensor-memory tile into registers&lt;/div&gt;
+&lt;div class=&quot;grid&quot;&gt;
+&lt;div class=&quot;cell head&quot;&gt;&lt;b&gt;CuTe&lt;/b&gt;&lt;span&gt;build a tiled copy&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;cell head t&quot;&gt;&lt;b&gt;TIRx&lt;/b&gt;&lt;span&gt;declare a copy primitive&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;role&quot;&gt;user programs&lt;/div&gt;
+&lt;div class=&quot;role&quot;&gt;user states&lt;/div&gt;
+&lt;div class=&quot;cell what&quot;&gt;&lt;b&gt;Copy atom + partitions&lt;/b&gt;&lt;/div&gt;
+&lt;div class=&quot;cell what t&quot;&gt;&lt;b&gt;Where the tile lives&lt;/b&gt;&lt;/div&gt;
+&lt;div class=&quot;cell code&quot;&gt;&lt;div class=&quot;cb&quot;&gt;&lt;span class=&quot;cm&quot;&gt;// tmem accumulator from the MMA atom&lt;/span&gt;
+Tensor tCtAcc = cta_mma.&lt;span class=&quot;fn&quot;&gt;make_fragment_C&lt;/span&gt;(tCgC);
+TiledCopy t2r = &lt;span class=&quot;fn&quot;&gt;make_tmem_copy&lt;/span&gt;(SM100_TMEM_LOAD_32dp32b1x{}, tCtAcc);
+ThrCopy thr_t2r = t2r.&lt;span class=&quot;fn&quot;&gt;get_slice&lt;/span&gt;(threadIdx.x);
+&lt;span class=&quot;cm&quot;&gt;// this thread&apos;s tmem slice + register fragment&lt;/span&gt;
+Tensor tDtAcc = thr_t2r.&lt;span class=&quot;fn&quot;&gt;partition_S&lt;/span&gt;(tCtAcc);
+Tensor tDrAcc = &lt;span class=&quot;fn&quot;&gt;make_tensor&lt;/span&gt;&amp;lt;AccType&amp;gt;(&lt;span class=&quot;fn&quot;&gt;shape&lt;/span&gt;(tDtAcc));
+&lt;span class=&quot;cm&quot;&gt;// tcgen05.ld&lt;/span&gt;
+&lt;span class=&quot;fn&quot;&gt;copy&lt;/span&gt;(t2r, tDtAcc, tDrAcc);&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;cell code t&quot;&gt;&lt;div class=&quot;cb&quot;&gt;&lt;span class=&quot;cm&quot;&gt;# tensor-memory accumulator, layout=TileLayout(S[(128, N):(1@TLane, 1@TCol)])&lt;/span&gt;
+tmem = &lt;span class=&quot;fn&quot;&gt;tmem_pool.alloc&lt;/span&gt;(128, N, &lt;span class=&quot;st&quot;&gt;&quot;float32&quot;&lt;/span&gt;)
+&lt;span class=&quot;cm&quot;&gt;# sugar for T.alloc_local((128, TMEM_LD_N), layout=TileLayout(S[(128, TMEM_LD_N):(1@tid_in_wg, 1)]))&lt;/span&gt;
+rD = &lt;span class=&quot;fn&quot;&gt;T.wg_reg_tile&lt;/span&gt;(TMEM_LD_N)
+&lt;span class=&quot;cm&quot;&gt;# tcgen05.ld; loops and addressing generated&lt;/span&gt;
+&lt;span class=&quot;fn&quot;&gt;Tx.wg.copy_async&lt;/span&gt;(rD, tmem[:, tmem_n : tmem_n + TMEM_LD_N])&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;layer&quot;&gt;intermediate layer&lt;/div&gt;
+&lt;div class=&quot;layer&quot;&gt;no intermediate layer&lt;/div&gt;
+&lt;div class=&quot;cell result&quot;&gt;the tiled copy issues tcgen05.ld over each partition&lt;/div&gt;
+&lt;div class=&quot;cell result t&quot;&gt;loops and addressing are generated&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+--&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Layout maps logical tensor coordinates to physical hardware coordinates.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Explicit replica and offset structure come from the designated logical-to-physical formulation. One alternative way to formalize layouts is to map physical locations to logical coordinates, such that replication—one logical element stored in multiple physical locations—can still be defined as a point-valued function. However, for tensors that span physical locations in a strided pattern, some physical locations may not have a well-defined mapping.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Layout supports general shapes.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Modern kernels frequently use shapes that do not fit a power-of-two-only representation. Global tensors, multi-stage shared-memory buffers, tensor-memory tiles, accelerator scratchpads, and distributed tensors all produce general shapes in practice. TIRx layout therefore starts from general shape support instead of treating it as a special case. This matters for block-scaled GEMM scale-factor tiles, Blackwell tensor memory, and accelerator memories with native multi-dimensional addressing.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4. Layout uses named hardware axes.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Another possible design is to map logical coordinates to a generic pair such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(t, m)&lt;/code&gt;, leaving the meaning of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m&lt;/code&gt; to be recovered from context. Disambiguating such cases would require the compiler to consult additional contextual information carried by the tensor or rely on extra conventions in the programming model—for example, that the meaning of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t&lt;/code&gt; is inherited from the execution scope at the tensor’s definition site. TIRx makes the hardware resource explicit in the layout itself. Axes such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;laneid&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;warpid&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tid_in_wg&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Col&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Lane&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;F&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pid&lt;/code&gt; carry semantic meaning. This makes layouts easier to read, removes context-dependent interpretation, and gives tile primitive dispatch the information it needs to check legality and select how to carry it out. It also decouples the layout from the programming model: because a layout names its hardware axes explicitly, it carries complete information on its own and is not tied to any particular programming model.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-lightweight-compiler-backend&quot;&gt;&lt;strong&gt;A Lightweight Compiler Backend&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;TIRx keeps the required lowering path focused. After parsing, a program consists of hardware-native IR plus unresolved tile primitive calls. The compiler resolves those calls locally: each primitive is dispatched according to its operands, layouts, execution scope, and target backend, and is replaced by native IR fragments such as loops, address calculations, memory-scope operations, synchronization, and intrinsic calls. After primitive dispatch, the program is already a native kernel IR and can be translated directly to backend code (CUDA C++/PTX).&lt;/p&gt;
+
+&lt;p&gt;This design keeps heavy optimization passes out of the critical path for expressing new kernels. Automatic warp specialization, layout inference across operators, schedule transformation, automatic tensor allocation, pipeline search, and cost-model-driven tuning are all valuable, but they tend to be tightly coupled to specific kernel families and hardware generations. When they become mandatory compiler stages, each new kernel pattern or hardware feature can require substantial pass redesign before users can access it productively.&lt;/p&gt;
+
+&lt;p&gt;TIRx instead treats these techniques as optional layers above a direct lowering path: they can improve performance, guide search, or automate common patterns, but the core DSL does not depend on them to represent a new program.&lt;/p&gt;
+
+&lt;h2 id=&quot;performance&quot;&gt;&lt;strong&gt;Performance&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;We evaluate TIRx on 54 configurations spanning dense GEMM, block-scaled low-precision GEMM, and attention, measured on an NVIDIA B200 (SM100) and reported as sustained TFLOPS. On each configuration we compare TIRx to the fastest of the applicable state-of-the-art baselines.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Dense GEMM (FP16 / BF16).&lt;/strong&gt; TIRx tracks the best cuBLAS and DeepGEMM baselines across square sizes from 1024³ to 16384³, reaching 1517 TFLOPS on BF16 8192³ and 1404 TFLOPS on FP16 8192³, or 0.96× and 0.95× the best baseline on those shapes (DeepGEMM-BF16 and DeepGEMM cuBLASLt).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/fp16_bf16_gemm_fp16_tflops.png&quot; alt=&quot;image&quot; style=&quot;width: 85%; margin: auto; display: block;&quot; /&gt;
+&lt;img src=&quot;/images/tirx/fp16_bf16_gemm_bf16_tflops.png&quot; alt=&quot;image&quot; style=&quot;width: 85%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Block-scaled low-precision GEMM (FP8 / NVFP4).&lt;/strong&gt; For FP8 blockwise GEMM, TIRx sustains 2895 TFLOPS on 4096×4096×7168, matching DeepGEMM within 0.99×. On NVFP4 8192³, TIRx achieves 5930 TFLOPS, within 2% of the best baseline (cuBLASLt NVFP4 and FlashInfer).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/fp8_blockwise_gemm_tflops.png&quot; alt=&quot;image&quot; style=&quot;width: 85%; margin: auto; display: block;&quot; /&gt;
+&lt;img src=&quot;/images/tirx/nvfp4_gemm_tflops.png&quot; alt=&quot;image&quot; style=&quot;width: 85%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;FlashAttention-4 (causal / non-causal).&lt;/strong&gt; TIRx is competitive with flashattn_sm100 (CuTeDSL) at long sequence lengths. At s4096 and s8192 with 32 query heads (non-causal), TIRx delivers 1340 and 1328 TFLOPS versus 1330 and 1327 for the CuTeDSL baseline (0.99× and 1.00×); the causal variant at s4096 reaches 1236 TFLOPS (0.97×). Across all 32 FA4 configurations, non-causal throughput ranges from 580 to 1358 TFLOPS (median 1277) and causal from 277 to 1326 TFLOPS (median 1075); the lower absolute numbers at short sequences (433 TFLOPS at s1024 causal) follow from the S² FLOP scaling, not degraded long-context performance.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/flash_attention4_causal_tflops.png&quot; alt=&quot;image&quot; style=&quot;width: 95%; margin: auto; display: block;&quot; /&gt;
+&lt;img src=&quot;/images/tirx/flash_attention4_non_causal_tflops.png&quot; alt=&quot;image&quot; style=&quot;width: 95%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Experimental setup.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Hardware and software:&lt;/strong&gt; 4× NVIDIA B200 (SM100), driver 595.58.03, CUDA 13.2, PyTorch 2.12.0+cu132 (torch git 7661cd9c6b84).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Workloads (54 configurations):&lt;/strong&gt; FP16 and BF16 GEMM (5 square sizes each, 1024³ to 16384³), FP8 blockwise GEMM (7 DeepGEMM-style shapes), NVFP4 GEMM (5 square sizes), and FlashAttention-4 (32 configs: sequence length 1024 to 8192, heads 4/8/16/32, causal and non-causal).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Protocol:&lt;/strong&gt; timed with Proton (warmup 100, repeat 30, 5 independent rounds averaged). TFLOPS = FLOPs / latency, with 2MNK for GEMM and 4·B·H·S²·D for FA4 (B=1, D=128; causal configs scaled by 0.5).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Baselines (local editable installs, pinned by commit):&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;torch-cublas&lt;/code&gt;: PyTorch 2.12.0+cu132 / cuBLAS&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deepgemm&lt;/code&gt; / &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deepgemm-bf16&lt;/code&gt; / &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deepgemm-cublaslt&lt;/code&gt;: DeepGEMM commit 714dd1a4 (2026-05-11), 17 commits after v2.1.1.post3&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flashinfer&lt;/code&gt;: FlashInfer commit bff85f34 (2026-05-22), tag nightly-v0.6.12-20260523&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flashattn_sm100&lt;/code&gt; (CuTeDSL): FlashAttention commit 3da76cdb (2026-05-22), tag fa4-v4.0.0.beta14&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cublaslt_nvfp4&lt;/code&gt;: cuBLASLt reference in tirx-kernels, same CUDA 13.2 stack&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;what-tirx-enables&quot;&gt;&lt;strong&gt;What TIRx Enables&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;TIRx is immediately useful as a kernel DSL. The same structure also helps with three things that are becoming important for ML systems: supporting new hardware, building megakernels, and agentic kernel programming.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-stable-extension-boundary-for-future-hardware&quot;&gt;&lt;strong&gt;A Stable Extension Boundary for Future Hardware&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/extension_boundary.png&quot; alt=&quot;image&quot; style=&quot;width: 53.333%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;By design, TIRx treats new hardware support as a staged process rather than a redesign of the DSL. When a feature first appears, it can be exposed directly as a backend intrinsic so kernel authors can use it immediately. Once the same usage pattern repeats across kernels, it can be promoted into a tile primitive with layout helpers, legality checks, and optimized dispatch. This lets the system support a new generation early, then consolidate recurring patterns into reusable libraries.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Future hardware should grow the backend library, not the core language.&lt;/strong&gt; This separation keeps the TIRx core small. New memory spaces become storage scopes and layout axes; new cooperation mechanisms become scope constructs and validation rules; new instructions become intrinsics and primitive implementations. Higher-level automation—schedule search, pipelining, performance models, and agentic tuning—can then optimize over these explicit building blocks instead of requiring the core compiler to predict every hardware pattern upfront.&lt;/p&gt;
+
+&lt;h3 id=&quot;megakernels-and-composable-tile-tasks&quot;&gt;&lt;strong&gt;Megakernels and Composable Tile Tasks&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/megakernel_tasks.png&quot; alt=&quot;image&quot; style=&quot;width: 53.333%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Megakernels may change the shape of kernel libraries. Instead of exposing optimized implementations only as opaque host-launched kernels, future libraries may expose efficient device-side tasks: GEMM tiles, attention tiles, reduction tiles, communication chunks, epilogue tiles, and accelerator-specific data movement tasks. A megakernel DSL or compiler can then stitch these tasks together through an in-kernel schedule, forming a larger persistent kernel from reusable high-performance building blocks.&lt;/p&gt;
+
+&lt;p&gt;This creates a new requirement for the DSL used to write those tasks. Each task must still capture state-of-the-art intra-task implementation details: memory movement, synchronization, pipeline state, warpgroup roles, tensor-memory usage, backend intrinsics, and layout choices. At the same time, the task needs enough IR structure to be stitched into a larger program: inputs, outputs, memory scopes, layouts, synchronization behavior, and execution ownership cannot be hidden behind an opaque kernel boundary.&lt;/p&gt;
+
+&lt;p&gt;TIRx is designed for this layer for two reasons. First, the performance of a megakernel depends on the performance of its tasks: TIRx tasks keep pipeline structure, synchronization, role assignment, and backend intrinsics under the author’s control, so each task can carry a state-of-the-art implementation. Second, TIRx tasks exist as compiler IR rather than as separately compiled kernels, so a megakernel compiler can transform them directly: stitching and scheduling can be organized as passes over task IR (re-offsetting shared memory, renaming barriers, reassigning warp roles, interleaving pipelines across tasks), which a separately compiled, opaque kernel cannot support.&lt;/p&gt;
+
+&lt;p&gt;TIRx is not a full megakernel compiler by itself; task graphs, dependency tracking, in-kernel scheduling, and runtime policies belong to the megakernel system above it. We have already been exploring this direction on top of TIRx and built &lt;strong&gt;Event Tensor&lt;/strong&gt; (MLSys ‘26, &lt;a href=&quot;https://arxiv.org/pdf/2604.13327&quot;&gt;https://arxiv.org/pdf/2604.13327&lt;/a&gt;), which uses tiled tasks and first-class dependency tensors to compile dynamic megakernels. It illustrates the kind of system TIRx is meant to support: a higher-level megakernel compiler manages task dependencies and scheduling. At the same time, TIRx provides the substrate for authoring high-performance tile tasks that are both hardware-native and composable. We will be working on bringing Event Tensor integration into TIRx in follow-up releases.&lt;/p&gt;
+
+&lt;h3 id=&quot;agentic-kernel-programming&quot;&gt;&lt;strong&gt;Agentic Kernel Programming&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Agentic kernel programming needs support at two levels: the compiler stack must be easy for agents and tools to instrument, and the DSL must expose a search space that is structured enough to guide kernel exploration.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tirx/agentic.png&quot; alt=&quot;image&quot; style=&quot;width: 53.333%; margin: auto; display: block;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Agent-visible compiler infrastructure.&lt;/strong&gt; The first layer is compiler toolability. An agent workflow should be able to construct, inspect, visit, mutate, and analyze compiler IR without turning every new experiment into a full compiler rebuild. TIRx is built to expose its IR objects and compiler utilities through TVM FFI across Python, C++, and Rust. This makes it practical to plug in sidecar analysis passes in the language best suited for the task: layout inspection in Python, fast simulation or static analysis in Rust, backend-specific checks in C++, or lightweight mutation passes for rapid search.&lt;/p&gt;
+
+&lt;p&gt;This matters because agentic optimization will likely depend on fast iteration. Agents need to test hypotheses, mutate programs, run legality checks, inspect intermediate IR, and attach profiling or simulation feedback. A compiler stack that exposes IR and passes through a language-agnostic FFI gives agents a practical substrate for this kind of experimentation, instead of forcing every new analysis or mutation strategy into the core compiler build.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Structured search over kernel programs.&lt;/strong&gt; The second layer is the search space itself. Earlier automatic kernel optimization systems such as Ansor and MetaSchedule framed the problem around structured search: construct a search space that mostly contains algorithmically valid programs, sample candidates from that space, and then perform local tuning to improve performance. Agentic kernel optimization can be viewed as a more flexible version of the same idea, in which an agent controls how candidates are generated, mutated, refined, and evaluated.&lt;/p&gt;
+
+&lt;p&gt;We can think of this progression in several levels.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;L1&lt;/strong&gt;: An agent locally tunes an already optimized expert kernel, which is where many current kernel-agent systems operate.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;L2&lt;/strong&gt;: An agent samples kernel candidates from a human-defined structured search space and then performs local performance tuning.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;L3&lt;/strong&gt;: An agent starts to generate or modify the search space from human-provided meta-rules.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;L4&lt;/strong&gt;: The long-term goal is for an agent to bootstrap useful search spaces from hardware documentation, primitive experiments, and compiler feedback.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;TIRx is designed to support the middle of this spectrum. It combines high-level tile primitives with full hardware-native access, so an agent can start from a structured program written mostly in primitives and gradually refine it toward a more specialized implementation. This high-level subset gives the compiler a program structure that can provide early feedback on primitive dispatch, layout compatibility, synchronization structure, race conditions, and value-level simulation against a reference.&lt;/p&gt;
+
+&lt;p&gt;This is the key advantage for agentic search. If the only reward comes after compiling, running, checking correctness, and benchmarking on hardware, the signal is sparse and expensive. A structured TIRx program gives the agent denser reward signals along the way: whether the program is well formed, whether the synchronization pattern is valid, whether memory accesses are race-free, whether simulated values match the intended computation, and whether resource or performance models predict a useful direction.&lt;/p&gt;
+
+&lt;p&gt;In this view, TIRx is not just a target language for generated kernels. It is something an agent can optimize against with the compiler’s help: high-level enough that the compiler can run static checks and simulate values, low-level enough to express state-of-the-art implementations, and open enough that an agent can inspect and mutate it for feedback before the final benchmark.&lt;/p&gt;
+
+&lt;h2 id=&quot;contributing&quot;&gt;&lt;strong&gt;Contributing&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;TIRx is an open compiler foundation. The core abstraction boundary is intentionally small, but the ecosystem around it can grow in several directions. Feel free to try out TIRx and contribute to the compiler and kernel library!&lt;/p&gt;
+
+&lt;h2 id=&quot;acknowledgement&quot;&gt;&lt;strong&gt;Acknowledgement&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;TIRx would not exist without Apache TVM, on whose compiler infrastructure it is built. Beyond that foundation, its design has been shaped by a long line of systems work, including NumPy, CuTe, Triton, ThunderKittens, and TileLang. We thank the FlashInfer and FlashInfer-Bench teams and the Apache TVM community for helpful technical discussions.&lt;/p&gt;
+</description>
+                <link>https://tvm.apache.org/2026/06/22/tirx</link>
+                <guid>https://tvm.apache.org/2026/06/22/tirx</guid>
+                <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
+        </item>
 
         <item>
                 <title>Building an Open ABI and FFI for ML Systems</title>
@@ -3850,580 +4169,6 @@ optimizations into the TVM stack.&lt;/p&gt;
                 <link>https://tvm.apache.org/2018/03/12/webgl</link>
                 <guid>https://tvm.apache.org/2018/03/12/webgl</guid>
                 <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
-        </item>
-
-        <item>
-                <title>Optimizing Mobile Deep Learning on ARM GPU with TVM</title>
-                <description>&lt;p&gt;With the great success of deep learning, the demand for
-deploying deep neural networks to mobile devices is growing rapidly.
-Similar to what we do in desktop platforms, utilizing GPU in mobile devices
-can benefit both inference speed and energy efficiency. However, most
-existing deep learning frameworks do not support mobile GPU very well.
-The difficulty lies at the difference between mobile GPU architecture and
-desktop GPU architecture. It means special effort is required for optimizing on
-mobile GPU. The non-trivial extra work eventually results in the poor support
-of mobile GPU in most deep learning frameworks.&lt;/p&gt;
-
-&lt;p&gt;TVM addresses the difficulty of deploying for different hardwares by
-introducing an unified IR stack, with which the optimization for different
-hardwares can be done easily.  In this post, we show how we use
-&lt;a href=&quot;http://tvmlang.org/2017/08/17/tvm-release-announcement.html&quot;&gt;TVM&lt;/a&gt;/&lt;a href=&quot;http://tvmlang.org/2017/10/06/nnvm-compiler-announcement.html&quot;&gt;NNVM&lt;/a&gt; to
-generate efficient kernels for ARM Mali GPU and do end-to-end compilation.
-In our test on Mali-T860 MP4, compared with
-&lt;a href=&quot;https://developer.arm.com/technologies/compute-library&quot;&gt;Arm Compute Library&lt;/a&gt;,
-our method is 1.4x faster on VGG-16 and 2.2x faster on MobileNet.
-Both graph-level and operator-level optimization contribute
-to this speed up.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/images/opt-mali/end2end.png&quot; alt=&quot;image&quot; width=&quot;95%&quot; /&gt;&lt;/p&gt;
-
-&lt;center&gt; Figure. Inference Speed of Different Backends on ImageNet&lt;/center&gt;
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;mali-midgrad-gpu&quot;&gt;Mali Midgrad GPU&lt;/h1&gt;
-&lt;p&gt;We will use Firefly-RK3399 with Mali-T860 MP4 as our test environment,
-so we mainly focus on Mali T8xx below.&lt;/p&gt;
-
-&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
-&lt;p&gt;Figure 1 is an overview of the Mali Architecture on T860 and T880.
-The GPUs are scalable up to 16 coherent shader cores. Inside each
-shader core, there are 2 or 3 arithmetic pipelines, 1 load/store pipeline
-and 1 texture pipeline (so-called TriPipe). The ALU in each arithmetic
-pipeline has four 128-bit vector units and one scalar units.&lt;/p&gt;
-
-&lt;p&gt;We use OpenCL for GPU computing. When mapping to OpenCL model, each
-shader core executes one or several work groups. Each shader core supports
-up to 384 concurrently executing threads. Each work item in OpenCL
-typically maps to a single thread on a Mali GPU.
-The Mali GPUs use a VLIW (Very Long Instruction Word) architecture.
-Each instruction word contains multiple operations. The Mali GPUs
-also use SIMD, so that most arithmetic instructions operate on
-multiple data elements simultaneously. &lt;sup&gt;[1]&lt;/sup&gt;&lt;/p&gt;
-
-&lt;center&gt; &lt;img width=&quot;50%&quot; src=&quot;/images/opt-mali/mali-arch.png&quot; /&gt; &lt;/center&gt;
-&lt;center&gt; Figure 1. Mali T860 and T880 (source &lt;sup&gt;[2]&lt;/sup&gt;) &lt;/center&gt;
-
-&lt;h2 id=&quot;difference-with-nvidias-gpus&quot;&gt;Difference with NVIDIA’s GPUs&lt;/h2&gt;
-&lt;p&gt;Here are some differences that we should concern when writing OpenCL
-code for Mali GPUs, compared with writing for NVIDIA’s GPUs.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Mali GPUs use an unified global memory. In NVIDIA’s GPUs, we usually
-copy data to shared memory, because NVIDIA’s GPUs have physically
-separate global memory, shared memory and register. In Mali, this copy
-does not improve performance and can be removed. Besides, Mali GPUs
-usually share the global memory with CPU, so there is no need for copying
-between CPU and GPU.&lt;/li&gt;
-  &lt;li&gt;Mali Midgrad GPUs are based on SIMD (Single Instruction Multiple Data)
-and need explicit vectorization. In NVIDIA CUDA, parallelism is
-achieved by SIMT (Single Instruction Multiple Thread), which does
-not require explicit vectorization. But also notice that the newer
-Mali Bitfrost GPUs are based on quad-style vectorization and does not
-require explicit vectorization.&lt;/li&gt;
-  &lt;li&gt;All threads in Mali GPUs have individual program counters. It means
-the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;warp size&lt;/code&gt; is 1, so that branch divergence is not a major problem.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;optimization--convolution-as-example&quot;&gt;Optimization : Convolution as Example&lt;/h1&gt;
-&lt;p&gt;The convolution layer is the core of most deep neural networks and
-takes most of the computation time. So we take the convolution layer
-as example to demonstrate how common optimization techniques like
-packing, tiling, unrolling and vectorization are applied in TVM.&lt;/p&gt;
-
-&lt;h2 id=&quot;im2col-with-gemm&quot;&gt;Im2Col with GEMM&lt;/h2&gt;
-&lt;p&gt;A well-known algorithm for convolution layer is &lt;a href=&quot;https://petewarden.com/2015/04/20/why-gemm-is-at-the-heart-of-deep-learning/&quot;&gt;im2col&lt;/a&gt;,
-which converts the little 3D input cubes to columns of a matrix and
-perform a GEMM. The advantage of this method is easy utilization of
-highly optimized BLAS library.  However, the memory redundancy
-(9x memory for 3x3 kernel) is awful.&lt;/p&gt;
-
-&lt;h2 id=&quot;spatial-packing&quot;&gt;Spatial Packing&lt;/h2&gt;
-&lt;p&gt;Instead, we adopt a method to calculate the convolution, and apply the
-optimization techniques step by step. A convolution layer in VGG-16
-is used as tuning case, whose configuration is listed below.
-We assume the batch size is 1 for inference.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Input Shape&lt;/th&gt;
-      &lt;th&gt;Output Shape&lt;/th&gt;
-      &lt;th&gt;Kernel Size&lt;/th&gt;
-      &lt;th&gt;Stride&lt;/th&gt;
-      &lt;th&gt;Padding&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;56x56x256&lt;/td&gt;
-      &lt;td&gt;56x56x256&lt;/td&gt;
-      &lt;td&gt;3x3&lt;/td&gt;
-      &lt;td&gt;(1, 1)&lt;/td&gt;
-      &lt;td&gt;(1, 1)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;As a baseline, we also list the performance of this layer in
-Arm Compute Library.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Kernel&lt;/th&gt;
-      &lt;th&gt;Cost (second)&lt;/th&gt;
-      &lt;th&gt;GFLOPS&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GEMM method in ARMComputeLib&lt;/td&gt;
-      &lt;td&gt;0.1821&lt;/td&gt;
-      &lt;td&gt;20.3111&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;declare-the-computation-tiling-and-packing&quot;&gt;Declare the computation: tiling and packing&lt;/h3&gt;
-&lt;p&gt;Tiling and packing are two methods intended for better memory access.
-Tiling separates the whole computation into small blocks for better
-datareuse.  Packing re-layouts the input matrices according to the
-tiling so that we can access the memory sequentially, which reduces
-cache miss rate.&lt;/p&gt;
-
-&lt;p&gt;We do tiling on the width dimension of the input image and CO dimension
-of the filter matrix.  This is described by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tvm.compute&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# set tiling factor
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;VW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VC&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# get input shape
-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;CO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;TH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H_PAD&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;TW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;W_PAD&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# calc output shape
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H_PAD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H_STR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;OW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W_PAD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;W_STR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# data shape after packing
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dvshape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H_STRIDE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W_STRIDE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H_STRIDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HCAT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W_STRIDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WCAT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# kernel shape after packing
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kvshape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;ovshape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;oshape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# define packing
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_vec&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;compute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dvshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;data_pad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H_STRIDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W_STRIDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;data_vec&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;compute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kvshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;kernel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# define convolution
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;reduce_axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;reduce_axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;reduce_axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;compute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ovshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H_STRIDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W_STRIDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out_dtype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out_dtype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# unpack to correct layout
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;compute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-                     &lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                     &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;output_unpack&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;direct_conv_output&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We can inspect the defined IR by&lt;/p&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;lower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simple_mode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;I pick the convolution part here.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;produce conv {
-  for (co, 0, 64) {
-    for (h, 0, 56) {
-      for (w, 0, 14) {
-        for (vw.init, 0, 4) {
-          for (vc.init, 0, 4) {
-            conv[((((((((co*56) + h)*14) + w)*4) + vw.init)*4) + vc.init)] = 0.000000f
-          }
-        }
-        for (ci, 0, 256) {
-          for (kh, 0, 3) {
-            for (kw, 0, 3) {
-              for (vw, 0, 4) {
-                for (vc, 0, 4) {
-                  conv[((((((((co*56) + h)*14) + w)*4) + vw)*4) + vc)] = (conv[((((((((co*56) + h)*14) + w)*4) + vw)*4) + vc)] + (data_vec[(((((((((h*14) + w)*256) + ci)*3) + kh)*6) + kw) + vw)]*kernel_vec[((((((((co*256) + ci)*3) + kh)*3) + kw)*4) + vc)]))
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;kernel-1-bind-thread&quot;&gt;Kernel 1: bind thread&lt;/h3&gt;
-&lt;p&gt;In TVM, we declare the computation at first and then &lt;em&gt;schedule&lt;/em&gt; it.
-This mechanism decouples the algorithm and implementation detail. (This idea
-is from &lt;a href=&quot;http://halide-lang.org/&quot;&gt;Halide&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;The following schedule simply binds axes to GPU threads, so that
-our code can run on Mali GPU.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# helper function for binding thread
-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;tile_and_bind3d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z_factor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_factor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_factor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; tile and bind 3d &lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;y_factor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_factor&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z_factor&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;x_factor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_factor&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_factor&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;zo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z_factor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;yo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_factor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;xo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_factor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;thread_axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;blockIdx.z&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;thread_axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;threadIdx.z&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;thread_axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;blockIdx.y&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;thread_axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;threadIdx.y&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;thread_axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;blockIdx.x&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tvm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;thread_axis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;threadIdx.x&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# set tunable parameter
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_thread&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# schedule data packing
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind3d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# schedule kernel packing
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# schedule conv
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;kc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reduce_axis&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;reorder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind3d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind3d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;With this schedule, our code can run now, but the performance is terrible.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Kernel&lt;/th&gt;
-      &lt;th&gt;Cost (second)&lt;/th&gt;
-      &lt;th&gt;GFLOPS&lt;/th&gt;
-      &lt;th&gt;speedup&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GEMM method in ARMComputeLib&lt;/td&gt;
-      &lt;td&gt;0.1821&lt;/td&gt;
-      &lt;td&gt;20.3111&lt;/td&gt;
-      &lt;td&gt;1x&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Kernel 1: simple bind&lt;/td&gt;
-      &lt;td&gt;5.6154&lt;/td&gt;
-      &lt;td&gt;0.6588&lt;/td&gt;
-      &lt;td&gt;0.03x&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;kernel-2-unrolling&quot;&gt;Kernel 2: unrolling&lt;/h3&gt;
-&lt;p&gt;Loop unrolling can reduce the instructions for loop control, reduce
-branch penalties and hide latency in reading memory.
-In TVM, this can be done easily by calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s.unroll(axis)&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# set tunable parameter
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_thread&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# schedule data packing
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind3d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;!! ADD UNROLL HERE !!&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# schedule kernel packing
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;!! ADD UNROLL HERE !!&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# schedule conv
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;kc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reduce_axis&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;reorder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind3d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;!! ADD UNROLL HERE !!&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind3d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Kernel&lt;/th&gt;
-      &lt;th&gt;Cost (second)&lt;/th&gt;
-      &lt;th&gt;GFLOPS&lt;/th&gt;
-      &lt;th&gt;speedup&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GEMM method in ARMComputeLib&lt;/td&gt;
-      &lt;td&gt;0.1821&lt;/td&gt;
-      &lt;td&gt;20.3111&lt;/td&gt;
-      &lt;td&gt;1x&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Kernel 1: simple bind&lt;/td&gt;
-      &lt;td&gt;5.6154&lt;/td&gt;
-      &lt;td&gt;0.6588&lt;/td&gt;
-      &lt;td&gt;0.03x&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Kernel 2: + unrolling&lt;/td&gt;
-      &lt;td&gt;0.3707&lt;/td&gt;
-      &lt;td&gt;9.9796&lt;/td&gt;
-      &lt;td&gt;0.49x&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;kernel3-vectorization&quot;&gt;Kernel3: vectorization&lt;/h3&gt;
-&lt;p&gt;As mentioned before, we need to do vectorization explictly
- in order to achieve the best performance on Mali GPU.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# set tunable parameter
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_thread&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# schedule data packing
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind3d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# unroll
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# schedule kernel packing
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# unroll
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;!! VECTORIZE HERE !!&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kernel_vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vectorize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# schedule conv
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;kc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reduce_axis&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;reorder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind3d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# unroll
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unroll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;!! VECTORIZE HERE !!&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vectorize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;tile_and_bind3d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Kernel&lt;/th&gt;
-      &lt;th&gt;Cost (second)&lt;/th&gt;
-      &lt;th&gt;GFLOPS&lt;/th&gt;
-      &lt;th&gt;speedup&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GEMM method in ARMComputeLib&lt;/td&gt;
-      &lt;td&gt;0.1821&lt;/td&gt;
-      &lt;td&gt;20.3111&lt;/td&gt;
-      &lt;td&gt;1x&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Kernel 1: simple bind&lt;/td&gt;
-      &lt;td&gt;5.6154&lt;/td&gt;
-      &lt;td&gt;0.6588&lt;/td&gt;
-      &lt;td&gt;0.03x&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Kernel 2: + unrolling&lt;/td&gt;
-      &lt;td&gt;0.3707&lt;/td&gt;
-      &lt;td&gt;9.9796&lt;/td&gt;
-      &lt;td&gt;0.49x&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Kernel 3: + vectorization&lt;/td&gt;
-      &lt;td&gt;0.1304&lt;/td&gt;
-      &lt;td&gt;28.3679&lt;/td&gt;
-      &lt;td&gt;1.40x&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;how-to-set-the-tunable-parameter&quot;&gt;How to set the tunable parameter&lt;/h3&gt;
-&lt;p&gt;As for the tunable parameters above, some can be calculated.
-For the vectorized dimension &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;VC&lt;/code&gt;, we should fill the 128-bit register,
-so it can be set as 128/32=4 for float32 and 128/16=8 for float16.&lt;/p&gt;
-
-&lt;p&gt;But more often we cannot determine the optimal value, due to the
-complicated runtime. We use grid search in TVM. It can be
-done extremely effective since we write python code in TVM’s high-level
-IR rather than direct OpenCL code.&lt;/p&gt;
-
-&lt;h3 id=&quot;the-generated-opencl-code&quot;&gt;The generated OpenCL code&lt;/h3&gt;
-&lt;p&gt;We can view the generated OpenCL code by&lt;/p&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imported_modules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;get_source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The OpenCL code is too long to be pasted here, and it is hard to read due
-to heavy unrolling. If interested, you can view it
-&lt;a href=&quot;https://github.com/merrymercy/tvm-mali/blob/master/data/kernels.cl&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;end-to-end-benchmarking&quot;&gt;End-to-End Benchmarking&lt;/h1&gt;
-&lt;p&gt;In this section, we compare the comprehensive performance between
-different backends on some popular deep neural networks.
-Our test environment is&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Firefly-RK3399 4G
-CPU: dual-core Cortex-A72 + quad-core Cortex-A53
-GPU: Mali-T860MP4
-
-Arm Compute Library : v17.12
-MXNet: v1.0.1
-Openblas: v0.2.18
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We use NNVM and TVM to do end-to-end compilation.&lt;/p&gt;
-
-&lt;h2 id=&quot;performance&quot;&gt;Performance&lt;/h2&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/images/opt-mali/end2end.png&quot; alt=&quot;image&quot; width=&quot;95%&quot; /&gt;&lt;/p&gt;
-
-&lt;center&gt; Figure 2. Inference Speed of Different Backends on ImageNet&lt;/center&gt;
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;As shown in Figure 2, we test the inference speed on ImageNet.
-On Firefly-RK3399, Mali GPU can be 2x ~ 4x faster than 6-core big.LITTLE CPU.
-Our end-to-end pipeline is 1.4x ~ 2.2x faster than Arm Compute Library.
-We try both GEMM and direct method of convolution layer in
-Arm Compute Library, GEMM method is always faster than direct method
-in these test cases, so we only plot the result of GEMM method.&lt;/p&gt;
-
-&lt;p&gt;Some results, like resnet18 on Arm Compute Library, are missing in the Figure 2.
-It is because the graph runtime of Arm Compute Library does not support
-skip connection currently and has a poor neon implementation of
-depthwise convolution.  This also reflects the advantage of NNVM
-software stack.&lt;/p&gt;
-
-&lt;h2 id=&quot;half-precision-performance&quot;&gt;Half-Precision Performance&lt;/h2&gt;
-&lt;p&gt;Precision in deep neural networks is not very important, especially
-for the inference on mobile devices. Using low-precision arithmetic
-can make the inference much faster. We also test the half-precision
-floating number on Mali GPU.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;model&lt;/th&gt;
-      &lt;th&gt;backend&lt;/th&gt;
-      &lt;th&gt;Time Cost per Image (second)&lt;/th&gt;
-      &lt;th&gt;speed up to FP32&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vgg16&lt;/td&gt;
-      &lt;td&gt;ACM-mali&lt;/td&gt;
-      &lt;td&gt;0.9694&lt;/td&gt;
-      &lt;td&gt;1.69&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vgg16&lt;/td&gt;
-      &lt;td&gt;TVM-mali&lt;/td&gt;
-      &lt;td&gt;0.6896&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;1.87x&lt;/strong&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MobileNet 1.0&lt;/td&gt;
-      &lt;td&gt;TVM-mali&lt;/td&gt;
-      &lt;td&gt;0.0479&lt;/td&gt;
-      &lt;td&gt;1.60x&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ResNet18&lt;/td&gt;
-      &lt;td&gt;TVM-mali&lt;/td&gt;
-      &lt;td&gt;0.1183&lt;/td&gt;
-      &lt;td&gt;1.73x&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;center&gt; Table 1. Inference Speed of FP16 on ImageNet&lt;/center&gt;
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;In theory, FP16 can both double peak compute and halve memory consumption,
-so that doubling the speed. But it needs good input shape for
-longer vectorization and fine-tuning some parameters.&lt;/p&gt;
-
-&lt;h2 id=&quot;further-work-on-mobile-devices&quot;&gt;Further Work on Mobile Devices&lt;/h2&gt;
-&lt;p&gt;We should admit that there is still some room for improvement,
-mainly at the graph level, such as model compression and weight prelayout.
-Further improvement in NNVM will try to solve these problems.&lt;/p&gt;
-
-&lt;h1 id=&quot;show-me-the-code&quot;&gt;Show me the code&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/merrymercy/tvm-mali&quot;&gt;End-to-End benchmark&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dmlc/tvm/tree/master/topi/python/topi/mali&quot;&gt;Convolution and Depthwise Convolution Schedule&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;bio--acknowledgement&quot;&gt;Bio &amp;amp; Acknowledgement&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://lmzheng.net&quot;&gt;Lianmin Zheng&lt;/a&gt; is an undergraduate
-student at SJTU Apex lab.  He is interested in machine learning
-and building computer system.&lt;/p&gt;
-
-&lt;p&gt;The author has many thanks to
-&lt;a href=&quot;https://homes.cs.washington.edu/~tqchen/&quot;&gt;Tianqi Chen&lt;/a&gt; for his helpful
-advice and &lt;a href=&quot;https://github.com/yzhliu&quot;&gt;Yizhi Liu&lt;/a&gt; for his earlier work.&lt;/p&gt;
-
-&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
-&lt;p&gt;[1] &lt;a href=&quot;https://developer.arm.com/docs/100614/0302&quot;&gt;ARM Mali GPU OpenCL Developer Guide&lt;/a&gt;
-[2] &lt;a href=&quot;https://developer.arm.com/&quot;&gt;ARM Developer&lt;/a&gt;&lt;/p&gt;
-</description>
-                <link>https://tvm.apache.org/2018/01/16/opt-mali-gpu</link>
-                <guid>https://tvm.apache.org/2018/01/16/opt-mali-gpu</guid>
-                <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
         </item>
 
 

@@ -1,4 +1,314 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2026-06-16T17:17:47+00:00</updated><id>/feed.xml</id><title type="html">TVM</title><author><name>{&quot;name&quot; =&gt; nil}</name></author><entry><title type="html">Building an Open ABI and FFI for ML Systems</title><link href="/2025/10/21/tvm-ffi" rel="alternate" type="text/html" title="Building an Open ABI and FFI for ML Systems" /><published>2025-10-21T00:00:00+00:00</published><updated>2025-10-21T00:00:00+00:00</updated><id>/2025/10/21/tvm-ffi</id><content type="html" xml:base="/2025/10/21/tvm-ffi"><![CDATA[<p>We are currently living in an exciting era for AI, where machine learning systems and infrastructures are crucial for training and deploying efficient AI models. The modern machine learning systems landscape comes rich with diverse components, including popular ML frameworks and array libraries like JAX, PyTorch, and CuPy. It also includes specialized libraries such as FlashAttention, FlashInfer and cuDNN. Furthermore, there’s a growing trend of ML compilers and domain-specific languages (DSLs) operating at both graph and kernel levels, encompassing tools like Torch Inductor, OpenAI Triton, TileLang, Mojo, cuteDSL, Helion, Hidet and more. Finally, we are starting to see intriguing developments of coding agents that can generate kernels and integrate them into ML systems.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2026-06-22T03:36:47+00:00</updated><id>/feed.xml</id><title type="html">TVM</title><author><name>{&quot;name&quot; =&gt; nil}</name></author><entry><title type="html">TIRx: An Open Compiler Stack for Evolving Frontier ML Kernels</title><link href="/2026/06/22/tirx" rel="alternate" type="text/html" title="TIRx: An Open Compiler Stack for Evolving Frontier ML Kernels" /><published>2026-06-22T00:00:00+00:00</published><updated>2026-06-22T00:00:00+00:00</updated><id>/2026/06/22/tirx</id><content type="html" xml:base="/2026/06/22/tirx"><![CDATA[<style>
+/* Theme has h3=38px but no h2 rule; size both down a notch and keep h2 > h3. */
+.post-content h2 { font-size: 38px; line-height: 1.3; }
+.post-content h3 { font-size: 30px; line-height: 1.3; }
+@media (max-width: 768px) {
+  .post-content h2 { font-size: 30px; }
+  .post-content h3 { font-size: 25px; }
+}
+</style>
+
+<p>Today we are introducing <strong>TIRx</strong>, an open-source, hardware-native DSL and compiler for ML kernels, built on Apache TVM. It targets the part of the AI software stack where fast-moving kernels meet fast-moving hardware: TIRx compiles to GPUs and specialized AI accelerators today and is designed to grow with the generations that follow. The same design serves expert-written kernels, agent-generated kernels, and megakernel systems.</p>
+
+<p>We have been working together with the broader community to provide the following materials at launch:</p>
+
+<ul>
+  <li><strong>PyPI wheel and Python frontend.</strong> A Python-embedded hardware-native kernel DSL with <code class="language-plaintext highlighter-rouge">@T.jit</code> / <code class="language-plaintext highlighter-rouge">@T.prim_func</code> style authoring, parser utilities, and Python APIs for constructing TIRx programs.</li>
+  <li><strong>TIRx kernel library and benchmarks.</strong> End-to-end examples covering GEMM, attention-style kernels, and low-precision operators on Blackwell GPUs.</li>
+  <li><strong>Open course on modern GPU programming.</strong> This curated online course was taught as part of the machine learning systems course at Carnegie Mellon University, and uses TIRx to teach students <a href="https://mlc.ai/modern-gpu-programming-for-mlsys/index.html">modern GPU programming for machine learning systems</a>.</li>
+</ul>
+
+<p>You can find the following resources:</p>
+
+<ul>
+  <li>GitHub: <a href="https://github.com/apache/tvm">https://github.com/apache/tvm</a></li>
+  <li>Documentation: <a href="https://tvm.apache.org/docs/tirx/overview.html">https://tvm.apache.org/docs/tirx/overview.html</a></li>
+  <li>PyPI wheel: <a href="https://pypi.org/project/apache-tvm/0.25.0/">https://pypi.org/project/apache-tvm/0.25.0/</a></li>
+  <li>Community TIRx kernel library: <a href="https://github.com/mlc-ai/tirx-kernels">https://github.com/mlc-ai/tirx-kernels</a></li>
+  <li>Modern GPU programming for machine learning systems: <a href="https://mlc.ai/modern-gpu-programming-for-mlsys/index.html">https://mlc.ai/modern-gpu-programming-for-mlsys/index.html</a></li>
+</ul>
+
+<h2 id="motivation"><strong>Motivation</strong></h2>
+
+<p>Kernel DSLs are most effective when they choose the right boundary between the programmer and the machine. For mature kernels and mature hardware, that boundary can be high-level: the compiler hides thread assignment, memory movement, layout details, and instruction selection behind compact tensor or tile abstractions. Triton is the canonical example, and its adoption shows how well this works for established kernel patterns. At the frontier, the same boundary is under more pressure. New instructions, memory spaces, cooperation patterns, and kernel algorithms often appear before a compiler has the built-in machinery to automate them well. When that happens, the parts a high-level compiler would normally hide are exactly the parts an expert still needs to control by hand.</p>
+
+<p><img src="/images/tirx/motivation.png" alt="image" style="width: 80%; margin: auto; display: block;" /></p>
+
+<p>TIRx (pronounced “tier-ex”) responds by choosing a lower and more explicit boundary, organized around three decisions:</p>
+
+<ul>
+  <li><strong>Orchestration stays in the hardware-native source.</strong> Pipeline structure, synchronization, role assignment, memory placement, and backend intrinsics are the parts that most often need expert control at the frontier, so TIRx keeps them in source rather than behind an abstraction that may not yet model a new feature.</li>
+  <li><strong>Recurring tile primitives are exposed to the compiler.</strong> Execution scope, tensor layout, and tile primitive dispatch let common operations stay reusable, analyzable, and portable across backends, without forcing the whole kernel through a fixed compiler pipeline. The cost of hardware-native control is engineering effort: writing every operation by hand for each kernel and backend is laborious. Exposing recurring operations as tile primitives alleviates this, so authors reuse a dispatched implementation instead of re-writing the same data movement or matrix multiply each time.</li>
+  <li><strong>New hardware enters as intrinsics first, tile primitives later.</strong> A new feature can be used immediately as a native intrinsic — a thin, backend-specific wrapper over a single hardware operation. Once the usage pattern stabilizes across kernels, it can be promoted to a tile primitive: a layout-aware operation that dispatches across scopes, operands, and backends. The core abstraction stays small, and adding an intrinsic for a new feature never breaks existing ones.</li>
+</ul>
+
+<p>The result is a DSL and compiler stack that can grow with the hardware. This is the core design philosophy behind TIRx: keep the foundation small and explicit, and let the backend library evolve as new accelerator generations arrive.</p>
+
+<p>This places TIRx below systems like TileLang, which also lowers the boundary relative to Triton by exposing memory scopes and pipelining, while still leaving layout inference and thread binding to the compiler. TIRx deliberately leaves those higher-level concerns outside its core and provides a minimal foundation that such systems can build on; we are working with the TileLang community to bring TIRx as a new minimal foundation to support TileLang compilation.</p>
+
+<p>The same small, explicit foundation is what lets one design serve several kinds of users who pursue peak performance while reducing engineering effort as much as possible: expert-written production kernels, agent-generated kernels, and megakernel systems, each of which needs both control at the native level and recurring operations the compiler can see.</p>
+
+<p>The rest of this post walks through the programming model and then through each of these directions in turn.</p>
+
+<h2 id="the-tirx-programming-model"><strong>The TIRx Programming Model</strong></h2>
+
+<p>Here is what that boundary looks like in practice. A TIRx program reads as a structured native kernel: loops, branches, tensors, synchronization, pipeline state, and backend intrinsics are written directly. Tile primitives appear where a recurring hardware operation should become reusable and dispatchable. Three ingredients carry most of the model.</p>
+
+<p><strong>Execution scope</strong> decides who runs an operation and at what granularity. Two things select it: control flow, which picks the hardware role entering a region, and the primitive namespace, which sets the granularity of the call.</p>
+
+<p><img src="/images/tirx/exec_scope.png" alt="image" style="width: 56%; margin: auto; display: block;" /></p>
+
+<p>An unqualified <code class="language-plaintext highlighter-rouge">Tx.*</code> call runs at thread level; <code class="language-plaintext highlighter-rouge">Tx.wg.*</code> runs at warpgroup level. A predicate such as <code class="language-plaintext highlighter-rouge">T.ptx.elect_sync()</code> can narrow a thread-level call further, down to a single issuing thread.</p>
+
+<p><strong>Tensor layout</strong> describes where a logical tensor lives through a storage-first interface. A tile may sit in global memory, shared memory, registers, tensor memory, or accelerator SRAM. The user declares where each tile lives and how its elements are spread across lanes, warps, and registers; that declaration stays attached to the tile. When a primitive is called, the compiler reads those declarations to choose an implementation. A layout is a storage description, not a loop-transformation utility: the user may construct a tile’s layout, but never uses layouts to transform loops.</p>
+
+<p><strong>Tile primitive dispatch</strong> turns one call into native IR. From the operand layouts, the execution scope, and the target, or an explicit <code class="language-plaintext highlighter-rouge">dispatch=</code> hint, it selects the matching implementation: a copy from global to shared resolves to TMA, shared to register to ldmatrix, and tensor memory to register to tcgen05.ld; a matrix multiply resolves to WGMMA, tcgen05, or a systolic-array instruction. Dispatch then generates the loops and addressing needed to apply that instruction across the whole tile.</p>
+
+<p>These ingredients combine wherever scope matters. In the GEMM epilogue below, warpgroup-scoped and thread-scoped primitives sit in the same region: the <code class="language-plaintext highlighter-rouge">Tx.wg.*</code> calls move and cast a tile across the warpgroup, while a final thread-scoped <code class="language-plaintext highlighter-rouge">Tx.copy_async</code>, guarded by an explicit issuing-thread predicate, performs the TMA store.</p>
+
+<p><img src="/images/tirx/gemm_epilogue.png" alt="image" style="width: 56%; margin: auto; display: block;" /></p>
+
+<p>The excerpts above are simplified. For the full picture, here are two roles from a complete FP16/BF16 GEMM kernel — a TMA producer and the tensor-memory writeback. You do not need to read them line by line. The point is that everything to do with orchestration (pipeline state, barrier protocol, role selection, low-level synchronization intrinsics like <code class="language-plaintext highlighter-rouge">tcgen05.wait</code> and <code class="language-plaintext highlighter-rouge">cp_async.bulk</code>) stays in ordinary source code, while the recurring data movement appears as tile primitives whose lowering is selected from scope, layout, and dispatch configuration.</p>
+
+<p><img src="/images/tirx/gemm_producer.png" alt="image" style="width: 56%; margin: auto; display: block;" />
+<img src="/images/tirx/gemm_writeback.png" alt="image" style="width: 56%; margin: auto; display: block;" /></p>
+
+<p>Of the three ingredients, layout involves the most design decisions, so it is worth a closer look.</p>
+
+<h3 id="a-storage-first-interface-for-tensor-layouts"><strong>A Storage-First Interface for Tensor Layouts</strong></h3>
+
+<p>TIRx treats layout as a first-class representation of tensor storage. Readers familiar with CuTe will recognize the territory: both systems use layout to describe how tensor data maps onto hardware resources, but CuTe exposes layout as a programmable interface for deriving how tile work is partitioned across threads, while TIRx uses layout as a storage contract consumed by primitive dispatch.</p>
+
+<p>A TIRx layout maps a logical tensor index to physical coordinates on named axes. The model generalizes shape-stride layout by attaching strides to semantic hardware axes and by adding explicit <strong>shard</strong>, <strong>replica</strong>, and <strong>offset</strong> components. Shard describes how logical elements are partitioned across physical axes. Replica describes where the same logical element is replicated. Offset describes where physical placement begins. Specifically,</p>
+
+<ul>
+  <li><strong>D (Shard).</strong> A list of one or more iterators, each with an extent and a stride on some axis. D partitions the logical index across these iters and produces a base coordinate. This generalizes shape-stride to multiple axes.</li>
+  <li><strong>R (Replica).</strong> A set of replication iterators that enumerate offsets in hardware space, independent of the logical index. Adding each element of this set to the <strong>D</strong> result yields replication or broadcasting.</li>
+  <li><strong>O (Offset).</strong> A fixed coordinate offset (one integer per axis) is added to every result. This places data at a specific base position or reserves exclusive resources.</li>
+</ul>
+
+<p>A concrete example of the TIRx layout Python API is:</p>
+
+<p><img src="/images/tirx/layout_api.png" alt="image" style="width: 56%; margin: auto; display: block;" /></p>
+
+<p>This represents a logical tile distributed over lanes and warps, replicated across another warpgroup, and placed at an offset on the warp axis. Given a logical coordinate (i, j) in (8, 16) shape space, it maps to the warp, lane, and reg axes, respectively, by computing</p>
+
+\[\begin{aligned}
+L(i,j)_{(8,16)} &amp;= L(i\cdot 16 + j) &amp;&amp; \text{(flatten)} \\
+&amp;= L\bigl(i,\ \lfloor j/8\rfloor,\ \lfloor j/2\rfloor\,\%\,4,\ j\,\%\,2\bigr) &amp;&amp; \text{(unflatten)}
+\end{aligned}\]
+
+\[\begin{cases}
+@\mathrm{warp}:\ \{\,\lfloor j/8\rfloor + 5 + 4r \mid r \in [0,2)\,\} \\
+@\mathrm{lane}:\ 4i + \lfloor j/2\rfloor\,\%\,4 \\
+@\mathrm{reg}:\ \ j\,\%\,2
+\end{cases}\]
+
+<p>For example, element 57 at logical (3, 9) maps to:</p>
+
+<ul>
+  <li>base location: 6@warpid, 12@laneid, 1@m</li>
+  <li>owners (×2 via replica): { warpid=6 laneid=12 }, { warpid=10 laneid=12 }</li>
+</ul>
+
+<p><em>(Click element 57 in the interactive demo below to see exactly these owners.)</em></p>
+
+<details>
+<summary>Unfold to see the interactive layout demo</summary>
+<iframe id="tirx-layout-demo" data-src="https://mlc.ai/modern-gpu-programming-for-mlsys/_static/tirx-layout-demo/index.html?preset=tensor-core&amp;notitle&amp;lock" style="width:100%; height:560px; border:1px solid #dfe1e6; border-radius:10px; margin:12px 0;" title="TIRx interactive layout demo: tensor-core tile" loading="lazy"></iframe>
+<script>
+(function () { var f = document.getElementById('tirx-layout-demo'); if (f && !f.src) f.src = f.getAttribute('data-src'); })();
+window.addEventListener('message', function (e) {
+  var h = e.data && e.data.tirxLayoutDemoHeight;
+  if (!h) return;
+  var f = document.getElementById('tirx-layout-demo');
+  if (f) f.style.height = h + 'px';
+});
+</script>
+</details>
+
+<p>TIRx’s layout interface is built around four design choices.</p>
+
+<p><strong>1. Layout is a storage contract, not a work-partitioning interface.</strong></p>
+
+<p>In CuTe, layout is not only a representation of data placement; it is also part of the programming interface for deriving how tile operations are distributed across threads. Users compose, tile, and partition layouts to express data and work distribution for copy and compute operations. TIRx draws the boundary differently. Users describe the storage layout of each tile and call tile primitives over those tiles. The layout records how logical tensor coordinates map to physical hardware coordinates, including sharding, replication, and offset; it is not the surface used to construct the execution partitioning. When a primitive is lowered, dispatch uses the operand layouts, execution scope, and backend target to generate the thread partitioning, loop nest, addressing, and instruction sequence. In this sense, TIRx layout only needs to represent storage precisely; the transformation logic lives inside primitive dispatch rather than in user-written layout composition.</p>
+
+<!-- CuTe vs TIRx comparison figure (parked for now)
+<style>
+.tirx-paradigms{max-width:980px;margin:20px auto;font-size:14px;line-height:1.45;color:#1f2937}
+.tirx-paradigms .task{text-align:center;color:#6b7280;font-size:13px;margin-bottom:12px}
+.tirx-paradigms .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 14px;align-items:stretch}
+.tirx-paradigms .cell{border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.tirx-paradigms .head{text-align:center;background:#f4efe6;border:1px solid #e4dccb}
+.tirx-paradigms .head b{font-size:16px}
+.tirx-paradigms .head span{color:#8a8a8a;font-size:12px}
+.tirx-paradigms .role{text-align:center;color:#6b7280;font-size:12px}
+.tirx-paradigms .what{text-align:center;background:#fdf0db;border:1px solid #f0d7a3}
+.tirx-paradigms .what b{font-size:15px}
+.tirx-paradigms .what span{color:#b45309;font-weight:600;font-size:13px}
+.tirx-paradigms .code{display:flex;flex-direction:column;justify-content:center;overflow-x:auto;background:#f6f6f3;border:1px solid #e6e6df;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:12.5px;color:#1f2937}
+.tirx-paradigms .code .cb{display:block;white-space:pre}
+.tirx-paradigms .code .cm{color:#7d8590;font-style:italic}
+.tirx-paradigms .code .kw{color:#9333ea}
+.tirx-paradigms .code .fn{color:#2563eb}
+.tirx-paradigms .code .st{color:#15803d}
+.tirx-paradigms .layer{text-align:center;color:#6b7280;font-size:12px}
+.tirx-paradigms .result{text-align:center;background:#fdf0db;border:1px solid #f0d7a3;color:#b45309;font-weight:600}
+.tirx-paradigms .t.head{background:#d7f0eb;border-color:#a5d8cf}
+.tirx-paradigms .t.head b,.tirx-paradigms .t.head span{color:#0f766e}
+.tirx-paradigms .t.what{background:#e4f5f1;border-color:#a5d8cf}
+.tirx-paradigms .t.what span{color:#0f766e}
+.tirx-paradigms .t.code{background:#eefaf7;border-color:#c2e7e0}
+.tirx-paradigms .t.result{background:#d7f0eb;border-color:#a5d8cf;color:#0f766e}
+.tirx-paradigms .note{margin-top:14px;background:#f4efe6;border:1px solid #e4dccb;border-radius:10px;padding:12px 14px;color:#374151;font-size:13px}
+@media(max-width:760px){.tirx-paradigms .grid{grid-template-columns:1fr}}
+</style>
+<div class="tirx-paradigms">
+<div class="task">Task: load a tensor-memory tile into registers</div>
+<div class="grid">
+<div class="cell head"><b>CuTe</b><span>build a tiled copy</span></div>
+<div class="cell head t"><b>TIRx</b><span>declare a copy primitive</span></div>
+<div class="role">user programs</div>
+<div class="role">user states</div>
+<div class="cell what"><b>Copy atom + partitions</b></div>
+<div class="cell what t"><b>Where the tile lives</b></div>
+<div class="cell code"><div class="cb"><span class="cm">// tmem accumulator from the MMA atom</span>
+Tensor tCtAcc = cta_mma.<span class="fn">make_fragment_C</span>(tCgC);
+TiledCopy t2r = <span class="fn">make_tmem_copy</span>(SM100_TMEM_LOAD_32dp32b1x{}, tCtAcc);
+ThrCopy thr_t2r = t2r.<span class="fn">get_slice</span>(threadIdx.x);
+<span class="cm">// this thread's tmem slice + register fragment</span>
+Tensor tDtAcc = thr_t2r.<span class="fn">partition_S</span>(tCtAcc);
+Tensor tDrAcc = <span class="fn">make_tensor</span>&lt;AccType&gt;(<span class="fn">shape</span>(tDtAcc));
+<span class="cm">// tcgen05.ld</span>
+<span class="fn">copy</span>(t2r, tDtAcc, tDrAcc);</div></div>
+<div class="cell code t"><div class="cb"><span class="cm"># tensor-memory accumulator, layout=TileLayout(S[(128, N):(1@TLane, 1@TCol)])</span>
+tmem = <span class="fn">tmem_pool.alloc</span>(128, N, <span class="st">"float32"</span>)
+<span class="cm"># sugar for T.alloc_local((128, TMEM_LD_N), layout=TileLayout(S[(128, TMEM_LD_N):(1@tid_in_wg, 1)]))</span>
+rD = <span class="fn">T.wg_reg_tile</span>(TMEM_LD_N)
+<span class="cm"># tcgen05.ld; loops and addressing generated</span>
+<span class="fn">Tx.wg.copy_async</span>(rD, tmem[:, tmem_n : tmem_n + TMEM_LD_N])</div></div>
+<div class="layer">intermediate layer</div>
+<div class="layer">no intermediate layer</div>
+<div class="cell result">the tiled copy issues tcgen05.ld over each partition</div>
+<div class="cell result t">loops and addressing are generated</div>
+</div>
+</div>
+-->
+
+<p><strong>2. Layout maps logical tensor coordinates to physical hardware coordinates.</strong></p>
+
+<p>Explicit replica and offset structure come from the designated logical-to-physical formulation. One alternative way to formalize layouts is to map physical locations to logical coordinates, such that replication—one logical element stored in multiple physical locations—can still be defined as a point-valued function. However, for tensors that span physical locations in a strided pattern, some physical locations may not have a well-defined mapping.</p>
+
+<p><strong>3. Layout supports general shapes.</strong></p>
+
+<p>Modern kernels frequently use shapes that do not fit a power-of-two-only representation. Global tensors, multi-stage shared-memory buffers, tensor-memory tiles, accelerator scratchpads, and distributed tensors all produce general shapes in practice. TIRx layout therefore starts from general shape support instead of treating it as a special case. This matters for block-scaled GEMM scale-factor tiles, Blackwell tensor memory, and accelerator memories with native multi-dimensional addressing.</p>
+
+<p><strong>4. Layout uses named hardware axes.</strong></p>
+
+<p>Another possible design is to map logical coordinates to a generic pair such as <code class="language-plaintext highlighter-rouge">(t, m)</code>, leaving the meaning of <code class="language-plaintext highlighter-rouge">t</code> and <code class="language-plaintext highlighter-rouge">m</code> to be recovered from context. Disambiguating such cases would require the compiler to consult additional contextual information carried by the tensor or rely on extra conventions in the programming model—for example, that the meaning of <code class="language-plaintext highlighter-rouge">t</code> is inherited from the execution scope at the tensor’s definition site. TIRx makes the hardware resource explicit in the layout itself. Axes such as <code class="language-plaintext highlighter-rouge">laneid</code>, <code class="language-plaintext highlighter-rouge">warpid</code>, <code class="language-plaintext highlighter-rouge">tid_in_wg</code>, <code class="language-plaintext highlighter-rouge">Col</code>, <code class="language-plaintext highlighter-rouge">Lane</code>, <code class="language-plaintext highlighter-rouge">P</code>, <code class="language-plaintext highlighter-rouge">F</code>, and <code class="language-plaintext highlighter-rouge">pid</code> carry semantic meaning. This makes layouts easier to read, removes context-dependent interpretation, and gives tile primitive dispatch the information it needs to check legality and select how to carry it out. It also decouples the layout from the programming model: because a layout names its hardware axes explicitly, it carries complete information on its own and is not tied to any particular programming model.</p>
+
+<h3 id="a-lightweight-compiler-backend"><strong>A Lightweight Compiler Backend</strong></h3>
+
+<p>TIRx keeps the required lowering path focused. After parsing, a program consists of hardware-native IR plus unresolved tile primitive calls. The compiler resolves those calls locally: each primitive is dispatched according to its operands, layouts, execution scope, and target backend, and is replaced by native IR fragments such as loops, address calculations, memory-scope operations, synchronization, and intrinsic calls. After primitive dispatch, the program is already a native kernel IR and can be translated directly to backend code (CUDA C++/PTX).</p>
+
+<p>This design keeps heavy optimization passes out of the critical path for expressing new kernels. Automatic warp specialization, layout inference across operators, schedule transformation, automatic tensor allocation, pipeline search, and cost-model-driven tuning are all valuable, but they tend to be tightly coupled to specific kernel families and hardware generations. When they become mandatory compiler stages, each new kernel pattern or hardware feature can require substantial pass redesign before users can access it productively.</p>
+
+<p>TIRx instead treats these techniques as optional layers above a direct lowering path: they can improve performance, guide search, or automate common patterns, but the core DSL does not depend on them to represent a new program.</p>
+
+<h2 id="performance"><strong>Performance</strong></h2>
+
+<p>We evaluate TIRx on 54 configurations spanning dense GEMM, block-scaled low-precision GEMM, and attention, measured on an NVIDIA B200 (SM100) and reported as sustained TFLOPS. On each configuration we compare TIRx to the fastest of the applicable state-of-the-art baselines.</p>
+
+<p><strong>Dense GEMM (FP16 / BF16).</strong> TIRx tracks the best cuBLAS and DeepGEMM baselines across square sizes from 1024³ to 16384³, reaching 1517 TFLOPS on BF16 8192³ and 1404 TFLOPS on FP16 8192³, or 0.96× and 0.95× the best baseline on those shapes (DeepGEMM-BF16 and DeepGEMM cuBLASLt).</p>
+
+<p><img src="/images/tirx/fp16_bf16_gemm_fp16_tflops.png" alt="image" style="width: 85%; margin: auto; display: block;" />
+<img src="/images/tirx/fp16_bf16_gemm_bf16_tflops.png" alt="image" style="width: 85%; margin: auto; display: block;" /></p>
+
+<p><strong>Block-scaled low-precision GEMM (FP8 / NVFP4).</strong> For FP8 blockwise GEMM, TIRx sustains 2895 TFLOPS on 4096×4096×7168, matching DeepGEMM within 0.99×. On NVFP4 8192³, TIRx achieves 5930 TFLOPS, within 2% of the best baseline (cuBLASLt NVFP4 and FlashInfer).</p>
+
+<p><img src="/images/tirx/fp8_blockwise_gemm_tflops.png" alt="image" style="width: 85%; margin: auto; display: block;" />
+<img src="/images/tirx/nvfp4_gemm_tflops.png" alt="image" style="width: 85%; margin: auto; display: block;" /></p>
+
+<p><strong>FlashAttention-4 (causal / non-causal).</strong> TIRx is competitive with flashattn_sm100 (CuTeDSL) at long sequence lengths. At s4096 and s8192 with 32 query heads (non-causal), TIRx delivers 1340 and 1328 TFLOPS versus 1330 and 1327 for the CuTeDSL baseline (0.99× and 1.00×); the causal variant at s4096 reaches 1236 TFLOPS (0.97×). Across all 32 FA4 configurations, non-causal throughput ranges from 580 to 1358 TFLOPS (median 1277) and causal from 277 to 1326 TFLOPS (median 1075); the lower absolute numbers at short sequences (433 TFLOPS at s1024 causal) follow from the S² FLOP scaling, not degraded long-context performance.</p>
+
+<p><img src="/images/tirx/flash_attention4_causal_tflops.png" alt="image" style="width: 95%; margin: auto; display: block;" />
+<img src="/images/tirx/flash_attention4_non_causal_tflops.png" alt="image" style="width: 95%; margin: auto; display: block;" /></p>
+
+<p><strong>Experimental setup.</strong></p>
+
+<ul>
+  <li><strong>Hardware and software:</strong> 4× NVIDIA B200 (SM100), driver 595.58.03, CUDA 13.2, PyTorch 2.12.0+cu132 (torch git 7661cd9c6b84).</li>
+  <li><strong>Workloads (54 configurations):</strong> FP16 and BF16 GEMM (5 square sizes each, 1024³ to 16384³), FP8 blockwise GEMM (7 DeepGEMM-style shapes), NVFP4 GEMM (5 square sizes), and FlashAttention-4 (32 configs: sequence length 1024 to 8192, heads 4/8/16/32, causal and non-causal).</li>
+  <li><strong>Protocol:</strong> timed with Proton (warmup 100, repeat 30, 5 independent rounds averaged). TFLOPS = FLOPs / latency, with 2MNK for GEMM and 4·B·H·S²·D for FA4 (B=1, D=128; causal configs scaled by 0.5).</li>
+  <li><strong>Baselines (local editable installs, pinned by commit):</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">torch-cublas</code>: PyTorch 2.12.0+cu132 / cuBLAS</li>
+      <li><code class="language-plaintext highlighter-rouge">deepgemm</code> / <code class="language-plaintext highlighter-rouge">deepgemm-bf16</code> / <code class="language-plaintext highlighter-rouge">deepgemm-cublaslt</code>: DeepGEMM commit 714dd1a4 (2026-05-11), 17 commits after v2.1.1.post3</li>
+      <li><code class="language-plaintext highlighter-rouge">flashinfer</code>: FlashInfer commit bff85f34 (2026-05-22), tag nightly-v0.6.12-20260523</li>
+      <li><code class="language-plaintext highlighter-rouge">flashattn_sm100</code> (CuTeDSL): FlashAttention commit 3da76cdb (2026-05-22), tag fa4-v4.0.0.beta14</li>
+      <li><code class="language-plaintext highlighter-rouge">cublaslt_nvfp4</code>: cuBLASLt reference in tirx-kernels, same CUDA 13.2 stack</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="what-tirx-enables"><strong>What TIRx Enables</strong></h2>
+
+<p>TIRx is immediately useful as a kernel DSL. The same structure also helps with three things that are becoming important for ML systems: supporting new hardware, building megakernels, and agentic kernel programming.</p>
+
+<h3 id="a-stable-extension-boundary-for-future-hardware"><strong>A Stable Extension Boundary for Future Hardware</strong></h3>
+
+<p><img src="/images/tirx/extension_boundary.png" alt="image" style="width: 53.333%; margin: auto; display: block;" /></p>
+
+<p>By design, TIRx treats new hardware support as a staged process rather than a redesign of the DSL. When a feature first appears, it can be exposed directly as a backend intrinsic so kernel authors can use it immediately. Once the same usage pattern repeats across kernels, it can be promoted into a tile primitive with layout helpers, legality checks, and optimized dispatch. This lets the system support a new generation early, then consolidate recurring patterns into reusable libraries.</p>
+
+<p><strong>Future hardware should grow the backend library, not the core language.</strong> This separation keeps the TIRx core small. New memory spaces become storage scopes and layout axes; new cooperation mechanisms become scope constructs and validation rules; new instructions become intrinsics and primitive implementations. Higher-level automation—schedule search, pipelining, performance models, and agentic tuning—can then optimize over these explicit building blocks instead of requiring the core compiler to predict every hardware pattern upfront.</p>
+
+<h3 id="megakernels-and-composable-tile-tasks"><strong>Megakernels and Composable Tile Tasks</strong></h3>
+
+<p><img src="/images/tirx/megakernel_tasks.png" alt="image" style="width: 53.333%; margin: auto; display: block;" /></p>
+
+<p>Megakernels may change the shape of kernel libraries. Instead of exposing optimized implementations only as opaque host-launched kernels, future libraries may expose efficient device-side tasks: GEMM tiles, attention tiles, reduction tiles, communication chunks, epilogue tiles, and accelerator-specific data movement tasks. A megakernel DSL or compiler can then stitch these tasks together through an in-kernel schedule, forming a larger persistent kernel from reusable high-performance building blocks.</p>
+
+<p>This creates a new requirement for the DSL used to write those tasks. Each task must still capture state-of-the-art intra-task implementation details: memory movement, synchronization, pipeline state, warpgroup roles, tensor-memory usage, backend intrinsics, and layout choices. At the same time, the task needs enough IR structure to be stitched into a larger program: inputs, outputs, memory scopes, layouts, synchronization behavior, and execution ownership cannot be hidden behind an opaque kernel boundary.</p>
+
+<p>TIRx is designed for this layer for two reasons. First, the performance of a megakernel depends on the performance of its tasks: TIRx tasks keep pipeline structure, synchronization, role assignment, and backend intrinsics under the author’s control, so each task can carry a state-of-the-art implementation. Second, TIRx tasks exist as compiler IR rather than as separately compiled kernels, so a megakernel compiler can transform them directly: stitching and scheduling can be organized as passes over task IR (re-offsetting shared memory, renaming barriers, reassigning warp roles, interleaving pipelines across tasks), which a separately compiled, opaque kernel cannot support.</p>
+
+<p>TIRx is not a full megakernel compiler by itself; task graphs, dependency tracking, in-kernel scheduling, and runtime policies belong to the megakernel system above it. We have already been exploring this direction on top of TIRx and built <strong>Event Tensor</strong> (MLSys ‘26, <a href="https://arxiv.org/pdf/2604.13327">https://arxiv.org/pdf/2604.13327</a>), which uses tiled tasks and first-class dependency tensors to compile dynamic megakernels. It illustrates the kind of system TIRx is meant to support: a higher-level megakernel compiler manages task dependencies and scheduling. At the same time, TIRx provides the substrate for authoring high-performance tile tasks that are both hardware-native and composable. We will be working on bringing Event Tensor integration into TIRx in follow-up releases.</p>
+
+<h3 id="agentic-kernel-programming"><strong>Agentic Kernel Programming</strong></h3>
+
+<p>Agentic kernel programming needs support at two levels: the compiler stack must be easy for agents and tools to instrument, and the DSL must expose a search space that is structured enough to guide kernel exploration.</p>
+
+<p><img src="/images/tirx/agentic.png" alt="image" style="width: 53.333%; margin: auto; display: block;" /></p>
+
+<p><strong>Agent-visible compiler infrastructure.</strong> The first layer is compiler toolability. An agent workflow should be able to construct, inspect, visit, mutate, and analyze compiler IR without turning every new experiment into a full compiler rebuild. TIRx is built to expose its IR objects and compiler utilities through TVM FFI across Python, C++, and Rust. This makes it practical to plug in sidecar analysis passes in the language best suited for the task: layout inspection in Python, fast simulation or static analysis in Rust, backend-specific checks in C++, or lightweight mutation passes for rapid search.</p>
+
+<p>This matters because agentic optimization will likely depend on fast iteration. Agents need to test hypotheses, mutate programs, run legality checks, inspect intermediate IR, and attach profiling or simulation feedback. A compiler stack that exposes IR and passes through a language-agnostic FFI gives agents a practical substrate for this kind of experimentation, instead of forcing every new analysis or mutation strategy into the core compiler build.</p>
+
+<p><strong>Structured search over kernel programs.</strong> The second layer is the search space itself. Earlier automatic kernel optimization systems such as Ansor and MetaSchedule framed the problem around structured search: construct a search space that mostly contains algorithmically valid programs, sample candidates from that space, and then perform local tuning to improve performance. Agentic kernel optimization can be viewed as a more flexible version of the same idea, in which an agent controls how candidates are generated, mutated, refined, and evaluated.</p>
+
+<p>We can think of this progression in several levels.</p>
+
+<ul>
+  <li><strong>L1</strong>: An agent locally tunes an already optimized expert kernel, which is where many current kernel-agent systems operate.</li>
+  <li><strong>L2</strong>: An agent samples kernel candidates from a human-defined structured search space and then performs local performance tuning.</li>
+  <li><strong>L3</strong>: An agent starts to generate or modify the search space from human-provided meta-rules.</li>
+  <li><strong>L4</strong>: The long-term goal is for an agent to bootstrap useful search spaces from hardware documentation, primitive experiments, and compiler feedback.</li>
+</ul>
+
+<p>TIRx is designed to support the middle of this spectrum. It combines high-level tile primitives with full hardware-native access, so an agent can start from a structured program written mostly in primitives and gradually refine it toward a more specialized implementation. This high-level subset gives the compiler a program structure that can provide early feedback on primitive dispatch, layout compatibility, synchronization structure, race conditions, and value-level simulation against a reference.</p>
+
+<p>This is the key advantage for agentic search. If the only reward comes after compiling, running, checking correctness, and benchmarking on hardware, the signal is sparse and expensive. A structured TIRx program gives the agent denser reward signals along the way: whether the program is well formed, whether the synchronization pattern is valid, whether memory accesses are race-free, whether simulated values match the intended computation, and whether resource or performance models predict a useful direction.</p>
+
+<p>In this view, TIRx is not just a target language for generated kernels. It is something an agent can optimize against with the compiler’s help: high-level enough that the compiler can run static checks and simulate values, low-level enough to express state-of-the-art implementations, and open enough that an agent can inspect and mutate it for feedback before the final benchmark.</p>
+
+<h2 id="contributing"><strong>Contributing</strong></h2>
+
+<p>TIRx is an open compiler foundation. The core abstraction boundary is intentionally small, but the ecosystem around it can grow in several directions. Feel free to try out TIRx and contribute to the compiler and kernel library!</p>
+
+<h2 id="acknowledgement"><strong>Acknowledgement</strong></h2>
+
+<p>TIRx would not exist without Apache TVM, on whose compiler infrastructure it is built. Beyond that foundation, its design has been shaped by a long line of systems work, including NumPy, CuTe, Triton, ThunderKittens, and TileLang. We thank the FlashInfer and FlashInfer-Bench teams and the Apache TVM community for helpful technical discussions.</p>]]></content><author><name>Apache TVM Community</name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Building an Open ABI and FFI for ML Systems</title><link href="/2025/10/21/tvm-ffi" rel="alternate" type="text/html" title="Building an Open ABI and FFI for ML Systems" /><published>2025-10-21T00:00:00+00:00</published><updated>2025-10-21T00:00:00+00:00</updated><id>/2025/10/21/tvm-ffi</id><content type="html" xml:base="/2025/10/21/tvm-ffi"><![CDATA[<p>We are currently living in an exciting era for AI, where machine learning systems and infrastructures are crucial for training and deploying efficient AI models. The modern machine learning systems landscape comes rich with diverse components, including popular ML frameworks and array libraries like JAX, PyTorch, and CuPy. It also includes specialized libraries such as FlashAttention, FlashInfer and cuDNN. Furthermore, there’s a growing trend of ML compilers and domain-specific languages (DSLs) operating at both graph and kernel levels, encompassing tools like Torch Inductor, OpenAI Triton, TileLang, Mojo, cuteDSL, Helion, Hidet and more. Finally, we are starting to see intriguing developments of coding agents that can generate kernels and integrate them into ML systems.</p>
 
 <p>The exciting growth of the ecosystem is the reason for today’s fast pace of innovation in AI. However, it also presents a significant challenge: <strong>interoperability</strong>. Many of those components need to integrate with each other. For example, libraries such as FlashInfer and cuDNN need to be integrated into PyTorch, JAX, and TensorRT’s runtime system, each of which may come with different interface requirements. ML compilers and DSLs also usually expose Python JIT binding support, while also needing to bring separate ahead-of-time compilation to specific exposure to non-Python environments such as automotive and mobile. The emergence of coding agents makes it even more interesting, as each agent is its own mini code generator that needs to interface with various deployment scenarios. As of now, the ecosystems address these challenges by creating numerous specific bindings for each DSL and library to deployment environments (Python/Torch/JAX/TensorRT, etc.).</p>
 
@@ -2083,139 +2393,4 @@ def mul(a, b, c):
 
 # via script
 relay_graph = torch_tvm.to_relay(mul, inputs)
-</code></pre></div></div>]]></content><author><name>Bram Wasti</name></author><summary type="html"><![CDATA[As TVM continuously demonstrates improvements to the efficiency of deep learning execution, it has become clear that PyTorch stands to benefit from directly leveraging the compiler stack. A major tenet of PyTorch is providing seamless and robust integrations that don’t get in the user’s way. To that end, PyTorch now has an official TVM-based backend, torch_tvm.]]></summary></entry><entry><title type="html">Automating Optimization of Quantized Deep Learning Models on CUDA</title><link href="/2019/04/29/opt-cuda-quantized" rel="alternate" type="text/html" title="Automating Optimization of Quantized Deep Learning Models on CUDA" /><published>2019-04-29T16:00:00+00:00</published><updated>2019-04-29T16:00:00+00:00</updated><id>/2019/04/29/opt-cuda-quantized</id><content type="html" xml:base="/2019/04/29/opt-cuda-quantized"><![CDATA[<p>Deep learning has been successfully applied to a variety of tasks.
-On real-time scenarios such as inference on autonomous vehicles, the inference speed of the model is critical.
-Network quantization is an effective approach to accelerating deep learning models.
-In quantized models, both data and model parameters are represented with low precision data types such as <code class="language-plaintext highlighter-rouge">int8</code> and <code class="language-plaintext highlighter-rouge">float16</code>.
-The lowered data bandwidth reduces the inference time and memory/storage requirements, as well as the power consumption.
-Meanwhile, under proper quantization schemes, we can minimize the accuracy drops of the quantized models.
-Therefore, quantized models are of particular interests of researchers and developers as it makes large models suitable to deploy on diverse devices, such as GPU, CPU and mobile devices.</p>
-
-<p>Previously, quantized operators are usually optimized with handcrafted microkernels for different workloads, or rely on blackbox proprietary solutions such as cuDNN and TensorRT.
-Writing a high-performance microkernel in assembly can be very challenging and usually requires heavy engineering effort.
-Besides, it is difficult to adapt these ad-hoc microkernels to emerging workloads and new devices.</p>
-
-<p style="text-align: center"><img src="/images/cuda-quantized/benchmark.svg" alt="image" width="100%" /></p>
-<center> Figure 1. Inference time of different models on TVM, TensorRT, and MXNet </center>
-<p></p>
-
-<p>TVM solves this challenge with a full stack compiler and a machine-learning-based optimizer to automatically generate computing kernels.
-TVM can generate efficient kernels via automatic search in a human-designed search space.
-In standard workloads such as VGG and ResNet, TVM achieves competitive performance compared with other state-of-the-art frameworks. 
-In emerging models such as ResNeXt and Deformable ConvNets, the automatic optimization makes it easy for TVM to adapt to these new workloads and achieve a significant performance boost.</p>
-
-<p>In this post, we show how to use TVM to automatically optimize of quantized deep learning models on CUDA.</p>
-
-<h1 id="expressing-quantized-cuda-kernels-in-tvm">Expressing Quantized CUDA Kernels in TVM</h1>
-<h2 id="leveraging-tensor-intrinsics-via-tensorization">Leveraging Tensor Intrinsics via Tensorization</h2>
-<p>Many platforms provide architecture-specific instructions for special computation patterns, for example, the SIMD instructions on x86, and the <code class="language-plaintext highlighter-rouge">dp4a</code> and <code class="language-plaintext highlighter-rouge">hfma</code> instructions on CUDA.
-These intrinsic instructions are highly optimized for specific devices.
-By leveraging hardware intrinsics, we can achieve a significant performance boost for quantized operators.</p>
-
-<p>Currently, <a href="https://devblogs.nvidia.com/mixed-precision-programming-cuda-8/">dp4a</a> has been extensively used in TVM int8 operators on CUDA.
-<code class="language-plaintext highlighter-rouge">dp4a</code> is a CUDA intrinsic on Compute Capability 6.1 devices.
-It is a mixed-precision instruction that provides the efficient computation of the dot product between two 4-element 8-bit integer vectors and accumulates the result in 32-bit format.
-Using <code class="language-plaintext highlighter-rouge">dp4a</code>, we can implement a dot product between 8-bit integer vectors with number of elements evenly divisible by four.
-With an efficient dot product operator, we can implement high-level operators such as 2d convolution and dense layers as these operators are commonly backed by dot products.</p>
-
-<p>To illustrate, in 2d convolution we accumulate along the channel, the width, and the height axis of the kernel.
-This is a typical use case of <code class="language-plaintext highlighter-rouge">dp4a</code>.
-TVM uses tensorization to support calling external intrinsics.
-We do not need to modify the original computation declaration; we use the schedule primitive <code class="language-plaintext highlighter-rouge">tensorize</code> to replace the accumulation with <code class="language-plaintext highlighter-rouge">dp4a</code> tensor intrinsic.
-More details of tensorization can be found in the <a href="https://tvm.apache.org/docs//tutorials/language/tensorize.html">tutorial</a>.</p>
-
-<h2 id="data-layout-rearrangement">Data Layout Rearrangement</h2>
-<p>One of the challenges in tensorization is that we may need to design special computation logic to adapt to the requirement of tensor intrinsics.
-Although it is natural to accumulate along the inner axis of the tensor in the dense operator, <code class="language-plaintext highlighter-rouge">conv2d</code> can be more challenging.
-In <code class="language-plaintext highlighter-rouge">conv2d</code> we expect to take a slice in the channel dimension as the input of <code class="language-plaintext highlighter-rouge">dp4a</code> because the number of channels is typically multiple of 4 (otherwise we fall back to original <code class="language-plaintext highlighter-rouge">conv2d</code> in NCHW layout).
-Meanwhile, to achieve memory locality, we would like to reduce along the innermost axis first.
-Taking these factors into account, we use a custom data layout to address this challenge.</p>
-
-<p>In CUDA int8 2d convolution, we empirically choose <code class="language-plaintext highlighter-rouge">NCHW4c</code> as data layout and <code class="language-plaintext highlighter-rouge">OIHW4o4i</code> as weight layout.
-The templates can also be easily generalized to <code class="language-plaintext highlighter-rouge">NCHW[x]c</code> and <code class="language-plaintext highlighter-rouge">OIHW[x]o[x]i</code>, where x is an arbitrary positive integer divisible by four.
-In the data layout we choose, slices of channels are in the packed innermost dimension.
-Likewise, we pack slices in both the input and output channel dimensions of the weight so that the output has a consistent data layout with the input, which prevents redundant layout transformations between layers.</p>
-
-<p>We show the computation of one element of the output of the 2d convolution in Figure 2.
-The element in each position of the super dimension (the outer dimension of the blocked layout which contains packed elements) NCHW and OIHW is the packed input and kernel, respectively.
-Each column of the packed kernel comes from a different filter.
-We calculate the dot product between the packed input and each row in the packed kernel using <code class="language-plaintext highlighter-rouge">dp4a</code>, and accumulate the result to the output tensor.</p>
-
-<p style="text-align: center"><img src="/images/cuda-quantized/conv2d.png" alt="image" width="60%" /></p>
-<div>
-Figure 2. 2D convolution with data layout in NCHW4c and weight layout in OIHW4o4i.
-<b>Left</b>: The input tensor in NCHW4c layout. One moving filter of the kernel is colored in blue. One element of the input and kernel is colored in grey. 
-<b>Mid</b>: The packed input and kernel in the grey block.
-<b>Right</b>: The output in NCHW4c layout. Inside the one element depicted, there are four packed elements in channel sub-dimension.
-</div>
-<p></p>
-
-<p>After we have specified the layout of convolution layers, other operators such as <code class="language-plaintext highlighter-rouge">add</code> and activations can automatically adapt to the chosen layout during the <a href="https://github.com/apache/incubator-tvm/blob/main/src/relay/pass/alter_op_layout.cc">AlterOpLayout</a> pass in Relay.
-The layout transformation of the weight can be precomputed offline. Therefore, we can run the whole model in the same layout without extra overhead.</p>
-
-<h2 id="designing-search-space-for-automatic-optimization">Designing Search Space for Automatic Optimization</h2>
-<p>The key to achieving good performance in our quantized operators is to integrate with machine-learning-based automatic optimization. One question is how to design an effective schedule search space.
-An effective schedule template means that we can obtain good performance in a reasonable number of iterations in automatic tuning.
-Generally speaking, we strive to define a flexible template to cover different configurations in the search space.
-On the other hand, we also take advantage of the prior knowledge in performance optimization.
-For example, as caching data in the shared memory is a common practice in CUDA programming, we utilize shared memory, but we use machine learning to choose the best tile size.
-We also do some manual tiling such as splitting axes by 4 or 16 to facilitate vectorized memory access.</p>
-
-<p>In quantized 2d convolution, we design a search space that includes a set of tunable options, such as the tile size, the axes to fuse, configurations of loop unrolling and double buffering.
-The templates of quantized <code class="language-plaintext highlighter-rouge">conv2d</code> and <code class="language-plaintext highlighter-rouge">dense</code> on CUDA are registered under template key <code class="language-plaintext highlighter-rouge">int8</code>.
-During automatic tuning, we can create tuning tasks for these quantized operators by setting the <code class="language-plaintext highlighter-rouge">template_key</code> argument.
-Details of how to launch automatic optimization can be found in the <a href="https://tvm.apache.org/docs//tutorials/autotvm/tune_relay_cuda.html">AutoTVM tutorial</a>.</p>
-
-<h1 id="general-workflow">General Workflow</h1>
-
-<p style="text-align: center"><img src="/images/cuda-quantized/workflow.png" alt="image" width="60%" /></p>
-<center> Figure 3. Workflow of running quantized models </center>
-<p></p>
-
-<p>TVM provides an easy workflow to quantize trained models from other frameworks, automatically optimize operators (with AutoTVM), and deploy to different devices.</p>
-
-<p>First, we use the Relay frontend to import existing models. Here we use an MXNet model with <code class="language-plaintext highlighter-rouge">(1, 3, 224, 224)</code> input shape as an example.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sym</span><span class="p">,</span> <span class="n">arg_params</span><span class="p">,</span> <span class="n">aux_params</span> <span class="o">=</span> <span class="n">mxnet</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="nf">load_checkpoint</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span>
-<span class="n">net</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">relay</span><span class="p">.</span><span class="nf">from_mxnet</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">data</span><span class="sh">'</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)},</span> <span class="n">arg_params</span><span class="o">=</span><span class="n">arg_params</span><span class="p">,</span> <span class="n">aux_params</span><span class="o">=</span><span class="n">aux_params</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Next, we use the relay quantization API to convert it to a quantized model.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">net</span> <span class="o">=</span> <span class="n">relay</span><span class="p">.</span><span class="n">quantize</span><span class="p">.</span><span class="nf">quantize</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Then, we use AutoTVM to extract tuning tasks for the operators in the model and perform automatic optimization. The <a href="https://tvm.apache.org/docs//tutorials/autotvm/tune_relay_cuda.html">AutoTVM tutorial</a> provides an example for this.</p>
-
-<p>Finally, we build the model and run inference in the quantized mode.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">relay</span><span class="p">.</span><span class="nf">build_config</span><span class="p">(</span><span class="n">opt_level</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">graph</span><span class="p">,</span> <span class="n">lib</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">relay</span><span class="p">.</span><span class="nf">build</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
-</code></pre></div></div>
-<p>The result of <code class="language-plaintext highlighter-rouge">relay.build</code> is a deployable library.
-We can either run inference <a href="https://tvm.apache.org/docs//tutorials/frontend/from_mxnet.html#execute-the-portable-graph-on-tvm">on the GPU</a> directly or deploy <a href="https://tvm.apache.org/docs//tutorials/frontend/deploy_model_on_rasp.html#deploy-the-model-remotely-by-rpc">on the remote devices</a> via RPC.</p>
-
-<h1 id="benchmark">Benchmark</h1>
-<p>To verify the performance of the quantized operators in TVM, we benchmark the performance of several popular network models including VGG-19, ResNet-50 and Inception V3.
-We also benchmark on DRN-C-26, ResNeXt-50, and DCN-ResNet-101 from <a href="https://github.com/msracver/Deformable-ConvNets">Deformable ConvNets</a> to show the performance of emerging models, which contains less conventional operators such as dilated convolutions, group convolutions and deformable convolutions.
-We choose NVIDIA TensorRT as our baseline.
-The result of MXNet 1.4 + cuDNN 7.3 in float32 mode is reported to show the speed up of quantization.
-The experiments are conducted on NVIDIA GTX 1080.
-We report the inference time per image when running in batch size = 1 and 16.</p>
-
-<p>As shown in the Figure 1, TVM achieves up to 8x speedup using quantization.
-In standard CNN models such as VGG and ResNet, TVM achieves parity with the state-of-the-art results from TensorRT.</p>
-
-<p>When benchmarking emerging models, TVM achieves impressive results.
-We obtain significant performance gains on ResNeXt and DCN-ResNet-101.
-Results of DCN-ResNet-101 of TensorRT are not available because there is no official implementation of the deformable convolution.
-We show that automatic optimization in TVM makes it easy and flexible to support and optimize emerging workloads.</p>
-
-<h1 id="show-me-the-code">Show Me the Code</h1>
-<ul>
-  <li><a href="https://github.com/vinx13/tvm-cuda-int8-benchmark">Benchmark</a></li>
-  <li><a href="https://github.com/apache/incubator-tvm/blob/main/topi/python/topi/cuda/conv2d_int8.py">CUDA int8 conv2d</a></li>
-  <li><a href="https://github.com/apache/incubator-tvm/blob/main/topi/python/topi/cuda/group_conv2d_nchw.py">CUDA int8 group conv2d</a></li>
-  <li><a href="https://github.com/apache/incubator-tvm/blob/main/topi/python/topi/cuda/dense.py">CUDA int8 dense</a></li>
-  <li><a href="https://github.com/apache/incubator-tvm/blob/main/topi/python/topi/cuda/tensor_intrin.py">Tensor intrinsics declaration</a></li>
-</ul>
-
-<h1 id="bio--acknowledgement">Bio &amp; Acknowledgement</h1>
-<p><a href="https://wuwei.io/">Wuwei Lin</a> is an undergraduate student at SJTU. He is currently an intern at TuSimple. The author has many thanks to <a href="https://homes.cs.washington.edu/~tqchen/">Tianqi Chen</a> and <a href="https://homes.cs.washington.edu/~eqy/">Eddie Yan</a> for their reviews.</p>]]></content><author><name>Wuwei Lin</name></author><summary type="html"><![CDATA[Deep learning has been successfully applied to a variety of tasks. On real-time scenarios such as inference on autonomous vehicles, the inference speed of the model is critical. Network quantization is an effective approach to accelerating deep learning models. In quantized models, both data and model parameters are represented with low precision data types such as int8 and float16. The lowered data bandwidth reduces the inference time and memory/storage requirements, as well as the power consumption. Meanwhile, under proper quantization schemes, we can minimize the accuracy drops of the quantized models. Therefore, quantized models are of particular interests of researchers and developers as it makes large models suitable to deploy on diverse devices, such as GPU, CPU and mobile devices.]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name>Bram Wasti</name></author><summary type="html"><![CDATA[As TVM continuously demonstrates improvements to the efficiency of deep learning execution, it has become clear that PyTorch stands to benefit from directly leveraging the compiler stack. A major tenet of PyTorch is providing seamless and robust integrations that don’t get in the user’s way. To that end, PyTorch now has an official TVM-based backend, torch_tvm.]]></summary></entry></feed>

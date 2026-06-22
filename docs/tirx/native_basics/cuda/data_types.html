@@ -1,0 +1,492 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data types and expressions &mdash; tvm 0.26.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/downloads/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/tlcpack_theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=ee335dfd"></script>
+        <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <script type="text/javascript" src="../../../_static/js/tlcpack_theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Buffers and memory" href="buffers.html" />
+    <link rel="prev" title="Parser utilities" href="parser_utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    
+<header class="header">
+    <div class="innercontainer">
+      <div class="headerInner d-flex justify-content-between align-items-center">
+          <div class="headerLogo">
+               <a href="https://tvm.apache.org/"><img src=https://tvm.apache.org/assets/images/logo.svg alt="logo"></a>
+          </div>
+
+          <div id="headMenu" class="headerNav">
+            <button type="button" id="closeHeadMenu" class="navCloseBtn"><img src="../../../_static/img/close-icon.svg" alt="Close"></button>
+             <ul class="nav">
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/community>Community</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/download>Download</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/docs>Docs</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://github.com/apache/tvm/>GitHub</a>
+                </li>
+             </ul>
+               <div class="responsivetlcdropdown">
+                 <button type="button" class="btn-link">
+                   ASF
+                 </button>
+                 <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                 </ul>
+               </div>
+          </div>
+            <div class="responsiveMenuIcon">
+              <button type="button" id="menuBtn" class="btn-menu"><img src="../../../_static/img/menu-icon.svg" alt="Menu Icon"></button>
+            </div>
+
+            <div class="tlcDropdown">
+              <div class="dropdown">
+                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ASF
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+       </div>
+    </div>
+ </header>
+ 
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side fixed">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="sidetitle" alt="Documentation Home"> tvm
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Installing TVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/ir_module.html">IRModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errors.html">TVM Errors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How To</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/import_model.html">Importing Models from ML Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/e2e_opt_model.html">End-to-End Optimize Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/customize_opt.html">Customize Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/optimize_llm.html">Optimize Large Language Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/export_and_load_executable.html">Export and Load Relax Executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../arch/index.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/tensor_ir/index.html">TensorIR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/relax/index.html">Relax</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../native_basics.html">TIRx Basics: CUDA C++/PTX native level</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../native_basics.html#what-native-level-means">What “native level” means</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../native_basics.html#the-authoring-model">The authoring model</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="first_kernel.html">Your first kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html">Defining a function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parser_utils.html">Parser utilities</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Data types and expressions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expression-dtypes">Expression dtypes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dtype-vs-type">dtype vs type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pointers-handle">Pointers (<code class="docutils literal notranslate"><span class="pre">handle</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="buffers.html">Buffers and memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control_flow.html">Control flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="threads_sync.html">CUDA C++/PTX intrinsics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compiling.html">Compiling and inspecting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout.html">Tensor Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tile_primitives.html">Tile Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/api/python/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/api/links.html">Other APIs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/security.html">Security Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      
+      <nav class="wy-nav-top" aria-label="top navigation" data-toggle="wy-nav-top">
+        
+            <div class="togglemenu">
+
+            </div>
+            <div class="nav-content">
+              <!-- tvm -->
+              Table of Contents
+            </div>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> <span class="br-arrow">></span></li>
+        
+          <li><a href="../../native_basics.html">TIRx Basics: CUDA C++/PTX native level</a> <span class="br-arrow">></span></li>
+        
+      <li>Data types and expressions</li>
+    
+    
+      
+      
+        
+      
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/apache/tvm/edit/main/docs/tirx/native_basics/cuda/data_types.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="data-types-and-expressions">
+<h1>Data types and expressions<a class="headerlink" href="#data-types-and-expressions" title="Link to this heading"></a></h1>
+<p>Every TIRx expression carries a low-level <strong>dtype</strong> and a high-level <strong>type</strong>.</p>
+<section id="expression-dtypes">
+<h2>Expression dtypes<a class="headerlink" href="#expression-dtypes" title="Link to this heading"></a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">PrimExpr</span></code>’s <code class="docutils literal notranslate"><span class="pre">.dtype</span></code> is its scalar (or vector) element type — <code class="docutils literal notranslate"><span class="pre">float32</span></code>,
+<code class="docutils literal notranslate"><span class="pre">float16</span></code>, <code class="docutils literal notranslate"><span class="pre">bfloat16</span></code>, <code class="docutils literal notranslate"><span class="pre">int32</span></code>, <code class="docutils literal notranslate"><span class="pre">uint8</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>, the low-precision
+<code class="docutils literal notranslate"><span class="pre">float8_e4m3fn</span></code> / <code class="docutils literal notranslate"><span class="pre">float4_e2m1fn</span></code> …, <code class="docutils literal notranslate"><span class="pre">handle</span></code> (a pointer), and vector forms
+such as <code class="docutils literal notranslate"><span class="pre">float32x4</span></code>. Each prints to the matching CUDA type. Allocating local and
+shared buffers across several dtypes, plus a vectorized <code class="docutils literal notranslate"><span class="pre">float32x4</span></code> load/store:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@T</span><span class="o">.</span><span class="n">prim_func</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dtypes</span><span class="p">(</span><span class="n">A_ptr</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">O_ptr</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">handle</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">match_buffer</span><span class="p">(</span><span class="n">A_ptr</span><span class="p">,</span> <span class="p">(</span><span class="mi">256</span><span class="p">,),</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">match_buffer</span><span class="p">(</span><span class="n">O_ptr</span><span class="p">,</span> <span class="p">(</span><span class="mi">256</span><span class="p">,),</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">device_entry</span><span class="p">();</span> <span class="n">bx</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">cta_id</span><span class="p">([</span><span class="mi">1</span><span class="p">]);</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">thread_id</span><span class="p">([</span><span class="mi">64</span><span class="p">])</span>
+    <span class="n">f16</span>  <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_local</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="s2">&quot;float16&quot;</span><span class="p">)</span>        <span class="c1"># register scalars ...</span>
+    <span class="n">bf16</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_local</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="s2">&quot;bfloat16&quot;</span><span class="p">)</span>
+    <span class="n">i32</span>  <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_local</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="s2">&quot;int32&quot;</span><span class="p">)</span>
+    <span class="n">u8</span>   <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_local</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+    <span class="n">b1</span>   <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_local</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="s2">&quot;bool&quot;</span><span class="p">)</span>
+    <span class="n">sm</span>   <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_shared</span><span class="p">((</span><span class="mi">64</span><span class="p">,),</span> <span class="s2">&quot;float16&quot;</span><span class="p">)</span>      <span class="c1"># ... and a shared tile</span>
+    <span class="n">v</span>    <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_local</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="s2">&quot;float32x4&quot;</span><span class="p">)</span>      <span class="c1"># a vector-dtype register (float4)</span>
+    <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">vload</span><span class="p">([</span><span class="n">tx</span> <span class="o">*</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32x4&quot;</span><span class="p">)</span>  <span class="c1"># vectorized load</span>
+    <span class="n">O</span><span class="o">.</span><span class="n">vstore</span><span class="p">([</span><span class="n">tx</span> <span class="o">*</span> <span class="mi">4</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>                     <span class="c1"># vectorized store</span>
+    <span class="c1"># ... (use f16/bf16/i32/u8/b1/sm) ...</span>
+</pre></div>
+</div>
+<p>lowers to (generated CUDA, elided):</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">half</span><span class="w">          </span><span class="n">f16_ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w">               </span><span class="c1">// float16</span>
+<span class="n">nv_bfloat16</span><span class="w">   </span><span class="n">bf16_ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w">              </span><span class="c1">// bfloat16</span>
+<span class="kt">int</span><span class="w">           </span><span class="n">i32_ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w">               </span><span class="c1">// int32</span>
+<span class="n">uchar</span><span class="w">         </span><span class="n">u8_ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w">                </span><span class="c1">// uint8</span>
+<span class="kt">signed</span><span class="w"> </span><span class="kt">char</span><span class="w">   </span><span class="n">b1_ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w">                </span><span class="c1">// bool</span>
+<span class="n">__shared__</span><span class="w"> </span><span class="nf">alignas</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="n">half</span><span class="w"> </span><span class="n">sm_ptr</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"> </span><span class="c1">// shared float16</span>
+<span class="n">float4</span><span class="w">        </span><span class="n">v_ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w">                 </span><span class="c1">// float32x4  (vector)</span>
+<span class="n">v_ptr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">float4</span><span class="o">*</span><span class="p">)(</span><span class="n">A_ptr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w">   </span><span class="c1">// vectorized load</span>
+<span class="o">*</span><span class="p">(</span><span class="n">float4</span><span class="o">*</span><span class="p">)(</span><span class="n">O_ptr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v_ptr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w">                   </span><span class="c1">// vectorized store</span>
+</pre></div>
+</div>
+<p>A buffer’s dtype can itself be a <strong>vector type</strong>: <code class="docutils literal notranslate"><span class="pre">T.alloc_local((1,),</span> <span class="pre">&quot;float32x4&quot;)</span></code>
+declares a <code class="docutils literal notranslate"><span class="pre">float4</span></code> register directly (you index it as <code class="docutils literal notranslate"><span class="pre">v[0]</span></code>), and a
+<code class="docutils literal notranslate"><span class="pre">float32x4</span></code> <code class="docutils literal notranslate"><span class="pre">vload</span></code> / <code class="docutils literal notranslate"><span class="pre">vstore</span></code> then moves it as one 16-byte access. The vector
+dtype is not tied to <code class="docutils literal notranslate"><span class="pre">vload</span></code> — any buffer or scalar can carry it.</p>
+<p>so the dtype → CUDA mapping is:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34.0%" />
+<col style="width: 33.0%" />
+<col style="width: 33.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>dtype → CUDA</p></th>
+<th class="head"><p>dtype → CUDA</p></th>
+<th class="head"><p>dtype → CUDA</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">float32</span></code> → <code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float16</span></code> → <code class="docutils literal notranslate"><span class="pre">half</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bfloat16</span></code> → <code class="docutils literal notranslate"><span class="pre">nv_bfloat16</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">int32</span></code> → <code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint8</span></code> → <code class="docutils literal notranslate"><span class="pre">uchar</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code> → <code class="docutils literal notranslate"><span class="pre">signed</span> <span class="pre">char</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">float32x4</span></code> → <code class="docutils literal notranslate"><span class="pre">float4</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">handle</span></code> → <code class="docutils literal notranslate"><span class="pre">T*</span></code> (pointer)</p></td>
+<td><p>(vector dtypes → CUDA vector types)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dtype-vs-type">
+<h2>dtype vs type<a class="headerlink" href="#dtype-vs-type" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">dtype</span></code> is <em>low-level</em> — it says “what bits”. Separately, a value has a
+high-level <strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">PrimType(dtype)</span></code> for a scalar, or
+<code class="docutils literal notranslate"><span class="pre">PointerType(PrimType(dtype),</span> <span class="pre">scope)</span></code> for a pointer. Most expressions are scalars
+(<code class="docutils literal notranslate"><span class="pre">PrimType</span></code>); the type system matters mainly for <strong>pointers</strong>.</p>
+</section>
+<section id="pointers-handle">
+<h2>Pointers (<code class="docutils literal notranslate"><span class="pre">handle</span></code>)<a class="headerlink" href="#pointers-handle" title="Link to this heading"></a></h2>
+<p>A buffer’s <code class="docutils literal notranslate"><span class="pre">data</span></code> — its pointer — is a <code class="docutils literal notranslate"><span class="pre">Var</span></code> of pointer type, and it is
+<strong>immutable</strong> (a pointer is never reassigned). That shapes how you obtain one:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">T.alloc_buffer(...)</span></code> allocates storage <strong>and</strong> defines its <code class="docutils literal notranslate"><span class="pre">data</span></code> pointer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T.decl_buffer(...,</span> <span class="pre">data=ptr)</span></code> declares a buffer over an existing pointer
+<code class="docutils literal notranslate"><span class="pre">Var</span></code> <code class="docutils literal notranslate"><span class="pre">ptr</span></code>.</p></li>
+<li><p>To back a buffer with a pointer <strong>expression</strong> — e.g. <code class="docutils literal notranslate"><span class="pre">T.ptx.map_shared_rank</span></code>
+(PTX <code class="docutils literal notranslate"><span class="pre">mapa</span></code>) giving another cluster CTA’s shared address — you must first bind
+that expression to a pointer <code class="docutils literal notranslate"><span class="pre">Var</span></code> (<code class="docutils literal notranslate"><span class="pre">data</span></code> must be a <code class="docutils literal notranslate"><span class="pre">Var</span></code>, not an
+expression), using a <code class="docutils literal notranslate"><span class="pre">T.let</span></code> of <code class="docutils literal notranslate"><span class="pre">PointerType</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tvm.ir.type</span><span class="w"> </span><span class="kn">import</span> <span class="n">PointerType</span><span class="p">,</span> <span class="n">PrimType</span>
+
+<span class="n">ptr</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">let</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;ptr&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">PointerType</span><span class="p">(</span><span class="n">PrimType</span><span class="p">(</span><span class="s2">&quot;uint64&quot;</span><span class="p">)))]</span> <span class="o">=</span> \
+    <span class="n">T</span><span class="o">.</span><span class="n">reinterpret</span><span class="p">(</span><span class="s2">&quot;handle&quot;</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">map_shared_rank</span><span class="p">(</span><span class="n">mbar</span><span class="o">.</span><span class="n">ptr_to</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">remote_mbar</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">decl_buffer</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;uint64&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">ptr</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;shared&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          
+
+<footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="buffers.html" class="btn btn-neutral float-right" title="Buffers and memory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="parser_utils.html" class="btn btn-neutral float-left" title="Parser utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+
+<div id="button" class="backtop"><img src="../../../_static/img/right.svg" alt="backtop"/> </div>
+<section class="footerSec">
+    <div class="footerHeader">
+      <div class="d-flex align-md-items-center justify-content-between flex-column flex-md-row">
+        <div class="copywrite d-flex align-items-center">
+          <h5 id="copy-right-info">© 2026 Apache Software Foundation | All rights reserved</h5>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="footernote">Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.</div>
+    </div>
+
+</section>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+    <script src="../../../_static/downloads/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../../../_static/downloads/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

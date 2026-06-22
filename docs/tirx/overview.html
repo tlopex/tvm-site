@@ -1,0 +1,544 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Overview &mdash; tvm 0.26.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/downloads/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/tlcpack_theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=ee335dfd"></script>
+        <script src="../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <script type="text/javascript" src="../_static/js/tlcpack_theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="install.html" />
+    <link rel="prev" title="Transformation" href="../deep_dive/relax/tutorials/relax_transformation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    
+<header class="header">
+    <div class="innercontainer">
+      <div class="headerInner d-flex justify-content-between align-items-center">
+          <div class="headerLogo">
+               <a href="https://tvm.apache.org/"><img src=https://tvm.apache.org/assets/images/logo.svg alt="logo"></a>
+          </div>
+
+          <div id="headMenu" class="headerNav">
+            <button type="button" id="closeHeadMenu" class="navCloseBtn"><img src="../_static/img/close-icon.svg" alt="Close"></button>
+             <ul class="nav">
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/community>Community</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/download>Download</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/docs>Docs</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://github.com/apache/tvm/>GitHub</a>
+                </li>
+             </ul>
+               <div class="responsivetlcdropdown">
+                 <button type="button" class="btn-link">
+                   ASF
+                 </button>
+                 <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                 </ul>
+               </div>
+          </div>
+            <div class="responsiveMenuIcon">
+              <button type="button" id="menuBtn" class="btn-menu"><img src="../_static/img/menu-icon.svg" alt="Menu Icon"></button>
+            </div>
+
+            <div class="tlcDropdown">
+              <div class="dropdown">
+                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ASF
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+       </div>
+    </div>
+ </header>
+ 
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side fixed">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="sidetitle" alt="Documentation Home"> tvm
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">Installing TVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/tutorials/quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/tutorials/ir_module.html">IRModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">TVM Errors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How To</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/import_model.html">Importing Models from ML Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/e2e_opt_model.html">End-to-End Optimize Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/customize_opt.html">Customize Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/optimize_llm.html">Optimize Large Language Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/export_and_load_executable.html">Export and Load Relax Executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../arch/index.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep_dive/tensor_ir/index.html">TensorIR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep_dive/relax/index.html">Relax</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#design-philosophy">Design Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-programming-model">The Programming Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#execution-scope">Execution scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tensor-layout">Tensor layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tile-primitive-dispatch">Tile primitive dispatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#putting-it-together">Putting it together</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#what-tirx-enables">What TIRx Enables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-stable-extension-boundary-for-future-hardware">A stable extension boundary for future hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#megakernels-and-composable-tile-tasks">Megakernels and composable tile tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#agentic-kernel-programming">Agentic kernel programming</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout.html">Tensor Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tile_primitives.html">Tile Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/api/python/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/api/links.html">Other APIs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/security.html">Security Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      
+      <nav class="wy-nav-top" aria-label="top navigation" data-toggle="wy-nav-top">
+        
+            <div class="togglemenu">
+
+            </div>
+            <div class="nav-content">
+              <!-- tvm -->
+              Table of Contents
+            </div>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> <span class="br-arrow">></span></li>
+        
+      <li>Overview</li>
+    
+    
+      
+      
+        
+      
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/apache/tvm/edit/main/docs/tirx/overview.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
+<p>TIRx (pronounced <em>“tier-ex”</em>) is an open-source, hardware-native DSL and compiler
+for machine-learning kernels. It targets the part of the AI software stack
+where fast-moving kernels meet fast-moving hardware: TIRx compiles to GPUs and
+specialized AI accelerators today and is designed to grow with the hardware
+generations that follow. The same design makes it a substrate not only for
+expert-written kernels, but also for agent-generated kernels and megakernel
+systems.</p>
+<p>TIRx is the next-generation kernel-level compiler structure of Apache TVM, and
+is built on top of the TVM compiler infrastructure.</p>
+<figure class="align-center" id="id1">
+<img alt="A TIRx kernel keeps orchestration in hardware-native source while exposing tile structure to the compiler; agentic, megakernel, and new-backend systems build on the same structure." src="../_static/downloads/tirx_overview_hero.png" />
+<figcaption>
+<p><span class="caption-text">A TIRx kernel keeps orchestration — pipeline state, roles, synchronization,
+and backend intrinsics — in hardware-native source, while execution scope,
+tensor layout, and tile primitive dispatch expose the recurring tile
+structure to the compiler. Higher-level systems build on the same structure.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="design-philosophy">
+<h2>Design Philosophy<a class="headerlink" href="#design-philosophy" title="Link to this heading"></a></h2>
+<p>Kernel DSLs are most effective when they choose the right boundary between the
+programmer and the machine. For mature kernels on mature hardware, that boundary
+can be high-level: the compiler hides thread assignment, memory movement, layout
+details, and instruction selection behind compact tensor or tile abstractions,
+and this works well for established kernel patterns.</p>
+<p>At the frontier, the same boundary is under more pressure. New instructions,
+memory spaces, cooperation patterns, and kernel algorithms often appear <em>before</em>
+a compiler has enough built-in machinery to automate them well.</p>
+<p>TIRx chooses a <strong>lower and more explicit boundary</strong>. It keeps the parts of a
+kernel that frequently require expert control — pipeline structure,
+synchronization, role assignment, memory placement, and backend intrinsics — in
+hardware-native source code. At the same time, it exposes the recurring tile-level
+structure to the compiler through three constructs: <em>execution scope</em>, <em>tensor
+layout</em>, and <em>tile primitive dispatch</em>. Orchestration stays in hardware-native
+source code, while the recurring tile-level structure becomes visible to the
+compiler. Hardware-native control is powerful but costs engineering effort;
+exposing recurring operations as tile primitives relieves this, since authors
+reuse a dispatched implementation instead of re-writing the same operation for
+each kernel and backend.</p>
+<p>The result is a DSL that can <strong>grow with the hardware</strong>. A new feature can first
+be used directly as a native intrinsic, and later become a reusable primitive
+once the pattern stabilizes. This is the core design philosophy behind TIRx:
+keep the foundation small and explicit, and let the backend library evolve as
+new accelerator generations arrive.</p>
+</section>
+<section id="the-programming-model">
+<h2>The Programming Model<a class="headerlink" href="#the-programming-model" title="Link to this heading"></a></h2>
+<p>A TIRx program reads as a structured native kernel: loops, branches, buffers,
+synchronization, pipeline state, backend intrinsics, and hardware roles are
+written directly. Tile primitives appear exactly where a repeated hardware-level
+operation should become reusable and dispatchable.</p>
+<p>The model has three core ingredients.</p>
+<section id="execution-scope">
+<h3>Execution scope<a class="headerlink" href="#execution-scope" title="Link to this heading"></a></h3>
+<p>Execution scope describes both the active participants and the logical scope of
+a primitive invocation. Control flow such as <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">wg_id</span> <span class="pre">==</span> <span class="pre">...</span></code>,
+<code class="docutils literal notranslate"><span class="pre">warp_id</span> <span class="pre">==</span> <span class="pre">...</span></code>, or <code class="docutils literal notranslate"><span class="pre">cbx</span> <span class="pre">==</span> <span class="pre">...</span></code> selects which hardware roles enter a
+region, while predicates such as <code class="docutils literal notranslate"><span class="pre">T.ptx.elect_sync()</span></code> further select the
+issuing thread.</p>
+<p>The primitive namespace is also part of the scope. For example, <code class="docutils literal notranslate"><span class="pre">Tx.wg.*</span></code>
+denotes warpgroup-level primitives, while an unqualified <code class="docutils literal notranslate"><span class="pre">Tx.*</span></code> call defaults
+to thread-level invocation.</p>
+</section>
+<section id="tensor-layout">
+<h3>Tensor layout<a class="headerlink" href="#tensor-layout" title="Link to this heading"></a></h3>
+<p>Tensor layout, with a storage-first interface, describes how logical
+tensors map to physical resources. A tile may live in global memory, shared
+memory, registers, tensor memory, or accelerator SRAM.
+Users declare where each tile lives and how its elements are spread across
+lanes, warps, and registers; tile primitive dispatch reads those declarations to
+choose an implementation. A layout is a storage description, not a
+loop-transformation utility: users may construct a tile’s layout, but never use
+layouts to transform loops.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The layout model — including the shard / replica / offset structure and its
+design rationale — is described in <a class="reference internal" href="layout.html"><span class="doc">Tensor Layout</span></a>, which also has an
+interactive explorer.</p>
+</div>
+</section>
+<section id="tile-primitive-dispatch">
+<h3>Tile primitive dispatch<a class="headerlink" href="#tile-primitive-dispatch" title="Link to this heading"></a></h3>
+<p>Tile primitive dispatch selects an implementation according to the primitive,
+the current execution scope, the operand layouts, and the target backend. For
+example:</p>
+<ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">copy</span></code> primitive may dispatch to TMA, vectorized loads/stores,
+tensor-memory movement, accelerator DMA, or another backend-specific
+implementation.</p></li>
+<li><p>A matrix-multiply primitive may dispatch to WGMMA, <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code>, a
+systolic-array instruction, or a backend-specific matmul engine.</p></li>
+</ul>
+<p>Once a variant is selected, dispatch generates the loops and addressing to
+apply that instruction across the whole tile.</p>
+</section>
+<section id="putting-it-together">
+<h3>Putting it together<a class="headerlink" href="#putting-it-together" title="Link to this heading"></a></h3>
+<p>Across a full kernel, orchestration stays in ordinary source code, and the
+recurring hardware operations appear as tile primitives. For the building blocks —
+TMA loads, <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code> async MMA, reductions, and the rest — see the per-dispatch
+walkthroughs in <a class="reference internal" href="tile_primitives.html"><span class="doc">Tile Primitives</span></a>.</p>
+</section>
+</section>
+<section id="what-tirx-enables">
+<h2>What TIRx Enables<a class="headerlink" href="#what-tirx-enables" title="Link to this heading"></a></h2>
+<p>TIRx is immediately useful as a kernel DSL. The same structure also helps with
+three things that are becoming important for ML systems: supporting new
+hardware, building megakernels, and agentic kernel programming.</p>
+<section id="a-stable-extension-boundary-for-future-hardware">
+<h3>A stable extension boundary for future hardware<a class="headerlink" href="#a-stable-extension-boundary-for-future-hardware" title="Link to this heading"></a></h3>
+<p>New hardware support is a staged process rather than a redesign of the DSL: a
+feature is first exposed as a backend intrinsic, then promoted into a tile
+primitive once the usage pattern repeats. Future hardware grows the backend
+library, not the core language.</p>
+</section>
+<section id="megakernels-and-composable-tile-tasks">
+<h3>Megakernels and composable tile tasks<a class="headerlink" href="#megakernels-and-composable-tile-tasks" title="Link to this heading"></a></h3>
+<p>Because TIRx tasks exist as compiler IR rather than separately compiled kernels,
+a megakernel compiler can stitch and schedule them directly — re-offsetting
+shared memory, renaming barriers, reassigning warp roles, and interleaving
+pipelines across tasks.</p>
+<figure class="align-center" id="id2">
+<img alt="Kernel-by-kernel and CUDA-graph execution leave kernel boundaries between tasks, while a megakernel fuses tasks into one kernel with fine-grained dependencies and in-kernel scheduling." src="../_static/downloads/tirx_megakernel.png" />
+<figcaption>
+<p><span class="caption-text">From kernel-by-kernel launches to a single megakernel: fusing tasks into one
+kernel exposes fine-grained dependencies and in-kernel (static or dynamic)
+scheduling.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="agentic-kernel-programming">
+<h3>Agentic kernel programming<a class="headerlink" href="#agentic-kernel-programming" title="Link to this heading"></a></h3>
+<p>TIRx exposes its IR and compiler utilities through TVM FFI across Python, C++,
+and Rust, and offers a structured search space with dense, pre-benchmark
+feedback (well-formedness, synchronization validity, race-freedom, value
+simulation).</p>
+<figure class="align-center" id="id3">
+<img alt="Agent-visible compiler infrastructure exposes TIRx IR and utilities via TVM FFI across Python, Rust, and C++, over a structured search space spanning levels L1 to L4." src="../_static/downloads/tirx_agentic.webp" />
+<figcaption>
+<p><span class="caption-text">Agent-visible compiler infrastructure (IR and utilities over TVM FFI) plus a
+structured search space (levels L1–L4) make TIRx a compiler-mediated
+optimization surface for agents.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="install.html"><span class="doc">Installation</span></a> — install TIRx and the kernel library.</p></li>
+<li><p><a class="reference internal" href="layout.html"><span class="doc">Tensor Layout</span></a> — the tensor layout model with an interactive explorer.</p></li>
+<li><p><a class="reference internal" href="arch/index.html"><span class="doc">Compiler Internals</span></a> — compiler internals (lowering pipeline, passes, codegen).</p></li>
+<li><p><a class="reference internal" href="api/index.html"><span class="doc">API Reference</span></a> — the <code class="docutils literal notranslate"><span class="pre">tvm.tirx</span></code> Python API.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          
+
+<footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../deep_dive/relax/tutorials/relax_transformation.html" class="btn btn-neutral float-left" title="Transformation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+
+<div id="button" class="backtop"><img src="../_static/img/right.svg" alt="backtop"/> </div>
+<section class="footerSec">
+    <div class="footerHeader">
+      <div class="d-flex align-md-items-center justify-content-between flex-column flex-md-row">
+        <div class="copywrite d-flex align-items-center">
+          <h5 id="copy-right-info">© 2026 Apache Software Foundation | All rights reserved</h5>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="footernote">Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.</div>
+    </div>
+
+</section>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+    <script src="../_static/downloads/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../_static/downloads/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

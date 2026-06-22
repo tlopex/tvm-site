@@ -1,0 +1,436 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TIRx Basics: CUDA C++/PTX native level &mdash; tvm 0.26.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/downloads/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/tlcpack_theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=ee335dfd"></script>
+        <script src="../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <script type="text/javascript" src="../_static/js/tlcpack_theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Your first kernel" href="native_basics/cuda/first_kernel.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    
+<header class="header">
+    <div class="innercontainer">
+      <div class="headerInner d-flex justify-content-between align-items-center">
+          <div class="headerLogo">
+               <a href="https://tvm.apache.org/"><img src=https://tvm.apache.org/assets/images/logo.svg alt="logo"></a>
+          </div>
+
+          <div id="headMenu" class="headerNav">
+            <button type="button" id="closeHeadMenu" class="navCloseBtn"><img src="../_static/img/close-icon.svg" alt="Close"></button>
+             <ul class="nav">
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/community>Community</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/download>Download</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/docs>Docs</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://github.com/apache/tvm/>GitHub</a>
+                </li>
+             </ul>
+               <div class="responsivetlcdropdown">
+                 <button type="button" class="btn-link">
+                   ASF
+                 </button>
+                 <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                 </ul>
+               </div>
+          </div>
+            <div class="responsiveMenuIcon">
+              <button type="button" id="menuBtn" class="btn-menu"><img src="../_static/img/menu-icon.svg" alt="Menu Icon"></button>
+            </div>
+
+            <div class="tlcDropdown">
+              <div class="dropdown">
+                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ASF
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+       </div>
+    </div>
+ </header>
+ 
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side fixed">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="sidetitle" alt="Documentation Home"> tvm
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">Installing TVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/tutorials/quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/tutorials/ir_module.html">IRModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">TVM Errors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How To</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/import_model.html">Importing Models from ML Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/e2e_opt_model.html">End-to-End Optimize Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/customize_opt.html">Customize Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/optimize_llm.html">Optimize Large Language Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/export_and_load_executable.html">Export and Load Relax Executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../arch/index.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep_dive/tensor_ir/index.html">TensorIR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep_dive/relax/index.html">Relax</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TIRx Basics: CUDA C++/PTX native level</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-native-level-means">What “native level” means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-authoring-model">The authoring model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="native_basics/cuda/first_kernel.html">Your first kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="native_basics/cuda/functions.html">Defining a function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="native_basics/cuda/parser_utils.html">Parser utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="native_basics/cuda/data_types.html">Data types and expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="native_basics/cuda/buffers.html">Buffers and memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="native_basics/cuda/control_flow.html">Control flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="native_basics/cuda/threads_sync.html">CUDA C++/PTX intrinsics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="native_basics/cuda/compiling.html">Compiling and inspecting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="layout.html">Tensor Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tile_primitives.html">Tile Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/api/python/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/api/links.html">Other APIs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/security.html">Security Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      
+      <nav class="wy-nav-top" aria-label="top navigation" data-toggle="wy-nav-top">
+        
+            <div class="togglemenu">
+
+            </div>
+            <div class="nav-content">
+              <!-- tvm -->
+              Table of Contents
+            </div>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> <span class="br-arrow">></span></li>
+        
+      <li>TIRx Basics: CUDA C++/PTX native level</li>
+    
+    
+      
+      
+        
+      
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/apache/tvm/edit/main/docs/tirx/native_basics.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="tirx-basics-cuda-c-ptx-native-level">
+<h1>TIRx Basics: CUDA C++/PTX native level<a class="headerlink" href="#tirx-basics-cuda-c-ptx-native-level" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Native-level kernel authoring for the <strong>CUDA backend</strong> (the <code class="docutils literal notranslate"><span class="pre">&quot;cuda&quot;</span></code>
+target): the thread hierarchy, memory scopes, the <code class="docutils literal notranslate"><span class="pre">T.cuda.*</span></code> / <code class="docutils literal notranslate"><span class="pre">T.ptx.*</span></code>
+intrinsics, and the compile / run / inspect loop. The complete kernels in
+these chapters (<code class="docutils literal notranslate"><span class="pre">scale</span></code>, <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">smem_demo</span></code>, <code class="docutils literal notranslate"><span class="pre">block_sum</span></code>, and the
+warp all-reduce) are tested end-to-end on a CUDA GPU.</p>
+</div>
+<section id="what-native-level-means">
+<h2>What “native level” means<a class="headerlink" href="#what-native-level-means" title="Link to this heading"></a></h2>
+<p>A native-level TIRx kernel reads like a structured device kernel: you place
+threads yourself, allocate shared/register buffers, write loops and barriers, and
+call device intrinsics directly. There is no automatic scheduling — what you write
+is what is emitted. This is the foundation the tile primitives
+(<a class="reference internal" href="tile_primitives.html"><span class="doc">Tile Primitives</span></a>) are built on; everything here is what those primitives
+ultimately lower to, so it is also where you go when a hardware feature does not
+have a primitive yet.</p>
+</section>
+<section id="the-authoring-model">
+<h2>The authoring model<a class="headerlink" href="#the-authoring-model" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;T.prim_func</span></code> (or <code class="docutils literal notranslate"><span class="pre">&#64;T.jit</span></code> for compile-time-specialized) kernels, written
+with <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">tvm.script</span> <span class="pre">import</span> <span class="pre">tirx</span> <span class="pre">as</span> <span class="pre">T</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T.device_entry()</span></code> plus <em>scope-id</em> intrinsics for thread binding;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T.match_buffer</span></code> parameters and <code class="docutils literal notranslate"><span class="pre">T.alloc_*</span></code> scratch buffers;</p></li>
+<li><p>ordinary loops, branches, and scalar math;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tvm.compile(mod,</span> <span class="pre">target=...,</span> <span class="pre">tir_pipeline=&quot;tirx&quot;)</span></code> to build, then call the
+result directly.</p></li>
+</ul>
+<p>All native authoring uses these imports. The <code class="docutils literal notranslate"><span class="pre">__future__</span></code> import lets <code class="docutils literal notranslate"><span class="pre">&#64;T.jit</span></code>
+kernels reference compile-time parameters inside type annotations (see
+<a class="reference internal" href="native_basics/cuda/functions.html"><span class="doc">Defining a function</span></a>); it is harmless for ordinary kernels:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tvm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tvm.script</span><span class="w"> </span><span class="kn">import</span> <span class="n">tirx</span> <span class="k">as</span> <span class="n">T</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="native_basics/cuda/first_kernel.html">Your first kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="native_basics/cuda/functions.html">Defining a function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="native_basics/cuda/parser_utils.html">Parser utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="native_basics/cuda/data_types.html">Data types and expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="native_basics/cuda/buffers.html">Buffers and memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="native_basics/cuda/control_flow.html">Control flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="native_basics/cuda/threads_sync.html">CUDA C++/PTX intrinsics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="native_basics/cuda/compiling.html">Compiling and inspecting</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          
+
+<footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="native_basics/cuda/first_kernel.html" class="btn btn-neutral float-right" title="Your first kernel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+
+<div id="button" class="backtop"><img src="../_static/img/right.svg" alt="backtop"/> </div>
+<section class="footerSec">
+    <div class="footerHeader">
+      <div class="d-flex align-md-items-center justify-content-between flex-column flex-md-row">
+        <div class="copywrite d-flex align-items-center">
+          <h5 id="copy-right-info">© 2026 Apache Software Foundation | All rights reserved</h5>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="footernote">Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.</div>
+    </div>
+
+</section>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+    <script src="../_static/downloads/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../_static/downloads/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

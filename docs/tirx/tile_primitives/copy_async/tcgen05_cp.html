@@ -1,0 +1,570 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>copy_async → tcgen05_cp &mdash; tvm 0.26.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/downloads/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/tlcpack_theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=ee335dfd"></script>
+        <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <script type="text/javascript" src="../../../_static/js/tlcpack_theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="copy_async → tcgen05_ldst" href="tcgen05_ldst.html" />
+    <link rel="prev" title="copy_async → dsmem" href="dsmem.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    
+<header class="header">
+    <div class="innercontainer">
+      <div class="headerInner d-flex justify-content-between align-items-center">
+          <div class="headerLogo">
+               <a href="https://tvm.apache.org/"><img src=https://tvm.apache.org/assets/images/logo.svg alt="logo"></a>
+          </div>
+
+          <div id="headMenu" class="headerNav">
+            <button type="button" id="closeHeadMenu" class="navCloseBtn"><img src="../../../_static/img/close-icon.svg" alt="Close"></button>
+             <ul class="nav">
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/community>Community</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/download>Download</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/docs>Docs</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://github.com/apache/tvm/>GitHub</a>
+                </li>
+             </ul>
+               <div class="responsivetlcdropdown">
+                 <button type="button" class="btn-link">
+                   ASF
+                 </button>
+                 <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                 </ul>
+               </div>
+          </div>
+            <div class="responsiveMenuIcon">
+              <button type="button" id="menuBtn" class="btn-menu"><img src="../../../_static/img/menu-icon.svg" alt="Menu Icon"></button>
+            </div>
+
+            <div class="tlcDropdown">
+              <div class="dropdown">
+                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ASF
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+       </div>
+    </div>
+ </header>
+ 
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side fixed">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="sidetitle" alt="Documentation Home"> tvm
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Installing TVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/ir_module.html">IRModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errors.html">TVM Errors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How To</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/import_model.html">Importing Models from ML Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/e2e_opt_model.html">End-to-End Optimize Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/customize_opt.html">Customize Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/optimize_llm.html">Optimize Large Language Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/export_and_load_executable.html">Export and Load Relax Executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../arch/index.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/tensor_ir/index.html">TensorIR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/relax/index.html">Relax</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout.html">Tensor Layout</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tile_primitives.html">Tile Primitives</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#calling-convention">Calling convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#primitive-catalog">Primitive catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#dispatch-config">Dispatch config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#dispatch-mechanism">Dispatch mechanism</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../tile_primitives.html#dispatch-by-primitive">Dispatch by primitive</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../copy.html">copy</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../copy_async.html">copy_async</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ldgsts.html">copy_async → ldgsts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tma.html">copy_async → tma</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dsmem.html">copy_async → dsmem</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">copy_async → tcgen05_cp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tcgen05_ldst.html">copy_async → tcgen05_ldst</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../gemm.html">gemm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gemm_async.html">gemm_async</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../elementwise.html">elementwise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reduction.html">reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../permute_layout.html">permute_layout</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/api/python/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/api/links.html">Other APIs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/security.html">Security Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      
+      <nav class="wy-nav-top" aria-label="top navigation" data-toggle="wy-nav-top">
+        
+            <div class="togglemenu">
+
+            </div>
+            <div class="nav-content">
+              <!-- tvm -->
+              Table of Contents
+            </div>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> <span class="br-arrow">></span></li>
+        
+          <li><a href="../../tile_primitives.html">Tile Primitives</a> <span class="br-arrow">></span></li>
+        
+          <li><a href="../copy_async.html">copy_async</a> <span class="br-arrow">></span></li>
+        
+      <li>copy_async → tcgen05_cp</li>
+    
+    
+      
+      
+        
+      
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/apache/tvm/edit/main/docs/tirx/tile_primitives/copy_async/tcgen05_cp.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="copy-async-tcgen05-cp">
+<h1>copy_async → tcgen05_cp<a class="headerlink" href="#copy-async-tcgen05-cp" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">tcgen05_cp</span></code> variant lowers a <code class="docutils literal notranslate"><span class="pre">copy_async</span></code> from <strong>shared memory to tensor
+memory</strong> (Blackwell <code class="docutils literal notranslate"><span class="pre">tmem</span></code>). One elected thread issues
+<code class="docutils literal notranslate"><span class="pre">tcgen05.cp.32x128b.warpx4</span></code>: a shared <strong>matrix descriptor</strong> names the source tile,
+and the <code class="docutils literal notranslate"><span class="pre">warpx4</span></code> multicast routes 32 lanes × 128 bits into the tensor-memory lanes
+owned by all four warps. The dispatch issues only the copy; the caller signals
+completion with <code class="docutils literal notranslate"><span class="pre">tcgen05.commit</span></code>. Source:
+<code class="docutils literal notranslate"><span class="pre">python/tvm/backend/cuda/operator/tile_primitive/copy_async/tcgen05_cp.py</span></code>.</p>
+<section id="what-it-accepts">
+<h2>What it accepts<a class="headerlink" href="#what-it-accepts" title="Link to this heading"></a></h2>
+<p>Two predicates — a valid shared→tmem copy and a single-thread scope:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># register_dispatch(..., variant=&quot;smem-&gt;tmem&quot;, priority=10, when=[</span>
+<span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;validate_smem_tmem_copy&quot;</span><span class="p">,</span> <span class="n">_is_valid_smem_tmem_copy</span><span class="p">),</span>
+<span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;exec_scope&quot;</span><span class="p">,</span> <span class="n">_single_thread_exec</span><span class="p">),</span>       <span class="c1"># exec_scope == &quot;thread&quot;</span>
+<span class="c1"># ])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_valid_smem_tmem_copy</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">sctx</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">scope</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;shared&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dst</span><span class="o">.</span><span class="n">scope</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;tmem&quot;</span><span class="p">):</span> <span class="o">...</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">layout</span> <span class="ow">and</span> <span class="n">dst</span><span class="o">.</span><span class="n">layout</span><span class="p">):</span> <span class="o">...</span>
+    <span class="k">if</span> <span class="n">dst</span><span class="o">.</span><span class="n">allocated_addr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+    <span class="n">rep</span> <span class="o">=</span> <span class="n">dst</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">replica</span>                         <span class="c1"># the warpx4 router</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">rep</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">extent</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span>
+            <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">rep</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stride</span><span class="p">)</span> <span class="o">==</span> <span class="mi">32</span> <span class="ow">and</span> <span class="s2">&quot;TLane&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;requires R[4:32@TLane] on tmem, got </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Requirement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>target / priority</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cuda</span></code> (Blackwell, sm_100+); priority <code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>scope</p></td>
+<td><p><strong>single thread</strong> issues the copy</p></td>
+</tr>
+<tr class="row-even"><td><p>memory pair</p></td>
+<td><p>source <code class="docutils literal notranslate"><span class="pre">shared*</span></code> → destination <code class="docutils literal notranslate"><span class="pre">tmem</span></code> (with <code class="docutils literal notranslate"><span class="pre">allocated_addr</span></code> set by a
+prior <code class="docutils literal notranslate"><span class="pre">tcgen05.alloc</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>tmem layout</p></td>
+<td><p>the replica <strong>must be exactly</strong> <code class="docutils literal notranslate"><span class="pre">R[4:32&#64;TLane]</span></code> — the warpx4 router that
+fans the copy across all four warps’ tensor-memory lanes</p></td>
+</tr>
+<tr class="row-even"><td><p>dtype</p></td>
+<td><p>sets <code class="docutils literal notranslate"><span class="pre">elem_per_128b</span> <span class="pre">=</span> <span class="pre">128</span> <span class="pre">/</span> <span class="pre">dtype_bits</span></code> (uint8 → 16) and the descriptor
+swizzle mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="demonstration-program">
+<h2>Demonstration program<a class="headerlink" href="#demonstration-program" title="Link to this heading"></a></h2>
+<p>A warpgroup allocates 16 tmem columns, fills a <code class="docutils literal notranslate"><span class="pre">32×16</span></code> <code class="docutils literal notranslate"><span class="pre">uint8</span></code> shared tile, and
+copies it into tmem with <code class="docutils literal notranslate"><span class="pre">tcgen05_cp</span></code> (from <code class="docutils literal notranslate"><span class="pre">test_smem_tmem.py</span></code>; the readback /
+dealloc tail is elided):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tvm.tirx.layout</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">TCol</span><span class="p">,</span> <span class="n">TileLayout</span><span class="p">,</span> <span class="n">TLane</span>
+
+<span class="n">A_smem</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_buffer</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s2">&quot;uint8&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;shared&quot;</span><span class="p">,</span>
+                        <span class="n">layout</span><span class="o">=</span><span class="n">TileLayout</span><span class="p">(</span><span class="n">S</span><span class="p">[(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]),</span> <span class="n">align</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="n">tmem_addr</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_shared</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;uint32&quot;</span><span class="p">)</span>
+<span class="n">cp_mbar</span>   <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_shared</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;uint64&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">warp_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">tcgen05</span><span class="o">.</span><span class="n">alloc</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">tmem_addr</span><span class="p">),</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">cta_group</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># ... mbarrier.init, fence, cta_sync, fill A_smem from global ...</span>
+<span class="n">tmem</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">decl_buffer</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s2">&quot;uint8&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;tmem&quot;</span><span class="p">,</span> <span class="n">allocated_addr</span><span class="o">=</span><span class="n">tmem_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                     <span class="n">layout</span><span class="o">=</span><span class="n">TileLayout</span><span class="p">(</span><span class="n">S</span><span class="p">[(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">@</span> <span class="n">TLane</span><span class="p">,</span> <span class="mi">1</span> <span class="o">@</span> <span class="n">TCol</span><span class="p">)]</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">4</span> <span class="p">:</span> <span class="mi">32</span> <span class="o">@</span> <span class="n">TLane</span><span class="p">]))</span>
+<span class="k">if</span> <span class="n">tid_in_wg</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">Tx</span><span class="o">.</span><span class="n">copy_async</span><span class="p">(</span><span class="n">tmem</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">16</span><span class="p">],</span> <span class="n">A_smem</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">16</span><span class="p">],</span> <span class="n">cta_group</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># smem -&gt; tmem</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">tcgen05</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">cp_mbar</span><span class="o">.</span><span class="n">ptr_to</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span> <span class="n">cta_group</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>             <span class="c1"># caller signals</span>
+<span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">mbarrier</span><span class="o">.</span><span class="n">try_wait</span><span class="p">(</span><span class="n">cp_mbar</span><span class="o">.</span><span class="n">ptr_to</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c1"># ... readback via tcgen05.ld, then tcgen05.dealloc ...</span>
+</pre></div>
+</div>
+<p>(The <code class="docutils literal notranslate"><span class="pre">copy_async</span></code> is auto-dispatched to the <code class="docutils literal notranslate"><span class="pre">smem-&gt;tmem</span></code> variant — the source is
+shared and the destination is the <code class="docutils literal notranslate"><span class="pre">R[4:32&#64;TLane]</span></code> tmem buffer.)</p>
+</section>
+<section id="algorithm">
+<h2>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading"></a></h2>
+<p><strong>1. Verify the warpx4 router and re-order.</strong> After slicing both layouts to the
+region, the dispatch confirms the tmem replica is <code class="docutils literal notranslate"><span class="pre">R[4:32&#64;TLane]</span></code>, permutes to
+TLane-first / TCol-stride-descending, isolates the broadcast, and groups the
+remaining iters into <code class="docutils literal notranslate"><span class="pre">(32,</span> <span class="pre">middle,</span> <span class="pre">elem_per_128b)</span></code> — the 32×128-bit atom plus a
+list of <em>middle</em> tiles to loop over.</p>
+<p><strong>2. Encode the matrix descriptor once.</strong> A 64-bit shared descriptor (leading-dim
+offset <code class="docutils literal notranslate"><span class="pre">ldo</span></code>, stride-dim offset <code class="docutils literal notranslate"><span class="pre">sdo</span></code>, swizzle mode) is encoded right after the
+shared buffer is allocated, cached per <code class="docutils literal notranslate"><span class="pre">(smem_buf,</span> <span class="pre">ldo,</span> <span class="pre">sdo,</span> <span class="pre">swizzle)</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">desc_buf</span> <span class="o">=</span> <span class="n">decl_buffer</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="s2">&quot;uint64&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;local&quot;</span><span class="p">)</span>
+<span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">tcgen05</span><span class="o">.</span><span class="n">encode_matrix_descriptor</span><span class="p">(</span><span class="n">desc_buf</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">s_buf</span><span class="o">.</span><span class="n">ptr_to</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">ldo</span><span class="p">,</span> <span class="n">sdo</span><span class="p">,</span> <span class="n">swizzle</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>3. Issue the copy</strong> — one <code class="docutils literal notranslate"><span class="pre">tcgen05.cp</span></code> for a single atom, or an unrolled loop
+that bumps the tmem column offset and the descriptor’s 16-byte shared offset per
+middle tile:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">tcgen05</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">t_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">t_col0</span><span class="p">,</span>
+                     <span class="n">smem_desc_add_16B_offset</span><span class="p">(</span><span class="n">desc_buf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">init_off_16B</span><span class="p">),</span>
+                     <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;32x128b&quot;</span><span class="p">,</span> <span class="n">cta_group</span><span class="o">=</span><span class="n">cta_group</span><span class="p">,</span> <span class="n">multicast</span><span class="o">=</span><span class="s2">&quot;warpx4&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">flat</span> <span class="ow">in</span> <span class="n">T</span><span class="o">.</span><span class="n">unroll</span><span class="p">(</span><span class="n">total</span><span class="p">):</span>
+        <span class="n">t_off</span><span class="p">,</span> <span class="n">s_off</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">meta_var</span><span class="p">(</span><span class="n">compute_offsets</span><span class="p">(</span><span class="n">flat</span><span class="p">))</span>
+        <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">tcgen05</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">t_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">t_col0</span> <span class="o">+</span> <span class="n">t_off</span><span class="p">,</span>
+                         <span class="n">smem_desc_add_16B_offset</span><span class="p">(</span><span class="n">desc_buf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">init_off_16B</span> <span class="o">+</span> <span class="n">s_off</span><span class="p">),</span>
+                         <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;32x128b&quot;</span><span class="p">,</span> <span class="n">cta_group</span><span class="o">=</span><span class="n">cta_group</span><span class="p">,</span> <span class="n">multicast</span><span class="o">=</span><span class="s2">&quot;warpx4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The dispatch emits <strong>no</strong> <code class="docutils literal notranslate"><span class="pre">tcgen05.commit</span></code> / <code class="docutils literal notranslate"><span class="pre">wait</span></code> — the caller commits against
+an mbarrier (as in the demo).</p>
+</section>
+<section id="generated-tirx-ir">
+<h2>Generated TIRx IR<a class="headerlink" href="#generated-tirx-ir" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">32×16</span></code> uint8 tile is a single atom (ldo=16, sdo=8, swizzle=0):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">tcgen05</span><span class="o">.</span><span class="n">encode_matrix_descriptor</span><span class="p">(</span><span class="n">cp_desc</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">A_smem</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">tcgen05</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">tmem_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="n">smem_desc_add_16B_offset</span><span class="p">(</span><span class="n">cp_desc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>
+                 <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;32x128b&quot;</span><span class="p">,</span> <span class="n">cta_group</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">multicast</span><span class="o">=</span><span class="s2">&quot;warpx4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="generated-cuda">
+<h2>Generated CUDA<a class="headerlink" href="#generated-cuda" title="Link to this heading"></a></h2>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// one warpx4 copy: shared (named by the matrix descriptor) -&gt; tensor memory</span>
+<span class="s">&quot;tcgen05.cp.cta_group::1.32x128b.warpx4 [%0], %1;&quot;</span><span class="w">   </span><span class="c1">// [%0]=tmem addr, %1=descriptor</span>
+</pre></div>
+</div>
+<p>(Compiled for <code class="docutils literal notranslate"><span class="pre">sm_100a</span></code>. End-to-end correctness — including the tmem readback —
+is covered by <code class="docutils literal notranslate"><span class="pre">test_smem_tmem.py</span></code>.)</p>
+</section>
+<section id="how-inputs-change-the-algorithm">
+<h2>How inputs change the algorithm<a class="headerlink" href="#how-inputs-change-the-algorithm" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>input</p></th>
+<th class="head"><p>effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dtype</p></td>
+<td><p>sets <code class="docutils literal notranslate"><span class="pre">elem_per_128b</span> <span class="pre">=</span> <span class="pre">128</span> <span class="pre">/</span> <span class="pre">dtype_bits</span></code> (uint8 → 16, uint32 → 4) and the
+descriptor swizzle mode (atom K-byte ∈ {16, 32, 64, 128} → swizzle 0/1/2/3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>number of tiles</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">total</span></code> middle tiles: <code class="docutils literal notranslate"><span class="pre">1</span></code> → a single <code class="docutils literal notranslate"><span class="pre">tcgen05.cp</span></code>; <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">1</span></code> → an
+unrolled loop, each step bumping the tmem column and the descriptor’s 16-B
+shared offset</p></td>
+</tr>
+<tr class="row-even"><td><p>shared swizzle layout</p></td>
+<td><p>changes the encoded <code class="docutils literal notranslate"><span class="pre">swizzle</span></code> mode (must match the shared buffer’s swizzle)</p></td>
+</tr>
+<tr class="row-odd"><td><p>tmem layout (D vs F) / cta_group</p></td>
+<td><p>the permutation order sets per-tile column steps; <code class="docutils literal notranslate"><span class="pre">cta_group</span></code> selects the
+multicast routing (<code class="docutils literal notranslate"><span class="pre">cta_group::1</span></code> vs <code class="docutils literal notranslate"><span class="pre">::2</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>atom shape</p></td>
+<td><p>fixed at <code class="docutils literal notranslate"><span class="pre">32x128b</span></code> <code class="docutils literal notranslate"><span class="pre">warpx4</span></code> — a different atom would need a new variant</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          
+
+<footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tcgen05_ldst.html" class="btn btn-neutral float-right" title="copy_async → tcgen05_ldst" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dsmem.html" class="btn btn-neutral float-left" title="copy_async → dsmem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+
+<div id="button" class="backtop"><img src="../../../_static/img/right.svg" alt="backtop"/> </div>
+<section class="footerSec">
+    <div class="footerHeader">
+      <div class="d-flex align-md-items-center justify-content-between flex-column flex-md-row">
+        <div class="copywrite d-flex align-items-center">
+          <h5 id="copy-right-info">© 2026 Apache Software Foundation | All rights reserved</h5>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="footernote">Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.</div>
+    </div>
+
+</section>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+    <script src="../../../_static/downloads/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../../../_static/downloads/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

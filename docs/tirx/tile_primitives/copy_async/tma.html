@@ -1,0 +1,584 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>copy_async → tma &mdash; tvm 0.26.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/downloads/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/tlcpack_theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=ee335dfd"></script>
+        <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <script type="text/javascript" src="../../../_static/js/tlcpack_theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="copy_async → dsmem" href="dsmem.html" />
+    <link rel="prev" title="copy_async → ldgsts" href="ldgsts.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    
+<header class="header">
+    <div class="innercontainer">
+      <div class="headerInner d-flex justify-content-between align-items-center">
+          <div class="headerLogo">
+               <a href="https://tvm.apache.org/"><img src=https://tvm.apache.org/assets/images/logo.svg alt="logo"></a>
+          </div>
+
+          <div id="headMenu" class="headerNav">
+            <button type="button" id="closeHeadMenu" class="navCloseBtn"><img src="../../../_static/img/close-icon.svg" alt="Close"></button>
+             <ul class="nav">
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/community>Community</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/download>Download</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/docs>Docs</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://github.com/apache/tvm/>GitHub</a>
+                </li>
+             </ul>
+               <div class="responsivetlcdropdown">
+                 <button type="button" class="btn-link">
+                   ASF
+                 </button>
+                 <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                 </ul>
+               </div>
+          </div>
+            <div class="responsiveMenuIcon">
+              <button type="button" id="menuBtn" class="btn-menu"><img src="../../../_static/img/menu-icon.svg" alt="Menu Icon"></button>
+            </div>
+
+            <div class="tlcDropdown">
+              <div class="dropdown">
+                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ASF
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+       </div>
+    </div>
+ </header>
+ 
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side fixed">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="sidetitle" alt="Documentation Home"> tvm
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Installing TVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/ir_module.html">IRModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errors.html">TVM Errors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How To</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/import_model.html">Importing Models from ML Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/e2e_opt_model.html">End-to-End Optimize Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/customize_opt.html">Customize Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/optimize_llm.html">Optimize Large Language Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/export_and_load_executable.html">Export and Load Relax Executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../arch/index.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/tensor_ir/index.html">TensorIR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/relax/index.html">Relax</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout.html">Tensor Layout</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tile_primitives.html">Tile Primitives</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#calling-convention">Calling convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#primitive-catalog">Primitive catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#dispatch-config">Dispatch config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#dispatch-mechanism">Dispatch mechanism</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../tile_primitives.html#dispatch-by-primitive">Dispatch by primitive</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../copy.html">copy</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../copy_async.html">copy_async</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ldgsts.html">copy_async → ldgsts</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">copy_async → tma</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dsmem.html">copy_async → dsmem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tcgen05_cp.html">copy_async → tcgen05_cp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tcgen05_ldst.html">copy_async → tcgen05_ldst</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../gemm.html">gemm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gemm_async.html">gemm_async</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../elementwise.html">elementwise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reduction.html">reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../permute_layout.html">permute_layout</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/api/python/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/api/links.html">Other APIs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/security.html">Security Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      
+      <nav class="wy-nav-top" aria-label="top navigation" data-toggle="wy-nav-top">
+        
+            <div class="togglemenu">
+
+            </div>
+            <div class="nav-content">
+              <!-- tvm -->
+              Table of Contents
+            </div>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> <span class="br-arrow">></span></li>
+        
+          <li><a href="../../tile_primitives.html">Tile Primitives</a> <span class="br-arrow">></span></li>
+        
+          <li><a href="../copy_async.html">copy_async</a> <span class="br-arrow">></span></li>
+        
+      <li>copy_async → tma</li>
+    
+    
+      
+      
+        
+      
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/apache/tvm/edit/main/docs/tirx/tile_primitives/copy_async/tma.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="copy-async-tma">
+<h1>copy_async → tma<a class="headerlink" href="#copy-async-tma" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">tma</span></code> variant lowers <code class="docutils literal notranslate"><span class="pre">copy_async</span></code> between <strong>global and shared</strong> to the
+hardware <strong>Tensor Memory Accelerator</strong>: a single elected thread issues a
+descriptor-driven bulk copy (<code class="docutils literal notranslate"><span class="pre">cp.async.bulk.tensor</span></code>), and the hardware walks the
+multi-dimensional tile described by a <code class="docutils literal notranslate"><span class="pre">cuTensorMap</span></code>. The descriptor is built once
+on the host (<code class="docutils literal notranslate"><span class="pre">cuTensorMapEncodeTiled</span></code>); the device only <em>issues</em> the copy — the
+hardware signals the caller’s mbarrier when the transfer completes (the dispatch
+itself emits no completion op). Source:
+<code class="docutils literal notranslate"><span class="pre">python/tvm/backend/cuda/operator/tile_primitive/copy_async/tma.py</span></code>.</p>
+<section id="what-it-accepts">
+<h2>What it accepts<a class="headerlink" href="#what-it-accepts" title="Link to this heading"></a></h2>
+<p>The dispatch registers two predicates — a valid copy and a <strong>single-thread</strong> scope:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># register_dispatch(..., priority=10, when=[</span>
+<span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;validate_copy_op&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">op</span><span class="p">,</span> <span class="n">sctx</span><span class="p">:</span> <span class="p">(</span><span class="n">validate_copy_op</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">sctx</span><span class="p">),</span> <span class="s2">&quot;not a valid copy op&quot;</span><span class="p">)),</span>
+<span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;single_thread&quot;</span><span class="p">,</span>    <span class="k">lambda</span> <span class="n">op</span><span class="p">,</span> <span class="n">sctx</span><span class="p">:</span> <span class="p">(</span><span class="n">single_thread</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">sctx</span><span class="p">),</span>    <span class="s2">&quot;expected single thread&quot;</span><span class="p">)),</span>
+<span class="c1"># ])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">single_thread</span><span class="p">(</span><span class="n">op_call</span><span class="p">,</span> <span class="n">sctx</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">sctx</span><span class="o">.</span><span class="n">is_thread</span>            <span class="c1"># exactly one elected thread issues the TMA</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Requirement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>target / priority</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cuda</span></code>; priority <code class="docutils literal notranslate"><span class="pre">10</span></code> (the bulk path for <code class="docutils literal notranslate"><span class="pre">copy_async</span></code> global ↔ shared)</p></td>
+</tr>
+<tr class="row-odd"><td><p>scope</p></td>
+<td><p><strong>single thread</strong> (<code class="docutils literal notranslate"><span class="pre">sctx.is_thread</span></code>) — TMA is issued by one thread, not a
+partitioned warp</p></td>
+</tr>
+<tr class="row-even"><td><p>direction</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">global</span> <span class="pre">→</span> <span class="pre">shared</span></code> (g2s) or <code class="docutils literal notranslate"><span class="pre">shared</span> <span class="pre">→</span> <span class="pre">global</span></code> (s2g), inferred from the
+buffer scopes at lowering</p></td>
+</tr>
+<tr class="row-odd"><td><p>dtype / shape</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">validate_copy_op</span></code>: both sides have layouts, equal dtype, equal non-unit
+extents</p></td>
+</tr>
+<tr class="row-even"><td><p>layout</p></td>
+<td><p>must form a legal descriptor: rank ≤ 5, innermost stride 1, innermost box
+fits the shared swizzle atom (else the plan search shrinks / declines)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="demonstration-program">
+<h2>Demonstration program<a class="headerlink" href="#demonstration-program" title="Link to this heading"></a></h2>
+<p>One thread bulk-copies an <code class="docutils literal notranslate"><span class="pre">8×256</span></code> <code class="docutils literal notranslate"><span class="pre">float16</span></code> tile global → shared (with a
+128-byte swizzled shared layout), signals an mbarrier, waits, then reads it back
+(mirrors <code class="docutils literal notranslate"><span class="pre">test_tma.py</span></code>’s G2S smoke test):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tvm.tirx.cuda.operator.tile_primitive.tma_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">mma_shared_layout</span>
+
+<span class="n">g_shape</span> <span class="o">=</span> <span class="n">s_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;float16&quot;</span>
+<span class="n">shared_layout</span> <span class="o">=</span> <span class="n">mma_shared_layout</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">))</span>    <span class="c1"># 128-B swizzle</span>
+<span class="n">smem_bytes</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="nd">@T</span><span class="o">.</span><span class="n">prim_func</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">copy_async</span><span class="p">(</span><span class="n">A_ptr</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">B_ptr</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">handle</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">match_buffer</span><span class="p">(</span><span class="n">A_ptr</span><span class="p">,</span> <span class="n">g_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">TileLayout</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">]))</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">match_buffer</span><span class="p">(</span><span class="n">B_ptr</span><span class="p">,</span> <span class="n">g_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">TileLayout</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">]))</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">device_entry</span><span class="p">();</span> <span class="n">T</span><span class="o">.</span><span class="n">cta_id</span><span class="p">([</span><span class="mi">1</span><span class="p">]);</span> <span class="n">tid</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">thread_id</span><span class="p">([</span><span class="mi">8</span><span class="p">])</span>
+    <span class="n">dyn</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_buffer</span><span class="p">([</span><span class="n">smem_bytes</span> <span class="o">+</span> <span class="mi">8</span><span class="p">],</span> <span class="s2">&quot;uint8&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;shared.dyn&quot;</span><span class="p">)</span>   <span class="c1"># arena</span>
+    <span class="n">A_smem</span>   <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">decl_buffer</span><span class="p">(</span><span class="n">s_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">dyn</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">elem_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">shared_layout</span><span class="p">)</span>
+    <span class="n">mbarrier</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">decl_buffer</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;uint64&quot;</span><span class="p">,</span> <span class="n">dyn</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">elem_offset</span><span class="o">=</span><span class="n">smem_bytes</span> <span class="o">//</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">phase</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">int32</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">tid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">mbarrier</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">mbarrier</span><span class="o">.</span><span class="n">ptr_to</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">fence</span><span class="o">.</span><span class="n">proxy_async</span><span class="p">(</span><span class="s2">&quot;shared::cta&quot;</span><span class="p">);</span> <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">cta_sync</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">tid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">Tx</span><span class="o">.</span><span class="n">copy_async</span><span class="p">(</span><span class="n">A_smem</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">256</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">256</span><span class="p">],</span> <span class="n">dispatch</span><span class="o">=</span><span class="s2">&quot;tma&quot;</span><span class="p">,</span> <span class="n">mbar</span><span class="o">=</span><span class="n">mbarrier</span><span class="o">.</span><span class="n">ptr_to</span><span class="p">([</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">mbarrier</span><span class="o">.</span><span class="n">arrive</span><span class="o">.</span><span class="n">expect_tx</span><span class="p">(</span><span class="n">mbarrier</span><span class="o">.</span><span class="n">ptr_to</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span> <span class="n">smem_bytes</span><span class="p">)</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">mbarrier</span><span class="o">.</span><span class="n">try_wait</span><span class="p">(</span><span class="n">mbarrier</span><span class="o">.</span><span class="n">ptr_to</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span> <span class="n">phase</span><span class="p">)</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">fence</span><span class="o">.</span><span class="n">proxy_async</span><span class="p">(</span><span class="s2">&quot;shared::cta&quot;</span><span class="p">);</span> <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">cta_sync</span><span class="p">()</span>
+    <span class="n">Tx</span><span class="o">.</span><span class="n">cta</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">256</span><span class="p">],</span> <span class="n">A_smem</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">256</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="algorithm">
+<h2>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading"></a></h2>
+<p><strong>1. Infer direction from scopes.</strong> <code class="docutils literal notranslate"><span class="pre">global</span> <span class="pre">→</span> <span class="pre">shared</span></code> is g2s, <code class="docutils literal notranslate"><span class="pre">shared</span> <span class="pre">→</span> <span class="pre">global</span></code>
+is s2g (anything else is an error):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">src</span><span class="o">.</span><span class="n">scope</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;global&quot;</span> <span class="ow">and</span> <span class="n">dst</span><span class="o">.</span><span class="n">scope</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;shared&quot;</span><span class="p">):</span>
+    <span class="n">direction</span><span class="p">,</span> <span class="n">s_buf</span><span class="p">,</span> <span class="n">g_buf</span> <span class="o">=</span> <span class="s2">&quot;g2s&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">src</span>
+<span class="k">elif</span> <span class="n">src</span><span class="o">.</span><span class="n">scope</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;shared&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dst</span><span class="o">.</span><span class="n">scope</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;global&quot;</span><span class="p">:</span>
+    <span class="n">direction</span><span class="p">,</span> <span class="n">s_buf</span><span class="p">,</span> <span class="n">g_buf</span> <span class="o">=</span> <span class="s2">&quot;s2g&quot;</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dst</span>
+</pre></div>
+</div>
+<p><strong>2. Plan the descriptor (L1 → L2 → L3).</strong> The dispatch canonicalizes both
+layouts (L1), then for each global iter finds the maximal contiguous stride-1 shard
+chain and cuts the axis into descriptor <strong>box</strong> segments (L2), then stacks those
+into a <code class="docutils literal notranslate"><span class="pre">cuTensorMap</span></code> and validates the hardware constraints — rank ≤ 5, innermost
+stride 1, innermost box fits the shared swizzle atom — shrinking the chain prefix
+and retrying if a constraint fails (L3). Adjacent fully-boxed contiguous dims are
+merged, and an over-256 box may trigger element-type promotion.</p>
+<p><strong>3. Emit the host descriptor once,</strong> keyed by a cache so a repeated copy reuses it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="o">.</span><span class="n">call_packed</span><span class="p">(</span><span class="s2">&quot;runtime.cuTensorMapEncodeTiled&quot;</span><span class="p">,</span> <span class="n">tensormap</span><span class="p">,</span> <span class="n">dtype_str</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span>
+              <span class="n">tensor_ptr</span><span class="p">,</span> <span class="o">*</span><span class="nb">reversed</span><span class="p">(</span><span class="n">shape</span><span class="p">),</span> <span class="o">*</span><span class="nb">reversed</span><span class="p">(</span><span class="n">strides</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+              <span class="o">*</span><span class="nb">reversed</span><span class="p">(</span><span class="n">box_dim</span><span class="p">),</span> <span class="o">*</span><span class="n">element_strides</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">swizzle_mode</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">oob_fill</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>4. Emit the device issue loop</strong> — an unrolled loop over the issue axes, one
+<code class="docutils literal notranslate"><span class="pre">cp.async.bulk.tensor</span></code> per step, direction-specific:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;g2s&quot;</span><span class="p">:</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">cp_async</span><span class="o">.</span><span class="n">bulk</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">g2c</span><span class="p">(</span><span class="n">plan</span><span class="o">.</span><span class="n">rank</span><span class="p">,</span> <span class="n">s_buf</span><span class="o">.</span><span class="n">ptr_to</span><span class="p">(</span><span class="n">s_st</span><span class="p">),</span> <span class="n">mbar</span><span class="p">,</span>
+                                   <span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">tensor_map</span><span class="p">),</span> <span class="n">cta_mask</span><span class="p">,</span> <span class="n">cta_group</span><span class="p">,</span>
+                                   <span class="n">cache_hint</span><span class="p">,</span> <span class="o">*</span><span class="n">tma_coords</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">cp_async</span><span class="o">.</span><span class="n">bulk</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">s2g</span><span class="p">(</span><span class="n">plan</span><span class="o">.</span><span class="n">rank</span><span class="p">,</span> <span class="n">s_buf</span><span class="o">.</span><span class="n">ptr_to</span><span class="p">(</span><span class="n">s_st</span><span class="p">),</span>
+                                   <span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">tensor_map</span><span class="p">),</span> <span class="n">cache_hint</span><span class="p">,</span> <span class="o">*</span><span class="n">tma_coords</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Like all <code class="docutils literal notranslate"><span class="pre">copy_async</span></code> variants the dispatch emits no completion — the caller’s
+mbarrier <code class="docutils literal notranslate"><span class="pre">arrive.expect_tx</span></code> / <code class="docutils literal notranslate"><span class="pre">try_wait</span></code> (g2s) close the loop.</p>
+</section>
+<section id="generated-tirx-ir">
+<h2>Generated TIRx IR<a class="headerlink" href="#generated-tirx-ir" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">8×256</span></code> swizzled tile produces a <strong>rank-3</strong> descriptor and a single issue:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># host (once): encode the tensor map (rank 3, reversed shape/box/strides, swizzle 3)</span>
+<span class="n">T</span><span class="o">.</span><span class="n">call_packed</span><span class="p">(</span><span class="s2">&quot;runtime.cuTensorMapEncodeTiled&quot;</span><span class="p">,</span> <span class="n">A_ptr_tensormap</span><span class="p">,</span> <span class="s2">&quot;float16&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>
+              <span class="n">A</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c1"># device:</span>
+<span class="k">for</span> <span class="n">loop_vars</span> <span class="ow">in</span> <span class="n">T</span><span class="o">.</span><span class="n">unroll</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">cp_async</span><span class="o">.</span><span class="n">bulk</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">g2c</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">s_buf_w_offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                                   <span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">mbarrier</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                                   <span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">A_ptr_tensormap</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="generated-cuda">
+<h2>Generated CUDA<a class="headerlink" href="#generated-cuda" title="Link to this heading"></a></h2>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// one TMA instruction copies the whole rank-3 tile, async, into shared</span>
+<span class="s">&quot;cp.async.bulk.tensor.3d.shared::cluster.global.mbarrier::complete_tx::bytes&quot;</span>
+<span class="s">&quot;.cta_group::1 [%0], [%1, {%3, %4, %5}], [%2];&quot;</span>
+<span class="c1">// call: ptx_cp_async_bulk_tensor_g2cluster_tile_3d(smem, mbar, tensormap, coords...)</span>
+</pre></div>
+</div>
+<p>The three <code class="docutils literal notranslate"><span class="pre">{%3,</span> <span class="pre">%4,</span> <span class="pre">%5}</span></code> are the descriptor coordinates; <code class="docutils literal notranslate"><span class="pre">[%1]</span></code> is the
+tensor-map address, <code class="docutils literal notranslate"><span class="pre">[%2]</span></code> the mbarrier. One thread launches the entire 8×256
+copy. (This was compiled for <code class="docutils literal notranslate"><span class="pre">sm_100a</span></code> — Blackwell — so the instruction carries
+the <code class="docutils literal notranslate"><span class="pre">.cta_group::1</span></code> qualifier; on Hopper the qualifier is omitted.)</p>
+</section>
+<section id="how-inputs-change-the-algorithm">
+<h2>How inputs change the algorithm<a class="headerlink" href="#how-inputs-change-the-algorithm" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26.0%" />
+<col style="width: 74.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>input</p></th>
+<th class="head"><p>effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>direction</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">g2s</span></code> → <code class="docutils literal notranslate"><span class="pre">cp.async.bulk.tensor.*.g2c</span></code>; <code class="docutils literal notranslate"><span class="pre">s2g</span></code> → <code class="docutils literal notranslate"><span class="pre">…s2g</span></code>; with a reduce
+op → <code class="docutils literal notranslate"><span class="pre">…s2g_reduce</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">add</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>shared swizzle mode</p></td>
+<td><p>sets the <code class="docutils literal notranslate"><span class="pre">swizzle_mode</span></code> in the descriptor and the innermost-box constraint;
+a 128-B swizzle on a 2-D tile yields a <strong>rank-3</strong> descriptor (the inner axis
+splits into swizzle atoms), as in the demo</p></td>
+</tr>
+<tr class="row-even"><td><p>box shape / chain prefix</p></td>
+<td><p>more selected stride-1 shards → more box&gt;1 descriptor dims; merge collapses
+contiguous full-box dims; box &gt; 256 triggers dtype promotion (1→2→4→8 B)</p></td>
+</tr>
+<tr class="row-odd"><td><p>dtype</p></td>
+<td><p>sets element size and the descriptor’s element strides / box byte width</p></td>
+</tr>
+</tbody>
+</table>
+<p>A copy whose layout cannot form a legal descriptor (rank &gt; 5 after shrinking, or no
+swizzle-atom-aligned innermost box) makes the plan search fail and the variant
+declines.</p>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          
+
+<footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dsmem.html" class="btn btn-neutral float-right" title="copy_async → dsmem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ldgsts.html" class="btn btn-neutral float-left" title="copy_async → ldgsts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+
+<div id="button" class="backtop"><img src="../../../_static/img/right.svg" alt="backtop"/> </div>
+<section class="footerSec">
+    <div class="footerHeader">
+      <div class="d-flex align-md-items-center justify-content-between flex-column flex-md-row">
+        <div class="copywrite d-flex align-items-center">
+          <h5 id="copy-right-info">© 2026 Apache Software Foundation | All rights reserved</h5>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="footernote">Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.</div>
+    </div>
+
+</section>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+    <script src="../../../_static/downloads/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../../../_static/downloads/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

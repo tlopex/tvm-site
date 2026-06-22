@@ -1,0 +1,729 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tensor Layout &mdash; tvm 0.26.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/downloads/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/tlcpack_theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=ee335dfd"></script>
+        <script src="../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="../_static/downloads/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <script type="text/javascript" src="../_static/js/tlcpack_theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tile Primitives" href="tile_primitives.html" />
+    <link rel="prev" title="Compiling and inspecting" href="native_basics/cuda/compiling.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    
+<header class="header">
+    <div class="innercontainer">
+      <div class="headerInner d-flex justify-content-between align-items-center">
+          <div class="headerLogo">
+               <a href="https://tvm.apache.org/"><img src=https://tvm.apache.org/assets/images/logo.svg alt="logo"></a>
+          </div>
+
+          <div id="headMenu" class="headerNav">
+            <button type="button" id="closeHeadMenu" class="navCloseBtn"><img src="../_static/img/close-icon.svg" alt="Close"></button>
+             <ul class="nav">
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/community>Community</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/download>Download</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/docs>Docs</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://github.com/apache/tvm/>GitHub</a>
+                </li>
+             </ul>
+               <div class="responsivetlcdropdown">
+                 <button type="button" class="btn-link">
+                   ASF
+                 </button>
+                 <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                 </ul>
+               </div>
+          </div>
+            <div class="responsiveMenuIcon">
+              <button type="button" id="menuBtn" class="btn-menu"><img src="../_static/img/menu-icon.svg" alt="Menu Icon"></button>
+            </div>
+
+            <div class="tlcDropdown">
+              <div class="dropdown">
+                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ASF
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+       </div>
+    </div>
+ </header>
+ 
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side fixed">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="sidetitle" alt="Documentation Home"> tvm
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">Installing TVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/tutorials/quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/tutorials/ir_module.html">IRModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">TVM Errors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How To</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/import_model.html">Importing Models from ML Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/e2e_opt_model.html">End-to-End Optimize Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/customize_opt.html">Customize Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/optimize_llm.html">Optimize Large Language Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/export_and_load_executable.html">Export and Load Relax Executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../arch/index.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep_dive/tensor_ir/index.html">TensorIR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep_dive/relax/index.html">Relax</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tensor Layout</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#interactive-demo">Interactive demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tilelayout">TileLayout</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#forward-mapping">Forward mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#case-study-nvidia-tensor-core-tile">Case study: NVIDIA tensor-core tile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#case-study-blackwell-tensor-memory">Case study: Blackwell tensor memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beyond-gpu-registers">Beyond GPU registers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#swizzlelayout-composelayout">SwizzleLayout, ComposeLayout</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#why-swizzle">Why swizzle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-transform">The transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#choosing-the-parameters">Choosing the parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bank-and-line-of-an-element">Bank and line of an element</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#worked-example-128b-swizzle-float16-8-64-tile">Worked example: 128B swizzle, <code class="docutils literal notranslate"><span class="pre">float16</span></code>, <code class="docutils literal notranslate"><span class="pre">(8,</span> <span class="pre">64)</span></code> tile</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#design-rationale">Design rationale</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tile_primitives.html">Tile Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/api/python/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/api/links.html">Other APIs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/security.html">Security Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      
+      <nav class="wy-nav-top" aria-label="top navigation" data-toggle="wy-nav-top">
+        
+            <div class="togglemenu">
+
+            </div>
+            <div class="nav-content">
+              <!-- tvm -->
+              Table of Contents
+            </div>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> <span class="br-arrow">></span></li>
+        
+      <li>Tensor Layout</li>
+    
+    
+      
+      
+        
+      
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/apache/tvm/edit/main/docs/tirx/layout.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="tensor-layout">
+<h1>Tensor Layout<a class="headerlink" href="#tensor-layout" title="Link to this heading"></a></h1>
+<p>A tensor layout describes how a logical tensor is stored in physical resources.
+TIRx generalizes the classical <em>shape–stride</em> model: strides are semantically
+<strong>named</strong> and bound to <strong>axes</strong> that represent hardware resources — memory,
+threads, and devices. A layout maps each logical index to a <em>set</em> of coordinates
+on these named axes, decomposed into shard (<code class="docutils literal notranslate"><span class="pre">D</span></code>), replica (<code class="docutils literal notranslate"><span class="pre">R</span></code>), and offset
+(<code class="docutils literal notranslate"><span class="pre">O</span></code>).</p>
+<section id="interactive-demo">
+<h2>Interactive demo<a class="headerlink" href="#interactive-demo" title="Link to this heading"></a></h2>
+<p>Pick a preset, edit the logical shape and the <code class="docutils literal notranslate"><span class="pre">S/R/O</span></code> layout, choose a dtype +
+swizzle mode, then click an element to see exactly which physical thread(s) own
+it.</p>
+<p>
+  <a class="reference external" href="https://mlc.ai/modern-gpu-programming-for-mlsys/_static/tirx-layout-demo/index.html"
+     target="_blank" rel="noopener"
+     style="display:inline-block; padding:10px 18px; background:#3b82f6;
+     color:#fff !important; font-weight:700; border-radius:8px;
+     text-decoration:none;">▶ Open the interactive layout demo ↗</a>
+</p></section>
+<section id="tilelayout">
+<h2>TileLayout<a class="headerlink" href="#tilelayout" title="Link to this heading"></a></h2>
+<p>An <strong>iter</strong> is a triple <code class="docutils literal notranslate"><span class="pre">(extent,</span> <span class="pre">stride,</span> <span class="pre">axis)</span></code> that defines a linear,
+strided access on one axis.</p>
+<ul class="simple">
+<li><p><strong>D (Shard).</strong> A list of one or more iters, each with an extent and a stride on
+some axis. <code class="docutils literal notranslate"><span class="pre">D</span></code> partitions the logical index across these iters and produces a
+base coordinate; this generalizes shape–stride to multiple axes. Written in
+parentheses, e.g. <code class="docutils literal notranslate"><span class="pre">S[(8,2,4,2):(4&#64;laneid,1&#64;warpid,1&#64;laneid,1)]</span></code>.</p></li>
+<li><p><strong>R (Replica).</strong> A set of replication iters that enumerate offsets in hardware
+space, independent of the logical index. Adding each element of the set to the
+<code class="docutils literal notranslate"><span class="pre">D</span></code> result yields replication or broadcasting. Written in square brackets,
+e.g. <code class="docutils literal notranslate"><span class="pre">R[2:4&#64;warpid]</span></code>.</p></li>
+<li><p><strong>O (Offset).</strong> A fixed coordinate offset (one integer per axis) added to every
+result. This places data at a base position or reserves exclusive resources.</p></li>
+</ul>
+<p>Formally, for a logical index <code class="docutils literal notranslate"><span class="pre">x</span></code> the layout produces</p>
+<div class="math notranslate nohighlight">
+\[L(x) = \{\, D(x) + r + O \mid r \in R \,\},\]</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">D(x)</span></code> is the base coordinate from the sharded iters, <code class="docutils literal notranslate"><span class="pre">r</span></code> ranges over
+all combinations of the replica iters (a single zero offset when <code class="docutils literal notranslate"><span class="pre">R</span></code> is empty),
+and <code class="docutils literal notranslate"><span class="pre">O</span></code> is the constant offset. <code class="docutils literal notranslate"><span class="pre">L(x)</span></code> can be a singleton or contain multiple
+coordinates. A term is written <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&#64;</span> <span class="pre">axis</span></code>; if a stride is not paired with an
+axis, the memory axis <code class="docutils literal notranslate"><span class="pre">m</span></code> is used by default.</p>
+<section id="forward-mapping">
+<h3>Forward mapping<a class="headerlink" href="#forward-mapping" title="Link to this heading"></a></h3>
+<p>Evaluating <code class="docutils literal notranslate"><span class="pre">L(x)</span></code> for a logical coordinate <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">(x_0,</span> <span class="pre">…,</span> <span class="pre">x_{r-1})</span></code> in a shape
+<code class="docutils literal notranslate"><span class="pre">(S_0,</span> <span class="pre">…,</span> <span class="pre">S_{r-1})</span></code> is four mechanical steps.</p>
+<p><strong>1. Flatten</strong> the coordinate row-major to a single index:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{flat} = \sum_{d} x_d \prod_{e &gt; d} S_e .\]</div>
+<p><strong>2. Split</strong> that index across the shard extents <code class="docutils literal notranslate"><span class="pre">(e_0,</span> <span class="pre">…,</span> <span class="pre">e_{n-1})</span></code>
+(one component <code class="docutils literal notranslate"><span class="pre">c_k</span></code> per shard iter, innermost-first):</p>
+<div class="math notranslate nohighlight">
+\[c_k = \left\lfloor \mathrm{flat} \,\Big/ \textstyle\prod_{l &gt; k} e_l \right\rfloor
+      \bmod e_k .\]</div>
+<p><strong>3. Accumulate</strong> each component onto its axis with its stride to get the base
+coordinate, then <strong>add the offset</strong>:</p>
+<div class="math notranslate nohighlight">
+\[D(x)[a] = \sum_{k\,:\,a_k = a} c_k\, s_k ,
+\qquad
+\bigl(D(x) + O\bigr)[a] = D(x)[a] + O[a] .\]</div>
+<p><strong>4. Broadcast</strong> the replica iters: <code class="docutils literal notranslate"><span class="pre">r</span></code> ranges over
+<code class="docutils literal notranslate"><span class="pre">∏_t</span> <span class="pre">[0,</span> <span class="pre">e_t)</span></code> and adds, per replica iter <code class="docutils literal notranslate"><span class="pre">(e_t,</span> <span class="pre">s_t,</span> <span class="pre">a_t)</span></code>, <code class="docutils literal notranslate"><span class="pre">r_t</span> <span class="pre">s_t</span></code> to
+axis <code class="docutils literal notranslate"><span class="pre">a_t</span></code> — yielding the set <code class="docutils literal notranslate"><span class="pre">L(x)</span></code>:</p>
+<div class="math notranslate nohighlight">
+\[L(x)[a] = D(x)[a] + O[a] + \sum_{t\,:\,a_t = a} r_t\, s_t .\]</div>
+<p>A shape is <em>admitted</em> by a layout when its total size equals
+<code class="docutils literal notranslate"><span class="pre">∏_k</span> <span class="pre">e_k</span></code>; the same layout then works for any such shape (the flatten/split
+re-derives the per-iter components).</p>
+</section>
+<section id="case-study-nvidia-tensor-core-tile">
+<h3>Case study: NVIDIA tensor-core tile<a class="headerlink" href="#case-study-nvidia-tensor-core-tile" title="Link to this heading"></a></h3>
+<p>Consider a logical <code class="docutils literal notranslate"><span class="pre">(8,</span> <span class="pre">16)</span></code> tile distributed across 2 warps of 32 lanes each,
+with each lane holding part of the tile in its registers (the <code class="docutils literal notranslate"><span class="pre">reg</span></code> slot is the
+default memory axis <code class="docutils literal notranslate"><span class="pre">m</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="p">[(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">):(</span><span class="mi">4</span><span class="nd">@laneid</span><span class="p">,</span><span class="mi">1</span><span class="nd">@warpid</span><span class="p">,</span><span class="mi">1</span><span class="nd">@laneid</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="nd">@warpid</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="nd">@warpid</span>
+</pre></div>
+</div>
+<p>The shard factors the logical indices into four iters of extent <code class="docutils literal notranslate"><span class="pre">8,</span> <span class="pre">2,</span> <span class="pre">4,</span> <span class="pre">2</span></code>
+over axes <code class="docutils literal notranslate"><span class="pre">laneid,</span> <span class="pre">warpid,</span> <span class="pre">laneid,</span> <span class="pre">m</span></code>. Running the four steps on element
+<code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j)</span></code>:</p>
+<ol class="arabic simple">
+<li><p><strong>flatten:</strong> <code class="docutils literal notranslate"><span class="pre">flat</span> <span class="pre">=</span> <span class="pre">16</span> <span class="pre">i</span> <span class="pre">+</span> <span class="pre">j</span></code>.</p></li>
+<li><p><strong>split</strong> by <code class="docutils literal notranslate"><span class="pre">(8,</span> <span class="pre">2,</span> <span class="pre">4,</span> <span class="pre">2)</span></code>: <code class="docutils literal notranslate"><span class="pre">c_0</span> <span class="pre">=</span> <span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">c_1</span> <span class="pre">=</span> <span class="pre">⌊j/8⌋</span></code>,
+<code class="docutils literal notranslate"><span class="pre">c_2</span> <span class="pre">=</span> <span class="pre">⌊j/2⌋</span> <span class="pre">mod</span> <span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">c_3</span> <span class="pre">=</span> <span class="pre">j</span> <span class="pre">mod</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>accumulate + offset:</strong> <code class="docutils literal notranslate"><span class="pre">laneid</span> <span class="pre">=</span> <span class="pre">4</span> <span class="pre">c_0</span> <span class="pre">+</span> <span class="pre">c_2</span> <span class="pre">=</span> <span class="pre">4</span> <span class="pre">i</span> <span class="pre">+</span> <span class="pre">⌊j/2⌋</span> <span class="pre">mod</span> <span class="pre">4</span></code> (two
+iters land on <code class="docutils literal notranslate"><span class="pre">laneid</span></code>); <code class="docutils literal notranslate"><span class="pre">warpid</span> <span class="pre">=</span> <span class="pre">c_1</span> <span class="pre">+</span> <span class="pre">5</span> <span class="pre">=</span> <span class="pre">⌊j/8⌋</span> <span class="pre">+</span> <span class="pre">5</span></code> (offset
+<code class="docutils literal notranslate"><span class="pre">5&#64;warpid</span></code>); <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">c_3</span> <span class="pre">=</span> <span class="pre">j</span> <span class="pre">mod</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>replica</strong> <code class="docutils literal notranslate"><span class="pre">R[2:4&#64;warpid]</span></code>: <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">∈</span> <span class="pre">{0,</span> <span class="pre">1}</span></code> adds <code class="docutils literal notranslate"><span class="pre">4r</span></code> to <code class="docutils literal notranslate"><span class="pre">warpid</span></code>, so
+each element lives on <strong>two</strong> warps.</p></li>
+</ol>
+<p>So the full mapping is</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{laneid} = 4 i + \lfloor j/2 \rfloor \bmod 4, \quad
+\mathrm{warpid} = \lfloor j/8 \rfloor + 5 + 4 r\ (r \in \{0,1\}), \quad
+m = j \bmod 2 .\]</div>
+<p>The shard places the tile on warps <code class="docutils literal notranslate"><span class="pre">{5,</span> <span class="pre">6}</span></code> (<code class="docutils literal notranslate"><span class="pre">⌊j/8⌋</span> <span class="pre">+</span> <span class="pre">5</span></code>); the replica copies
+it to <code class="docutils literal notranslate"><span class="pre">{9,</span> <span class="pre">10}</span></code>. A few elements:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.2%" />
+<col style="width: 10.9%" />
+<col style="width: 28.3%" />
+<col style="width: 13.0%" />
+<col style="width: 21.7%" />
+<col style="width: 10.9%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j)</span></code></p></th>
+<th class="head"><p>flat</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">(c0,</span> <span class="pre">c1,</span> <span class="pre">c2,</span> <span class="pre">c3)</span></code></p></th>
+<th class="head"><p>laneid</p></th>
+<th class="head"><p>warpid (×2)</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">m</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code></p></td>
+<td><p>0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+<td><p>0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{5,</span> <span class="pre">9}</span></code></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1)</span></code></p></td>
+<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">1)</span></code></p></td>
+<td><p>0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{5,</span> <span class="pre">9}</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">2)</span></code></p></td>
+<td><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">0)</span></code></p></td>
+<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{5,</span> <span class="pre">9}</span></code></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">0)</span></code></p></td>
+<td><p>16</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+<td><p>4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{5,</span> <span class="pre">9}</span></code></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">8)</span></code></p></td>
+<td><p>8</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+<td><p>0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{6,</span> <span class="pre">10}</span></code></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(7,</span> <span class="pre">15)</span></code></p></td>
+<td><p>127</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(7,</span> <span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">1)</span></code></p></td>
+<td><p>31</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{6,</span> <span class="pre">10}</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="case-study-blackwell-tensor-memory">
+<h3>Case study: Blackwell tensor memory<a class="headerlink" href="#case-study-blackwell-tensor-memory" title="Link to this heading"></a></h3>
+<p>The same machinery places a tensor into Blackwell <strong>tensor memory</strong>, a 2D address
+space addressed by <code class="docutils literal notranslate"><span class="pre">TLane</span></code> × <code class="docutils literal notranslate"><span class="pre">TCol</span></code> (both <em>memory</em> axes). Where the register
+tile bound strides to thread axes, here every stride binds to a memory axis, so
+the layout is a pure placement — no threads, no replica, no offset, and <code class="docutils literal notranslate"><span class="pre">L(x)</span></code>
+is a singleton:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">112</span><span class="p">):(</span><span class="mi">112</span><span class="nd">@TCol</span><span class="p">,</span><span class="mi">1</span><span class="nd">@TLane</span><span class="p">,</span><span class="mi">1</span><span class="nd">@TCol</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Take the logical tile shape equal to the shard extents, <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">128,</span> <span class="pre">112)</span></code> — then
+the split step is the identity (<code class="docutils literal notranslate"><span class="pre">c_k</span> <span class="pre">=</span> <span class="pre">x_k</span></code>), and element <code class="docutils literal notranslate"><span class="pre">(a,</span> <span class="pre">l,</span> <span class="pre">c)</span></code> maps to:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{TLane} = l, \qquad \mathrm{TCol} = 112\,a + c .\]</div>
+<p>The extent-128 iter (<code class="docutils literal notranslate"><span class="pre">1&#64;TLane</span></code>) lays the tile across <strong>128 lanes</strong>; the
+extent-2 iter (<code class="docutils literal notranslate"><span class="pre">112&#64;TCol</span></code>) and the extent-112 iter (<code class="docutils literal notranslate"><span class="pre">1&#64;TCol</span></code>) together cover
+<strong>224 columns</strong> (<code class="docutils literal notranslate"><span class="pre">TCol</span> <span class="pre">=</span> <span class="pre">112</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">c</span> <span class="pre">∈</span> <span class="pre">[0,</span> <span class="pre">224)</span></code>). A few elements:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">(a,</span> <span class="pre">l,</span> <span class="pre">c)</span></code></p></th>
+<th class="head"><p>TLane</p></th>
+<th class="head"><p>TCol</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">5,</span> <span class="pre">3)</span></code></p></td>
+<td><p>5</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+<td><p>0</p></td>
+<td><p>112</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">127,</span> <span class="pre">111)</span></code></p></td>
+<td><p>127</p></td>
+<td><p>223</p></td>
+</tr>
+</tbody>
+</table>
+<p>The 224-wide span is intentionally <strong>not a power of two</strong>: a block-scaled FP8
+GEMM may use a 224-column tile because tensor memory cannot hold two accumulator
+stages plus the scale factors at 256. General-shape support is what lets the
+layout express this directly.</p>
+<p><strong>Scale factors (SFA / SFB).</strong> A block-scaled MMA also keeps its per-block scale
+factors in tensor memory, and their layout is the first one here to use a
+<strong>replica</strong>. The atom is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="p">[(</span><span class="mi">32</span><span class="p">,</span> <span class="n">sf_per_mma</span><span class="p">):(</span><span class="mi">1</span><span class="nd">@TLane</span><span class="p">,</span> <span class="mi">1</span><span class="nd">@TCol</span><span class="p">)]</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">32</span><span class="nd">@TLane</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>— 32 rows on <code class="docutils literal notranslate"><span class="pre">TLane</span></code> and <code class="docutils literal notranslate"><span class="pre">sf_per_mma</span></code> scale factors on <code class="docutils literal notranslate"><span class="pre">TCol</span></code>, with the
+replica <code class="docutils literal notranslate"><span class="pre">R[4:32&#64;TLane]</span></code> routing that 32-row group across the <strong>four warps</strong> of a
+warpgroup (stride 32 covers lanes 0–127) — the “warpx4” router, so one physical
+scale-factor group feeds all four warps. The atom is then direct-summed with an
+outer over <code class="docutils literal notranslate"><span class="pre">(M</span> <span class="pre">rows,</span> <span class="pre">K</span> <span class="pre">scale-factor</span> <span class="pre">groups)</span></code>, packing <code class="docutils literal notranslate"><span class="pre">epc</span> <span class="pre">=</span> <span class="pre">32</span> <span class="pre">/</span> <span class="pre">SF_bits</span></code>
+scale factors into each 32-bit <code class="docutils literal notranslate"><span class="pre">TCol</span></code> cell (e.g. four fp8 <code class="docutils literal notranslate"><span class="pre">e8m0</span></code> SFs per cell);
+optional stride-0 <code class="docutils literal notranslate"><span class="pre">reuse</span></code> and outer <code class="docutils literal notranslate"><span class="pre">pipe_depth</span></code> iters express SF reuse across
+MMAs and double-buffering. So the one <code class="docutils literal notranslate"><span class="pre">TileLayout</span></code> model expresses both the
+accumulator (a pure placement, no replica) and its scale factors (a replicated,
+routed placement) in the same tensor-memory address space.</p>
+</section>
+<section id="beyond-gpu-registers">
+<h3>Beyond GPU registers<a class="headerlink" href="#beyond-gpu-registers" title="Link to this heading"></a></h3>
+<p>The same layout describes more than register tiles. Binding strides to a device
+axis (<code class="docutils literal notranslate"><span class="pre">pid</span></code>) expresses <strong>distributed sharding</strong> across a GPU mesh; binding them
+to on-chip memory axes expresses native accelerator memories — a 2D-partitioned
+scratchpad (partition <code class="docutils literal notranslate"><span class="pre">P</span></code> and free <code class="docutils literal notranslate"><span class="pre">F</span></code> axes), or NVIDIA Blackwell tensor
+memory with native 2D addressing (<code class="docutils literal notranslate"><span class="pre">TLane</span></code> × <code class="docutils literal notranslate"><span class="pre">TCol</span></code>). The demo includes
+presets for each.</p>
+</section>
+</section>
+<section id="swizzlelayout-composelayout">
+<h2>SwizzleLayout, ComposeLayout<a class="headerlink" href="#swizzlelayout-composelayout" title="Link to this heading"></a></h2>
+<p>Some layouts also need a <em>swizzle</em>: a non-linear, XOR-based permutation of the
+linear memory address. It is not expressible as a strided <code class="docutils literal notranslate"><span class="pre">TileLayout</span></code> (which
+is affine), so TIRx represents it as a separate <code class="docutils literal notranslate"><span class="pre">SwizzleLayout</span></code> composed with
+the tile layout: <code class="docutils literal notranslate"><span class="pre">ComposeLayout(swizzle,</span> <span class="pre">tile)</span></code>. The tile layout produces a
+linear memory address; the swizzle then permutes that address.</p>
+<section id="why-swizzle">
+<h3>Why swizzle<a class="headerlink" href="#why-swizzle" title="Link to this heading"></a></h3>
+<p>Shared memory is organized into <strong>32 banks of 4 bytes</strong>. Consecutive 4-byte
+words land in consecutive banks and wrap every <code class="docutils literal notranslate"><span class="pre">32</span> <span class="pre">×</span> <span class="pre">4</span> <span class="pre">=</span> <span class="pre">128</span></code> bytes (one
+<em>bank line</em>). A bank conflict occurs when the threads of an access touch
+different addresses in the <strong>same</strong> bank.</p>
+<p>Store a tile row-major and the conflict is structural. Take an <code class="docutils literal notranslate"><span class="pre">(8,</span> <span class="pre">64)</span></code>
+<code class="docutils literal notranslate"><span class="pre">float16</span></code> tile (<code class="docutils literal notranslate"><span class="pre">S[(8,64):(64&#64;m,1&#64;m)]</span></code> — element <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j)</span></code> at address
+<code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">64i</span> <span class="pre">+</span> <span class="pre">j</span></code>). One row is <code class="docutils literal notranslate"><span class="pre">64</span> <span class="pre">×</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">128</span></code> bytes = exactly one bank line, so
+walking <em>down a column</em> (fixed <code class="docutils literal notranslate"><span class="pre">j</span></code>, increasing <code class="docutils literal notranslate"><span class="pre">i</span></code>) jumps the address by a
+whole bank line and lands on the <strong>same bank</strong> every time — a 32-way column
+conflict. Swizzle scatters those accesses across banks.</p>
+</section>
+<section id="the-transform">
+<h3>The transform<a class="headerlink" href="#the-transform" title="Link to this heading"></a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">SwizzleLayout</span></code> has three integer parameters — <code class="docutils literal notranslate"><span class="pre">per_element</span></code> (M),
+<code class="docutils literal notranslate"><span class="pre">swizzle_len</span></code> (B), and <code class="docutils literal notranslate"><span class="pre">atom_len</span></code> (S) — and maps a linear element address
+<code class="docutils literal notranslate"><span class="pre">m</span></code> as follows (keeping the low <code class="docutils literal notranslate"><span class="pre">M</span></code> bits untouched and XOR-ing a higher bit
+group down into a lower one):</p>
+<div class="math notranslate nohighlight">
+\[\text{addr}(m) = \bigl(f(m \gg M)\bigr)\!\cdot\! 2^{M} + (m \bmod 2^{M}),
+\qquad
+f(x) = x \oplus \bigl((x \mathbin{\&amp;} (\,(2^{B}-1)\ll S\,)) \gg S\bigr).\]</div>
+<p>So the bits at positions <code class="docutils literal notranslate"><span class="pre">[S,</span> <span class="pre">S+B)</span></code> of <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">m</span> <span class="pre">&gt;&gt;</span> <span class="pre">M</span></code> are XOR-ed into bits
+<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">B)</span></code>. The well-formedness requirement is <code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">≥</span> <span class="pre">B</span></code>.</p>
+</section>
+<section id="choosing-the-parameters">
+<h3>Choosing the parameters<a class="headerlink" href="#choosing-the-parameters" title="Link to this heading"></a></h3>
+<p>In practice the parameters come from the <strong>element dtype</strong> and the <strong>swizzle
+mode</strong> (the 32B / 64B / 128B shared-memory swizzle widths):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}M = \operatorname{bitlen}\!\left(\frac{128}{\text{dtype bits}}\right) - 1,
+\qquad
+B = \begin{cases} 1 &amp; 32\text{B} \\ 2 &amp; 64\text{B} \\ 3 &amp; 128\text{B} \end{cases},
+\qquad
+S = 3 .\end{split}\]</div>
+<p>For example <code class="docutils literal notranslate"><span class="pre">float16</span></code> (16-bit) gives <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=</span> <span class="pre">bitlen(8)</span> <span class="pre">-</span> <span class="pre">1</span> <span class="pre">=</span> <span class="pre">3</span></code>; with 128B
+swizzle that is <code class="docutils literal notranslate"><span class="pre">Swizzle(M=3,</span> <span class="pre">B=3,</span> <span class="pre">S=3)</span></code>. <code class="docutils literal notranslate"><span class="pre">M</span></code> keeps a 16-byte (128-bit)
+contiguous run unswizzled, matching the minimum vector access.</p>
+</section>
+<section id="bank-and-line-of-an-element">
+<h3>Bank and line of an element<a class="headerlink" href="#bank-and-line-of-an-element" title="Link to this heading"></a></h3>
+<p>Because a bank word is 4 bytes and an element is <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">dtype_bytes</span></code> bytes, the
+swizzled element address <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">addr(m)</span></code> lands in</p>
+<div class="math notranslate nohighlight">
+\[\text{bankword} = \left\lfloor \frac{a \cdot b}{4} \right\rfloor,
+\qquad
+\text{bank} = \text{bankword} \bmod 32,
+\qquad
+\text{line} = \left\lfloor \frac{\text{bankword}}{32} \right\rfloor .\]</div>
+</section>
+<section id="worked-example-128b-swizzle-float16-8-64-tile">
+<h3>Worked example: 128B swizzle, <code class="docutils literal notranslate"><span class="pre">float16</span></code>, <code class="docutils literal notranslate"><span class="pre">(8,</span> <span class="pre">64)</span></code> tile<a class="headerlink" href="#worked-example-128b-swizzle-float16-8-64-tile" title="Link to this heading"></a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">Swizzle(3,3,3)</span></code> over <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">64i</span> <span class="pre">+</span> <span class="pre">j</span></code> the address simplifies to</p>
+<div class="math notranslate nohighlight">
+\[\text{addr}(i, j) = 64\,i + 8\,(\lfloor j/8 \rfloor \oplus i) + (j \bmod 8),\]</div>
+<p>and (<code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">2</span></code>) <code class="docutils literal notranslate"><span class="pre">bank</span> <span class="pre">=</span> <span class="pre">⌊addr/2⌋</span> <span class="pre">mod</span> <span class="pre">32</span></code>. Reading column <code class="docutils literal notranslate"><span class="pre">j</span> <span class="pre">=</span> <span class="pre">0</span></code> down the
+8 rows gives <code class="docutils literal notranslate"><span class="pre">addr</span> <span class="pre">=</span> <span class="pre">72</span> <span class="pre">i</span></code> and banks <code class="docutils literal notranslate"><span class="pre">0,</span> <span class="pre">4,</span> <span class="pre">8,</span> <span class="pre">12,</span> <span class="pre">16,</span> <span class="pre">20,</span> <span class="pre">24,</span> <span class="pre">28</span></code> — <strong>eight
+distinct banks, no conflict</strong>. Without the swizzle the same column is
+<code class="docutils literal notranslate"><span class="pre">bank</span> <span class="pre">=</span> <span class="pre">⌊j/2⌋</span></code> for every row — a single bank, fully serialized.</p>
+<p><strong>Key:</strong> the 128B/<code class="docutils literal notranslate"><span class="pre">float16</span></code> case above is just one instance — with swizzle, a
+read of any <strong>8×16B column is conflict-free, under any format</strong> (32B / 64B / 128B).
+The <code class="docutils literal notranslate"><span class="pre">B</span></code> parameter is chosen per swizzle width precisely so the eight 16-byte rows
+of a column always scatter across distinct banks.</p>
+<p>In the interactive demo, pick a dtype and a swizzle mode (<code class="docutils literal notranslate"><span class="pre">none</span></code> / <code class="docutils literal notranslate"><span class="pre">32B</span></code> /
+<code class="docutils literal notranslate"><span class="pre">64B</span></code> / <code class="docutils literal notranslate"><span class="pre">128B</span></code>) in the <em>Swizzle (SMEM)</em> control. The physical panel switches
+to a <em>line × bank</em> view (each cell is one 4-byte bank word, holding
+<code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">/</span> <span class="pre">dtype_bytes</span></code> elements side by side): with <code class="docutils literal notranslate"><span class="pre">none</span></code> a column maps to one
+bank (the conflict); with a swizzle the same column is scattered across banks.</p>
+</section>
+</section>
+<section id="design-rationale">
+<h2>Design rationale<a class="headerlink" href="#design-rationale" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>General shape support.</strong> Non-power-of-two shapes are common — in global
+tensors, multi-stage shared-memory buffers, and capacity-limited on-chip
+scratchpads — so the layout supports general shapes directly rather than as a
+special case.</p></li>
+<li><p><strong>Logical-to-physical mapping.</strong> The map goes from logical coordinates to a set
+of physical coordinates. This lets replication (one logical element in multiple
+physical locations) be expressed cleanly, which a physical-to-logical
+formulation cannot always represent for strided patterns.</p></li>
+<li><p><strong>Explicit hardware axes.</strong> Axes carry their hardware meaning in the layout
+itself, so an expression is unambiguous without external context. For instance
+<code class="docutils literal notranslate"><span class="pre">1&#64;tid</span></code> (block-wide thread id) and <code class="docutils literal notranslate"><span class="pre">1&#64;tid_in_wg</span></code> (thread id within a
+warpgroup) are distinct rather than a generic <code class="docutils literal notranslate"><span class="pre">t</span></code> whose meaning depends on the
+definition site. Legality and feasibility checks are left to tile primitive
+dispatch.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          
+
+<footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tile_primitives.html" class="btn btn-neutral float-right" title="Tile Primitives" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="native_basics/cuda/compiling.html" class="btn btn-neutral float-left" title="Compiling and inspecting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+
+<div id="button" class="backtop"><img src="../_static/img/right.svg" alt="backtop"/> </div>
+<section class="footerSec">
+    <div class="footerHeader">
+      <div class="d-flex align-md-items-center justify-content-between flex-column flex-md-row">
+        <div class="copywrite d-flex align-items-center">
+          <h5 id="copy-right-info">© 2026 Apache Software Foundation | All rights reserved</h5>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="footernote">Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.</div>
+    </div>
+
+</section>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+    <script src="../_static/downloads/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../_static/downloads/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

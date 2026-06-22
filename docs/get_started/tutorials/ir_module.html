@@ -216,6 +216,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../deep_dive/tensor_ir/index.html">TensorIR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../deep_dive/relax/index.html">Relax</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/layout.html">Tensor Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/tile_primitives.html">Tile Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/api/index.html">API Reference</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/api/python/index.html">Python API</a></li>
@@ -819,8 +829,8 @@ backends.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">cpu_out</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.01538962  0.3851107   0.03527965  0.13098207 -0.16662857  0.00333789
-  -0.09144688 -0.0468705   0.06863248  0.2076945 ]]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.0547377   0.18783814 -0.04199328 -0.10805021 -0.03187234  0.19495451
+   0.32176793 -0.14547694  0.02930979  0.00290294]]
 </pre></div>
 </div>
 </section>
@@ -854,8 +864,8 @@ the details of <code class="docutils literal notranslate"><span class="pre">DLig
 <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">cpu_out</span><span class="p">,</span> <span class="n">gpu_out</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.01538961  0.38511077  0.03527965  0.1309821  -0.16662858  0.00333788
-  -0.09144685 -0.04687053  0.06863243  0.2076945 ]]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.05473768  0.18783814 -0.04199325 -0.1080502  -0.03187232  0.1949545
+   0.32176787 -0.14547694  0.02930982  0.00290294]]
 </pre></div>
 </div>
 </section>

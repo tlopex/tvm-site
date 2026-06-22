@@ -1,0 +1,455 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Your first kernel &mdash; tvm 0.26.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/downloads/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/tlcpack_theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=ee335dfd"></script>
+        <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <script type="text/javascript" src="../../../_static/js/tlcpack_theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Defining a function" href="functions.html" />
+    <link rel="prev" title="TIRx Basics: CUDA C++/PTX native level" href="../../native_basics.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    
+<header class="header">
+    <div class="innercontainer">
+      <div class="headerInner d-flex justify-content-between align-items-center">
+          <div class="headerLogo">
+               <a href="https://tvm.apache.org/"><img src=https://tvm.apache.org/assets/images/logo.svg alt="logo"></a>
+          </div>
+
+          <div id="headMenu" class="headerNav">
+            <button type="button" id="closeHeadMenu" class="navCloseBtn"><img src="../../../_static/img/close-icon.svg" alt="Close"></button>
+             <ul class="nav">
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/community>Community</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/download>Download</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/docs>Docs</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://github.com/apache/tvm/>GitHub</a>
+                </li>
+             </ul>
+               <div class="responsivetlcdropdown">
+                 <button type="button" class="btn-link">
+                   ASF
+                 </button>
+                 <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                 </ul>
+               </div>
+          </div>
+            <div class="responsiveMenuIcon">
+              <button type="button" id="menuBtn" class="btn-menu"><img src="../../../_static/img/menu-icon.svg" alt="Menu Icon"></button>
+            </div>
+
+            <div class="tlcDropdown">
+              <div class="dropdown">
+                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ASF
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+       </div>
+    </div>
+ </header>
+ 
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side fixed">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="sidetitle" alt="Documentation Home"> tvm
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Installing TVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/ir_module.html">IRModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errors.html">TVM Errors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How To</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/import_model.html">Importing Models from ML Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/e2e_opt_model.html">End-to-End Optimize Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/customize_opt.html">Customize Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/optimize_llm.html">Optimize Large Language Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/export_and_load_executable.html">Export and Load Relax Executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../arch/index.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/tensor_ir/index.html">TensorIR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/relax/index.html">Relax</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../native_basics.html">TIRx Basics: CUDA C++/PTX native level</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../native_basics.html#what-native-level-means">What “native level” means</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../native_basics.html#the-authoring-model">The authoring model</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Your first kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html">Defining a function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parser_utils.html">Parser utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_types.html">Data types and expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buffers.html">Buffers and memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control_flow.html">Control flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="threads_sync.html">CUDA C++/PTX intrinsics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compiling.html">Compiling and inspecting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout.html">Tensor Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tile_primitives.html">Tile Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/api/python/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/api/links.html">Other APIs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/security.html">Security Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      
+      <nav class="wy-nav-top" aria-label="top navigation" data-toggle="wy-nav-top">
+        
+            <div class="togglemenu">
+
+            </div>
+            <div class="nav-content">
+              <!-- tvm -->
+              Table of Contents
+            </div>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> <span class="br-arrow">></span></li>
+        
+          <li><a href="../../native_basics.html">TIRx Basics: CUDA C++/PTX native level</a> <span class="br-arrow">></span></li>
+        
+      <li>Your first kernel</li>
+    
+    
+      
+      
+        
+      
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/apache/tvm/edit/main/docs/tirx/native_basics/cuda/first_kernel.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="your-first-kernel">
+<h1>Your first kernel<a class="headerlink" href="#your-first-kernel" title="Link to this heading"></a></h1>
+<p>A complete write → compile → run → inspect loop. This kernel scales a vector by 2
+with one block of 256 threads.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tvm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tvm.script</span><span class="w"> </span><span class="kn">import</span> <span class="n">tirx</span> <span class="k">as</span> <span class="n">T</span>
+
+<span class="nd">@T</span><span class="o">.</span><span class="n">prim_func</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">A_ptr</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">B_ptr</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">handle</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">match_buffer</span><span class="p">(</span><span class="n">A_ptr</span><span class="p">,</span> <span class="p">(</span><span class="mi">256</span><span class="p">,),</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">match_buffer</span><span class="p">(</span><span class="n">B_ptr</span><span class="p">,</span> <span class="p">(</span><span class="mi">256</span><span class="p">,),</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+
+    <span class="n">T</span><span class="o">.</span><span class="n">device_entry</span><span class="p">()</span>                 <span class="c1"># everything below runs on the device</span>
+    <span class="n">bx</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">cta_id</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>               <span class="c1"># 1 block  (blockIdx)</span>
+    <span class="n">tx</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">thread_id</span><span class="p">([</span><span class="mi">256</span><span class="p">])</span>          <span class="c1"># 256 threads per block (threadIdx)</span>
+
+    <span class="n">B</span><span class="p">[</span><span class="n">tx</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">tx</span><span class="p">]</span> <span class="o">*</span> <span class="n">T</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="c1"># compile for CUDA through the TIRx pipeline -&gt; an Executable</span>
+<span class="n">exe</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">tvm</span><span class="o">.</span><span class="n">IRModule</span><span class="p">({</span><span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="n">scale</span><span class="p">}),</span>
+                  <span class="n">target</span><span class="o">=</span><span class="n">tvm</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">Target</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span> <span class="n">tir_pipeline</span><span class="o">=</span><span class="s2">&quot;tirx&quot;</span><span class="p">)</span>
+
+<span class="n">dev</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">dev</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="s2">&quot;float32&quot;</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">dev</span><span class="p">)</span>
+<span class="n">exe</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>                            <span class="c1"># run</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exe</span><span class="o">.</span><span class="n">mod</span><span class="o">.</span><span class="n">imports</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inspect_source</span><span class="p">())</span>   <span class="c1"># the generated CUDA C</span>
+</pre></div>
+</div>
+<p>What the surrounding calls do:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tvm.IRModule({&quot;main&quot;:</span> <span class="pre">scale})</span></code> wraps the <code class="docutils literal notranslate"><span class="pre">PrimFunc</span></code> into an <em>IRModule</em> — a
+named collection of functions; <code class="docutils literal notranslate"><span class="pre">&quot;main&quot;</span></code> is the entry point the compiler builds
+and the symbol you call.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tvm.compile(mod,</span> <span class="pre">target=...,</span> <span class="pre">tir_pipeline=&quot;tirx&quot;)</span></code> returns an <strong>Executable</strong>:
+the compiled host launcher plus device code, bundled together. You call it like
+a function (<code class="docutils literal notranslate"><span class="pre">exe(a,</span> <span class="pre">b)</span></code>); arguments are positional and match the kernel’s
+parameter order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tvm.cuda(0)</span></code> is a handle to CUDA device 0; <code class="docutils literal notranslate"><span class="pre">tvm.runtime.tensor(arr,</span>
+<span class="pre">device=dev)</span></code> places data on that device as a TVM tensor (an <code class="docutils literal notranslate"><span class="pre">NDArray</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exe.mod</span></code> is the underlying runtime <code class="docutils literal notranslate"><span class="pre">Module</span></code>; <code class="docutils literal notranslate"><span class="pre">exe.mod.imports[0]</span></code> is the
+imported device (CUDA) module, and its <code class="docutils literal notranslate"><span class="pre">.inspect_source()</span></code> returns the
+generated CUDA C.</p></li>
+</ul>
+<p>For this kernel, that last <code class="docutils literal notranslate"><span class="pre">print</span></code> produces (boilerplate elided):</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">__launch_bounds__</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">scale_kernel</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">__restrict__</span><span class="w"> </span><span class="n">A_ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">__restrict__</span><span class="w"> </span><span class="n">B_ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">tx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="n">B_ptr</span><span class="p">[</span><span class="n">tx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A_ptr</span><span class="p">[</span><span class="n">tx</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Every thread writes one element — a direct map from <code class="docutils literal notranslate"><span class="pre">B[tx]</span> <span class="pre">=</span> <span class="pre">A[tx]</span> <span class="pre">*</span> <span class="pre">2.0</span></code> to the
+generated indexing.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The compiled <code class="docutils literal notranslate"><span class="pre">Executable</span></code> also accepts CUDA <code class="docutils literal notranslate"><span class="pre">torch</span></code> tensors <strong>directly</strong>
+(zero-copy, via DLPack) — no conversion step needed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">exe</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_close</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The following chapters expand each piece: <a class="reference internal" href="functions.html"><span class="doc">Defining a function</span></a>, <a class="reference internal" href="buffers.html"><span class="doc">Buffers and memory</span></a>,
+<a class="reference internal" href="control_flow.html"><span class="doc">Control flow</span></a>, <a class="reference internal" href="threads_sync.html"><span class="doc">CUDA C++/PTX intrinsics</span></a>, and <a class="reference internal" href="compiling.html"><span class="doc">Compiling and inspecting</span></a>.</p>
+</section>
+
+
+           </div>
+           
+          </div>
+          
+
+<footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="functions.html" class="btn btn-neutral float-right" title="Defining a function" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../native_basics.html" class="btn btn-neutral float-left" title="TIRx Basics: CUDA C++/PTX native level" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+
+<div id="button" class="backtop"><img src="../../../_static/img/right.svg" alt="backtop"/> </div>
+<section class="footerSec">
+    <div class="footerHeader">
+      <div class="d-flex align-md-items-center justify-content-between flex-column flex-md-row">
+        <div class="copywrite d-flex align-items-center">
+          <h5 id="copy-right-info">© 2026 Apache Software Foundation | All rights reserved</h5>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="footernote">Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.</div>
+    </div>
+
+</section>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+    <script src="../../../_static/downloads/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../../../_static/downloads/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

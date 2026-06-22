@@ -1,0 +1,534 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>reduction → sm100_packed &mdash; tvm 0.26.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/downloads/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/tlcpack_theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=ee335dfd"></script>
+        <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <script type="text/javascript" src="../../../_static/js/tlcpack_theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="permute_layout" href="../permute_layout.html" />
+    <link rel="prev" title="reduction → shared" href="shared.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    
+<header class="header">
+    <div class="innercontainer">
+      <div class="headerInner d-flex justify-content-between align-items-center">
+          <div class="headerLogo">
+               <a href="https://tvm.apache.org/"><img src=https://tvm.apache.org/assets/images/logo.svg alt="logo"></a>
+          </div>
+
+          <div id="headMenu" class="headerNav">
+            <button type="button" id="closeHeadMenu" class="navCloseBtn"><img src="../../../_static/img/close-icon.svg" alt="Close"></button>
+             <ul class="nav">
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/community>Community</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/download>Download</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://tvm.apache.org/docs>Docs</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href=https://github.com/apache/tvm/>GitHub</a>
+                </li>
+             </ul>
+               <div class="responsivetlcdropdown">
+                 <button type="button" class="btn-link">
+                   ASF
+                 </button>
+                 <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                 </ul>
+               </div>
+          </div>
+            <div class="responsiveMenuIcon">
+              <button type="button" id="menuBtn" class="btn-menu"><img src="../../../_static/img/menu-icon.svg" alt="Menu Icon"></button>
+            </div>
+
+            <div class="tlcDropdown">
+              <div class="dropdown">
+                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ASF
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <ul>
+                     <li>
+                       <a href=https://apache.org/>Apache Homepage</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/licenses/>License</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
+                     </li>
+                     <li>
+                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
+                     </li>
+                     <li>
+                       <a href=https://www.apache.org/events/current-event>Events</a>
+                     </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+       </div>
+    </div>
+ </header>
+ 
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side fixed">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="sidetitle" alt="Documentation Home"> tvm
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Installing TVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/ir_module.html">IRModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../errors.html">TVM Errors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How To</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/import_model.html">Importing Models from ML Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/e2e_opt_model.html">End-to-End Optimize Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/customize_opt.html">Customize Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/optimize_llm.html">Optimize Large Language Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/cross_compilation_and_rpc.html">Cross Compilation and RPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/export_and_load_executable.html">Export and Load Relax Executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../arch/index.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/tensor_ir/index.html">TensorIR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/relax/index.html">Relax</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout.html">Tensor Layout</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tile_primitives.html">Tile Primitives</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#calling-convention">Calling convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#primitive-catalog">Primitive catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#dispatch-config">Dispatch config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#dispatch-mechanism">Dispatch mechanism</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../tile_primitives.html#dispatch-by-primitive">Dispatch by primitive</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../copy.html">copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../copy_async.html">copy_async</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gemm.html">gemm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gemm_async.html">gemm_async</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../elementwise.html">elementwise</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../reduction.html">reduction</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="local.html">reduction → local</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shared.html">reduction → shared</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">reduction → sm100_packed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../permute_layout.html">permute_layout</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tile_primitives.html#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/api/python/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/api/links.html">Other APIs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/security.html">Security Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      
+      <nav class="wy-nav-top" aria-label="top navigation" data-toggle="wy-nav-top">
+        
+            <div class="togglemenu">
+
+            </div>
+            <div class="nav-content">
+              <!-- tvm -->
+              Table of Contents
+            </div>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> <span class="br-arrow">></span></li>
+        
+          <li><a href="../../tile_primitives.html">Tile Primitives</a> <span class="br-arrow">></span></li>
+        
+          <li><a href="../reduction.html">reduction</a> <span class="br-arrow">></span></li>
+        
+      <li>reduction → sm100_packed</li>
+    
+    
+      
+      
+        
+      
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/apache/tvm/edit/main/docs/tirx/tile_primitives/reduction/sm100_packed.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="reduction-sm100-packed">
+<h1>reduction → sm100_packed<a class="headerlink" href="#reduction-sm100-packed" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">sm100_packed</span></code> variant is a <strong>Blackwell-only fast path</strong> (priority <strong>20</strong>, so
+it pre-empts <a class="reference internal" href="local.html"><span class="doc">reduction → local</span></a>) for a thread-scope reduction of a 1-D <code class="docutils literal notranslate"><span class="pre">float32</span></code> vector
+of at least 8 elements to a scalar. It uses the SM100 packed math instructions —
+<code class="docutils literal notranslate"><span class="pre">add.f32x2</span></code> for <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">max3.f32</span></code> / <code class="docutils literal notranslate"><span class="pre">min3.f32</span></code> for <code class="docutils literal notranslate"><span class="pre">max</span></code> / <code class="docutils literal notranslate"><span class="pre">min</span></code> —
+to fold two (or three) lanes of data per instruction. Source:
+<code class="docutils literal notranslate"><span class="pre">python/tvm/backend/cuda/operator/tile_primitive/reduction/sm100_packed.py</span></code>.</p>
+<section id="what-it-accepts">
+<h2>What it accepts<a class="headerlink" href="#what-it-accepts" title="Link to this heading"></a></h2>
+<p>All of the following must hold (else the dispatch declines and <a class="reference internal" href="local.html"><span class="doc">reduction → local</span></a> runs):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@register_dispatch</span><span class="p">(</span><span class="n">op_name</span><span class="p">,</span> <span class="s2">&quot;cuda&quot;</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="n">variant_name</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">when</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;exec_scope&quot;</span><span class="p">,</span> <span class="n">exec_scope_ok</span><span class="p">,</span> <span class="n">expected_scopes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;thread&quot;</span><span class="p">]),</span>
+        <span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;local_scope&quot;</span><span class="p">,</span> <span class="n">_local_scope_match</span><span class="p">),</span>       <span class="c1"># src &amp; dst local</span>
+        <span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;dst_len&quot;</span><span class="p">,</span> <span class="n">_dst_len_ok</span><span class="p">,</span> <span class="n">expected_len</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>  <span class="c1"># reduce to scalar</span>
+        <span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;src_ndim&quot;</span><span class="p">,</span> <span class="n">_src_ndim_ok</span><span class="p">,</span> <span class="n">expected_ndim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;dtype&quot;</span><span class="p">,</span> <span class="n">_dtype_ok</span><span class="p">,</span> <span class="n">expected_dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">),</span>
+        <span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;sm_version&quot;</span><span class="p">,</span> <span class="n">sm_version_ok</span><span class="p">,</span> <span class="n">min_version</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+        <span class="n">predicate</span><span class="p">(</span><span class="s2">&quot;reduction_len&quot;</span><span class="p">,</span> <span class="n">_reduction_len_ok</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span>
+    <span class="p">])</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Requirement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>target / priority</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cuda</span></code> <code class="docutils literal notranslate"><span class="pre">sm_100+</span></code> (Blackwell); priority <code class="docutils literal notranslate"><span class="pre">20</span></code> (beats <code class="docutils literal notranslate"><span class="pre">local</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>exec scope</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thread</span></code> only</p></td>
+</tr>
+<tr class="row-even"><td><p>operands</p></td>
+<td><p>src &amp; dst <code class="docutils literal notranslate"><span class="pre">local</span></code>, both <code class="docutils literal notranslate"><span class="pre">float32</span></code>; dst length <code class="docutils literal notranslate"><span class="pre">1</span></code>; src <strong>1-D</strong> with
+<code class="docutils literal notranslate"><span class="pre">≥</span> <span class="pre">8</span></code> elements</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="demonstration-program">
+<h2>Demonstration program<a class="headerlink" href="#demonstration-program" title="Link to this heading"></a></h2>
+<p>A single thread sums a 32-element <code class="docutils literal notranslate"><span class="pre">float32</span></code> register vector on <code class="docutils literal notranslate"><span class="pre">sm_100a</span></code> (from
+<code class="docutils literal notranslate"><span class="pre">test_reduction.py</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@T</span><span class="o">.</span><span class="n">prim_func</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_func</span><span class="p">(</span><span class="n">A_ptr</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">B_ptr</span><span class="p">:</span> <span class="n">T</span><span class="o">.</span><span class="n">handle</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">match_buffer</span><span class="p">(</span><span class="n">A_ptr</span><span class="p">,</span> <span class="p">[</span><span class="mi">32</span><span class="p">],</span> <span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">TileLayout</span><span class="p">(</span><span class="n">S</span><span class="p">[(</span><span class="mi">32</span><span class="p">,)]))</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">match_buffer</span><span class="p">(</span><span class="n">B_ptr</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">TileLayout</span><span class="p">(</span><span class="n">S</span><span class="p">[(</span><span class="mi">1</span><span class="p">,)]))</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">device_entry</span><span class="p">();</span> <span class="n">T</span><span class="o">.</span><span class="n">cta_id</span><span class="p">([</span><span class="mi">1</span><span class="p">]);</span> <span class="n">T</span><span class="o">.</span><span class="n">thread_id</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">A_local</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_buffer</span><span class="p">([</span><span class="mi">32</span><span class="p">],</span> <span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;local&quot;</span><span class="p">)</span>
+    <span class="n">B_local</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">alloc_buffer</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;local&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">T</span><span class="o">.</span><span class="n">serial</span><span class="p">(</span><span class="mi">32</span><span class="p">):</span> <span class="n">A_local</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">Tx</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">B_local</span><span class="p">,</span> <span class="n">A_local</span><span class="p">,</span> <span class="n">accum</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>     <span class="c1"># -&gt; sm100_packed (len 32 &gt;= 8, fp32, sm100)</span>
+    <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">B_local</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">target</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">Target</span><span class="p">({</span><span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;cuda&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">:</span> <span class="s2">&quot;sm_100a&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="algorithm">
+<h2>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading"></a></h2>
+<p><strong>sum (packed_add_sum).</strong> Keep an 8-wide <code class="docutils literal notranslate"><span class="pre">float32</span></code> accumulator. Load the first 8
+elements; for each further chunk of 8, pairwise-add it in with four <code class="docutils literal notranslate"><span class="pre">add.f32x2</span></code>
+(each adds two <code class="docutils literal notranslate"><span class="pre">float2</span></code> lanes at once); handle the remainder scalar; then collapse
+the accumulator <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">→</span> <span class="pre">4</span> <span class="pre">→</span> <span class="pre">2</span> <span class="pre">→</span> <span class="pre">1</span></code> with three more <code class="docutils literal notranslate"><span class="pre">add.f32x2</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># final tree (8 -&gt; 4 -&gt; 2 -&gt; 1)</span>
+<span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">add_f32x2</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">make_float2</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">local_sum</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">make_float2</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">local_sum</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="n">ftz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">add_f32x2</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+                <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">make_float2</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">local_sum</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span>
+                <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">make_float2</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">local_sum</span><span class="p">[</span><span class="mi">7</span><span class="p">]),</span> <span class="n">ftz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">add_f32x2</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">make_float2</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">local_sum</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">make_float2</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">local_sum</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span> <span class="n">ftz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dst</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">local_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">local_sum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>max / min (3input_maxmin).</strong> A 4-wide accumulator folded three-at-a-time with the
+<code class="docutils literal notranslate"><span class="pre">max3.f32</span></code> / <code class="docutils literal notranslate"><span class="pre">min3.f32</span></code> instructions.</p>
+</section>
+<section id="generated-tirx-ir">
+<h2>Generated TIRx IR<a class="headerlink" href="#generated-tirx-ir" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="o">.</span><span class="n">ptx</span><span class="o">.</span><span class="n">add_f32x2</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">address_of</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">make_float2</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">local_sum</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">make_float2</span><span class="p">(</span><span class="n">local_sum</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">local_sum</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>   <span class="c1"># ... the 8-&gt;4-&gt;2-&gt;1 tree</span>
+</pre></div>
+</div>
+</section>
+<section id="generated-cuda">
+<h2>Generated CUDA<a class="headerlink" href="#generated-cuda" title="Link to this heading"></a></h2>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// packed pairwise add: two float lanes per instruction</span>
+<span class="s">&quot;add.rn.ftz.f32x2 %0, %1, %2;&quot;</span>
+<span class="c1">// call: tvm_builtin_ptx_add_f32x2_rn_ftz(&amp;local_sum_ptr[0],</span>
+<span class="c1">//          tvm_builtin_make_float2(local_sum_ptr[0], local_sum_ptr[1]),</span>
+<span class="c1">//          tvm_builtin_make_float2(local_sum_ptr[2], local_sum_ptr[3]));</span>
+</pre></div>
+</div>
+<p>(Verified on <code class="docutils literal notranslate"><span class="pre">sm_100a</span></code> — <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">==</span> <span class="pre">sum(A)</span></code> for a 32-element vector.)</p>
+</section>
+<section id="how-inputs-change-the-algorithm">
+<h2>How inputs change the algorithm<a class="headerlink" href="#how-inputs-change-the-algorithm" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>input</p></th>
+<th class="head"><p>effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>op</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sum</span></code> → the <code class="docutils literal notranslate"><span class="pre">add.f32x2</span></code> packed tree; <code class="docutils literal notranslate"><span class="pre">max</span></code> / <code class="docutils literal notranslate"><span class="pre">min</span></code> → the
+<code class="docutils literal notranslate"><span class="pre">max3.f32</span></code> / <code class="docutils literal notranslate"><span class="pre">min3.f32</span></code> 3-input fold</p></td>
+</tr>
+<tr class="row-odd"><td><p>reduction length</p></td>
+<td><p>the chunk-of-8 (sum) / chunk handling and the scalar remainder loop; must be
+<code class="docutils literal notranslate"><span class="pre">≥</span> <span class="pre">8</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>accum</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> folds the old dst value into the first accumulator slot</p></td>
+</tr>
+<tr class="row-odd"><td><p>anything outside the gate</p></td>
+<td><p>non-fp32, 2-D src, dst length &gt; 1, pre-Blackwell, or <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">8</span></code> elements → the
+dispatch declines and <a class="reference internal" href="local.html"><span class="doc">reduction → local</span></a> handles it</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          
+
+<footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../permute_layout.html" class="btn btn-neutral float-right" title="permute_layout" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="shared.html" class="btn btn-neutral float-left" title="reduction → shared" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+
+<div id="button" class="backtop"><img src="../../../_static/img/right.svg" alt="backtop"/> </div>
+<section class="footerSec">
+    <div class="footerHeader">
+      <div class="d-flex align-md-items-center justify-content-between flex-column flex-md-row">
+        <div class="copywrite d-flex align-items-center">
+          <h5 id="copy-right-info">© 2026 Apache Software Foundation | All rights reserved</h5>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="footernote">Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.</div>
+    </div>
+
+</section>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+    <script src="../../../_static/downloads/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../../../_static/downloads/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

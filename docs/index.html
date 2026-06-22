@@ -200,6 +200,16 @@
 <li class="toctree-l1"><a class="reference internal" href="deep_dive/tensor_ir/index.html">TensorIR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deep_dive/relax/index.html">Relax</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tirx/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/layout.html">Tensor Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/tile_primitives.html">Tile Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/api/index.html">API Reference</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="reference/api/python/index.html">Python API</a></li>
@@ -364,6 +374,58 @@ driving its costs down.</p>
 <li class="toctree-l2"><a class="reference internal" href="deep_dive/relax/dpl.html">Dataflow Pattern Language (DPL)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deep_dive/relax/tutorials/relax_creation.html">Relax Creation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deep_dive/relax/tutorials/relax_transformation.html">Transformation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tirx/overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tirx/overview.html#design-philosophy">Design Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/overview.html#the-programming-model">The Programming Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/overview.html#what-tirx-enables">What TIRx Enables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/overview.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tirx/install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/install.html#install-the-tirx-compiler">Install the TIRx compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/install.html#install-the-kernel-library-optional">Install the kernel library (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/install.html#build-from-source">Build from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/native_basics.html">TIRx Basics: CUDA C++/PTX native level</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tirx/native_basics.html#what-native-level-means">What “native level” means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/native_basics.html#the-authoring-model">The authoring model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/layout.html">Tensor Layout</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tirx/layout.html#interactive-demo">Interactive demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/layout.html#tilelayout">TileLayout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/layout.html#swizzlelayout-composelayout">SwizzleLayout, ComposeLayout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/layout.html#design-rationale">Design rationale</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/tile_primitives.html">Tile Primitives</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tirx/tile_primitives.html#calling-convention">Calling convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/tile_primitives.html#primitive-catalog">Primitive catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/tile_primitives.html#dispatch-config">Dispatch config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/tile_primitives.html#dispatch-mechanism">Dispatch mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/tile_primitives.html#dispatch-by-primitive">Dispatch by primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/tile_primitives.html#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/arch/index.html">Compiler Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tirx/arch/lowering_pipeline.html">TIRx lowering pipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tirx/api/tirx.html">tvm.tirx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/api/analysis.html">tvm.tirx.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/api/stmt_functor.html">tvm.tirx.stmt_functor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/api/transform.html">tvm.tirx.transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tirx/api/backend.html">tvm.backend.cuda</a></li>
 </ul>
 </li>
 </ul>

@@ -200,6 +200,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">TensorIR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../relax/index.html">Relax</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tirx/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tirx/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tirx/native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tirx/layout.html">Tensor Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tirx/tile_primitives.html">Tile Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tirx/arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tirx/api/index.html">API Reference</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../reference/api/python/index.html">Python API</a></li>
@@ -360,7 +370,7 @@ original implementation.</p>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">mod</span><span class="p">:</span> <a href="../../../reference/api/python/ir.html#tvm.ir.Node" title="tvm.ir.Node" class="sphx-glr-backref-module-tvm-ir sphx-glr-backref-type-py-class"><span class="n">tvm</span><span class="o">.</span><span class="n">IRModule</span></a><span class="p">):</span>
-    <span class="n">lib</span> <span class="o">=</span> <a href="../../../reference/api/python/tirx/tirx.html#tvm.tirx.build" title="tvm.tirx.build" class="sphx-glr-backref-module-tvm-tirx sphx-glr-backref-type-py-function"><span class="n">tvm</span><span class="o">.</span><span class="n">tirx</span><span class="o">.</span><span class="n">build</span></a><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;llvm&quot;</span><span class="p">)</span>
+    <span class="n">lib</span> <span class="o">=</span> <a href="../../../tirx/api/tirx.html#tvm.tirx.build" title="tvm.tirx.build" class="sphx-glr-backref-module-tvm-tirx sphx-glr-backref-type-py-function"><span class="n">tvm</span><span class="o">.</span><span class="n">tirx</span><span class="o">.</span><span class="n">build</span></a><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;llvm&quot;</span><span class="p">)</span>
     <span class="c1"># check correctness</span>
     <span class="n">lib</span><span class="p">(</span><span class="n">a_nd</span><span class="p">,</span> <span class="n">b_nd</span><span class="p">,</span> <span class="n">c_nd</span><span class="p">)</span>
     <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">c_nd</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">c_np</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
@@ -374,7 +384,7 @@ original implementation.</p>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Execution time summary:
  mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)
-   2.8418       2.8418       2.8418       2.8418       0.0000
+   2.7688       2.7688       2.7688       2.7688       0.0000
 </pre></div>
 </div>
 <section id="initialization-schedule">
@@ -472,7 +482,7 @@ class Module:
 
 Execution time summary:
  mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)
-   0.8630       0.8630       0.8630       0.8630       0.0000
+   0.8701       0.8701       0.8701       0.8701       0.0000
 </pre></div>
 </div>
 </section>
@@ -568,7 +578,7 @@ class Module:
 
 Execution time summary:
  mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)
-   0.3552       0.3552       0.3552       0.3552       0.0000
+   0.3396       0.3396       0.3396       0.3396       0.0000
 </pre></div>
 </div>
 </section>

@@ -206,6 +206,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../deep_dive/tensor_ir/index.html">TensorIR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../deep_dive/relax/index.html">Relax</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/layout.html">Tensor Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/tile_primitives.html">Tile Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tirx/api/index.html">API Reference</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/api/python/index.html">Python API</a></li>
@@ -474,7 +484,7 @@ device and returns the measured cost. Network overhead is excluded.</p>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cost</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2"> secs/op&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1.06e-07 secs/op
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1.09e-07 secs/op
 </pre></div>
 </div>
 <dl>
@@ -990,8 +1000,8 @@ for ONNX models. Simply replace <code class="docutils literal notranslate"><span
 Converted PyTorch model to Relax:
   - Number of parameters: 4
 Using local target for demonstration
-Exported library to: /tmp/tmp4t1gpk2w/model_deployed.so
-Saved parameters to: /tmp/tmp4t1gpk2w/model_params.npz
+Exported library to: /tmp/tmp61m_clkt/model_deployed.so
+Saved parameters to: /tmp/tmp61m_clkt/model_params.npz
 
 RPC workflow (works for any remote device):
 ==================================================

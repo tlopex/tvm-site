@@ -200,6 +200,16 @@
 <li class="toctree-l1"><a class="reference internal" href="deep_dive/tensor_ir/index.html">TensorIR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deep_dive/relax/index.html">Relax</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tirx/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/layout.html">Tensor Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/tile_primitives.html">Tile Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/arch/index.html">Compiler Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirx/api/index.html">API Reference</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="reference/api/python/index.html">Python API</a></li>
@@ -307,6 +317,36 @@
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="reference/api/python/arith.html#module-tvm.arith"><code class="xref">tvm.arith</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="tirx/api/backend.html#module-tvm.backend.cuda"><code class="xref">tvm.backend.cuda</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="tirx/api/backend.html#module-tvm.backend.cuda.lang"><code class="xref">tvm.backend.cuda.lang</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="tirx/api/backend.html#module-tvm.backend.cuda.op"><code class="xref">tvm.backend.cuda.op</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="tirx/api/backend.html#module-tvm.backend.cuda.operator"><code class="xref">tvm.backend.cuda.operator</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="tirx/api/backend.html#module-tvm.backend.cuda.script"><code class="xref">tvm.backend.cuda.script</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="tirx/api/backend.html#module-tvm.backend.cuda.target_tags"><code class="xref">tvm.backend.cuda.target_tags</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -761,27 +801,22 @@
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="reference/api/python/tirx/tirx.html#module-tvm.tirx"><code class="xref">tvm.tirx</code></a></td><td>
+       <a href="tirx/api/tirx.html#module-tvm.tirx"><code class="xref">tvm.tirx</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="reference/api/python/tirx/analysis.html#module-tvm.tirx.analysis.analysis"><code class="xref">tvm.tirx.analysis.analysis</code></a></td><td>
+       <a href="tirx/api/analysis.html#module-tvm.tirx.analysis.analysis"><code class="xref">tvm.tirx.analysis.analysis</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="reference/api/python/tirx/backend.html#module-tvm.tirx.backend"><code class="xref">tvm.tirx.backend</code></a></td><td>
+       <a href="tirx/api/stmt_functor.html#module-tvm.tirx.stmt_functor"><code class="xref">tvm.tirx.stmt_functor</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="reference/api/python/tirx/stmt_functor.html#module-tvm.tirx.stmt_functor"><code class="xref">tvm.tirx.stmt_functor</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="reference/api/python/tirx/transform.html#module-tvm.tirx.transform"><code class="xref">tvm.tirx.transform</code></a></td><td>
+       <a href="tirx/api/transform.html#module-tvm.tirx.transform"><code class="xref">tvm.tirx.transform</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>

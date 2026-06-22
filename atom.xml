@@ -4,7 +4,7 @@
  <title>TVM</title>
  <link href="https://tvm.apache.org" rel="self"/>
  <link href="https://tvm.apache.org"/>
- <updated>2026-06-22T03:50:20+00:00</updated>
+ <updated>2026-06-22T03:55:23+00:00</updated>
  <id>https://tvm.apache.org</id>
  <author>
    <name></name>
@@ -130,20 +130,9 @@ L(i,j)_{(8,16)} &amp;amp;= L(i\cdot 16 + j) &amp;amp;&amp;amp; \text{(flatten)} 
   &lt;li&gt;owners (×2 via replica): { warpid=6 laneid=12 }, { warpid=10 laneid=12 }&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;em&gt;(Click element 57 in the interactive demo below to see exactly these owners.)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(Open the interactive demo and click element 57 to see exactly these owners.)&lt;/em&gt;&lt;/p&gt;
 
-&lt;details&gt;
-&lt;summary&gt;Unfold to see the interactive layout demo&lt;/summary&gt;
-&lt;iframe id=&quot;tirx-layout-demo&quot; src=&quot;/assets/tirx-layout-demo/index.html?preset=tensor-core&amp;amp;notitle&amp;amp;lock&quot; style=&quot;width:100%; height:560px; border:1px solid #dfe1e6; border-radius:10px; margin:12px 0;&quot; title=&quot;TIRx interactive layout demo: tensor-core tile&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
-&lt;script&gt;
-window.addEventListener(&apos;message&apos;, function (e) {
-  var h = e.data &amp;&amp; e.data.tirxLayoutDemoHeight;
-  if (!h) return;
-  var f = document.getElementById(&apos;tirx-layout-demo&apos;);
-  if (f) f.style.height = h + &apos;px&apos;;
-});
-&lt;/script&gt;
-&lt;/details&gt;
+&lt;p&gt;&lt;a href=&quot;https://mlc.ai/modern-gpu-programming-for-mlsys/_static/tirx-layout-demo/index.html?preset=tensor-core&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; style=&quot;display:inline-block; padding:10px 18px; background:#3b82f6; color:#fff !important; font-weight:700; border-radius:8px; text-decoration:none;&quot;&gt;▶ Open the interactive layout demo ↗&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;TIRx’s layout interface is built around four design choices.&lt;/p&gt;
 

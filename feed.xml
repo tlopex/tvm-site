@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2026-06-22T03:36:47+00:00</updated><id>/feed.xml</id><title type="html">TVM</title><author><name>{&quot;name&quot; =&gt; nil}</name></author><entry><title type="html">TIRx: An Open Compiler Stack for Evolving Frontier ML Kernels</title><link href="/2026/06/22/tirx" rel="alternate" type="text/html" title="TIRx: An Open Compiler Stack for Evolving Frontier ML Kernels" /><published>2026-06-22T00:00:00+00:00</published><updated>2026-06-22T00:00:00+00:00</updated><id>/2026/06/22/tirx</id><content type="html" xml:base="/2026/06/22/tirx"><![CDATA[<style>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2026-06-22T03:50:20+00:00</updated><id>/feed.xml</id><title type="html">TVM</title><author><name>{&quot;name&quot; =&gt; nil}</name></author><entry><title type="html">TIRx: An Open Compiler Stack for Evolving Frontier ML Kernels</title><link href="/2026/06/22/tirx" rel="alternate" type="text/html" title="TIRx: An Open Compiler Stack for Evolving Frontier ML Kernels" /><published>2026-06-22T00:00:00+00:00</published><updated>2026-06-22T00:00:00+00:00</updated><id>/2026/06/22/tirx</id><content type="html" xml:base="/2026/06/22/tirx"><![CDATA[<style>
 /* Theme has h3=38px but no h2 rule; size both down a notch and keep h2 > h3. */
 .post-content h2 { font-size: 38px; line-height: 1.3; }
 .post-content h3 { font-size: 30px; line-height: 1.3; }
@@ -115,9 +115,8 @@ L(i,j)_{(8,16)} &amp;= L(i\cdot 16 + j) &amp;&amp; \text{(flatten)} \\
 
 <details>
 <summary>Unfold to see the interactive layout demo</summary>
-<iframe id="tirx-layout-demo" data-src="https://mlc.ai/modern-gpu-programming-for-mlsys/_static/tirx-layout-demo/index.html?preset=tensor-core&amp;notitle&amp;lock" style="width:100%; height:560px; border:1px solid #dfe1e6; border-radius:10px; margin:12px 0;" title="TIRx interactive layout demo: tensor-core tile" loading="lazy"></iframe>
+<iframe id="tirx-layout-demo" src="/assets/tirx-layout-demo/index.html?preset=tensor-core&amp;notitle&amp;lock" style="width:100%; height:560px; border:1px solid #dfe1e6; border-radius:10px; margin:12px 0;" title="TIRx interactive layout demo: tensor-core tile" loading="lazy"></iframe>
 <script>
-(function () { var f = document.getElementById('tirx-layout-demo'); if (f && !f.src) f.src = f.getAttribute('data-src'); })();
 window.addEventListener('message', function (e) {
   var h = e.data && e.data.tirxLayoutDemoHeight;
   if (!h) return;

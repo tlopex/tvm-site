@@ -5,8 +5,8 @@
         <description>TVM - </description>
         <link>https://tvm.apache.org</link>
         <atom:link href="https://tvm.apache.org" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Mon, 22 Jun 2026 03:55:23 +0000</lastBuildDate>
-        <pubDate>Mon, 22 Jun 2026 03:55:23 +0000</pubDate>
+        <lastBuildDate>Mon, 22 Jun 2026 04:01:08 +0000</lastBuildDate>
+        <pubDate>Mon, 22 Jun 2026 04:01:08 +0000</pubDate>
         <ttl>60</ttl>
 
 
@@ -37,7 +37,12 @@
 &lt;ul&gt;
   &lt;li&gt;GitHub: &lt;a href=&quot;https://github.com/apache/tvm&quot;&gt;https://github.com/apache/tvm&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Documentation: &lt;a href=&quot;https://tvm.apache.org/docs/tirx/overview.html&quot;&gt;https://tvm.apache.org/docs/tirx/overview.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;PyPI wheel: &lt;a href=&quot;https://pypi.org/project/apache-tvm/0.25.0/&quot;&gt;https://pypi.org/project/apache-tvm/0.25.0/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;PyPI wheel: &lt;a href=&quot;https://pypi.org/project/apache-tvm/0.25.0/&quot;&gt;https://pypi.org/project/apache-tvm/0.25.0/&lt;/a&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;apache-tvm&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;0.25.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
   &lt;li&gt;Community TIRx kernel library: &lt;a href=&quot;https://github.com/mlc-ai/tirx-kernels&quot;&gt;https://github.com/mlc-ai/tirx-kernels&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Modern GPU programming for machine learning systems: &lt;a href=&quot;https://mlc.ai/modern-gpu-programming-for-mlsys/index.html&quot;&gt;https://mlc.ai/modern-gpu-programming-for-mlsys/index.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;

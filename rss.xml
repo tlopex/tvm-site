@@ -5,8 +5,8 @@
         <description>TVM - </description>
         <link>https://tvm.apache.org</link>
         <atom:link href="https://tvm.apache.org" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Mon, 22 Jun 2026 04:06:19 +0000</lastBuildDate>
-        <pubDate>Mon, 22 Jun 2026 04:06:19 +0000</pubDate>
+        <lastBuildDate>Mon, 22 Jun 2026 14:41:57 +0000</lastBuildDate>
+        <pubDate>Mon, 22 Jun 2026 14:41:57 +0000</pubDate>
         <ttl>60</ttl>
 
 
@@ -311,11 +311,11 @@ rD = &lt;span class=&quot;fn&quot;&gt;T.wg_reg_tile&lt;/span&gt;(TMEM_LD_N)
 
 &lt;h2 id=&quot;contributing&quot;&gt;&lt;strong&gt;Contributing&lt;/strong&gt;&lt;/h2&gt;
 
-&lt;p&gt;TIRx is an open compiler foundation. The core abstraction boundary is intentionally small, but the ecosystem around it can grow in several directions. Feel free to try out TIRx and contribute to the compiler and kernel library!&lt;/p&gt;
+&lt;p&gt;TIRx is an open compiler foundation. The core abstraction boundary is intentionally small, but the ecosystem around it can grow in several directions. Feel free to try out TIRx and contribute to the compiler and the community projects.&lt;/p&gt;
 
 &lt;h2 id=&quot;acknowledgement&quot;&gt;&lt;strong&gt;Acknowledgement&lt;/strong&gt;&lt;/h2&gt;
 
-&lt;p&gt;TIRx would not exist without Apache TVM, on whose compiler infrastructure it is built. Beyond that foundation, its design has been shaped by a long line of systems work, including NumPy, CuTe, Triton, ThunderKittens, and TileLang. We thank the FlashInfer and FlashInfer-Bench teams and the Apache TVM community for helpful technical discussions.&lt;/p&gt;
+&lt;p&gt;TIRx would not exist without Apache TVM, on whose compiler infrastructure it is built. Beyond that foundation, its design has been shaped by a long line of systems work, including NumPy, CuTe, Triton, ThunderKittens, and TileLang. We thank the FlashInfer, FlashInfer-Bench, and TileLang teams and the Apache TVM community for helpful technical discussions.&lt;/p&gt;
 </description>
                 <link>https://tvm.apache.org/2026/06/22/tirx</link>
                 <guid>https://tvm.apache.org/2026/06/22/tirx</guid>

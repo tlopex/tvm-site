@@ -4,7 +4,7 @@
  <title>TVM</title>
  <link href="https://tvm.apache.org" rel="self"/>
  <link href="https://tvm.apache.org"/>
- <updated>2026-06-22T04:06:19+00:00</updated>
+ <updated>2026-06-22T14:41:57+00:00</updated>
  <id>https://tvm.apache.org</id>
  <author>
    <name></name>
@@ -316,11 +316,11 @@ rD = &lt;span class=&quot;fn&quot;&gt;T.wg_reg_tile&lt;/span&gt;(TMEM_LD_N)
 
 &lt;h2 id=&quot;contributing&quot;&gt;&lt;strong&gt;Contributing&lt;/strong&gt;&lt;/h2&gt;
 
-&lt;p&gt;TIRx is an open compiler foundation. The core abstraction boundary is intentionally small, but the ecosystem around it can grow in several directions. Feel free to try out TIRx and contribute to the compiler and kernel library!&lt;/p&gt;
+&lt;p&gt;TIRx is an open compiler foundation. The core abstraction boundary is intentionally small, but the ecosystem around it can grow in several directions. Feel free to try out TIRx and contribute to the compiler and the community projects.&lt;/p&gt;
 
 &lt;h2 id=&quot;acknowledgement&quot;&gt;&lt;strong&gt;Acknowledgement&lt;/strong&gt;&lt;/h2&gt;
 
-&lt;p&gt;TIRx would not exist without Apache TVM, on whose compiler infrastructure it is built. Beyond that foundation, its design has been shaped by a long line of systems work, including NumPy, CuTe, Triton, ThunderKittens, and TileLang. We thank the FlashInfer and FlashInfer-Bench teams and the Apache TVM community for helpful technical discussions.&lt;/p&gt;
+&lt;p&gt;TIRx would not exist without Apache TVM, on whose compiler infrastructure it is built. Beyond that foundation, its design has been shaped by a long line of systems work, including NumPy, CuTe, Triton, ThunderKittens, and TileLang. We thank the FlashInfer, FlashInfer-Bench, and TileLang teams and the Apache TVM community for helpful technical discussions.&lt;/p&gt;
 </content>
  </entry>
  

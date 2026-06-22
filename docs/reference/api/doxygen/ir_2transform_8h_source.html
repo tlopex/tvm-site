@@ -126,7 +126,7 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="classtvm_1_1transform_1_1PassContextNode.html#a3eefdea0d7b623abd48b2fb3341631a5">config</a>.defined()) <span class="keywordflow">return</span> default_value;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">auto</span> it = <a class="code" href="classtvm_1_1transform_1_1PassContextNode.html#a3eefdea0d7b623abd48b2fb3341631a5">config</a>.find(key);</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">if</span> (it != <a class="code" href="classtvm_1_1transform_1_1PassContextNode.html#a3eefdea0d7b623abd48b2fb3341631a5">config</a>.end()) {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      <span class="keywordflow">return</span> Downcast&lt;ffi::Optional&lt;TObjectRef&gt;&gt;((*it).second);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      <span class="keywordflow">return</span> (*it).second.as_or_throw&lt;ffi::Optional&lt;TObjectRef&gt;&gt;();</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      <span class="keywordflow">return</span> default_value;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>

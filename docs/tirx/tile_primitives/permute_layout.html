@@ -1,190 +1,205 @@
 
-
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>permute_layout &mdash; tvm 0.26.dev0 documentation</title>
-  
 
-  
-  <link rel="stylesheet" href="../../_static/downloads/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/tlcpack_theme.css" type="text/css" />
+<html lang="en" data-content_root="../../" >
 
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>permute_layout &#8212; Apache TVM</title>
   
   
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  
-  
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=ee335dfd"></script>
-        <script src="../../_static/doctools.js?v=9bcbadda"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-    <script type="text/javascript" src="../../_static/js/tlcpack_theme.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=572841fb"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tirx/tile_primitives/permute_layout';</script>
+    <link rel="icon" href="../../_static/tvm-logo-square.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Compiler Internals" href="../arch/index.html" />
-    <link rel="prev" title="reduction → sm100_packed" href="reduction/sm100_packed.html" /> 
-</head>
+    <link rel="prev" title="reduction → sm100_packed" href="reduction/sm100_packed.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-   
-  <div class="wy-grid-for-nav">
-    
-    
-<header class="header">
-    <div class="innercontainer">
-      <div class="headerInner d-flex justify-content-between align-items-center">
-          <div class="headerLogo">
-               <a href="https://tvm.apache.org/"><img src=https://tvm.apache.org/assets/images/logo.svg alt="logo"></a>
-          </div>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-          <div id="headMenu" class="headerNav">
-            <button type="button" id="closeHeadMenu" class="navCloseBtn"><img src="../../_static/img/close-icon.svg" alt="Close"></button>
-             <ul class="nav">
-                <li class="nav-item">
-                   <a class="nav-link" href=https://tvm.apache.org/community>Community</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href=https://tvm.apache.org/download>Download</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href=https://tvm.apache.org/docs>Docs</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href=https://github.com/apache/tvm/>GitHub</a>
-                </li>
-             </ul>
-               <div class="responsivetlcdropdown">
-                 <button type="button" class="btn-link">
-                   ASF
-                 </button>
-                 <ul>
-                     <li>
-                       <a href=https://apache.org/>Apache Homepage</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/licenses/>License</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
-                     </li>
-                     <li>
-                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/events/current-event>Events</a>
-                     </li>
-                 </ul>
-               </div>
-          </div>
-            <div class="responsiveMenuIcon">
-              <button type="button" id="menuBtn" class="btn-menu"><img src="../../_static/img/menu-icon.svg" alt="Menu Icon"></button>
-            </div>
-
-            <div class="tlcDropdown">
-              <div class="dropdown">
-                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  ASF
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <ul>
-                     <li>
-                       <a href=https://apache.org/>Apache Homepage</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/licenses/>License</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
-                     </li>
-                     <li>
-                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/events/current-event>Events</a>
-                     </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-       </div>
-    </div>
- </header>
- 
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side fixed">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../../index.html" class="sidetitle" alt="Documentation Home"> tvm
-          
-
-          
-          </a>
-
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
-          
-        </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
 
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/tvm-logo-small.png" class="logo__image only-light" alt="Apache TVM - Home"/>
+    <script>document.write(`<img src="../../_static/tvm-logo-small.png" class="logo__image only-dark" alt="Apache TVM - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
           
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
-<ul>
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/apache/tvm" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tvm.apache.org/" title="TVM Homepage" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-house fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">TVM Homepage</span></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../get_started/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Installing TVM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../install/index.html">Installing TVM</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install/from_source.html">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install/docker.html">Docker Images</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../get_started/tutorials/quick_start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../get_started/tutorials/ir_module.html">IRModule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../errors.html">TVM Errors</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">How To</span></p>
-<ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How To</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../how_to/tutorials/import_model.html">Importing Models from ML Frameworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../how_to/tutorials/e2e_opt_model.html">End-to-End Optimize Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../how_to/tutorials/customize_opt.html">Customize Optimization</a></li>
@@ -194,148 +209,416 @@
 <li class="toctree-l1"><a class="reference internal" href="../../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../arch/index.html">Design and Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deep_dive/tensor_ir/index.html">TensorIR</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deep_dive/relax/index.html">Relax</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../arch/index.html">Design and Architecture</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../arch/fusion.html">Operator Fusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../arch/codegen.html">Code Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../arch/external_library_dispatch.html">External Library Dispatch (BYOC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../arch/runtime.html">TVM Runtime System</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../arch/introduction_to_module_serialization.html">Introduction to Module Serialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../arch/relax_vm.html">Relax Virtual Machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../arch/pass_infra.html">Pass Infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../arch/tvmscript.html">TVMScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../arch/device_target_interactions.html">Device/Target Interactions</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
-<ul class="current">
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../deep_dive/tensor_ir/index.html">TensorIR</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/tensor_ir/abstraction.html">Tensor Program Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/tensor_ir/learning.html">Understand TensorIR Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/tensor_ir/tutorials/tir_creation.html">TensorIR Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/tensor_ir/tutorials/tir_transformation.html">Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/tensor_ir/tutorials/dlight_gpu_scheduling.html">DLight: Rule-Based GPU Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/tensor_ir/tutorials/meta_schedule.html">MetaSchedule: Search-Based Auto-Tuning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../deep_dive/relax/index.html">Relax</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/relax/abstraction.html">Graph Abstraction for ML Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/relax/learning.html">Understand Relax Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/relax/dpl.html">Dataflow Pattern Language (DPL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/relax/tutorials/relax_creation.html">Relax Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deep_dive/relax/tutorials/relax_transformation.html">Transformation</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../native_basics.html">TIRx Basics: CUDA C++/PTX native level</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../native_basics/cuda/first_kernel.html">Your first kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../native_basics/cuda/functions.html">Defining a function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../native_basics/cuda/parser_utils.html">Parser utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../native_basics/cuda/data_types.html">Data types and expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../native_basics/cuda/buffers.html">Buffers and memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../native_basics/cuda/control_flow.html">Control flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../native_basics/cuda/threads_sync.html">CUDA C++/PTX intrinsics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../native_basics/cuda/compiling.html">Compiling and inspecting</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../layout.html">Tensor Layout</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../tile_primitives.html">Tile Primitives</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../tile_primitives.html#calling-convention">Calling convention</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tile_primitives.html#primitive-catalog">Primitive catalog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tile_primitives.html#dispatch-config">Dispatch config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tile_primitives.html#dispatch-mechanism">Dispatch mechanism</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../tile_primitives.html#dispatch-by-primitive">Dispatch by primitive</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="copy.html">copy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="copy_async.html">copy_async</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gemm.html">gemm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gemm_async.html">gemm_async</a></li>
-<li class="toctree-l3"><a class="reference internal" href="elementwise.html">elementwise</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reduction.html">reduction</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">permute_layout</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#what-it-accepts">What it accepts</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#demonstration-program">Demonstration program</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#algorithm">Algorithm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#generated-tirx-ir">Generated TIRx IR</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#generated-cuda">Generated CUDA</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#how-inputs-change-the-algorithm">How inputs change the algorithm</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../tile_primitives.html">Tile Primitives</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="copy.html">copy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="copy/gmem_smem.html">copy → gmem_smem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy/reg.html">copy → reg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy/ldstmatrix.html">copy → ldstmatrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy/fallback.html">copy → fallback</a></li>
 </ul>
-</li>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="copy_async.html">copy_async</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="copy_async/ldgsts.html">copy_async → ldgsts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy_async/tma.html">copy_async → tma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy_async/dsmem.html">copy_async → dsmem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy_async/tcgen05_cp.html">copy_async → tcgen05_cp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy_async/tcgen05_ldst.html">copy_async → tcgen05_ldst</a></li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../tile_primitives.html#see-also">See also</a></li>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="gemm.html">gemm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gemm_async.html">gemm_async</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="elementwise.html">elementwise</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="elementwise/reg.html">elementwise → reg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementwise/smem.html">elementwise → smem</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../arch/index.html">Compiler Internals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="reduction.html">reduction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reduction/local.html">reduction → local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reduction/shared.html">reduction → shared</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reduction/sm100_packed.html">reduction → sm100_packed</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../reference/api/python/index.html">Python API</a></li>
+</details></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">permute_layout</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../arch/index.html">Compiler Internals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../arch/lowering_pipeline.html">TIRx lowering pipeline</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/tirx.html">tvm.tirx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/analysis.html">tvm.tirx.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/stmt_functor.html">tvm.tirx.stmt_functor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/transform.html">tvm.tirx.transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/backend.html">tvm.backend.cuda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/api/python/index.html">Python API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/error.html">tvm.error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/ir.html">tvm.ir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/arith.html">tvm.arith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/instrument.html">tvm.ir.instrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/transform.html">tvm.ir.transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/target.html">tvm.target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/driver.html">tvm.driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/testing.html">tvm.testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/exec.html">tvm.exec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/support.html">tvm.support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/runtime/runtime.html">tvm.runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/runtime/vm.html">tvm.runtime.vm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/runtime/disco.html">tvm.runtime.disco</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/relax.html">tvm.relax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/analysis.html">tvm.relax.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/backend.html">tvm.relax.backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/block_builder.html">tvm.relax.block_builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/distributed.html">tvm.relax.distributed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/frontend.html">tvm.relax.frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/op.html">tvm.relax.op</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/testing.html">tvm.relax.testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/training.html">tvm.relax.training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/transform.html">tvm.relax.transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/relax/dpl.html">tvm.relax.dpl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/s_tir/analysis.html">tvm.s_tir.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/s_tir/schedule.html">tvm.s_tir.schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/s_tir/transform.html">tvm.s_tir.transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/s_tir/dlight.html">tvm.s_tir.dlight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/s_tir/backend.html">tvm.s_tir.backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/s_tir/tensor_intrin.html">tvm.s_tir.tensor_intrin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/script/script.html">tvm.script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/script/parser.html">tvm.script.parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/script/ir_builder.html">tvm.script.ir_builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/script/printer.html">tvm.script.printer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/te.html">tvm.te</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/topi.html">tvm.topi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/meta_schedule.html">tvm.s_tir.meta_schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/rpc.html">tvm.rpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/python/contrib.html">tvm.contrib</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/api/links.html">Other APIs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">About</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributor Guide</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../contribute/index.html">Contributor Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/community.html">TVM Community Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/pull_request.html">Submit a Pull Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/code_review.html">Code Reviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/committer_guide.html">Committer Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/document.html">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/code_guide.html">Code Guide and Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/testing.html">Testing TVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/git_howto.html">Git Usage Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/ci.html">Using TVM’s CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/release_process.html">Release Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/error_handling.html">Error Handling Guide</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/publications.html">Publications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/security.html">Security Guide</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Index</span></p>
-<ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
 </ul>
 
-            
-          
-        </div>
-        
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      
-      <nav class="wy-nav-top" aria-label="top navigation" data-toggle="wy-nav-top">
-        
-            <div class="togglemenu">
-
-            </div>
-            <div class="nav-content">
-              <!-- tvm -->
-              Table of Contents
-            </div>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html">Docs</a> <span class="br-arrow">></span></li>
-        
-          <li><a href="../tile_primitives.html">Tile Primitives</a> <span class="br-arrow">></span></li>
-        
-      <li>permute_layout</li>
-    
-    
-      
-      
-        
-      
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-            
-            
-              <a href="https://github.com/apache/tvm/edit/main/docs/tirx/tile_primitives/permute_layout.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
-      </li>
-    
-  </ul>
-
+    </div>
+</nav></div>
+    </div>
   
-  <hr/>
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/apache/tvm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/apache/tvm/blob/main/docs/tirx/tile_primitives/permute_layout.rst?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/apache/tvm/edit/main/docs/tirx/tile_primitives/permute_layout.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/apache/tvm/issues/new?title=Issue%20on%20page%20%2Ftirx/tile_primitives/permute_layout.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tirx/tile_primitives/permute_layout.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>permute_layout</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-accepts">What it accepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-program">Demonstration program</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generated-tirx-ir">Generated TIRx IR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generated-cuda">Generated CUDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-inputs-change-the-algorithm">How inputs change the algorithm</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="permute-layout">
-<h1>permute_layout<a class="headerlink" href="#permute-layout" title="Link to this heading"></a></h1>
+<h1>permute_layout<a class="headerlink" href="#permute-layout" title="Link to this heading">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">permute_layout</span></code> rearranges a warp’s data from a source <code class="docutils literal notranslate"><span class="pre">TileLayout</span></code> to a
 destination one — typically an in-place transpose. The single CUDA variant
 (<code class="docutils literal notranslate"><span class="pre">warp_xor_swizzle</span></code>) stages each lane’s elements through registers and writes them
@@ -345,7 +628,7 @@ bank-conflict-free. A <code class="docutils literal notranslate"><span class="pr
 when source and destination alias. Source:
 <code class="docutils literal notranslate"><span class="pre">python/tvm/backend/cuda/operator/tile_primitive/permute_layout/warp_xor_swizzle.py</span></code>.</p>
 <section id="what-it-accepts">
-<h2>What it accepts<a class="headerlink" href="#what-it-accepts" title="Link to this heading"></a></h2>
+<h2>What it accepts<a class="headerlink" href="#what-it-accepts" title="Link to this heading">#</a></h2>
 <p>The predicate (<code class="docutils literal notranslate"><span class="pre">_why_reject</span></code>) gates the variant:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">sctx</span><span class="o">.</span><span class="n">scope_kind</span> <span class="o">!=</span> <span class="s2">&quot;warp&quot;</span><span class="p">:</span>                  <span class="k">return</span> <span class="s2">&quot;scope is not &#39;warp&#39;&quot;</span>
 <span class="k">if</span> <span class="n">src_buf</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">dst_buf</span><span class="o">.</span><span class="n">dtype</span><span class="p">:</span>             <span class="k">return</span> <span class="s2">&quot;dtype mismatch&quot;</span>
@@ -356,7 +639,7 @@ when source and destination alias. Source:
 <span class="c1"># + layouts must slice/canonicalize; _choose_xor_k must find a valid k (else fail)</span>
 </pre></div>
 </div>
-<table class="docutils align-default">
+<div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
 <col style="width: 22.0%" />
 <col style="width: 78.0%" />
@@ -380,9 +663,10 @@ swizzle wrapper); dtype byte width ∈ {1, 2, 4, 8, 16}</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="demonstration-program">
-<h2>Demonstration program<a class="headerlink" href="#demonstration-program" title="Link to this heading"></a></h2>
+<h2>Demonstration program<a class="headerlink" href="#demonstration-program" title="Link to this heading">#</a></h2>
 <p>A warp transposes the inner <code class="docutils literal notranslate"><span class="pre">4×32</span></code> block of a scale-factor tile — source layout
 strides <code class="docutils literal notranslate"><span class="pre">(…,</span> <span class="pre">32,</span> <span class="pre">1)</span></code>, destination <code class="docutils literal notranslate"><span class="pre">(…,</span> <span class="pre">1,</span> <span class="pre">4)</span></code> — for two pipeline stages (the
 canonical SF-transpose, from <code class="docutils literal notranslate"><span class="pre">test_permute_layout.py</span></code>):</p>
@@ -402,7 +686,7 @@ canonical SF-transpose, from <code class="docutils literal notranslate"><span cl
 </div>
 </section>
 <section id="algorithm">
-<h2>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading"></a></h2>
+<h2>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h2>
 <p><strong>1. Align the two layouts.</strong> Both layouts are sliced to the region and
 canonicalized; if their shards differ in structure (a linear layout collapses to 1-D
 under canon, a transposed one keeps its multi-dim shape) the source is regrouped to
@@ -432,7 +716,7 @@ destination layout:</p>
 </div>
 </section>
 <section id="generated-tirx-ir">
-<h2>Generated TIRx IR<a class="headerlink" href="#generated-tirx-ir" title="Link to this heading"></a></h2>
+<h2>Generated TIRx IR<a class="headerlink" href="#generated-tirx-ir" title="Link to this heading">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">regs</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">A_buf</span><span class="p">[</span><span class="n">s</span><span class="o">*</span><span class="mi">128</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">^</span> <span class="p">((</span><span class="n">tx</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">3</span><span class="p">))</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">32</span> <span class="o">+</span> <span class="n">tx</span><span class="p">]</span>   <span class="c1"># phase 1 (src order)</span>
 <span class="n">T</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">warp_sync</span><span class="p">()</span>
 <span class="n">B_buf</span><span class="p">[</span><span class="n">s</span><span class="o">*</span><span class="mi">128</span> <span class="o">+</span> <span class="n">tx</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">^</span> <span class="p">((</span><span class="n">tx</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">3</span><span class="p">))</span> <span class="o">%</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">regs</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>    <span class="c1"># phase 2 (dst order)</span>
@@ -441,7 +725,7 @@ destination layout:</p>
 </div>
 </section>
 <section id="generated-cuda">
-<h2>Generated CUDA<a class="headerlink" href="#generated-cuda" title="Link to this heading"></a></h2>
+<h2>Generated CUDA<a class="headerlink" href="#generated-cuda" title="Link to this heading">#</a></h2>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">alignas</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">regs_ptr</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
 <span class="n">regs_ptr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A_buf_ptr</span><span class="p">[(</span><span class="n">s</span><span class="o">*</span><span class="mi">128</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(((</span><span class="mi">0</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">((</span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">];</span>
 <span class="n">regs_ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A_buf_ptr</span><span class="p">[(</span><span class="n">s</span><span class="o">*</span><span class="mi">128</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(((</span><span class="mi">1</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">((</span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">];</span>
@@ -457,8 +741,8 @@ write phase hits distinct banks. Verified on <code class="docutils literal notra
 transposed for every pipeline stage.</p>
 </section>
 <section id="how-inputs-change-the-algorithm">
-<h2>How inputs change the algorithm<a class="headerlink" href="#how-inputs-change-the-algorithm" title="Link to this heading"></a></h2>
-<table class="docutils align-default">
+<h2>How inputs change the algorithm<a class="headerlink" href="#how-inputs-change-the-algorithm" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
 <col style="width: 28.0%" />
 <col style="width: 72.0%" />
@@ -486,65 +770,141 @@ pack several lanes into one bank and make the dispatch <code class="docutils lit
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 </section>
 
 
-           </div>
-           
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="reduction/sm100_packed.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">reduction → sm100_packed</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../arch/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Compiler Internals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-accepts">What it accepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-program">Demonstration program</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generated-tirx-ir">Generated TIRx IR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generated-cuda">Generated CUDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-inputs-change-the-algorithm">How inputs change the algorithm</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
           </div>
-          
-
-<footer>
-
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../arch/index.html" class="btn btn-neutral float-right" title="Compiler Internals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="reduction/sm100_packed.html" class="btn btn-neutral float-left" title="reduction → sm100_packed" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-
-<div id="button" class="backtop"><img src="../../_static/img/right.svg" alt="backtop"/> </div>
-<section class="footerSec">
-    <div class="footerHeader">
-      <div class="d-flex align-md-items-center justify-content-between flex-column flex-md-row">
-        <div class="copywrite d-flex align-items-center">
-          <h5 id="copy-right-info">© 2026 Apache Software Foundation | All rights reserved</h5>
-        </div>
-      </div>
-
-    </div>
-
-    <div>
-      <div class="footernote">Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.</div>
-    </div>
-
-</section>
-</footer>
-        </div>
-      </div>
-
-    </section>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Apache Software Foundation
+</p>
 
   </div>
   
-
-    <script src="../../_static/downloads/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="../../_static/downloads/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-  </body>
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
+  <div class="footer-item">
     
-   
 
-</body>
+  <p class="copyright">
+    
+      © Copyright 2020 - 2026, Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  
+  <div class="footer-container" style="margin: 5px 0; font-size: 0.9em; color: #6c757d;">
+      <div class="footer-line1" style="display: flex; justify-content: center; align-items: center; gap: 0.9em; margin-bottom: 3px;">
+          <span class="footer-links"><a href="https://tvm.apache.org/community" style="color: #6c757d; text-decoration: none;">Community</a> &middot; <a href="https://tvm.apache.org/download" style="color: #6c757d; text-decoration: none;">Download</a> &middot; <a href="https://tvm.apache.org/docs" style="color: #6c757d; text-decoration: none;">Docs</a></span>
+          <div class="footer-dropdown">
+              <div class="dropdown">
+                  <button class="btn btn-link dropdown-toggle" type="button" id="footerDropdown" data-bs-toggle="dropdown"
+                  aria-expanded="false" style="font-size: 0.9em; color: #6c757d; text-decoration: none; padding: 0; border: none; background: none;">
+                      ASF
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="footerDropdown" style="font-size: 0.9em;">
+<li><a class="dropdown-item" href="https://apache.org/" target="_blank" style="font-size: 0.9em;">Apache Homepage</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/licenses/" target="_blank" style="font-size: 0.9em;">License</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html" target="_blank" style="font-size: 0.9em;">Sponsorship</a></li>
+<li><a class="dropdown-item" href="https://tvm.apache.org/docs/reference/security.html" target="_blank" style="font-size: 0.9em;">Security</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html" target="_blank" style="font-size: 0.9em;">Thanks</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/events/current-event" target="_blank" style="font-size: 0.9em;">Events</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="footer-line2" style="font-size: 0.9em; color: #6c757d; text-align: center;">
+          Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.
+      </div>
+  </div>
+  
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
 </html>

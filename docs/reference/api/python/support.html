@@ -1,190 +1,205 @@
 
-
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>tvm.support &mdash; tvm 0.26.dev0 documentation</title>
-  
 
-  
-  <link rel="stylesheet" href="../../../_static/downloads/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/css/tlcpack_theme.css" type="text/css" />
+<html lang="en" data-content_root="../../../" >
 
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>tvm.support &#8212; Apache TVM</title>
   
   
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  
-  
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=ee335dfd"></script>
-        <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-    <script type="text/javascript" src="../../../_static/js/tlcpack_theme.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=572841fb"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/api/python/support';</script>
+    <link rel="icon" href="../../../_static/tvm-logo-square.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="tvm.runtime" href="runtime/runtime.html" />
-    <link rel="prev" title="tvm.exec" href="exec.html" /> 
-</head>
+    <link rel="prev" title="tvm.exec" href="exec.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-   
-  <div class="wy-grid-for-nav">
-    
-    
-<header class="header">
-    <div class="innercontainer">
-      <div class="headerInner d-flex justify-content-between align-items-center">
-          <div class="headerLogo">
-               <a href="https://tvm.apache.org/"><img src=https://tvm.apache.org/assets/images/logo.svg alt="logo"></a>
-          </div>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-          <div id="headMenu" class="headerNav">
-            <button type="button" id="closeHeadMenu" class="navCloseBtn"><img src="../../../_static/img/close-icon.svg" alt="Close"></button>
-             <ul class="nav">
-                <li class="nav-item">
-                   <a class="nav-link" href=https://tvm.apache.org/community>Community</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href=https://tvm.apache.org/download>Download</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href=https://tvm.apache.org/docs>Docs</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href=https://github.com/apache/tvm/>GitHub</a>
-                </li>
-             </ul>
-               <div class="responsivetlcdropdown">
-                 <button type="button" class="btn-link">
-                   ASF
-                 </button>
-                 <ul>
-                     <li>
-                       <a href=https://apache.org/>Apache Homepage</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/licenses/>License</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
-                     </li>
-                     <li>
-                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/events/current-event>Events</a>
-                     </li>
-                 </ul>
-               </div>
-          </div>
-            <div class="responsiveMenuIcon">
-              <button type="button" id="menuBtn" class="btn-menu"><img src="../../../_static/img/menu-icon.svg" alt="Menu Icon"></button>
-            </div>
-
-            <div class="tlcDropdown">
-              <div class="dropdown">
-                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  ASF
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <ul>
-                     <li>
-                       <a href=https://apache.org/>Apache Homepage</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/licenses/>License</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/foundation/sponsorship.html>Sponsorship</a>
-                     </li>
-                     <li>
-                       <a href=https://tvm.apache.org/docs/reference/security.html>Security</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/foundation/thanks.html>Thanks</a>
-                     </li>
-                     <li>
-                       <a href=https://www.apache.org/events/current-event>Events</a>
-                     </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-       </div>
-    </div>
- </header>
- 
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side fixed">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../../../index.html" class="sidetitle" alt="Documentation Home"> tvm
-          
-
-          
-          </a>
-
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
-          
-        </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
 
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/tvm-logo-small.png" class="logo__image only-light" alt="Apache TVM - Home"/>
+    <script>document.write(`<img src="../../../_static/tvm-logo-small.png" class="logo__image only-dark" alt="Apache TVM - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
           
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
-<ul>
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/apache/tvm" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tvm.apache.org/" title="TVM Homepage" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-house fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">TVM Homepage</span></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../get_started/overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Installing TVM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../install/index.html">Installing TVM</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../install/from_source.html">Install from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install/docker.html">Docker Images</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/quick_start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../get_started/tutorials/ir_module.html">IRModule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../errors.html">TVM Errors</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">How To</span></p>
-<ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How To</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/import_model.html">Importing Models from ML Frameworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/e2e_opt_model.html">End-to-End Optimize Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/customize_opt.html">Customize Optimization</a></li>
@@ -194,25 +209,103 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/mix_python_and_tvm_with_pymodule.html">Mix Python/PyTorch with TVM Using BasePyModule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../how_to/tutorials/bring_your_own_codegen.html">Bring Your Own Codegen</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../arch/index.html">Design and Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/tensor_ir/index.html">TensorIR</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../deep_dive/relax/index.html">Relax</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deep Dive</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../arch/index.html">Design and Architecture</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../arch/fusion.html">Operator Fusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../arch/codegen.html">Code Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../arch/external_library_dispatch.html">External Library Dispatch (BYOC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../arch/runtime.html">TVM Runtime System</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../arch/introduction_to_module_serialization.html">Introduction to Module Serialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../arch/relax_vm.html">Relax Virtual Machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../arch/pass_infra.html">Pass Infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../arch/tvmscript.html">TVMScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../arch/device_target_interactions.html">Device/Target Interactions</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">TIRx</span></p>
-<ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../deep_dive/tensor_ir/index.html">TensorIR</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/tensor_ir/abstraction.html">Tensor Program Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/tensor_ir/learning.html">Understand TensorIR Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/tensor_ir/tutorials/tir_creation.html">TensorIR Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/tensor_ir/tutorials/tir_transformation.html">Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/tensor_ir/tutorials/dlight_gpu_scheduling.html">DLight: Rule-Based GPU Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/tensor_ir/tutorials/meta_schedule.html">MetaSchedule: Search-Based Auto-Tuning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../deep_dive/relax/index.html">Relax</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/relax/abstraction.html">Graph Abstraction for ML Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/relax/learning.html">Understand Relax Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/relax/dpl.html">Dataflow Pattern Language (DPL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/relax/tutorials/relax_creation.html">Relax Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../deep_dive/relax/tutorials/relax_transformation.html">Transformation</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">TIRx</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../tirx/overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tirx/install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tirx/native_basics.html">TIRx Basics: CUDA C++/PTX native level</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tirx/layout.html">Tensor Layout</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tirx/tile_primitives.html">Tile Primitives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tirx/arch/index.html">Compiler Internals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tirx/api/index.html">API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tirx/native_basics.html">TIRx Basics: CUDA C++/PTX native level</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/native_basics/cuda/first_kernel.html">Your first kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/native_basics/cuda/functions.html">Defining a function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/native_basics/cuda/parser_utils.html">Parser utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/native_basics/cuda/data_types.html">Data types and expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/native_basics/cuda/buffers.html">Buffers and memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/native_basics/cuda/control_flow.html">Control flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/native_basics/cuda/threads_sync.html">CUDA C++/PTX intrinsics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/native_basics/cuda/compiling.html">Compiling and inspecting</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python API</a><ul class="current">
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tirx/layout.html">Tensor Layout</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tirx/tile_primitives.html">Tile Primitives</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tirx/tile_primitives/copy.html">copy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/copy/gmem_smem.html">copy → gmem_smem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/copy/reg.html">copy → reg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/copy/ldstmatrix.html">copy → ldstmatrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/copy/fallback.html">copy → fallback</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tirx/tile_primitives/copy_async.html">copy_async</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/copy_async/ldgsts.html">copy_async → ldgsts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/copy_async/tma.html">copy_async → tma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/copy_async/dsmem.html">copy_async → dsmem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/copy_async/tcgen05_cp.html">copy_async → tcgen05_cp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/copy_async/tcgen05_ldst.html">copy_async → tcgen05_ldst</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/tile_primitives/gemm.html">gemm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/tile_primitives/gemm_async.html">gemm_async</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tirx/tile_primitives/elementwise.html">elementwise</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/elementwise/reg.html">elementwise → reg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/elementwise/smem.html">elementwise → smem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tirx/tile_primitives/reduction.html">reduction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/reduction/local.html">reduction → local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/reduction/shared.html">reduction → shared</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tirx/tile_primitives/reduction/sm100_packed.html">reduction → sm100_packed</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/tile_primitives/permute_layout.html">permute_layout</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tirx/arch/index.html">Compiler Internals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/arch/lowering_pipeline.html">TIRx lowering pipeline</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tirx/api/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/api/tirx.html">tvm.tirx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/api/analysis.html">tvm.tirx.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/api/stmt_functor.html">tvm.tirx.stmt_functor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/api/transform.html">tvm.tirx.transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tirx/api/backend.html">tvm.backend.cuda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Python API</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="error.html">tvm.error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ir.html">tvm.ir</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arith.html">tvm.arith</a></li>
@@ -222,88 +315,7 @@
 <li class="toctree-l2"><a class="reference internal" href="driver.html">tvm.driver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing.html">tvm.testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exec.html">tvm.exec</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">tvm.support</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.support.libinfo"><code class="docutils literal notranslate"><span class="pre">libinfo()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tvm.support.describe"><code class="docutils literal notranslate"><span class="pre">describe()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-tvm.support.cc">tvm.support.cc</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.cc.get_cc"><code class="docutils literal notranslate"><span class="pre">get_cc()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.cc.create_shared"><code class="docutils literal notranslate"><span class="pre">create_shared()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.cc.create_staticlib"><code class="docutils literal notranslate"><span class="pre">create_staticlib()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.cc.create_executable"><code class="docutils literal notranslate"><span class="pre">create_executable()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.cc.get_global_symbol_section_map"><code class="docutils literal notranslate"><span class="pre">get_global_symbol_section_map()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.cc.get_target_by_dump_machine"><code class="docutils literal notranslate"><span class="pre">get_target_by_dump_machine()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.cc.cross_compiler"><code class="docutils literal notranslate"><span class="pre">cross_compiler()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-tvm.support.nvcc">tvm.support.nvcc</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.nvcc.compile_cuda"><code class="docutils literal notranslate"><span class="pre">compile_cuda()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.nvcc.find_cuda_path"><code class="docutils literal notranslate"><span class="pre">find_cuda_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.nvcc.get_cuda_version"><code class="docutils literal notranslate"><span class="pre">get_cuda_version()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.nvcc.find_nvshmem_paths"><code class="docutils literal notranslate"><span class="pre">find_nvshmem_paths()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.nvcc.parse_compute_version"><code class="docutils literal notranslate"><span class="pre">parse_compute_version()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.nvcc.have_fp16"><code class="docutils literal notranslate"><span class="pre">have_fp16()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.nvcc.have_int8"><code class="docutils literal notranslate"><span class="pre">have_int8()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.nvcc.have_tensorcore"><code class="docutils literal notranslate"><span class="pre">have_tensorcore()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.nvcc.have_cudagraph"><code class="docutils literal notranslate"><span class="pre">have_cudagraph()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-tvm.support.rocm">tvm.support.rocm</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.rocm.find_lld"><code class="docutils literal notranslate"><span class="pre">find_lld()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.rocm.rocm_link"><code class="docutils literal notranslate"><span class="pre">rocm_link()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.rocm.parse_compute_version"><code class="docutils literal notranslate"><span class="pre">parse_compute_version()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.rocm.have_matrixcore"><code class="docutils literal notranslate"><span class="pre">have_matrixcore()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.rocm.find_rocm_path"><code class="docutils literal notranslate"><span class="pre">find_rocm_path()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-tvm.support.ndk">tvm.support.ndk</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.ndk.create_shared"><code class="docutils literal notranslate"><span class="pre">create_shared()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.ndk.create_staticlib"><code class="docutils literal notranslate"><span class="pre">create_staticlib()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.ndk.get_global_symbol_section_map"><code class="docutils literal notranslate"><span class="pre">get_global_symbol_section_map()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-tvm.support.xcode">tvm.support.xcode</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.xcode.xcrun"><code class="docutils literal notranslate"><span class="pre">xcrun()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.xcode.create_dylib"><code class="docutils literal notranslate"><span class="pre">create_dylib()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.xcode.compile_metal"><code class="docutils literal notranslate"><span class="pre">compile_metal()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.xcode.compile_coreml"><code class="docutils literal notranslate"><span class="pre">compile_coreml()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-tvm.support.clang">tvm.support.clang</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.clang.find_clang"><code class="docutils literal notranslate"><span class="pre">find_clang()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.clang.create_llvm"><code class="docutils literal notranslate"><span class="pre">create_llvm()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-tvm.support.emcc">tvm.support.emcc</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.emcc.find_wasm_lib"><code class="docutils literal notranslate"><span class="pre">find_wasm_lib()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.emcc.create_tvmjs_wasm"><code class="docutils literal notranslate"><span class="pre">create_tvmjs_wasm()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-tvm.support.popen_pool">tvm.support.popen_pool</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.popen_pool.kill_child_processes"><code class="docutils literal notranslate"><span class="pre">kill_child_processes()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.popen_pool.StatusKind"><code class="docutils literal notranslate"><span class="pre">StatusKind</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.popen_pool.MapResult"><code class="docutils literal notranslate"><span class="pre">MapResult</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.popen_pool.PopenWorker"><code class="docutils literal notranslate"><span class="pre">PopenWorker</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.popen_pool.PopenPoolExecutor"><code class="docutils literal notranslate"><span class="pre">PopenPoolExecutor</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-tvm.support.utils">tvm.support.utils</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.utils.DirectoryCreatedPastAtExit"><code class="docutils literal notranslate"><span class="pre">DirectoryCreatedPastAtExit</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.utils.TempDirectory"><code class="docutils literal notranslate"><span class="pre">TempDirectory</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.utils.tempdir"><code class="docutils literal notranslate"><span class="pre">tempdir()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.utils.FileLock"><code class="docutils literal notranslate"><span class="pre">FileLock</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.utils.filelock"><code class="docutils literal notranslate"><span class="pre">filelock()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.utils.is_source_path"><code class="docutils literal notranslate"><span class="pre">is_source_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.utils.which"><code class="docutils literal notranslate"><span class="pre">which()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-tvm.support.tar">tvm.support.tar</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.tar.tar"><code class="docutils literal notranslate"><span class="pre">tar()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.tar.untar"><code class="docutils literal notranslate"><span class="pre">untar()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tvm.support.tar.normalize_file_list_by_unpacking_tars"><code class="docutils literal notranslate"><span class="pre">normalize_file_list_by_unpacking_tars()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">tvm.support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="runtime/runtime.html">tvm.runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="runtime/vm.html">tvm.runtime.vm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="runtime/disco.html">tvm.runtime.disco</a></li>
@@ -334,111 +346,379 @@
 <li class="toctree-l2"><a class="reference internal" href="rpc.html">tvm.rpc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contrib.html">tvm.contrib</a></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../links.html">Other APIs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">About</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributor Guide</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../contribute/index.html">Contributor Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/community.html">TVM Community Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/pull_request.html">Submit a Pull Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/code_review.html">Code Reviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/committer_guide.html">Committer Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/document.html">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/code_guide.html">Code Guide and Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/testing.html">Testing TVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/git_howto.html">Git Usage Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/ci.html">Using TVM’s CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/release_process.html">Release Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribute/error_handling.html">Error Handling Guide</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../publications.html">Publications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../security.html">Security Guide</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Index</span></p>
-<ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
 </ul>
 
-            
-          
-        </div>
-        
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      
-      <nav class="wy-nav-top" aria-label="top navigation" data-toggle="wy-nav-top">
-        
-            <div class="togglemenu">
-
-            </div>
-            <div class="nav-content">
-              <!-- tvm -->
-              Table of Contents
-            </div>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../index.html">Docs</a> <span class="br-arrow">></span></li>
-        
-          <li><a href="index.html">Python API</a> <span class="br-arrow">></span></li>
-        
-      <li>tvm.support</li>
-    
-    
-      
-      
-        
-      
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-            
-            
-              <a href="https://github.com/apache/tvm/edit/main/docs/reference/api/python/support.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
-      </li>
-    
-  </ul>
-
+    </div>
+</nav></div>
+    </div>
   
-  <hr/>
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/apache/tvm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/apache/tvm/blob/main/docs/reference/api/python/support.rst?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/apache/tvm/edit/main/docs/reference/api/python/support.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/apache/tvm/issues/new?title=Issue%20on%20page%20%2Freference/api/python/support.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/reference/api/python/support.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>tvm.support</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.libinfo"><code class="docutils literal notranslate"><span class="pre">libinfo()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.describe"><code class="docutils literal notranslate"><span class="pre">describe()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.cc">tvm.support.cc</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.get_cc"><code class="docutils literal notranslate"><span class="pre">get_cc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.create_shared"><code class="docutils literal notranslate"><span class="pre">create_shared()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.create_staticlib"><code class="docutils literal notranslate"><span class="pre">create_staticlib()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.create_executable"><code class="docutils literal notranslate"><span class="pre">create_executable()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.get_global_symbol_section_map"><code class="docutils literal notranslate"><span class="pre">get_global_symbol_section_map()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.get_target_by_dump_machine"><code class="docutils literal notranslate"><span class="pre">get_target_by_dump_machine()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.cross_compiler"><code class="docutils literal notranslate"><span class="pre">cross_compiler()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.nvcc">tvm.support.nvcc</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.compile_cuda"><code class="docutils literal notranslate"><span class="pre">compile_cuda()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.find_cuda_path"><code class="docutils literal notranslate"><span class="pre">find_cuda_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.get_cuda_version"><code class="docutils literal notranslate"><span class="pre">get_cuda_version()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.find_nvshmem_paths"><code class="docutils literal notranslate"><span class="pre">find_nvshmem_paths()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.parse_compute_version"><code class="docutils literal notranslate"><span class="pre">parse_compute_version()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.have_fp16"><code class="docutils literal notranslate"><span class="pre">have_fp16()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.have_int8"><code class="docutils literal notranslate"><span class="pre">have_int8()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.have_tensorcore"><code class="docutils literal notranslate"><span class="pre">have_tensorcore()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.have_cudagraph"><code class="docutils literal notranslate"><span class="pre">have_cudagraph()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.rocm">tvm.support.rocm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.rocm.find_lld"><code class="docutils literal notranslate"><span class="pre">find_lld()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.rocm.rocm_link"><code class="docutils literal notranslate"><span class="pre">rocm_link()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.rocm.parse_compute_version"><code class="docutils literal notranslate"><span class="pre">parse_compute_version()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.rocm.have_matrixcore"><code class="docutils literal notranslate"><span class="pre">have_matrixcore()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.rocm.find_rocm_path"><code class="docutils literal notranslate"><span class="pre">find_rocm_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.ndk">tvm.support.ndk</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.ndk.create_shared"><code class="docutils literal notranslate"><span class="pre">create_shared()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.ndk.create_staticlib"><code class="docutils literal notranslate"><span class="pre">create_staticlib()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.ndk.get_global_symbol_section_map"><code class="docutils literal notranslate"><span class="pre">get_global_symbol_section_map()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.xcode">tvm.support.xcode</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.xcode.xcrun"><code class="docutils literal notranslate"><span class="pre">xcrun()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.xcode.create_dylib"><code class="docutils literal notranslate"><span class="pre">create_dylib()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.xcode.compile_metal"><code class="docutils literal notranslate"><span class="pre">compile_metal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.xcode.compile_coreml"><code class="docutils literal notranslate"><span class="pre">compile_coreml()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.clang">tvm.support.clang</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.clang.find_clang"><code class="docutils literal notranslate"><span class="pre">find_clang()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.clang.create_llvm"><code class="docutils literal notranslate"><span class="pre">create_llvm()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.emcc">tvm.support.emcc</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.emcc.find_wasm_lib"><code class="docutils literal notranslate"><span class="pre">find_wasm_lib()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.emcc.create_tvmjs_wasm"><code class="docutils literal notranslate"><span class="pre">create_tvmjs_wasm()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.popen_pool">tvm.support.popen_pool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.kill_child_processes"><code class="docutils literal notranslate"><span class="pre">kill_child_processes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.StatusKind"><code class="docutils literal notranslate"><span class="pre">StatusKind</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.MapResult"><code class="docutils literal notranslate"><span class="pre">MapResult</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker"><code class="docutils literal notranslate"><span class="pre">PopenWorker</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker.kill"><code class="docutils literal notranslate"><span class="pre">PopenWorker.kill()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker.join"><code class="docutils literal notranslate"><span class="pre">PopenWorker.join()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker.is_alive"><code class="docutils literal notranslate"><span class="pre">PopenWorker.is_alive()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker.send"><code class="docutils literal notranslate"><span class="pre">PopenWorker.send()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker.recv"><code class="docutils literal notranslate"><span class="pre">PopenWorker.recv()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenPoolExecutor"><code class="docutils literal notranslate"><span class="pre">PopenPoolExecutor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenPoolExecutor.shutdown"><code class="docutils literal notranslate"><span class="pre">PopenPoolExecutor.shutdown()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenPoolExecutor.submit"><code class="docutils literal notranslate"><span class="pre">PopenPoolExecutor.submit()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenPoolExecutor.map_with_error_catching"><code class="docutils literal notranslate"><span class="pre">PopenPoolExecutor.map_with_error_catching()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.utils">tvm.support.utils</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.DirectoryCreatedPastAtExit"><code class="docutils literal notranslate"><span class="pre">DirectoryCreatedPastAtExit</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.TempDirectory"><code class="docutils literal notranslate"><span class="pre">TempDirectory</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.TempDirectory.set_keep_for_debug"><code class="docutils literal notranslate"><span class="pre">TempDirectory.set_keep_for_debug()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.TempDirectory.remove"><code class="docutils literal notranslate"><span class="pre">TempDirectory.remove()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.TempDirectory.relpath"><code class="docutils literal notranslate"><span class="pre">TempDirectory.relpath()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.TempDirectory.listdir"><code class="docutils literal notranslate"><span class="pre">TempDirectory.listdir()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.tempdir"><code class="docutils literal notranslate"><span class="pre">tempdir()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.FileLock"><code class="docutils literal notranslate"><span class="pre">FileLock</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.FileLock.release"><code class="docutils literal notranslate"><span class="pre">FileLock.release()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.filelock"><code class="docutils literal notranslate"><span class="pre">filelock()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.is_source_path"><code class="docutils literal notranslate"><span class="pre">is_source_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.which"><code class="docutils literal notranslate"><span class="pre">which()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.tar">tvm.support.tar</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.tar.tar"><code class="docutils literal notranslate"><span class="pre">tar()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.tar.untar"><code class="docutils literal notranslate"><span class="pre">untar()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.tar.normalize_file_list_by_unpacking_tars"><code class="docutils literal notranslate"><span class="pre">normalize_file_list_by_unpacking_tars()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="module-tvm.support">
-<span id="tvm-support"></span><h1>tvm.support<a class="headerlink" href="#module-tvm.support" title="Link to this heading"></a></h1>
+<span id="tvm-support"></span><h1>tvm.support<a class="headerlink" href="#module-tvm.support" title="Link to this heading">#</a></h1>
 <p>tvm.support — Python helpers that integrate TVM with external CLIs
 and host-side tools (compilers, archivers, subprocess pools, build-info
 queries). Distinct from <cite>tvm.contrib</cite>, which is reserved for optional
 vendor SDK integrations and experimental features.</p>
 <p><strong>Functions:</strong></p>
-<table class="autosummary longtable docutils align-default">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tvm.support.libinfo" title="tvm.support.libinfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">libinfo</span></code></a>()</p></td>
 <td><p>Returns a dictionary of compile-time info — minimal Python fallback.</p></td>
@@ -448,9 +728,10 @@ vendor SDK integrations and experimental features.</p>
 </tr>
 </tbody>
 </table>
+</div>
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.libinfo">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.</span></span><span class="sig-name descname"><span class="pre">libinfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.libinfo" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.</span></span><span class="sig-name descname"><span class="pre">libinfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.libinfo" title="Link to this definition">#</a></dt>
 <dd><p>Returns a dictionary of compile-time info — minimal Python fallback.</p>
 <p>The native <code class="docutils literal notranslate"><span class="pre">support.GetLibInfo</span></code> global function is no longer registered
 after the upstream sync, so we synthesize the values from build-time hints
@@ -459,16 +740,16 @@ instead.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.describe">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.</span></span><span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.describe" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.</span></span><span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.describe" title="Link to this definition">#</a></dt>
 <dd><p>Print out information about TVM and the current Python environment</p>
 </dd></dl>
 
 <section id="module-tvm.support.cc">
-<span id="tvm-support-cc"></span><h2>tvm.support.cc<a class="headerlink" href="#module-tvm.support.cc" title="Link to this heading"></a></h2>
+<span id="tvm-support-cc"></span><h2>tvm.support.cc<a class="headerlink" href="#module-tvm.support.cc" title="Link to this heading">#</a></h2>
 <p>Util to invoke C/C++ compilers in the system.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.cc.get_cc">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">get_cc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.get_cc" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">get_cc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.get_cc" title="Link to this definition">#</a></dt>
 <dd><p>Return the path to the default C/C++ compiler.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -482,7 +763,7 @@ instead.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.cc.create_shared">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">create_shared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ccache_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.create_shared" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">create_shared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ccache_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.create_shared" title="Link to this definition">#</a></dt>
 <dd><p>Create shared library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -500,7 +781,7 @@ instead.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.cc.create_staticlib">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">create_staticlib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.create_staticlib" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">create_staticlib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.create_staticlib" title="Link to this definition">#</a></dt>
 <dd><p>Create static library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -516,7 +797,7 @@ of objects or an object file.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.cc.create_executable">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">create_executable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ccache_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.create_executable" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">create_executable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ccache_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.create_executable" title="Link to this definition">#</a></dt>
 <dd><p>Create executable binary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -534,7 +815,7 @@ of objects or an object file.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.cc.get_global_symbol_section_map">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">get_global_symbol_section_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#tvm.support.cc.get_global_symbol_section_map" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">get_global_symbol_section_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#tvm.support.cc.get_global_symbol_section_map" title="Link to this definition">#</a></dt>
 <dd><p>Get global symbols from a library via nm -g</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -554,7 +835,7 @@ of objects or an object file.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.cc.get_target_by_dump_machine">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">get_target_by_dump_machine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compiler</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.get_target_by_dump_machine" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">get_target_by_dump_machine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compiler</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.get_target_by_dump_machine" title="Link to this definition">#</a></dt>
 <dd><p>Functor of get_target_triple that can get the target triple using compiler.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -571,7 +852,7 @@ of objects or an object file.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.cc.cross_compiler">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">cross_compiler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compile_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_target_triple</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.cross_compiler" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.cc.</span></span><span class="sig-name descname"><span class="pre">cross_compiler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compile_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_target_triple</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.cc.cross_compiler" title="Link to this definition">#</a></dt>
 <dd><p>Create a cross compiler function by specializing compile_func with options.</p>
 <p>This function can be used to construct compile functions that
 can be passed to AutoTVM measure or export_library.</p>
@@ -610,11 +891,11 @@ to pass as part of the compilation.</p></li>
 
 </section>
 <section id="module-tvm.support.nvcc">
-<span id="tvm-support-nvcc"></span><h2>tvm.support.nvcc<a class="headerlink" href="#module-tvm.support.nvcc" title="Link to this heading"></a></h2>
+<span id="tvm-support-nvcc"></span><h2>tvm.support.nvcc<a class="headerlink" href="#module-tvm.support.nvcc" title="Link to this heading">#</a></h2>
 <p>Utility to invoke nvcc compiler in the system</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.nvcc.compile_cuda">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">compile_cuda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compiler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nvrtc'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.compile_cuda" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">compile_cuda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compiler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nvrtc'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.compile_cuda" title="Link to this definition">#</a></dt>
 <dd><p>Compile CUDA code with NVCC or NVRTC.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -644,7 +925,7 @@ This can be set by the TVM_CUDA_COMPILE_MODE environment variable.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.nvcc.find_cuda_path">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">find_cuda_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.find_cuda_path" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">find_cuda_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.find_cuda_path" title="Link to this definition">#</a></dt>
 <dd><p>Utility function to find CUDA path</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -658,7 +939,7 @@ This can be set by the TVM_CUDA_COMPILE_MODE environment variable.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.nvcc.get_cuda_version">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">get_cuda_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cuda_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.get_cuda_version" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">get_cuda_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cuda_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.get_cuda_version" title="Link to this definition">#</a></dt>
 <dd><p>Utility function to get CUDA version</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -676,7 +957,7 @@ This can be set by the TVM_CUDA_COMPILE_MODE environment variable.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.nvcc.find_nvshmem_paths">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">find_nvshmem_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#tvm.support.nvcc.find_nvshmem_paths" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">find_nvshmem_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#tvm.support.nvcc.find_nvshmem_paths" title="Link to this definition">#</a></dt>
 <dd><p>Searches for the NVSHMEM include and library directories.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -687,7 +968,7 @@ This can be set by the TVM_CUDA_COMPILE_MODE environment variable.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.nvcc.parse_compute_version">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">parse_compute_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.parse_compute_version" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">parse_compute_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.parse_compute_version" title="Link to this definition">#</a></dt>
 <dd><p>Parse compute capability string to divide major and minor version</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -705,7 +986,7 @@ This can be set by the TVM_CUDA_COMPILE_MODE environment variable.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.nvcc.have_fp16">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">have_fp16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.have_fp16" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">have_fp16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.have_fp16" title="Link to this definition">#</a></dt>
 <dd><p>Either fp16 support is provided in the compute capability or not</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -716,7 +997,7 @@ This can be set by the TVM_CUDA_COMPILE_MODE environment variable.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.nvcc.have_int8">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">have_int8</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.have_int8" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">have_int8</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.have_int8" title="Link to this definition">#</a></dt>
 <dd><p>Either int8 support is provided in the compute capability or not</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -727,7 +1008,7 @@ This can be set by the TVM_CUDA_COMPILE_MODE environment variable.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.nvcc.have_tensorcore">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">have_tensorcore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.have_tensorcore" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">have_tensorcore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.have_tensorcore" title="Link to this definition">#</a></dt>
 <dd><p>Either TensorCore support is provided in the compute capability or not</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -742,17 +1023,17 @@ isn’t specified.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.nvcc.have_cudagraph">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">have_cudagraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.have_cudagraph" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.nvcc.</span></span><span class="sig-name descname"><span class="pre">have_cudagraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.nvcc.have_cudagraph" title="Link to this definition">#</a></dt>
 <dd><p>Either CUDA Graph support is provided</p>
 </dd></dl>
 
 </section>
 <section id="module-tvm.support.rocm">
-<span id="tvm-support-rocm"></span><h2>tvm.support.rocm<a class="headerlink" href="#module-tvm.support.rocm" title="Link to this heading"></a></h2>
+<span id="tvm-support-rocm"></span><h2>tvm.support.rocm<a class="headerlink" href="#module-tvm.support.rocm" title="Link to this heading">#</a></h2>
 <p>Utility for ROCm backend</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.rocm.find_lld">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.rocm.</span></span><span class="sig-name descname"><span class="pre">find_lld</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.rocm.find_lld" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.rocm.</span></span><span class="sig-name descname"><span class="pre">find_lld</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.rocm.find_lld" title="Link to this definition">#</a></dt>
 <dd><p>Find ld.lld in system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -775,7 +1056,7 @@ matches the major llvm version that built with tvm</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.rocm.rocm_link">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.rocm.</span></span><span class="sig-name descname"><span class="pre">rocm_link</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lld</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.rocm.rocm_link" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.rocm.</span></span><span class="sig-name descname"><span class="pre">rocm_link</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lld</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.rocm.rocm_link" title="Link to this definition">#</a></dt>
 <dd><p>Link relocatable ELF object to shared ELF object using lld</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -791,7 +1072,7 @@ we will try to guess the matched clang version.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.rocm.parse_compute_version">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.rocm.</span></span><span class="sig-name descname"><span class="pre">parse_compute_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.rocm.parse_compute_version" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.rocm.</span></span><span class="sig-name descname"><span class="pre">parse_compute_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.rocm.parse_compute_version" title="Link to this definition">#</a></dt>
 <dd><p>Parse compute capability string to divide major and minor version</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -809,7 +1090,7 @@ we will try to guess the matched clang version.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.rocm.have_matrixcore">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.rocm.</span></span><span class="sig-name descname"><span class="pre">have_matrixcore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.rocm.have_matrixcore" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.rocm.</span></span><span class="sig-name descname"><span class="pre">have_matrixcore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compute_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.rocm.have_matrixcore" title="Link to this definition">#</a></dt>
 <dd><p>Either MatrixCore support is provided in the compute capability or not</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -826,7 +1107,7 @@ we will try to guess the matched clang version.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.rocm.find_rocm_path">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.rocm.</span></span><span class="sig-name descname"><span class="pre">find_rocm_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.rocm.find_rocm_path" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.rocm.</span></span><span class="sig-name descname"><span class="pre">find_rocm_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.rocm.find_rocm_path" title="Link to this definition">#</a></dt>
 <dd><p>Utility function to find ROCm path</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -840,11 +1121,11 @@ we will try to guess the matched clang version.</p></li>
 
 </section>
 <section id="module-tvm.support.ndk">
-<span id="tvm-support-ndk"></span><h2>tvm.support.ndk<a class="headerlink" href="#module-tvm.support.ndk" title="Link to this heading"></a></h2>
+<span id="tvm-support-ndk"></span><h2>tvm.support.ndk<a class="headerlink" href="#module-tvm.support.ndk" title="Link to this heading">#</a></h2>
 <p>Util to invoke NDK compiler toolchain.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.ndk.create_shared">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.ndk.</span></span><span class="sig-name descname"><span class="pre">create_shared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.ndk.create_shared" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.ndk.</span></span><span class="sig-name descname"><span class="pre">create_shared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.ndk.create_shared" title="Link to this definition">#</a></dt>
 <dd><p>Create shared library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -859,7 +1140,7 @@ we will try to guess the matched clang version.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.ndk.create_staticlib">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.ndk.</span></span><span class="sig-name descname"><span class="pre">create_staticlib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.ndk.create_staticlib" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.ndk.</span></span><span class="sig-name descname"><span class="pre">create_staticlib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.ndk.create_staticlib" title="Link to this definition">#</a></dt>
 <dd><p>Create static library:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -873,7 +1154,7 @@ we will try to guess the matched clang version.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.ndk.get_global_symbol_section_map">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.ndk.</span></span><span class="sig-name descname"><span class="pre">get_global_symbol_section_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#tvm.support.ndk.get_global_symbol_section_map" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.ndk.</span></span><span class="sig-name descname"><span class="pre">get_global_symbol_section_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#tvm.support.ndk.get_global_symbol_section_map" title="Link to this definition">#</a></dt>
 <dd><p>Get global symbols from a library via nm -gU in NDK</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -893,11 +1174,11 @@ we will try to guess the matched clang version.</p></li>
 
 </section>
 <section id="module-tvm.support.xcode">
-<span id="tvm-support-xcode"></span><h2>tvm.support.xcode<a class="headerlink" href="#module-tvm.support.xcode" title="Link to this heading"></a></h2>
+<span id="tvm-support-xcode"></span><h2>tvm.support.xcode<a class="headerlink" href="#module-tvm.support.xcode" title="Link to this heading">#</a></h2>
 <p>Utility to invoke Xcode compiler toolchain</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.xcode.xcrun">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.xcode.</span></span><span class="sig-name descname"><span class="pre">xcrun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.xcode.xcrun" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.xcode.</span></span><span class="sig-name descname"><span class="pre">xcrun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.xcode.xcrun" title="Link to this definition">#</a></dt>
 <dd><p>Run xcrun and return the output.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -914,7 +1195,7 @@ we will try to guess the matched clang version.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.xcode.create_dylib">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.xcode.</span></span><span class="sig-name descname"><span class="pre">create_dylib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macosx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_os_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.xcode.create_dylib" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.xcode.</span></span><span class="sig-name descname"><span class="pre">create_dylib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macosx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_os_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.xcode.create_dylib" title="Link to this definition">#</a></dt>
 <dd><p>Create dynamic library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -931,7 +1212,7 @@ we will try to guess the matched clang version.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.xcode.compile_metal">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.xcode.</span></span><span class="sig-name descname"><span class="pre">compile_metal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macosx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_os_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.xcode.compile_metal" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.xcode.</span></span><span class="sig-name descname"><span class="pre">compile_metal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macosx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_os_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.xcode.compile_metal" title="Link to this definition">#</a></dt>
 <dd><p>Compile Metal with CLI tool from env.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -952,17 +1233,17 @@ we will try to guess the matched clang version.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.xcode.compile_coreml">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.xcode.</span></span><span class="sig-name descname"><span class="pre">compile_coreml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.xcode.compile_coreml" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.xcode.</span></span><span class="sig-name descname"><span class="pre">compile_coreml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.xcode.compile_coreml" title="Link to this definition">#</a></dt>
 <dd><p>Compile coreml model and return the compiled model path.</p>
 </dd></dl>
 
 </section>
 <section id="module-tvm.support.clang">
-<span id="tvm-support-clang"></span><h2>tvm.support.clang<a class="headerlink" href="#module-tvm.support.clang" title="Link to this heading"></a></h2>
+<span id="tvm-support-clang"></span><h2>tvm.support.clang<a class="headerlink" href="#module-tvm.support.clang" title="Link to this heading">#</a></h2>
 <p>Util to invoke clang in the system.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.clang.find_clang">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.clang.</span></span><span class="sig-name descname"><span class="pre">find_clang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.clang.find_clang" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.clang.</span></span><span class="sig-name descname"><span class="pre">find_clang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.clang.find_clang" title="Link to this definition">#</a></dt>
 <dd><p>Find clang in system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -985,7 +1266,7 @@ matches the major llvm version that built with tvm</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.clang.create_llvm">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.clang.</span></span><span class="sig-name descname"><span class="pre">create_llvm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.clang.create_llvm" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.clang.</span></span><span class="sig-name descname"><span class="pre">create_llvm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.clang.create_llvm" title="Link to this definition">#</a></dt>
 <dd><p>Create llvm text ir.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1009,11 +1290,11 @@ we will try to guess the matched clang version.</p></li>
 
 </section>
 <section id="module-tvm.support.emcc">
-<span id="tvm-support-emcc"></span><h2>tvm.support.emcc<a class="headerlink" href="#module-tvm.support.emcc" title="Link to this heading"></a></h2>
+<span id="tvm-support-emcc"></span><h2>tvm.support.emcc<a class="headerlink" href="#module-tvm.support.emcc" title="Link to this heading">#</a></h2>
 <p>Util to invoke emscripten compilers in the system.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.emcc.find_wasm_lib">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.emcc.</span></span><span class="sig-name descname"><span class="pre">find_wasm_lib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.emcc.find_wasm_lib" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.emcc.</span></span><span class="sig-name descname"><span class="pre">find_wasm_lib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.emcc.find_wasm_lib" title="Link to this definition">#</a></dt>
 <dd><p>Find a wasm/web asset (e.g. a <code class="docutils literal notranslate"><span class="pre">.bc</span></code> or <code class="docutils literal notranslate"><span class="pre">.js</span></code> file) under <code class="docutils literal notranslate"><span class="pre">web/dist</span></code>.</p>
 <p>Specializes the asset search to the wasm build outputs that live under
 <code class="docutils literal notranslate"><span class="pre">web/dist/wasm</span></code> and <code class="docutils literal notranslate"><span class="pre">web/dist</span></code>, anchored on <code class="docutils literal notranslate"><span class="pre">TVM_HOME</span></code> (when set) or
@@ -1036,7 +1317,7 @@ the TVM source root otherwise.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.emcc.create_tvmjs_wasm">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.emcc.</span></span><span class="sig-name descname"><span class="pre">create_tvmjs_wasm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'emcc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">libs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.emcc.create_tvmjs_wasm" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.emcc.</span></span><span class="sig-name descname"><span class="pre">create_tvmjs_wasm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'emcc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">libs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.emcc.create_tvmjs_wasm" title="Link to this definition">#</a></dt>
 <dd><p>Create wasm that is supposed to run with the tvmjs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1053,13 +1334,13 @@ the TVM source root otherwise.</p>
 
 </section>
 <section id="module-tvm.support.popen_pool">
-<span id="tvm-support-popen-pool"></span><h2>tvm.support.popen_pool<a class="headerlink" href="#module-tvm.support.popen_pool" title="Link to this heading"></a></h2>
+<span id="tvm-support-popen-pool"></span><h2>tvm.support.popen_pool<a class="headerlink" href="#module-tvm.support.popen_pool" title="Link to this heading">#</a></h2>
 <p>Multiprocessing via Popen.</p>
 <p>This module provides a multi-processing pool backed by Popen.
 with additional timeout support.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.kill_child_processes">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.popen_pool.</span></span><span class="sig-name descname"><span class="pre">kill_child_processes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.kill_child_processes" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.popen_pool.</span></span><span class="sig-name descname"><span class="pre">kill_child_processes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.kill_child_processes" title="Link to this definition">#</a></dt>
 <dd><p>Kill all child processes recursively for a given pid.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1070,13 +1351,13 @@ with additional timeout support.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.StatusKind">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.popen_pool.</span></span><span class="sig-name descname"><span class="pre">StatusKind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.StatusKind" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.popen_pool.</span></span><span class="sig-name descname"><span class="pre">StatusKind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.StatusKind" title="Link to this definition">#</a></dt>
 <dd><p>Running and return value status.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.MapResult">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.popen_pool.</span></span><span class="sig-name descname"><span class="pre">MapResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.MapResult" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.popen_pool.</span></span><span class="sig-name descname"><span class="pre">MapResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.MapResult" title="Link to this definition">#</a></dt>
 <dd><p>Result of map_with_error_catching.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1090,7 +1371,7 @@ with additional timeout support.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.PopenWorker">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.popen_pool.</span></span><span class="sig-name descname"><span class="pre">PopenWorker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initializer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_uses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.popen_pool.</span></span><span class="sig-name descname"><span class="pre">PopenWorker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initializer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_uses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker" title="Link to this definition">#</a></dt>
 <dd><p>A subprocess worker via Popen.</p>
 <p>PopenWorker provides a low-level
 API to interact with a separate process via Popen.</p>
@@ -1109,7 +1390,7 @@ an operation times out.</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.PopenWorker.kill">
-<span class="sig-name descname"><span class="pre">kill</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker.kill" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">kill</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker.kill" title="Link to this definition">#</a></dt>
 <dd><p>Kill the current running process and cleanup.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1119,7 +1400,7 @@ an operation times out.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.PopenWorker.join">
-<span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker.join" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker.join" title="Link to this definition">#</a></dt>
 <dd><p>Join the current process worker before it terminates.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1131,13 +1412,13 @@ is a positive number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.PopenWorker.is_alive">
-<span class="sig-name descname"><span class="pre">is_alive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker.is_alive" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_alive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker.is_alive" title="Link to this definition">#</a></dt>
 <dd><p>Check if the process is alive</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.PopenWorker.send">
-<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker.send" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker.send" title="Link to this definition">#</a></dt>
 <dd><p>Send a new function task <code class="docutils literal notranslate"><span class="pre">fn(*args,</span> <span class="pre">**kwargs)</span></code> to the subprocess.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1159,7 +1440,7 @@ won’t affect the later requests.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.PopenWorker.recv">
-<span class="sig-name descname"><span class="pre">recv</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker.recv" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">recv</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenWorker.recv" title="Link to this definition">#</a></dt>
 <dd><p>Receive the result of the last send.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -1182,7 +1463,7 @@ won’t affect the later requests.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.PopenPoolExecutor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.popen_pool.</span></span><span class="sig-name descname"><span class="pre">PopenPoolExecutor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initializer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_process_uses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenPoolExecutor" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.popen_pool.</span></span><span class="sig-name descname"><span class="pre">PopenPoolExecutor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initializer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_process_uses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenPoolExecutor" title="Link to this definition">#</a></dt>
 <dd><p>An parallel executor backed by Popen processes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1207,7 +1488,7 @@ behavior of multiprocessing.pool().</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.PopenPoolExecutor.shutdown">
-<span class="sig-name descname"><span class="pre">shutdown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenPoolExecutor.shutdown" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">shutdown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenPoolExecutor.shutdown" title="Link to this definition">#</a></dt>
 <dd><p>Shutdown the executor and clean up resources.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1227,7 +1508,7 @@ which tries to acquire locks again.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.PopenPoolExecutor.submit">
-<span class="sig-name descname"><span class="pre">submit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Future</span></span></span><a class="headerlink" href="#tvm.support.popen_pool.PopenPoolExecutor.submit" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">submit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Future</span></span></span><a class="headerlink" href="#tvm.support.popen_pool.PopenPoolExecutor.submit" title="Link to this definition">#</a></dt>
 <dd><p>Submit a new function job to the pool</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1248,7 +1529,7 @@ which tries to acquire locks again.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.popen_pool.PopenPoolExecutor.map_with_error_catching">
-<span class="sig-name descname"><span class="pre">map_with_error_catching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenPoolExecutor.map_with_error_catching" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">map_with_error_catching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.popen_pool.PopenPoolExecutor.map_with_error_catching" title="Link to this definition">#</a></dt>
 <dd><p>Same as map, but catches exceptions and return them instead.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1270,34 +1551,34 @@ which tries to acquire locks again.</p>
 
 </section>
 <section id="module-tvm.support.utils">
-<span id="tvm-support-utils"></span><h2>tvm.support.utils<a class="headerlink" href="#module-tvm.support.utils" title="Link to this heading"></a></h2>
+<span id="tvm-support-utils"></span><h2>tvm.support.utils<a class="headerlink" href="#module-tvm.support.utils" title="Link to this heading">#</a></h2>
 <p>Common system utilities</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="tvm.support.utils.DirectoryCreatedPastAtExit">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">DirectoryCreatedPastAtExit</span></span><a class="headerlink" href="#tvm.support.utils.DirectoryCreatedPastAtExit" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">DirectoryCreatedPastAtExit</span></span><a class="headerlink" href="#tvm.support.utils.DirectoryCreatedPastAtExit" title="Link to this definition">#</a></dt>
 <dd><p>Raised when a TempDirectory is created after the atexit hook runs.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.support.utils.TempDirectory">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">TempDirectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_for_debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.TempDirectory" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">TempDirectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_for_debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.TempDirectory" title="Link to this definition">#</a></dt>
 <dd><p>Helper object to manage temp directory during testing.</p>
 <p>Automatically removes the directory when it went out of scope.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.utils.TempDirectory.set_keep_for_debug">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_keep_for_debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.TempDirectory.set_keep_for_debug" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_keep_for_debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.TempDirectory.set_keep_for_debug" title="Link to this definition">#</a></dt>
 <dd><p>Keep temporary directories past program exit for debugging.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.utils.TempDirectory.remove">
-<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.TempDirectory.remove" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.TempDirectory.remove" title="Link to this definition">#</a></dt>
 <dd><p>Remove the tmp dir</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.utils.TempDirectory.relpath">
-<span class="sig-name descname"><span class="pre">relpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.TempDirectory.relpath" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">relpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.TempDirectory.relpath" title="Link to this definition">#</a></dt>
 <dd><p>Relative path in temp dir</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1314,7 +1595,7 @@ which tries to acquire locks again.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.utils.TempDirectory.listdir">
-<span class="sig-name descname"><span class="pre">listdir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.TempDirectory.listdir" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">listdir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.TempDirectory.listdir" title="Link to this definition">#</a></dt>
 <dd><p>List contents in the dir.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -1330,7 +1611,7 @@ which tries to acquire locks again.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.utils.tempdir">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">tempdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_for_debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.tempdir" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">tempdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_for_debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.tempdir" title="Link to this definition">#</a></dt>
 <dd><p>Create temp dir which deletes the contents when exit.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1350,7 +1631,7 @@ which tries to acquire locks again.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="tvm.support.utils.FileLock">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">FileLock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.FileLock" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">FileLock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.FileLock" title="Link to this definition">#</a></dt>
 <dd><p>File lock object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1359,7 +1640,7 @@ which tries to acquire locks again.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="tvm.support.utils.FileLock.release">
-<span class="sig-name descname"><span class="pre">release</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.FileLock.release" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">release</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.FileLock.release" title="Link to this definition">#</a></dt>
 <dd><p>Release the lock</p>
 </dd></dl>
 
@@ -1367,7 +1648,7 @@ which tries to acquire locks again.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.utils.filelock">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">filelock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.filelock" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">filelock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.filelock" title="Link to this definition">#</a></dt>
 <dd><p>Create a file lock which locks on path</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1384,7 +1665,7 @@ which tries to acquire locks again.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.utils.is_source_path">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">is_source_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.is_source_path" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">is_source_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.is_source_path" title="Link to this definition">#</a></dt>
 <dd><p>Check if path is source code path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1401,7 +1682,7 @@ which tries to acquire locks again.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.utils.which">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">which</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.which" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.utils.</span></span><span class="sig-name descname"><span class="pre">which</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.utils.which" title="Link to this definition">#</a></dt>
 <dd><p>Try to find full path of exec_name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1418,11 +1699,11 @@ which tries to acquire locks again.</p>
 
 </section>
 <section id="module-tvm.support.tar">
-<span id="tvm-support-tar"></span><h2>tvm.support.tar<a class="headerlink" href="#module-tvm.support.tar" title="Link to this heading"></a></h2>
+<span id="tvm-support-tar"></span><h2>tvm.support.tar<a class="headerlink" href="#module-tvm.support.tar" title="Link to this heading">#</a></h2>
 <p>Util to invoke tarball in the system.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.tar.tar">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.tar.</span></span><span class="sig-name descname"><span class="pre">tar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.tar.tar" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.tar.</span></span><span class="sig-name descname"><span class="pre">tar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.tar.tar" title="Link to this definition">#</a></dt>
 <dd><p>Create tarball containing all files in root.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1436,7 +1717,7 @@ which tries to acquire locks again.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.tar.untar">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.tar.</span></span><span class="sig-name descname"><span class="pre">untar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tar_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.tar.untar" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.tar.</span></span><span class="sig-name descname"><span class="pre">untar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tar_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.tar.untar" title="Link to this definition">#</a></dt>
 <dd><p>Unpack all tar files into the directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1450,7 +1731,7 @@ which tries to acquire locks again.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tvm.support.tar.normalize_file_list_by_unpacking_tars">
-<span class="sig-prename descclassname"><span class="pre">tvm.support.tar.</span></span><span class="sig-name descname"><span class="pre">normalize_file_list_by_unpacking_tars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.tar.normalize_file_list_by_unpacking_tars" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">tvm.support.tar.</span></span><span class="sig-name descname"><span class="pre">normalize_file_list_by_unpacking_tars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tvm.support.tar.normalize_file_list_by_unpacking_tars" title="Link to this definition">#</a></dt>
 <dd><p>Normalize the file list by unpacking tars in list.</p>
 <p>When a filename is a tar, it will untar it into an unique dir
 in temp and return the list of files in the tar.
@@ -1477,61 +1758,230 @@ them into a library.</p>
 </section>
 
 
-           </div>
-           
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exec.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">tvm.exec</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="runtime/runtime.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">tvm.runtime</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.libinfo"><code class="docutils literal notranslate"><span class="pre">libinfo()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.describe"><code class="docutils literal notranslate"><span class="pre">describe()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.cc">tvm.support.cc</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.get_cc"><code class="docutils literal notranslate"><span class="pre">get_cc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.create_shared"><code class="docutils literal notranslate"><span class="pre">create_shared()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.create_staticlib"><code class="docutils literal notranslate"><span class="pre">create_staticlib()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.create_executable"><code class="docutils literal notranslate"><span class="pre">create_executable()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.get_global_symbol_section_map"><code class="docutils literal notranslate"><span class="pre">get_global_symbol_section_map()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.get_target_by_dump_machine"><code class="docutils literal notranslate"><span class="pre">get_target_by_dump_machine()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.cc.cross_compiler"><code class="docutils literal notranslate"><span class="pre">cross_compiler()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.nvcc">tvm.support.nvcc</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.compile_cuda"><code class="docutils literal notranslate"><span class="pre">compile_cuda()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.find_cuda_path"><code class="docutils literal notranslate"><span class="pre">find_cuda_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.get_cuda_version"><code class="docutils literal notranslate"><span class="pre">get_cuda_version()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.find_nvshmem_paths"><code class="docutils literal notranslate"><span class="pre">find_nvshmem_paths()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.parse_compute_version"><code class="docutils literal notranslate"><span class="pre">parse_compute_version()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.have_fp16"><code class="docutils literal notranslate"><span class="pre">have_fp16()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.have_int8"><code class="docutils literal notranslate"><span class="pre">have_int8()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.have_tensorcore"><code class="docutils literal notranslate"><span class="pre">have_tensorcore()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.nvcc.have_cudagraph"><code class="docutils literal notranslate"><span class="pre">have_cudagraph()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.rocm">tvm.support.rocm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.rocm.find_lld"><code class="docutils literal notranslate"><span class="pre">find_lld()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.rocm.rocm_link"><code class="docutils literal notranslate"><span class="pre">rocm_link()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.rocm.parse_compute_version"><code class="docutils literal notranslate"><span class="pre">parse_compute_version()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.rocm.have_matrixcore"><code class="docutils literal notranslate"><span class="pre">have_matrixcore()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.rocm.find_rocm_path"><code class="docutils literal notranslate"><span class="pre">find_rocm_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.ndk">tvm.support.ndk</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.ndk.create_shared"><code class="docutils literal notranslate"><span class="pre">create_shared()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.ndk.create_staticlib"><code class="docutils literal notranslate"><span class="pre">create_staticlib()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.ndk.get_global_symbol_section_map"><code class="docutils literal notranslate"><span class="pre">get_global_symbol_section_map()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.xcode">tvm.support.xcode</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.xcode.xcrun"><code class="docutils literal notranslate"><span class="pre">xcrun()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.xcode.create_dylib"><code class="docutils literal notranslate"><span class="pre">create_dylib()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.xcode.compile_metal"><code class="docutils literal notranslate"><span class="pre">compile_metal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.xcode.compile_coreml"><code class="docutils literal notranslate"><span class="pre">compile_coreml()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.clang">tvm.support.clang</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.clang.find_clang"><code class="docutils literal notranslate"><span class="pre">find_clang()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.clang.create_llvm"><code class="docutils literal notranslate"><span class="pre">create_llvm()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.emcc">tvm.support.emcc</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.emcc.find_wasm_lib"><code class="docutils literal notranslate"><span class="pre">find_wasm_lib()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.emcc.create_tvmjs_wasm"><code class="docutils literal notranslate"><span class="pre">create_tvmjs_wasm()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.popen_pool">tvm.support.popen_pool</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.kill_child_processes"><code class="docutils literal notranslate"><span class="pre">kill_child_processes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.StatusKind"><code class="docutils literal notranslate"><span class="pre">StatusKind</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.MapResult"><code class="docutils literal notranslate"><span class="pre">MapResult</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker"><code class="docutils literal notranslate"><span class="pre">PopenWorker</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker.kill"><code class="docutils literal notranslate"><span class="pre">PopenWorker.kill()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker.join"><code class="docutils literal notranslate"><span class="pre">PopenWorker.join()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker.is_alive"><code class="docutils literal notranslate"><span class="pre">PopenWorker.is_alive()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker.send"><code class="docutils literal notranslate"><span class="pre">PopenWorker.send()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenWorker.recv"><code class="docutils literal notranslate"><span class="pre">PopenWorker.recv()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenPoolExecutor"><code class="docutils literal notranslate"><span class="pre">PopenPoolExecutor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenPoolExecutor.shutdown"><code class="docutils literal notranslate"><span class="pre">PopenPoolExecutor.shutdown()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenPoolExecutor.submit"><code class="docutils literal notranslate"><span class="pre">PopenPoolExecutor.submit()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.popen_pool.PopenPoolExecutor.map_with_error_catching"><code class="docutils literal notranslate"><span class="pre">PopenPoolExecutor.map_with_error_catching()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.utils">tvm.support.utils</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.DirectoryCreatedPastAtExit"><code class="docutils literal notranslate"><span class="pre">DirectoryCreatedPastAtExit</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.TempDirectory"><code class="docutils literal notranslate"><span class="pre">TempDirectory</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.TempDirectory.set_keep_for_debug"><code class="docutils literal notranslate"><span class="pre">TempDirectory.set_keep_for_debug()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.TempDirectory.remove"><code class="docutils literal notranslate"><span class="pre">TempDirectory.remove()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.TempDirectory.relpath"><code class="docutils literal notranslate"><span class="pre">TempDirectory.relpath()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.TempDirectory.listdir"><code class="docutils literal notranslate"><span class="pre">TempDirectory.listdir()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.tempdir"><code class="docutils literal notranslate"><span class="pre">tempdir()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.FileLock"><code class="docutils literal notranslate"><span class="pre">FileLock</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.FileLock.release"><code class="docutils literal notranslate"><span class="pre">FileLock.release()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.filelock"><code class="docutils literal notranslate"><span class="pre">filelock()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.is_source_path"><code class="docutils literal notranslate"><span class="pre">is_source_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.utils.which"><code class="docutils literal notranslate"><span class="pre">which()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tvm.support.tar">tvm.support.tar</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.tar.tar"><code class="docutils literal notranslate"><span class="pre">tar()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.tar.untar"><code class="docutils literal notranslate"><span class="pre">untar()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tvm.support.tar.normalize_file_list_by_unpacking_tars"><code class="docutils literal notranslate"><span class="pre">normalize_file_list_by_unpacking_tars()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
           </div>
-          
-
-<footer>
-
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="runtime/runtime.html" class="btn btn-neutral float-right" title="tvm.runtime" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="exec.html" class="btn btn-neutral float-left" title="tvm.exec" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-
-<div id="button" class="backtop"><img src="../../../_static/img/right.svg" alt="backtop"/> </div>
-<section class="footerSec">
-    <div class="footerHeader">
-      <div class="d-flex align-md-items-center justify-content-between flex-column flex-md-row">
-        <div class="copywrite d-flex align-items-center">
-          <h5 id="copy-right-info">© 2026 Apache Software Foundation | All rights reserved</h5>
-        </div>
-      </div>
-
-    </div>
-
-    <div>
-      <div class="footernote">Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.</div>
-    </div>
-
-</section>
-</footer>
-        </div>
-      </div>
-
-    </section>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Apache Software Foundation
+</p>
 
   </div>
   
-
-    <script src="../../../_static/downloads/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="../../../_static/downloads/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-  </body>
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
+  <div class="footer-item">
     
-   
 
-</body>
+  <p class="copyright">
+    
+      © Copyright 2020 - 2026, Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  
+  <div class="footer-container" style="margin: 5px 0; font-size: 0.9em; color: #6c757d;">
+      <div class="footer-line1" style="display: flex; justify-content: center; align-items: center; gap: 0.9em; margin-bottom: 3px;">
+          <span class="footer-links"><a href="https://tvm.apache.org/community" style="color: #6c757d; text-decoration: none;">Community</a> &middot; <a href="https://tvm.apache.org/download" style="color: #6c757d; text-decoration: none;">Download</a> &middot; <a href="https://tvm.apache.org/docs" style="color: #6c757d; text-decoration: none;">Docs</a></span>
+          <div class="footer-dropdown">
+              <div class="dropdown">
+                  <button class="btn btn-link dropdown-toggle" type="button" id="footerDropdown" data-bs-toggle="dropdown"
+                  aria-expanded="false" style="font-size: 0.9em; color: #6c757d; text-decoration: none; padding: 0; border: none; background: none;">
+                      ASF
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="footerDropdown" style="font-size: 0.9em;">
+<li><a class="dropdown-item" href="https://apache.org/" target="_blank" style="font-size: 0.9em;">Apache Homepage</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/licenses/" target="_blank" style="font-size: 0.9em;">License</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html" target="_blank" style="font-size: 0.9em;">Sponsorship</a></li>
+<li><a class="dropdown-item" href="https://tvm.apache.org/docs/reference/security.html" target="_blank" style="font-size: 0.9em;">Security</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html" target="_blank" style="font-size: 0.9em;">Thanks</a></li>
+<li><a class="dropdown-item" href="https://www.apache.org/events/current-event" target="_blank" style="font-size: 0.9em;">Events</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="footer-line2" style="font-size: 0.9em; color: #6c757d; text-align: center;">
+          Copyright © 2026 The Apache Software Foundation. Apache TVM, Apache, the Apache feather, and the Apache TVM project logo are either trademarks or registered trademarks of the Apache Software Foundation.
+      </div>
+  </div>
+  
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
 </html>

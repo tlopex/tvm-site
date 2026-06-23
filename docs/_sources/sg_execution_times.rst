@@ -1,0 +1,82 @@
+
+:orphan:
+
+.. _sphx_glr_sg_execution_times:
+
+
+Computation times
+=================
+**00:19.964** total execution time for 16 files **from all galleries**:
+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_how_to_tutorials_optimize_llm.py` (``../how_to/tutorials/optimize_llm.py``)
+     - 00:09.127
+     - 0.0
+   * - :ref:`sphx_glr_get_started_tutorials_ir_module.py` (``../get_started/tutorials/ir_module.py``)
+     - 00:05.097
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_import_model.py` (``../how_to/tutorials/import_model.py``)
+     - 00:03.293
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_e2e_opt_model.py` (``../how_to/tutorials/e2e_opt_model.py``)
+     - 00:00.573
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_cross_compilation_and_rpc.py` (``../how_to/tutorials/cross_compilation_and_rpc.py``)
+     - 00:00.472
+     - 0.0
+   * - :ref:`sphx_glr_deep_dive_tensor_ir_tutorials_tir_transformation.py` (``../deep_dive/tensor_ir/tutorials/tir_transformation.py``)
+     - 00:00.298
+     - 0.0
+   * - :ref:`sphx_glr_deep_dive_tensor_ir_tutorials_tir_creation.py` (``../deep_dive/tensor_ir/tutorials/tir_creation.py``)
+     - 00:00.288
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_customize_opt.py` (``../how_to/tutorials/customize_opt.py``)
+     - 00:00.279
+     - 0.0
+   * - :ref:`sphx_glr_deep_dive_relax_tutorials_relax_creation.py` (``../deep_dive/relax/tutorials/relax_creation.py``)
+     - 00:00.157
+     - 0.0
+   * - :ref:`sphx_glr_get_started_tutorials_quick_start.py` (``../get_started/tutorials/quick_start.py``)
+     - 00:00.153
+     - 0.0
+   * - :ref:`sphx_glr_deep_dive_tensor_ir_tutorials_dlight_gpu_scheduling.py` (``../deep_dive/tensor_ir/tutorials/dlight_gpu_scheduling.py``)
+     - 00:00.121
+     - 0.0
+   * - :ref:`sphx_glr_deep_dive_relax_tutorials_relax_transformation.py` (``../deep_dive/relax/tutorials/relax_transformation.py``)
+     - 00:00.055
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_bring_your_own_codegen.py` (``../how_to/tutorials/bring_your_own_codegen.py``)
+     - 00:00.038
+     - 0.0
+   * - :ref:`sphx_glr_deep_dive_tensor_ir_tutorials_meta_schedule.py` (``../deep_dive/tensor_ir/tutorials/meta_schedule.py``)
+     - 00:00.007
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_mix_python_and_tvm_with_pymodule.py` (``../how_to/tutorials/mix_python_and_tvm_with_pymodule.py``)
+     - 00:00.004
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_export_and_load_executable.py` (``../how_to/tutorials/export_and_load_executable.py``)
+     - 00:00.002
+     - 0.0

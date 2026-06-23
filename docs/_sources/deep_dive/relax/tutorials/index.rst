@@ -1,0 +1,60 @@
+:orphan:
+
+Deep Dive: Relax
+----------------
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Relax Creation">
+
+.. only:: html
+
+  .. image:: /deep_dive/relax/tutorials/images/thumb/sphx_glr_relax_creation_thumb.png
+    :alt:
+
+  :doc:`/deep_dive/relax/tutorials/relax_creation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Relax Creation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Transformation">
+
+.. only:: html
+
+  .. image:: /deep_dive/relax/tutorials/images/thumb/sphx_glr_relax_transformation_thumb.png
+    :alt:
+
+  :doc:`/deep_dive/relax/tutorials/relax_transformation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Transformation</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /deep_dive/relax/tutorials/relax_creation
+   /deep_dive/relax/tutorials/relax_transformation
+

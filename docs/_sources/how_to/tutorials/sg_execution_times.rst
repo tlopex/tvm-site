@@ -1,0 +1,58 @@
+
+:orphan:
+
+.. _sphx_glr_how_to_tutorials_sg_execution_times:
+
+
+Computation times
+=================
+**00:13.788** total execution time for 8 files **from how_to/tutorials**:
+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_how_to_tutorials_optimize_llm.py` (``optimize_llm.py``)
+     - 00:09.127
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_import_model.py` (``import_model.py``)
+     - 00:03.293
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_e2e_opt_model.py` (``e2e_opt_model.py``)
+     - 00:00.573
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_cross_compilation_and_rpc.py` (``cross_compilation_and_rpc.py``)
+     - 00:00.472
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_customize_opt.py` (``customize_opt.py``)
+     - 00:00.279
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_bring_your_own_codegen.py` (``bring_your_own_codegen.py``)
+     - 00:00.038
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_mix_python_and_tvm_with_pymodule.py` (``mix_python_and_tvm_with_pymodule.py``)
+     - 00:00.004
+     - 0.0
+   * - :ref:`sphx_glr_how_to_tutorials_export_and_load_executable.py` (``export_and_load_executable.py``)
+     - 00:00.002
+     - 0.0

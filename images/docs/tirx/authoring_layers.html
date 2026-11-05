@@ -23,25 +23,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TIRx authoring layers</title>
   <style>
-    /* Palette and typography follow the Modern GPU Programming for MLSys
+    /* Typography, cards, and blue accent follow the Modern GPU Programming for MLSys
        diagrams: https://github.com/mlc-ai/modern-gpu-programming-for-mlsys */
     :root {
       color-scheme: light;
       --surface: #fff;
       --text: #222;
       --muted: #536276;
-      --frame: #94a3b8;
+      --frame: #b6bdc6;
       --frame-bg: #f8fafc;
       --tag: #475569;
       --line: #64748b;
-      --core: #5b9bd5;
-      --core-bg: #eef5fc;
-      --tile: #45b5a5;
-      --tile-bg: #ecfaf7;
-      --backend: #ed9a3c;
-      --backend-bg: #fef4e7;
-      --codegen: #9d6eb5;
-      --codegen-bg: #f6f1fa;
+      --neutral-border: #b6bdc6;
+      --neutral-bg: #f0f1f3;
+      --tile: #5b9bd5;
+      --tile-bg: #eef5fc;
     }
     :root[data-theme="dark"] {
       color-scheme: dark;
@@ -52,10 +48,9 @@
       --frame-bg: #1c232c;
       --tag: #475569;
       --line: #a1afc1;
-      --core-bg: #1d3043;
-      --tile-bg: #183731;
-      --backend-bg: #3b2c1c;
-      --codegen-bg: #30243d;
+      --neutral-border: #627084;
+      --neutral-bg: #262d36;
+      --tile-bg: #1d3043;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; }
@@ -103,8 +98,8 @@
       justify-content: center;
       gap: 18px;
       padding: 18px 10px;
-      border-color: var(--core);
-      background: var(--core-bg);
+      border-color: var(--neutral-border);
+      background: var(--neutral-bg);
     }
     .core code { display: block; margin-top: 4px; font-size: 15px; }
     .constructs { display: grid; gap: 6px; }
@@ -170,8 +165,8 @@
       flex-wrap: wrap;
       gap: 3px 16px;
       padding: 10px;
-      border-color: var(--backend);
-      background: var(--backend-bg);
+      border-color: var(--neutral-border);
+      background: var(--neutral-bg);
     }
     .backend h2 { font-size: 13px; }
     .shared-ir { margin-top: 14px; color: var(--muted); text-align: center; font-size: 12px; }
@@ -199,8 +194,8 @@
       max-width: 80%;
       margin: 0 auto;
       padding: 9px 14px;
-      border-color: var(--codegen);
-      background: var(--codegen-bg);
+      border-color: var(--neutral-border);
+      background: var(--surface);
     }
     .sr-only {
       position: absolute;

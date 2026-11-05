@@ -35,9 +35,8 @@
       --tag: #475569;
       --line: #64748b;
       --neutral-border: #b6bdc6;
-      --neutral-bg: #f0f1f3;
-      --tile: #5b9bd5;
-      --tile-bg: #eef5fc;
+      --layer-border: #5b9bd5;
+      --layer-bg: #eef5fc;
     }
     :root[data-theme="dark"] {
       color-scheme: dark;
@@ -49,8 +48,7 @@
       --tag: #475569;
       --line: #a1afc1;
       --neutral-border: #627084;
-      --neutral-bg: #262d36;
-      --tile-bg: #1d3043;
+      --layer-bg: #1d3043;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; }
@@ -98,8 +96,8 @@
       justify-content: center;
       gap: 18px;
       padding: 18px 10px;
-      border-color: var(--neutral-border);
-      background: var(--neutral-bg);
+      border-color: var(--layer-border);
+      background: var(--layer-bg);
     }
     .core code { display: block; margin-top: 4px; font-size: 15px; }
     .constructs { display: grid; gap: 6px; }
@@ -108,12 +106,12 @@
       grid-column: 2;
       grid-row: 1;
       padding: 14px 12px 12px;
-      border-color: var(--tile);
-      background: var(--tile-bg);
+      border-color: var(--layer-border);
+      background: var(--layer-bg);
     }
     .operations { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
     .operation code { display: block; margin-bottom: 4px; font-weight: 600; }
-    .tile-note { border-top: 1px solid var(--tile); padding-top: 9px; }
+    .tile-note { border-top: 1px solid var(--layer-border); padding-top: 9px; }
     .dispatch { grid-column: 2; grid-row: 2; position: relative; }
     .dispatch::before {
       content: '';
@@ -165,8 +163,8 @@
       flex-wrap: wrap;
       gap: 3px 16px;
       padding: 10px;
-      border-color: var(--neutral-border);
-      background: var(--neutral-bg);
+      border-color: var(--layer-border);
+      background: var(--layer-bg);
     }
     .backend h2 { font-size: 13px; }
     .shared-ir { margin-top: 14px; color: var(--muted); text-align: center; font-size: 12px; }
